@@ -17,3 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
+
+nav.navbar {
+    position: fixed; width: 100%
+}
