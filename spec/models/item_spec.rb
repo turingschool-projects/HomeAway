@@ -13,7 +13,7 @@ describe Item do
   it { should validate_numericality_of(:price).
     is_greater_than(0) }
 
-  xit { should have_many(:item_categories) }
-  xit { should have_many(:categories).through :item_categories }
+  it { should have_many(:item_categories) }
+  it { should have_many(:categories).through :item_categories }
 end
 # The photo is optional. If not present, a stand-in photo is used.
