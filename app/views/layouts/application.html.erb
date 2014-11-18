@@ -5,7 +5,7 @@
   <title>DinnerDash</title>
   <div class="container-fluid">
    <div class="row">
-  <img src="/images/lodgephotoshop.jpg" class="img-responsive">
+  <img src="/images/lodgephotoshop.jpg" class="img-responsive"></img>
    </div>
   </div>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -13,6 +13,7 @@
   <%= csrf_meta_tags %>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+  <%= render :partial => "layouts/navbar" %>
 </head>
 <body>
   <div class="col-xs-12">
