@@ -17,3 +17,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
+
+.img-responsive { min-width: 100% }
+
+div#background {background-image: url(/images/fence-background.jpg);
+                position: fixed;
+                opacity: 0.6;
+                width: 100%;
+                height: 100%;
+                z-index: -1
+                }
