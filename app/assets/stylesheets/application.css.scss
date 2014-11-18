@@ -27,3 +27,16 @@ div#background {background-image: url(/images/fence-background.jpg);
                 height: 100%;
                 z-index: -1
                 }
+
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p { background-color: white;
+    background-opacity: 0.6;
+    width: 75%;
+    @include center-block();
+    padding: 5% 15% 5% 15%;
+    }
