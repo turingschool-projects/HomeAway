@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/images/Gourmet_hamburger_with_bacon.jpg" alt="...">
+      <div class="caption">
+        <h3>Gourmet Bison Burger With Bacon</h3>
+        <p>The Bison Burger features a perfectly cooked beef patty, gooey melted cheese, lettuce, tomato, pickled onions, ketchup, smokey P&B housemade mayo, and a brioche bun. Don't forget to throw on some tasty bacon to add that last bit of flavor heaven. The Bison Burger is a melt in your mouth juicy, cheesy, salty, and tender masterpiece. The pillowy bun seems to melt with each bite and the ratio of the ingredients creates a perfect texture where none of them overpower the burger, while all of them contribute to the flavor profile. The ingredients are well thought out, portioned appropriately, and are high quality. </p>
+        <p><a href="#" class="btn btn-default" role="button">Add to Cart</a></p>
+      </div>
+    </div>
+  </div>
+</div>
