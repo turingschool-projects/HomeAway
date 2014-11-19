@@ -7,5 +7,5 @@ RSpec.describe Category, :type => :model do
   it { should validate_uniqueness_of(:name) }
 
   it { should have_many(:item_categories) }
-  it {should have_many(:items).through :item_categories }
+  it { should have_many(:items).through :item_categories }
 end
