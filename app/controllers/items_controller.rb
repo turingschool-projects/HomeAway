@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :find_resource, only: [:edit, :update]
+
   def index
     @items = Item.all
     @categories = Category.all
@@ -19,6 +21,12 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def update
+    @item.update(item_params)
+
+    redirect_to item_path(@item)
   end
 
   def edit
