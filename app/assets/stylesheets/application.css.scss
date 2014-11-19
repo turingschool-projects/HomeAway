@@ -22,7 +22,7 @@
 
 div#background {background-image: url(/images/fence-background.jpg);
                 position: fixed;
-                opacity: .9;
+                opacity: .95;
                 width: 100%;
                 height: 100%;
                 z-index: -1
@@ -45,14 +45,7 @@ nav.navbar.affix{
         top: 0px; /* Set the top position of pinned element */
     }
 
-p { background-color: #F5F1DE;
-    background-opacity: 0.6;
-    width: 75%;
-    @include center-block();
-    padding: 5% 15% 5% 15%;
-    margin-top: 30px;
-    }
 
 head {
-       margin-bottom: 30px;
+       margin-bottom: 0px;
       }

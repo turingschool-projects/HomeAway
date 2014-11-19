@@ -1,0 +1,20 @@
+<% @categories.each do |category| %>
+  <h2 class="menu-category" ><a><%= category.name %></a></h2>
+    <ul>
+      <% category.items.each do |item| %>
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="items.thumbnail" alt="...">
+              <div class="caption">
+                <h3><%= item.title %></h3>
+                <p> <%= item.description %></p>
+                <p> <%= item.price %></p>
+                <p><a href="#" class="btn btn-default" role="button">Add to Cart</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </ul>
+<%end%>
