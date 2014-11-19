@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20141119003251) do
     t.datetime "updated_at"
   end
 
+  create_table "examples", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "item_categories", force: true do |t|
     t.integer "item_id"
     t.integer "category_id"

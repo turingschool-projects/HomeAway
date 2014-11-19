@@ -1,2 +1,8 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<%= render :partial => "partials/category_sidebar",
+    :locals => { :categories => @categories } %>
+
+<ul>
+<% 300.times do %>
+  <li>i'm dumb</li>
+<% end %>
+</ul>
