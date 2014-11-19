@@ -28,9 +28,10 @@ div#background {background-image: url(/images/fence-background.jpg);
                 z-index: -1
                 }
 
-#sidebar {background-color: yellow;
+#sidebar {background-image: url(/images/ricepaper.png);
           opacity: .7;
-          width: 25%
+          width: 20%;
+          border-radius: 10px;
           }
 
 #sidebar.affix {top: 10%}
@@ -47,7 +48,7 @@ nav.navbar {
    padding-right: 2%;
 }
 
-
+.navbar.custom-color { background-color: #CCA714 }
 nav.navbar.affix{
         top: 0px; /* Set the top position of pinned element */
     }
@@ -56,3 +57,14 @@ nav.navbar.affix{
 head {
        margin-bottom: 0px;
       }
+
+li.menu-link {
+              text-decoration: none;
+              color: #FFD119;
+              font-family: Arial, sans-serif;
+              font-size: medium;
+              letter-spacing: 1px;
+              line-height: 40px;
+              font-weight: bold;
+              font-size: 150%
+              }
