@@ -28,10 +28,12 @@ div#background {background-image: url(/images/fence-background.jpg);
                 z-index: -1
                 }
 
-div#sidebar {background-color: yellow;
-            opacity: .7
-            }
+#sidebar {background-color: yellow;
+          opacity: .7;
+          width: 25%
+          }
 
+#sidebar.affix {top: 10%}
 @mixin center-block() {
   display: block;
   margin-left: auto;
