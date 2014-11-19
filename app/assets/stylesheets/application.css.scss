@@ -28,6 +28,10 @@ div#background {background-image: url(/images/fence-background.jpg);
                 z-index: -1
                 }
 
+div#sidebar {background-color: yellow;
+            opacity: .7
+            }
+
 @mixin center-block() {
   display: block;
   margin-left: auto;
@@ -40,6 +44,7 @@ nav.navbar {
    padding-left: 1%;
    padding-right: 2%;
 }
+
 
 nav.navbar.affix{
         top: 0px; /* Set the top position of pinned element */

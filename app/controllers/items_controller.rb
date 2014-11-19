@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :find_resource, only: [:edit, :update]
 
   def index
-    @items = Item.all
+    @items      = Item.all
     @categories = Category.all
   end
 
