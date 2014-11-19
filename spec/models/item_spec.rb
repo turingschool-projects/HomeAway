@@ -14,6 +14,8 @@ describe Item do
     is_greater_than(0) }
 
   it { should have_many(:item_categories) }
-  it { should have_many(:categories).through :item_categories }
+  it { should have_many(:categories) }
+
+  it { should have_many(:orders)}
 end
 # The photo is optional. If not present, a stand-in photo is used.
