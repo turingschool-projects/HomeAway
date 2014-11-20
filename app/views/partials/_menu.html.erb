@@ -8,7 +8,7 @@
           <article class="menu-item">
             <div class="col-sm-6 col-md-4">
               <div class="thumbnail" style="height:350px;">
-                <img src="<%= image_path('Gourmet_hamburger_with_bacon.jpg') %>" alt="...">
+                <%= image_tag item.image.url(:medium) %>
                 <div class="caption">
                   <h3><%= item.title %></h3>
                   <p> <%= item.description %></p>

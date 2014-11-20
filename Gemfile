@@ -13,6 +13,7 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'paperclip'
 
 gem 'unicorn'
 
