@@ -30,11 +30,15 @@ div#background {background-image: url(/assets/fence-background.jpg);
 
 #sidebar {background-image: url(/assets/ricepaper.png);
           opacity: .7;
-          width: 20%;
+          width: 25%;
           border-radius: 10px;
+          margin-left: 1%;
+          padding-top: 10px;
+          padding-bottom: 10px;
           }
 
-#sidebar.affix {top: 10%}
+.sidenav.affix-top { max-height: 325px}
+
 @mixin center-block() {
   display: block;
   margin-left: auto;
@@ -50,7 +54,7 @@ nav.navbar {
    padding-right: 2%;
    opacity: .9;
 }
-#container { width: 75%;
+#container { width: 70%;
              float: right;
             }
 
@@ -64,7 +68,10 @@ head {
        margin-bottom: 0px;
       }
 
-h2.menu-category { width: 75%;}
+div.category-title {display: block;
+                    max-height: 50px}
+
+h2.menu-category {}
 
 .menu_item { height:200px; }
 
@@ -79,3 +86,5 @@ li.menu-link {
               font-weight: bold;
               font-size: 150%
               }
+
+ul.main-nav {position: inherit}

@@ -19,15 +19,15 @@
 $(document).ready(function(){
     $(".navbar").affix({
         offset: {
-            top: 125
+            top: 200
      	}
     });
 });
 
 $(document).ready(function(){
-    $(".nav").affix({
+    $(".sidenav").affix({
         offset: {
-            top: 125
+            top: 186
        }
     });
 });
