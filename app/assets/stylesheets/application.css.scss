@@ -30,14 +30,13 @@ div#background {background-image: url(/assets/fence-background.jpg);
 
 #sidebar {background-image: url(/assets/ricepaper.png);
           opacity: .7;
-          width: 25%;
           border-radius: 10px;
           margin-left: 1%;
           padding-top: 10px;
           padding-bottom: 10px;
           }
 
-.sidenav.affix-top { max-height: 325px}
+div.sidenav {width: 25%; }
 
 @mixin center-block() {
   display: block;
