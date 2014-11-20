@@ -2,17 +2,8 @@
     <ul class="nav nav-pills nav-stacked sidenav" id="sidebar">
       <% @categories.each do |category| %>
         <!-- <li class="menu-link"><a href="#category-id-<%= category.id %>"><%= category.name %></a></li> -->
-        <li class="menu-link"><%= link_to category.name, "#category-id-#{category.id}" %></li>
+        <!-- <li class="menu-link"><%= link_to category.name, "#category-id-#{category.id}" %></li> -->
+        <li class="menu-link"><a href="#category-id-<%= category.id %>"><%= category.name %></a></li>
       <% end %>
     </ul>
 </div>
-
-<!-- <div class="list-group sidenav">
-  <% @categories.each do |category| %>
-    <a href="#category-id-<%= category.id %>" class="list-group-item"><%= category.name %></a>
-  <% end %>
-</div> -->
-
-
-
-<!-- <li class="active"><a href="#section-1">Section One</a></li> -->
