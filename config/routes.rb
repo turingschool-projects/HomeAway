@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :items
 
+  resources :categories
+
   get 'menu', to: 'items#index', as: :menu
 
   # The priority is based upon order of creation: first created -> highest priority.

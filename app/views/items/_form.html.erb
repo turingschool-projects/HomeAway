@@ -26,6 +26,7 @@
   <div class="field">
     <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
   </div>
+  </div>
   <div class="field">
     <%= f.label :image, "Attach an Image" %><br>
     <%= f.file_field :image %>
@@ -34,4 +35,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-
