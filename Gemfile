@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'quiet_assets'
 end
 
 group :test do

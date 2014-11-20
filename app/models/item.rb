@@ -17,9 +17,4 @@ class Item < ActiveRecord::Base
   :default_url => 'Gourmet_hamburger_with_bacon.jpg'
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-
-  def update_categories(category_ids)
-    self.categories = Category.where(id: category_ids)
-    save!
-  end
 end
