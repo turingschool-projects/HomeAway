@@ -1,11 +1,11 @@
 <div id="container">
   <% @categories.each do |category| %>
-    <div class="category-block">
+    <div class="category-block row">
       <div class= "category-title">
         <h2 id="category-id-<%= category.id %>" class="menu-category"><%= category.name %></h2>
       </div>
         <% category.items.each do |item| %>
-          <div class="thumbnail col-sm-6 col-md-4" style="height:350px;">
+          <div class="thumbnail col-sm-6 col-md-4" style="height:350px; width:250px; margin: 10px">
             <%= image_tag item.image.url(:medium) %>
             <div class="caption">
               <h3><%= item.title %></h3>
