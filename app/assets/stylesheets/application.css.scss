@@ -20,7 +20,7 @@
 
 .img-responsive { min-width: 100% }
 
-div#background {background-image: url(/images/fence-background.jpg);
+div#background {background-image: url(/asssets/fence-background.jpg);
                 position: fixed;
                 opacity: .95;
                 width: 100%;
@@ -28,7 +28,7 @@ div#background {background-image: url(/images/fence-background.jpg);
                 z-index: -1
                 }
 
-#sidebar {background-image: url(/images/ricepaper.png);
+#sidebar {background-image: url(/assets/ricepaper.png);
           opacity: .7;
           width: 20%;
           border-radius: 10px;
