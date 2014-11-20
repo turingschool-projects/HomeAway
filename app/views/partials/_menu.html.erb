@@ -2,7 +2,7 @@
   <% @categories.each do |category| %>
     <div class="category-block row">
       <div class= "category-title">
-        <h2 id="category-id-<%= category.id %>" class="menu-category"><%= category.name %></h2>
+        <h2 class="menu-category"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
       </div>
         <% category.items.each do |item| %>
           <div class="thumbnail col-sm-6 col-md-4" style="height:350px; width:250px; margin: 10px">
