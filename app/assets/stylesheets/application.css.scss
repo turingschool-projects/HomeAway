@@ -28,6 +28,11 @@ div#background {background-image: url(/assets/fence-background.jpg);
                 z-index: -1
                 }
 
+span.anchor {position:relative;
+             display: block;
+             bottom: 50px
+             }
+
 #sidebar {background-image: url(/assets/ricepaper.png);
           opacity: .7;
           border-radius: 10px;
