@@ -7,9 +7,4 @@ class Item < ActiveRecord::Base
   has_many :categories, through: :item_categories
   has_many :order_items
   has_many :orders, through: :order_items
-
-  def update_categories(category_ids)
-    self.categories = Category.where(id: category_ids)
-    save!
-  end
 end
