@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
 
   def update
     @item.update(item_params)
-    @item.update_categories(params[:item][:category_ids])
     redirect_to item_path(@item)
   end
 
@@ -35,6 +34,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :price, :category_ids)
+    params.require(:item).permit(:title, :description, :price, category_ids: [])
   end
 end
