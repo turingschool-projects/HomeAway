@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   validates :title, presence: true, uniqueness: true
-  validates :description, presence: true
+  validates :description, presence: true, length: { maximum: 120 }
   validates :price, numericality: {greater_than: 0}
 
   has_many :item_categories
