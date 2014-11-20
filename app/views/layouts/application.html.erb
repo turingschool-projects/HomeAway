@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
-<div id="background"></div>
 <head>
   <title>DinnerDash</title>
-  <div class="container-fluid">
-   <div class="row">
-  <img src="/images/lodgephotoshop2.jpg" class="img-responsive"></img>
-   </div>
-  </div>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 </head>
-  <%= render :partial => "partials/navbar" %>
 <body>
+<div id="background"></div>
+  <div class="container-fluid">
+   <div class="row">
+  <img src="/images/lodgephotoshop2.jpg" alt="lodge photo" class="img-responsive">
+   </div>
+  </div>
+  <%= render :partial => "partials/navbar" %>
   <%= yield %>
 </body>
 

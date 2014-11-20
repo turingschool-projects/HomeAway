@@ -1,10 +1,17 @@
-<!-- <div id="sidebar"class="col-xs-3" data-spy="affix"> -->
+<div class="sidenav">
     <ul class="nav nav-pills nav-stacked" id="sidebar">
       <% @categories.each do |category| %>
-        <li class="menu-link"><a href="#category-id-<%= category.id%>"><%= category.name %></a></li>
+        <!-- <li class="menu-link"><a href="#category-id-<%= category.id %>"><%= category.name %></a></li> -->
+        <li class="menu-link"><%= link_to category.name, "#category-id-#{category.id}" %></li>
       <% end %>
     </ul>
-<!-- </div> -->
+</div>
+
+<!-- <div class="list-group sidenav">
+  <% @categories.each do |category| %>
+    <a href="#category-id-<%= category.id %>" class="list-group-item"><%= category.name %></a>
+  <% end %>
+</div> -->
 
 
 
