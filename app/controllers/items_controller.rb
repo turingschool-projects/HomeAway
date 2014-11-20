@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :find_resource, only: [:edit, :update]
+  before_action :find_resource, only: [:new, :edit, :update]
 
   def index
     @items      = Item.all
@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
 
   def update
     @item.update(item_params)
-
     redirect_to item_path(@item)
   end
 
@@ -35,6 +34,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :price)
+    params.require(:item).permit(:title, :description, :price, category_ids: [], :image)
   end
 end

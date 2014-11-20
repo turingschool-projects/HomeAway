@@ -13,6 +13,7 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'paperclip'
 
 gem 'unicorn'
 
@@ -20,6 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'quiet_assets'
 end
 
 group :test do
