@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :find_resource, only: [:edit, :update]
+  before_action :set_item, only: [:edit, :update]
 
   def index
     @items      = Item.all
@@ -32,6 +32,9 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
 
   def item_params
     params.require(:item).permit(:title, :description, :price, :image, category_ids: [])
