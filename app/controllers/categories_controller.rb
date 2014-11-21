@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :find_resource, only: [:edit, :update]
+  before_action :set_category, only: [:edit, :update]
+
   def new
     @category = Category.new
   end
@@ -25,5 +26,9 @@ class CategoriesController < ApplicationController
   private
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 end
