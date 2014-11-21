@@ -10,8 +10,7 @@ describe Item do
 
   it { should validate_uniqueness_of(:title) }
 
-  it { should validate_numericality_of(:price).
-    is_greater_than(0) }
+  it { should validate_numericality_of(:price).is_greater_than(0) }
 
   it { should have_many(:item_categories) }
   it { should have_many(:categories) }
@@ -22,6 +21,10 @@ describe Item do
     it "validates title" do
       item = Item.create(description: "this is the title description", price: 10)
       expect(item.id).to be_nil
+
+      item  = Item.create(title: "title", description: "this is the title description", price: 10)
+      item2 = Item.create(title: "title", description: "this is the title description", price: 10)
+      expect(item2.id).to be_nil
     end
 
     it "validates description" do
