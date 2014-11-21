@@ -35,6 +35,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:title, :description, :price, :image, category_ids: [])
