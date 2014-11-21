@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'menu', to: 'items#index', as: :menu
 
+  get 'code', to: redirect('https://github.com/larsonkonr/dinner_dash')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
