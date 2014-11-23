@@ -62,6 +62,8 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    heroku-deflater (0.5.3)
+      rack (>= 1.4.5)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.2.5)
@@ -185,6 +187,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass
   capybara
+  heroku-deflater
   jbuilder (~> 2.0)
   jquery-rails
   launchy
