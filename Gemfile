@@ -15,6 +15,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
 gem 'unicorn'
 gem 'heroku-deflater', group: :production
+gem 'dimensions-rails'
 
 group :development, :test do
   gem 'pry-rails'
