@@ -9,17 +9,16 @@
     </ul>
 
     <div class="navbar-form navbar-right">
-      <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
       <div id="account">
+        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</button>
         <% if current_user  %>
           <%= link_to "Logout", logout_path, method: :delete,  class: "btn btn-default" %>
         <% else %>
           <%= link_to "Sign Up", new_user_path, class: "btn btn-default" %>
-
           <%= form_tag login_path, class: "navbar-form navbar-right" do %>
-            <%= text_field_tag :email_address, nil, placeholder: "username", class: "form-control" %>
-            <%= password_field_tag :password, nil, placeholder: "password", class: "form-control" %>
-            <%= submit_tag "Login!" , class: "btn btn-default" %>
+            <%= text_field_tag :email_address, nil, placeholder: "username", class: "form-control navbar_style" %>
+            <%= password_field_tag :password, nil, placeholder: "password", class: "form-control navbar_style" %>
+            <%= submit_tag "Login!" , class: "btn btn-default navbar_style" %>
           <% end %>
         <% end %>
       </div>
