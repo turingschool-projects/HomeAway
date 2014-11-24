@@ -60,6 +60,12 @@ GEM
     columnize (0.8.9)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
+    dimensions (1.3.0)
+    dimensions-rails (1.1.1)
+      actionpack (>= 3.0, < 4.2)
+      activesupport (>= 3.0, < 4.2)
+      dimensions
+      railties (>= 3.0, < 4.2)
     erubis (2.7.0)
     execjs (2.2.2)
     heroku-deflater (0.5.3)
@@ -187,6 +193,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass
   capybara
+  dimensions-rails
   heroku-deflater
   jbuilder (~> 2.0)
   jquery-rails
