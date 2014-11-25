@@ -26,6 +26,10 @@
   <div class="field">
     <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
   </div>
+  <div class="field">
+    <%= f.check_box(:retired) %>
+    <%= f.label :retired %>
+  </div>
   </div>
   <div class="field">
     <%= f.label :image, "Attach an Image" %><br>
