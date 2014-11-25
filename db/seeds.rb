@@ -12,6 +12,29 @@ categories = Category.create([
   { name: "Desserts" },
   { name: "Local Game" }])
 
+users = User.create!([
+  { name: "Rachel Warbelow",
+    email_address: "demo+rachel@jumpstartlab.com",
+    password: "password",
+    password_confirmation: "password" },
+  { name: "Jeff",
+    email_address: "demo+jeff@jumpstartlab.com",
+    password: "password",
+    password_confirmation: "password",
+    display_name: "j3" },
+  { name: "Jorge Tellez",
+    email_address: "demo+jorge@jumpstartlab.com",
+    password: "password",
+    password_confirmation: "password",
+    display_name: "novohispano" },
+  { name: "Josh Cheek",
+    email_address: "demo+josh@jumpstartlab.com",
+    password: "password",
+    password_confirmation: "password",
+    display_name: "josh",
+    admin: true }
+  ])
+
 foods = Item.create([
   { title: "Bison Burger",
     description: "Free range bison meat with cheddar cheese grilled onions and mushrooms topped with a homemade pickle",
