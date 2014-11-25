@@ -25,6 +25,11 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capybara'
   gem 'launchy'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-livereload'
 end
 
 group :test do
