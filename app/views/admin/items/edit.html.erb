@@ -1,2 +1,2 @@
 <h1>Editing an Item</h1>
-<%= render partial: 'form' %>
+<%= render partial: 'form', locals: { url: admin_item_path(@item) } %>
