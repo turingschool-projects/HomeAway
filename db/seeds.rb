@@ -12,7 +12,7 @@ categories = Category.create([
   { name: "Desserts" },
   { name: "Local Game" }])
 
-users = User.create([
+users = User.create!([
   { name: "Rachel Warbelow",
     email_address: "demo+rachel@jumpstartlab.com",
     password: "password",
@@ -31,7 +31,8 @@ users = User.create([
     email_address: "demo+josh@jumpstartlab.com",
     password: "password",
     password_confirmation: "password",
-    display_name: "josh" }
+    display_name: "josh",
+    admin: true }
   ])
 
 foods = Item.create([
