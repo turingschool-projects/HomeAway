@@ -69,6 +69,12 @@ context 'authenticated admin', type: :feature do
     expect(page).to have_content("Appetizers")
   end
 
+  it 'cannot create categories without a name' do
+    visit new_admin_category_path
+    click_button "Create Category"
+    expect(page).to have_content("Name can't be blank")
+  end
+
   it 'can assign items to categories or remove them from categories' do
     burgers = Category.create!(name: "Burgers")
     local_game = Category.create!(name: "Local Game")
