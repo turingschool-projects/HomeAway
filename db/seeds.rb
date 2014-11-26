@@ -49,10 +49,12 @@ appetizers = Item.create([
   { title: "Tomato Cheese Sandwich",
     description: "Fresh tomatoes, spinach and cheese top a slice of fresh mountain bread",
     price: 5.50 },
-  { title: "Nachos",
-    description: "Free range nachos with a bunch of stuff",
+  { title: "Beautiful Soup",
+    description: "Lovely green soup with a creamy star on top",
     price: 5.50 }
     ])
+appetizers[3].image = File.open("#{Rails.root}/app/assets/images/tomato-veg-cheese-sandwich.png")
+appetizers[3].save
 
 burgers = Item.create([
   { title: "Bison Burger",
