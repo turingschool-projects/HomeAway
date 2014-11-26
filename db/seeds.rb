@@ -53,6 +53,8 @@ appetizers = Item.create([
     description: "Lovely green soup with a creamy star on top",
     price: 5.50 }
     ])
+appetizers[0].image = File.open("#{Rails.root}/app/assets/images/deviled-quail-eggs.png")
+appetizers[0].save
 appetizers[3].image = File.open("#{Rails.root}/app/assets/images/tomato-veg-cheese-sandwich.png")
 appetizers[3].save
 
