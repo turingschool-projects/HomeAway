@@ -1,1 +1,13 @@
-<div class="register">  <%= form_tag users_path do %>    <%= flash[:errors] %>  <%= text_field_tag "user[name]", nil, placeholder: "Full Name", class: "form-control" %>  <%= text_field_tag "user[email_address]", nil, placeholder: "Email Address", class: "form-control" %>  <%= text_field_tag "user[display_name]", nil, placeholder: "(Optional) Display Name", class: "form-control" %>  <%= password_field_tag "user[password]", nil, placeholder: "Password", class: "form-control" %>  <%= password_field_tag "user[password_confirmation]", nil, placeholder: "Confirm Password", class: "form-control" %>  <%= submit_tag "Create User", class: "btn btn-default" %>  <% end %></div>
+<div class="register">
+  <%= form_tag users_path do %>
+    <%= flash[:errors] %>
+
+  <%= text_field_tag "user[name]", nil, placeholder: "Full Name", class: "form-control" %>
+  <%= text_field_tag "user[email_address]", nil, placeholder: "Email Address", class: "form-control" %>
+  <%= text_field_tag "user[display_name]", nil, placeholder: "(Optional) Display Name", class: "form-control" %>
+  <%= password_field_tag "user[password]", nil, placeholder: "Password", class: "form-control" %>
+  <%= password_field_tag "user[password_confirmation]", nil, placeholder: "Confirm Password", class: "form-control" %>
+
+  <%= submit_tag "Create User", class: "btn btn-default" %>
+  <% end %>
+</div>
