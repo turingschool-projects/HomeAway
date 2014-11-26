@@ -1,0 +1,8 @@
+
+
+<div id="item-edit-form">
+  <% @cart.data.each do |k, v| %>
+  <h1><%= Item.find(k.to_i).title %></h1>
+  <h2>Quantity: <%= v %></h2>
+   <% end %>
+</div>
