@@ -90,7 +90,7 @@ context 'authenticated admin', type: :feature do
   end
 end
 
-context 'unauthenticated admin', type: :feature do
+context 'authenticated non-admin', type: :feature do
   before(:each) do
     admin_data = { name: "Viki",
                    email_address: "viki@example.com",
