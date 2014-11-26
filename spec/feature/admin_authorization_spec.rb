@@ -29,6 +29,15 @@ context 'authenticated admin', type: :feature do
     expect(page).to have_content("Burgers")
   end
 
+  it 'cannot create item listings without valid attributes' do
+    visit new_admin_item_path
+    fill_in "Price", with: 0
+    click_button "Create Item"
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Price must be greater than 0")
+  end
+
   it 'can modify existing items’ name, description, price, and photo' do
     burgers = Category.create!(name: "Burgers")
     burger = Item.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
@@ -58,6 +67,12 @@ context 'authenticated admin', type: :feature do
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content("Appetizers")
+  end
+
+  it 'cannot create categories without a name' do
+    visit new_admin_category_path
+    click_button "Create Category"
+    expect(page).to have_content("Name can't be blank")
   end
 
   it 'can assign items to categories or remove them from categories' do
@@ -90,7 +105,7 @@ context 'authenticated admin', type: :feature do
   end
 end
 
-context 'unauthenticated admin', type: :feature do
+context 'authenticated non-admin', type: :feature do
   before(:each) do
     admin_data = { name: "Viki",
                    email_address: "viki@example.com",

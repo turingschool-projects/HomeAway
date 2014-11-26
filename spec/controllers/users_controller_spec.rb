@@ -44,16 +44,11 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET show" do
-    it "returns http success" do
+    it "renders the correct template" do
       user = User.create(valid_attributes)
       get :show, {id: user.id}
       expect(response).to have_http_status(:success)
-    end
-
-    xit "shows the users's info" do
-      user = User.create(valid_attributes)
-      get :show, {id: user.id}
-      expect(response).to include("Viki")
+      expect(response).to render_template(:show)
     end
   end
 end

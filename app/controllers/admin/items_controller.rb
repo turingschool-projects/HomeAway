@@ -6,10 +6,6 @@ class Admin::ItemsController < Admin::BaseAdminController
     @categories = Category.all
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
-
   def new
     @item = Item.new
   end
