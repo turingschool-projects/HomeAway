@@ -29,6 +29,15 @@ context 'authenticated admin', type: :feature do
     expect(page).to have_content("Burgers")
   end
 
+  it 'cannot create item listings without valid attributes' do
+    visit new_admin_item_path
+    fill_in "Price", with: 0
+    click_button "Create Item"
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Price must be greater than 0")
+  end
+
   it 'can modify existing items’ name, description, price, and photo' do
     burgers = Category.create!(name: "Burgers")
     burger = Item.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
