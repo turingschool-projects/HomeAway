@@ -112,10 +112,15 @@ entrees[3].save
 local_game = Item.create!([
   { title: "Mountain Lion Stew",
     description: "Free range mountain lion stewed with carrots and potatoes",
-    price: 13.50 }
+    price: 13.50 },
+  { title: "Wild Boar Ribs",
+    description: "Free range wild boar ribs with barbecue sauce and stuff",
+    price: 10.0}
     ])
 local_game[0].image = File.open("#{Rails.root}/app/assets/images/mountain-lion-stew.jpg")
 local_game[0].save
+local_game[1].image = File.open("#{Rails.root}/app/assets/images/wild-boar-ribs.jpg")
+local_game[1].save
 
 desserts = Item.create!([
   { title: "Chocolate Cake",
@@ -165,13 +170,13 @@ entree_items = ItemCategory.create!([
 
 local_game_items = ItemCategory.create!([
   { item_id: 15, category_id: 4 },
+  { item_id: 16, category_id: 4 },
   { item_id: 2, category_id: 4 },
   { item_id: 6, category_id: 4 },
   { item_id: 10, category_id: 4 }
   ])
 
 dessert_items = ItemCategory.create!([
-  { item_id: 16, category_id: 5 },
   { item_id: 17, category_id: 5 },
   { item_id: 18, category_id: 5 },
   { item_id: 19, category_id: 5 },
