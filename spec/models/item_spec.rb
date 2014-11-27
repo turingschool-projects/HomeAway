@@ -53,7 +53,7 @@ describe Item do
     end
 
     it "has many orders" do
-      order = Order.create
+      order = Order.create(user_id: 1)
       OrderItem.create(order_id: order.id, item_id: item.id)
       expect(item.orders.first).to eq(order)
     end
