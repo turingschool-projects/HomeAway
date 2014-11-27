@@ -10,7 +10,7 @@ describe Order do
   describe "relationships" do
     it "has many items" do
       item = Item.create(title: "title", price: 10, description: "description")
-      order = Order.create(item_id: item.id, status: "ordered")
+      order = Order.create(user_id: 1, status: "ordered")
       OrderItem.create(item_id: item.id, order_id: order.id)
       expect(order.items.first).to eq(item)
     end
@@ -24,8 +24,22 @@ describe Order do
     end
   end
 
-  it 'should default status to false' do
+  it 'should default status to ordered' do
     order = Order.create(address: "address is nice")
-    order.status = "ordered"
+    expect(order.status).to eq("ordered")
+  end
+
+  describe "validations" do
+    it "must have a user_id" do
+      order = Order.create(user_id: nil)
+      expect(order).to_not be_valid
+    end
+  end
+
+  describe "delivery orders" do
+    it "must have an address" do
+      order = Order.create(user_id: 1, delivery: true, address: nil)
+      expect(order).to_not be_valid
+    end
   end
 end
