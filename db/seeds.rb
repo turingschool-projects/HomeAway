@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-categories = Category.create([
+categories = Category.create!([
   { name: "Appetizers" },
   { name: "Burgers" },
   { name: "Entrees" },
@@ -13,30 +13,34 @@ categories = Category.create([
   { name: "Desserts" }
   ])
 
-users = User.create!([
-  { name: "Rachel Warbelow",
+rachel = User.create!({
+    name: "Rachel Warbelow",
     email_address: "demo+rachel@jumpstartlab.com",
     password: "password",
-    password_confirmation: "password" },
-  { name: "Jeff",
+    password_confirmation: "password" })
+
+jeff = User.create!({
+    name: "Jeff",
     email_address: "demo+jeff@jumpstartlab.com",
     password: "password",
     password_confirmation: "password",
-    display_name: "j3" },
-  { name: "Jorge Tellez",
-    email_address: "demo+jorge@jumpstartlab.com",
-    password: "password",
-    password_confirmation: "password",
-    display_name: "novohispano" },
-  { name: "Josh Cheek",
-    email_address: "demo+josh@jumpstartlab.com",
-    password: "password",
-    password_confirmation: "password",
-    display_name: "josh",
-    admin: true }
-  ])
+    display_name: "j3" })
 
-appetizers = Item.create([
+jorge = User.create!({
+  name: "Jorge Tellez",
+  email_address: "demo+jorge@jumpstartlab.com",
+  password: "password",
+  password_confirmation: "password",
+  display_name: "novohispano" })
+
+josh = User.create!({ name: "Josh Cheek",
+  email_address: "demo+josh@jumpstartlab.com",
+  password: "password",
+  password_confirmation: "password",
+  display_name: "josh",
+  admin: true })
+
+appetizers = Item.create!([
   { title: "Deviled Quail Eggs",
     description: "Free range quail eggs, perfect for sharing",
     price: 5.50 },
@@ -64,7 +68,7 @@ appetizers[3].save
 appetizers[4].image = File.open("#{Rails.root}/app/assets/images/lucky-soup.jpg")
 appetizers[4].save
 
-burgers = Item.create([
+burgers = Item.create!([
   { title: "Bison Burger",
     description: "Free range bison meat with cheddar cheese grilled onions and mushrooms topped with a homemade pickle",
     price: 9.50 },
@@ -82,7 +86,7 @@ burgers = Item.create([
     price: 9.75 }
     ])
 
-entrees = Item.create([
+entrees = Item.create!([
   { title: "Wild Boar Tenderloin",
     description: "Free range wild boar with tusks and stuff",
     price: 14.50 },
@@ -105,7 +109,7 @@ entrees[2].save
 entrees[3].image = File.open("#{Rails.root}/app/assets/images/chicken-pot-pie.jpg")
 entrees[3].save
 
-local_game = Item.create([
+local_game = Item.create!([
   { title: "Mountain Lion Stew",
     description: "Free range mountain lion stewed with carrots and potatoes",
     price: 13.50 }
@@ -113,7 +117,7 @@ local_game = Item.create([
 local_game[0].image = File.open("#{Rails.root}/app/assets/images/mountain-lion-stew.jpg")
 local_game[0].save
 
-desserts = Item.create([
+desserts = Item.create!([
   { title: "Chocolate Cake",
     description: "Free range cocoa beans and cane sugar",
     price: 4.50 },
@@ -134,8 +138,9 @@ desserts[1].save
 desserts[2].image = File.open("#{Rails.root}/app/assets/images/apple-pie.jpg")
 desserts[2].save
 desserts[3].image = File.open("#{Rails.root}/app/assets/images/apple-pie-a-la-mode.jpg")
+desserts[3].save
 
-appetizer_items = ItemCategory.create([
+appetizer_items = ItemCategory.create!([
   { item_id: 1, category_id: 1 },
   { item_id: 2, category_id: 1 },
   { item_id: 3, category_id: 1 },
@@ -143,7 +148,7 @@ appetizer_items = ItemCategory.create([
   { item_id: 5, category_id: 1 }
   ])
 
-burger_items = ItemCategory.create([
+burger_items = ItemCategory.create!([
   { item_id: 6, category_id: 2 },
   { item_id: 7, category_id: 2 },
   { item_id: 8, category_id: 2 },
@@ -151,24 +156,93 @@ burger_items = ItemCategory.create([
   { item_id: 10, category_id: 2 }
   ])
 
-entree_items = ItemCategory.create([
+entree_items = ItemCategory.create!([
   { item_id: 11, category_id: 3 },
   { item_id: 12, category_id: 3 },
   { item_id: 13, category_id: 3 },
   { item_id: 14, category_id: 3 }
   ])
 
-local_game_items = ItemCategory.create([
+local_game_items = ItemCategory.create!([
   { item_id: 15, category_id: 4 },
   { item_id: 2, category_id: 4 },
   { item_id: 6, category_id: 4 },
   { item_id: 10, category_id: 4 }
   ])
 
-dessert_items = ItemCategory.create([
+dessert_items = ItemCategory.create!([
   { item_id: 16, category_id: 5 },
   { item_id: 17, category_id: 5 },
   { item_id: 18, category_id: 5 },
   { item_id: 19, category_id: 5 },
   { item_id: 20, category_id: 5 }
 ])
+
+orders = Order.create!([
+  { delivery: false,
+    status: "completed",
+    user_id: rachel.id },
+  { delivery: false,
+    status: "completed",
+    user_id: jorge.id },
+  { delivery: true,
+    address: "123 Some St, Denver, CO",
+    status: "cancelled",
+    user_id: jeff.id },
+  { delivery: false,
+    status: "cancelled",
+    user_id: josh.id },
+  { delivery: true,
+    address: "123 Some Other St, Denver, CO",
+    user_id: rachel.id },
+  { delivery: false,
+    user_id: rachel.id },
+  { delivery: false,
+    user_id: jeff.id },
+  { delivery: false,
+    user_id: josh.id },
+  { delivery: false,
+    user_id: jorge.id },
+  { delivery: false,
+    user_id: josh.id }
+  ])
+
+order_items = OrderItem.create!([
+  { order_id: 1, item_id: 1 },
+  { order_id: 1, item_id: 5 },
+  { order_id: 1, item_id: 7 },
+  { order_id: 2, item_id: 2 },
+  { order_id: 2, item_id: 2 },
+  { order_id: 2, item_id: 11 },
+  { order_id: 2, item_id: 20 },
+  { order_id: 3, item_id: 5 },
+  { order_id: 3, item_id: 10 },
+  { order_id: 3, item_id: 18 },
+  { order_id: 4, item_id: 17 },
+  { order_id: 4, item_id: 18 },
+  { order_id: 4, item_id: 19 },
+  { order_id: 4, item_id: 20 },
+  { order_id: 5, item_id: 2 },
+  { order_id: 5, item_id: 6 },
+  { order_id: 5, item_id: 6 },
+  { order_id: 6, item_id: 1 },
+  { order_id: 6, item_id: 1 },
+  { order_id: 6, item_id: 1 },
+  { order_id: 6, item_id: 1 },
+  { order_id: 7, item_id: 3 },
+  { order_id: 7, item_id: 6 },
+  { order_id: 7, item_id: 10 },
+  { order_id: 7, item_id: 15 },
+  { order_id: 7, item_id: 4 },
+  { order_id: 8, item_id: 3 },
+  { order_id: 8, item_id: 13 },
+  { order_id: 8, item_id: 10 },
+  { order_id: 8, item_id: 11 },
+  { order_id: 8, item_id: 18 },
+  { order_id: 8, item_id: 19 },
+  { order_id: 9, item_id: 2 },
+  { order_id: 9, item_id: 4 },
+  { order_id: 9, item_id: 6 },
+  { order_id: 9, item_id: 8 },
+  { order_id: 10, item_id: 5 }
+  ])
