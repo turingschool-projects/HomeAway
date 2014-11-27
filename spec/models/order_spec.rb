@@ -36,10 +36,15 @@ describe Order do
     end
   end
 
-  describe "delivery orders" do
-    it "must have an address" do
+  describe "delivery or pickup" do
+    it "has an address if it's delivery" do
       order = Order.create(user_id: 1, delivery: true, address: nil)
       expect(order).to_not be_valid
+    end
+
+    it "is pickup if it's not delivery" do
+      order = Order.create(user_id: 1, delivery: false)
+      expect(order.pickup?).to eq(true)
     end
   end
 end

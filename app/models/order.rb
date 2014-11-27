@@ -4,4 +4,8 @@ class Order < ActiveRecord::Base
   has_many :order_items
   validates :user_id, presence: true
   validates :address, presence: true, if: :delivery?
+
+  def pickup?
+    delivery == false
+  end
 end
