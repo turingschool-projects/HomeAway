@@ -15,7 +15,7 @@ describe 'the unauthenticated user', type: :feature do
 
   let(:user_attributes) do
     { full_name: "Boy George",
-      email: "cultureclubforever@eighties.com",
+      email_address: "cultureclubforever@eighties.com",
       password: "password"
     }
   end
@@ -62,7 +62,7 @@ describe 'the unauthenticated user', type: :feature do
   it 'cannot become an administrator' do
     visit new_user_path
     fill_in("Full Name", with: user_attributes[:full_name])
-    fill_in("Email Address", with: user_attributes[:full_name])
+    fill_in("Email Address", with: user_attributes[:email_address])
     fill_in("Password", with: user_attributes[:password])
     fill_in("Confirm Password", with: user_attributes[:password])
     click_button("Create User")
