@@ -7,16 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="background"></div>
-  <div class="container-fluid">
+  <div class= "container-fluid" id="background"></div>
+
+  <!-- <div class="container-fluid head-banner"> -->
+  <div class="head-banner">
    <div class="row">
-  <img src="<%= image_path('lodgephotoshop2.jpg') %>" alt="lodge photo" class="img-responsive">
+     <img src="<%= image_path('lodgephotoshop3.jpg') %>" alt="lodge photo" class="img-responsive">
    </div>
+   <%= render :partial => "partials/navbar" %>
   </div>
-  <%= render :partial => "partials/navbar" %>
+
   <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
+
   <%= yield %>
 </body>
 
