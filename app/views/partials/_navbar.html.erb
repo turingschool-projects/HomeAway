@@ -1,23 +1,23 @@
 <div>
   <nav class="navbar navbar-inverse" role="navigation" data-spy="affix-top">
     <ul class="main-nav nav navbar-nav">
-      <li class="navbar-links"><%= link_to "Menu", items_path, id: 'nav-link' %></li>
+      <li class="navbar-links"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
     </ul>
 
     <div class="navbar-form navbar-right">
       <div id="account">
-        <%= link_to cart_items_path, class: "btn btn-success", id: 'nav-link' do %>
+        <%= link_to cart_items_path, class: "btn btn-success nav-link" do %>
           <span class="glyphicon glyphicon-shopping-cart">Cart</span>
         <% end %>
         <!-- <a class="btn btn-success" action="<%= cart_items_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a> -->
         <% if current_user  %>
-          <%= link_to "Logout", logout_path, method: :delete,  class: "btn btn-default", id: 'nav-link' %>
+          <%= link_to "Logout", logout_path, method: :delete,  class: "btn btn-default nav-link" %>
         <% else %>
-          <%= link_to "Sign Up", new_user_path, class: "btn btn-default", id: 'nav-link' %>
+          <%= link_to "Sign Up", new_user_path, class: "btn btn-default nav-link" %>
           <%= form_tag login_path, class: "navbar-form navbar-right" do %>
             <%= text_field_tag :email_address, nil, placeholder: "email address", class: "form-control navbar_style" %>
             <%= password_field_tag :password, nil, placeholder: "password", class: "form-control navbar_style" %>
-            <%= submit_tag "Login!" , class: "btn btn-default navbar_style", id: 'nav-link' %>
+            <%= submit_tag "Login!" , class: "btn btn-default navbar_style nav-link" %>
           <% end %>
         <% end %>
       </div>
