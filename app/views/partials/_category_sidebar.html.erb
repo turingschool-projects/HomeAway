@@ -1,5 +1,5 @@
-<div class="sidenav">
-    <ul class="nav nav-pills nav-stacked sidenav" id="sidebar">
+<div class="container sidenav col-md-3 affix">
+    <ul class="nav nav-pills nav-stacked sidenav-list" id="sidebar">
       <% @categories.each do |category| %>
         <li class="menu-link"><%= link_to category.name, "#category-id-#{category.id}" %></li>
       <% end %>

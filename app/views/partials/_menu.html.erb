@@ -1,9 +1,11 @@
 <div id="container">
   <% @categories.each do |category| %>
     <div class="category-block row">
+
       <div class= "category-title">
         <h2 class="menu-category"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
       </div>
+
         <% category.items.active.each do |item| %>
           <div class="thumbnail col-sm-6 col-md-4" style="height:350px; width:250px; margin: 10px">
             <%= image_tag item.image.url(:medium) %>
@@ -16,6 +18,7 @@
             </div>
           </div>
         <%end%>
+
     </div>
   <%end%>
 </div>
