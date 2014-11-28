@@ -59,15 +59,11 @@ appetizers = Item.create!([
     ])
 image_path = Rails.root.join("app", "assets", "images")
 appetizers[0].image = File.open(image_path.join("deviled-quail-eggs.png"))
-appetizers[0].save
 appetizers[1].image = File.open(image_path.join("chili-cheese-fries.png"))
-appetizers[1].save
 appetizers[2].image = File.open(image_path.join("tomato-bruschetta.png"))
-appetizers[2].save
 appetizers[3].image = File.open(image_path.join("tomato-veg-cheese-sandwich.png"))
-appetizers[3].save
 appetizers[4].image = File.open(image_path.join("lucky-soup.jpg"))
-appetizers[4].save
+appetizers.map(&:save)
 
 burgers = Item.create!([
   { title: "Bison Burger",
@@ -102,13 +98,10 @@ entrees = Item.create!([
     price: 11.50}
     ])
 entrees[0].image = File.open(image_path.join("pork-tenderloin.png"))
-entrees[0].save
 entrees[1].image = File.open(image_path.join("mountain-lion-steak.jpg"))
-entrees[1].save
 entrees[2].image = File.open(image_path.join("shepherds-pie.jpg"))
-entrees[2].save
 entrees[3].image = File.open(image_path.join("chicken-pot-pie.jpg"))
-entrees[3].save
+entrees.map(&:save)
 
 local_game = Item.create!([
   { title: "Mountain Lion Stew",
@@ -119,9 +112,8 @@ local_game = Item.create!([
     price: 10.0}
     ])
 local_game[0].image = File.open(image_path.join("mountain-lion-stew.jpg"))
-local_game[0].save
 local_game[1].image = File.open(image_path.join("wild-boar-ribs.jpg"))
-local_game[1].save
+local_game.map(&:save)
 
 desserts = Item.create!([
   { title: "Chocolate Cake",
@@ -138,13 +130,10 @@ desserts = Item.create!([
     price: 4.50 }
   ])
 desserts[0].image = File.open(image_path.join("chocolate-cake.jpg"))
-desserts[0].save
 desserts[1].image = File.open(image_path.join("brownie-sundae.jpg"))
-desserts[1].save
 desserts[2].image = File.open(image_path.join("apple-pie.jpg"))
-desserts[2].save
 desserts[3].image = File.open(image_path.join("apple-pie-a-la-mode.jpg"))
-desserts[3].save
+desserts.map(&:save)
 
 appetizer_items = ItemCategory.create!([
   { item_id: 1, category_id: 1 },
