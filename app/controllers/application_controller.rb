@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= if session[:user_id]
       user = User.where(id: session[:user_id]).first
       session[:user_id] = nil unless user
+      user
     end
   end
 
