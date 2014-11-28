@@ -1,9 +1,9 @@
-<div id="container">
+<div class="container menu-items-block col-md-9">
   <% @categories.each do |category| %>
     <div class="category-block row">
 
       <div class= "category-title">
-        <h2 class="menu-category"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
+        <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
       </div>
 
         <% category.items.active.each do |item| %>
