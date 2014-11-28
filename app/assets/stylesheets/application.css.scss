@@ -18,7 +18,9 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
-.img-responsive { min-width: 100% }
+html, body {height: 100%}
+
+.img-responsive { width: 100% }
 
 div#background {background-image: url(/assets/fence-background.jpg);
                 position: fixed;
@@ -30,42 +32,52 @@ div#background {background-image: url(/assets/fence-background.jpg);
 
 span.anchor {position:relative;
              display: block;
-             bottom: 50px
              }
 
-#sidebar {background-image: url(/assets/ricepaper.png);
-          opacity: .7;
-          border-radius: 10px;
-          margin-left: 1%;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          }
+ul.sidenav-list { z-index: 1;
+                  position: relative
+                  }
 
-div.sidenav {width: 25%; }
+ul.sidenav.affix-top {
+                   top: 50%;
+                  }
+//
+// ul.sidenav.affix {bottom: 33%;
+//                   margin-top: 30px;
+//                   }
+
+li.menu-link > a {
+              color: yellow;
+              font-family: Arial, sans-serif;
+              font-size: medium;
+              letter-spacing: 1px;
+              line-height: 30px;
+              font-weight: bold;
+              font-size: 200%;
+              line-height: 30px;
+              text-shadow: 0px;
+              }
 
 @mixin center-block() {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-a { color: #ffffff;
-text-shadow: 2px 2px #00000f;
-  }
+
+
 nav.navbar {
    width: 100%;
    z-index: 1;
    padding-left: 1%;
    padding-right: 2%;
    opacity: .9;
+   margin-bottom: 0px;
 }
 #container { width: 70%;
              float: right;
             }
 
 .navbar.custom-color { background-color: #CCA714 }
-nav.navbar.affix{
-        top: 0px; /* Set the top position of pinned element */
-    }
 
 #item-edit-form { background-image: url(/assets/ricepaper.png);
                   padding: 40px}
@@ -79,18 +91,17 @@ div.category-title {display: block;
 
 h2.menu-category {}
 
+.head-banner { width: 100% }
 .menu_item { height:200px; }
 
-.bottomright {position:absolute; bottom:0;  margin-bottom:7px; margin:7px; right: 0;}
-li.menu-link {
-              text-decoration: none;
-              color: #FFD119;
-              font-family: Arial, sans-serif;
-              font-size: medium;
-              letter-spacing: 1px;
-              line-height: 40px;
-              font-weight: bold;
-              font-size: 150%
-              }
+.bottomright { position:absolute; bottom:0;  margin-bottom:7px; margin:7px; right: 0; }
+
 
 ul.main-nav {position: inherit}
+
+.add-to-cart { position: absolute;
+                bottom: 10px;
+                right: 10px;
+                margin: 0;
+                padding: 5px 3px
+                }

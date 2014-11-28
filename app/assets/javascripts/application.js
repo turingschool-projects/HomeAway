@@ -16,21 +16,23 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(document).ready(function(){
-    $(".navbar").affix({
-        offset: {
-            top: 200
-     	}
-    });
-});
+// $(document).ready(function(){
+//     $(".navbar").affix({
+//         offset: {
+//             top: 200
+//      	}
+//     });
+// });
 
 $(document).ready(function(){
     $(".sidenav").affix({
         offset: {
-            top: 186
+            top: 0
        }
     });
 });
+
+$('.dropdown-toggle').dropdown()
 
 $(document).ready(function(){
   $('a[href*=#]').click(function() {
