@@ -27,7 +27,7 @@ div#background {background-image: url(/assets/fence-background.jpg);
                 opacity: .95;
                 width: 100%;
                 height: 100%;
-                z-index: -1
+                z-index: -1;
                 }
 
 span.anchor {position:relative;
@@ -41,10 +41,6 @@ ul.sidenav-list { z-index: 1;
 ul.sidenav.affix-top {
                    top: 50%;
                   }
-//
-// ul.sidenav.affix {bottom: 33%;
-//                   margin-top: 30px;
-//                   }
 
 li.menu-link > a {
               color: yellow;
@@ -73,8 +69,8 @@ nav.navbar {
    opacity: .9;
    margin-bottom: 0px;
 }
-#container { width: 70%;
-             float: right;
+
+.menu-items-block { float: right;
             }
 
 .navbar.custom-color { background-color: #CCA714 }
@@ -93,9 +89,6 @@ h2.menu-category {}
 
 .head-banner { width: 100% }
 .menu_item { height:200px; }
-
-.bottomright { position:absolute; bottom:0;  margin-bottom:7px; margin:7px; right: 0; }
-
 
 ul.main-nav {position: inherit}
 
