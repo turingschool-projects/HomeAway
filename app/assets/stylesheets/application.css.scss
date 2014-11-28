@@ -28,6 +28,7 @@ body {height: 100%;}
 .img-responsive { width: 100% }
 
 div#background-fence {background-image: url(/assets/fence-background.jpg);
+                      background-size: contain;
                       position: fixed;
                       opacity: .95;
                       height: 100%;
@@ -50,16 +51,22 @@ ul.sidenav.affix-top {
 li.menu-link > a {
               color: #E6BC2C;
               font-family: 'Stardos Stencil';
-              font-size: medium;
-              letter-spacing: 1px;
+              font-size: 250%;
+              letter-spacing: 2px;
               line-height: 30px;
               font-weight: bold;
-              font-size: 200%;
               line-height: 30px;
 
               }
 h2.menu-category {font-family: 'Stardos Stencil';
-                  color: #EB0C04;
+                  color: #E6BC2C;
+                  font-size: 200%;
+                  letter-spacing: 2px;
+                  opacity: 0.9;
+                  text-align: left;
+                  margin-left: 10px;
+                  text-transform: uppercase;
+                  margin-top: 5%;
                   }
 
 .shadow {text-shadow:
@@ -86,6 +93,11 @@ nav.navbar {
    padding-right: 2%;
    margin-bottom: 0px;
 }
+
+#nav-link {font-family: 'Stardos Stencil';
+                     }
+
+
 
 .menu-items-block { float: right;
             }
