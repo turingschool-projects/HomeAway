@@ -20,14 +20,14 @@
 
 body {height: 100%;}
 
-.navbar-inverse { background-image: url(/assets/black-mamba.png);
+.navbar-inverse { background-image: asset-url('black_mamba.png');
                   // background-color: #E6BC2C;
                   border: none;
                   border-radius: 0px;}
 
 .img-responsive { width: 100% }
 
-div#background-fence {background-image: url(/assets/fence-background.jpg);
+div#background-fence {background-image: asset-url('fence-background.jpg');
                       background-size: contain;
                       position: fixed;
                       opacity: .95;
@@ -94,7 +94,7 @@ nav.navbar {
    margin-bottom: 0px;
 }
 
-#nav-link {font-family: 'Stardos Stencil';
+.nav-link {font-family: 'Stardos Stencil';
                      }
 
 
@@ -103,7 +103,7 @@ nav.navbar {
             }
 
 
-#item-edit-form { background-image: url(/assets/ricepaper.png);
+#item-edit-form { background-image: asset-url('ricepaper.png');
                   padding: 40px}
 
 head {
