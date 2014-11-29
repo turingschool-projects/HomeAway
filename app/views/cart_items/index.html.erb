@@ -1,6 +1,7 @@
 <div id="item-edit-form">
-  <% @cart.data.each do |k, v| %>
-  <h1><%= Item.find(k.to_i).title %></h1>
-  <h2>Quantity: <%= v %></h2>
-   <% end %>
+  <% @cart.data.each do |_, item| %>
+    <h1><%= item.title %></h1>Price: $<%= item.price %>
+    <h2>Quantity: <%= item.quantity %></h2>
+  <% end %>
+  Total: $<%= @cart.total_cost %>
 </div>

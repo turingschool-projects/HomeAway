@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  attr_accessor :quantity
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true, length: { maximum: 120 }
   validates :price, numericality: {greater_than: 0}

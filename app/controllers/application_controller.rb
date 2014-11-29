@@ -14,5 +14,5 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :load_cart
-  
+
 end
