@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   include ActionView::Helpers::TextHelper
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= if session[:user_id]
+      user = User.where(id: session[:user_id]).first
+      session[:user_id] = nil unless user
+      user
+    end
   end
 
   def load_cart
@@ -14,5 +18,5 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :load_cart
-  
+
 end
