@@ -13,7 +13,8 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
-gem 'puma'
+gem 'aws-sdk'
+gem 'passenger'
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
 gem 'dimensions-rails'
