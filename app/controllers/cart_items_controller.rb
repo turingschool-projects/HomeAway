@@ -8,5 +8,4 @@ class CartItemsController < ApplicationController
     flash[:notice] = "You have #{pluralize(@cart.count_of(item), item.title)} in your cart."
     redirect_to root_path
   end
-
 end

@@ -15,8 +15,8 @@ class Cart
     data[item.id].quantity
   end
 
-  def count_total
-    data.values.sum
+  def total_items
+    to_h.values.sum
   end
 
   def cart_contents(cart_data)
@@ -25,6 +25,7 @@ class Cart
     Item.where(id: cart_data.keys).inject(contents) do |memo, item|
       item.quantity = cart_data[item.id.to_s]
       memo[item.id] = item
+      memo
     end
     contents
   end
@@ -39,7 +40,7 @@ class Cart
     hash = {}
     data.inject(hash) do |hash, (id, item)|
       hash[id] = item.quantity
+      hash
     end
-    hash
   end
 end
