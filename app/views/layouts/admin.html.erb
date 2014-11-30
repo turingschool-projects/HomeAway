@@ -2,21 +2,31 @@
 <html>
 <head>
   <title>DinnerDash</title>
+  <!-- <link href='http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400italic' rel='stylesheet' type='text/css'> -->
+  <%= stylesheet_link_tag    'application', 'http://fonts.googleapis.com/css?family=Stardos+Stencil:700' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="background"></div>
-  <div class="container-fluid">
-   <div class="row">
-  <img src="<%= image_path('lodgephotoshop2.jpg') %>" alt="lodge photo" class="img-responsive">
-   </div>
+  <div class= "container-fluid col-xs-12" id="background-fence">
   </div>
-  <%= render :partial => "partials/navbar" %>
+
+  <div class="head-banner">
+
+    <div class="row container-fluid">
+      <img src="<%= image_path('lodgephotoshop3.jpg') %>" alt="lodge photo" class="img-responsive">
+    </div>
+    <%= render :partial => "partials/navbar" %>
+
+  </div>
+
   <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
   <% end %>
+
   <%= yield %>
 </body>
 
