@@ -1,5 +1,5 @@
 class Cart
-  attr_reader :data
+  include Enumerable
 
   def initialize(input_data)
     @data = cart_contents(input_data) || Hash.new
@@ -19,16 +19,6 @@ class Cart
     to_h.values.sum
   end
 
-  def cart_contents(cart_data)
-    contents = {}
-    return contents unless cart_data
-    Item.where(id: cart_data.keys).inject(contents) do |memo, item|
-      item.quantity = cart_data[item.id.to_s]
-      memo[item.id] = item
-      memo
-    end
-    contents
-  end
 
   def total_cost
     data.inject(0) do |sum, (_, item)|
@@ -42,5 +32,23 @@ class Cart
       hash[id] = item.quantity
       hash
     end
+  end
+
+  def each(&block)
+    data.values.each(&block)
+  end
+
+  private
+  attr_reader :data
+
+  def cart_contents(cart_data)
+    contents = {}
+    return contents unless cart_data
+    Item.where(id: cart_data.keys).inject(contents) do |memo, item|
+      item.quantity = cart_data[item.id.to_s]
+      memo[item.id] = item
+      memo
+    end
+    contents
   end
 end

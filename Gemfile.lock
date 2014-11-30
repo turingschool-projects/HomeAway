@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.0.3)
     actionmailer (4.1.7)
       actionpack (= 4.1.7)
       actionview (= 4.1.7)
@@ -159,6 +160,8 @@ GEM
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-livereload (0.3.15)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.7)
@@ -253,6 +256,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   autoprefixer-rails
   aws-sdk
   bcrypt (~> 3.1.7)
@@ -276,6 +280,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   quiet_assets
+  rack-livereload
   rails (= 4.1.7)
   rails_12factor
   rspec-rails (~> 3.0)
