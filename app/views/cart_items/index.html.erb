@@ -3,10 +3,10 @@
     <h1><%= item.title %></h1>Price: $<%= item.price %>
     <h2>Quantity: <%= item.quantity %></h2>
   <% end %>
-  Total: $<%= @cart.total_cost %>
+  Total: $<%= @cart.total_cost %><br>
   <% if current_user %>
-    <%= link_to "Checkout", @cart.order, method: :put %>
+    <%= link_to "Checkout", @cart.order, method: :put, class: 'btn btn-default' %>
   <% else %>
-    <%= link_to "Checkout", new_user_path %>
+    <%= link_to "Checkout", new_user_path, class: 'btn btn-default' %>
   <% end %>
 </div>
