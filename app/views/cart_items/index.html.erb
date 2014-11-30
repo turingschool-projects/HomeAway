@@ -1,18 +1,31 @@
 <div id="item-edit-form">
   <table class="table table-hover">
-    <th>Item</th>
-    <th>Price</th>
-    <th>Quantity</th>
-
-    <% @cart.each do |item| %>
-    <tr>
-      <td><%= item.title %></td>
-      <td>$<%= item.price %></td>
-      <td><%= item.quantity %></td>
-    </tr>
-    <% end %>
+    <thead>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </thead>
+    <tbody>
+      <% @cart.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td>$<%= item.price %></td>
+        <td><%= item.quantity %></td>
+        <td>$<%= @cart.subtotal(item) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total: $<%= @cart.total_cost %></td>
+      </tr>
+    </tfoot>
   </table>
-  <h2>Total: $<%= @cart.total_cost %></h2>
+
   <div class="checkout-button">
     <% if current_user %>
     <%= link_to "Checkout", @cart.order, method: :put, class: 'btn btn-default' %>

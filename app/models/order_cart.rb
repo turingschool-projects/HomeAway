@@ -14,6 +14,10 @@ class OrderCart
     update_quantities
   end
 
+  def subtotal(item)
+    count_of(item) * item.price
+  end
+
   def count_of(item)
     quantities[item.id].quantity
   end
