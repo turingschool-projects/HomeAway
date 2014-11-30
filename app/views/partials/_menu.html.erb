@@ -13,7 +13,7 @@
               <h3><%= item.title %></h3>
               <p><%= item.description %></p>
               <p style="position:absolute;bottom:10px;left:10px;margin:0;padding:5px 3px;"> Price:$<%= item.price %></p>
-              <p><%= link_to "Add to Cart", cart_items_path(item_id: item), method: :create, class: "btn btn-default add-to-cart", role: "button" %></p>
+              <p><%= link_to "Add to Cart", cart_items_path(item_id: item), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
 
             </div>
           </div>
