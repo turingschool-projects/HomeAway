@@ -24,9 +24,9 @@ describe Order do
     end
   end
 
-  it 'should default status to ordered' do
+  it 'should default status to in_cart' do
     order = Order.create(address: "address is nice")
-    expect(order.status).to eq("ordered")
+    expect(order.status).to eq("in_cart")
   end
 
   describe "validations" do

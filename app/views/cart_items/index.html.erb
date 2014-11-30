@@ -4,4 +4,9 @@
     <h2>Quantity: <%= item.quantity %></h2>
   <% end %>
   Total: $<%= @cart.total_cost %>
+  <% if current_user %>
+    <%= link_to "Checkout", @cart.order, method: :put %>
+  <% else %>
+    <%= link_to "Checkout", new_user_path %>
+  <% end %>
 </div>

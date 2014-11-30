@@ -1,6 +1,8 @@
 class OrderCart
   include Enumerable
 
+  attr_reader :order
+
   def initialize(order)
     @order = order
     update_quantities
@@ -36,7 +38,6 @@ class OrderCart
   end
 
   private
-  attr_reader :order
 
   def update_quantities
     current_quantities = quantities
