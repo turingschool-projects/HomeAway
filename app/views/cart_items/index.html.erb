@@ -1,5 +1,5 @@
 <div id="item-edit-form">
-  <% @cart.data.each do |_, item| %>
+  <% @cart.each do |item| %>
     <h1><%= item.title %></h1>Price: $<%= item.price %>
     <h2>Quantity: <%= item.quantity %></h2>
   <% end %>

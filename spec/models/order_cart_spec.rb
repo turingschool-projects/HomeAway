@@ -1,14 +1,19 @@
 require 'rails_helper'
 
-describe Cart do
-  let(:item1) {Item.create!(title: "Test item", description: "test", price: 1.0)}
-  let(:item2) {Item.create!(title: "Another test item", description: "other test", price: 2.0)}
-  let(:session_hash) do
-    {item1.id.to_s => 2, item2.id.to_s => 1}
-  end
+describe OrderCart do
+  let(:item1) { Item.create!(title: "Test item", description: "test", price: 1.0) }
+  let(:item2) { Item.create!(title: "Another test item", description: "other test", price: 2.0) }
+  let(:user)  { User.create!(name: "Viki", email_address: "viki@example.com", password: "password", password_confirmation: "password") }
+  let(:order) { Order.create!(user: user) }
+  let!(:order_items) { order.order_items.create!([
+    {item: item1},
+    {item: item1},
+    {item: item2}
+    ]) }
 
-  subject(:cart) {Cart.new(session_hash)}
-  it "loads a correct hash" do
+
+  subject(:cart) {OrderCart.new(order)}
+  it "loads the correct order" do
     expect(cart.to_h).to eq({item1.id => 2, item2.id => 1})
   end
 

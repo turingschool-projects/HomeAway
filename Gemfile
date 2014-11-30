@@ -17,6 +17,7 @@ gem 'aws-sdk'
 gem 'passenger'
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
+gem 'aasm'
 gem 'dimensions-rails'
 
 group :development, :test do
@@ -28,11 +29,12 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capybara'
   gem 'launchy'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-livereload'
+  gem 'guard', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-rails', require: false
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 end
 
 group :test do
