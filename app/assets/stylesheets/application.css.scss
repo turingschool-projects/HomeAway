@@ -132,15 +132,23 @@ div.category-title {display: block;
 .title-text { position: absolute;
               z-index: 1;
               font-family: 'Stardos Stencil';
-              margin-left: auto;
-              margin-right: auto;
+              // margin-left: auto;
+              // margin-right: auto;
               text-align: center;
-              margin-top: 5px
+              width: 100%
               }
 
-.established {color: #E30908}
+#established {
+              color: #E30908;
+              font-size: 275%;
+              letter-spacing: 3px;
+              }
 
-.main-title {color: #E6BC2C}           
+#main-title {
+             color: #E6BC2C;
+             font-size: 450%;
+             letter-spacing: 3px;
+             }
 
 
 .menu_item { height:200px; }
