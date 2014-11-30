@@ -85,6 +85,14 @@ h2.menu-category {font-family: 'Stardos Stencil';
   margin-right: auto;
 }
 
+a.btn-success {background-color: none;
+               background-image: asset-url('cart-background.png');
+               border-color: #E30908;
+               color: black;
+               font-family: 'Stardos Stencil';
+              }
+
+a.btn-success:hover {border-color: #E30908}
 
 nav.navbar {
    width: 100%;
@@ -96,6 +104,8 @@ nav.navbar {
 
 .nav-link {font-family: 'Stardos Stencil';
                      }
+
+.menu-navbar-link {font-size: 150%}
 
 
 
@@ -114,7 +124,33 @@ div.category-title {display: block;
                     max-height: 50px}
 
 
-.head-banner { width: 100% }
+.head-banner { width: 100%;
+               }
+
+.banner-image {position: relative}
+
+.title-text { position: absolute;
+              z-index: 1;
+              font-family: 'Stardos Stencil';
+              // margin-left: auto;
+              // margin-right: auto;
+              text-align: center;
+              width: 100%
+              }
+
+#established {
+              color: #E30908;
+              font-size: 275%;
+              letter-spacing: 3px;
+              }
+
+#main-title {
+             color: #E6BC2C;
+             font-size: 450%;
+             letter-spacing: 3px;
+             }
+
+
 .menu_item { height:200px; }
 
 ul.main-nav {position: inherit}
