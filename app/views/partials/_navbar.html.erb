@@ -9,7 +9,6 @@
         <%= link_to cart_items_path, class: "btn btn-success nav-link" do %>
           <span class="glyphicon glyphicon-shopping-cart">Cart</span>
         <% end %>
-        <!-- <a class="btn btn-success" action="<%= cart_items_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a> -->
         <% if current_user  %>
           <%= link_to "Logout", logout_path, method: :delete,  class: "btn btn-default nav-link" %>
         <% else %>

@@ -11,6 +11,10 @@ class Cart
     data[item.id].quantity += 1
   end
 
+  def subtotal(item)
+    count_of(item) * item.price
+  end
+
   def count_of(item)
     data[item.id].quantity
   end

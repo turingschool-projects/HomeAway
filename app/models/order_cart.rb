@@ -1,6 +1,8 @@
 class OrderCart
   include Enumerable
 
+  attr_reader :order
+
   def initialize(order)
     @order = order
     update_quantities
@@ -10,6 +12,10 @@ class OrderCart
     order.order_items.create!(item: item)
     order.items.reload
     update_quantities
+  end
+
+  def subtotal(item)
+    count_of(item) * item.price
   end
 
   def count_of(item)
@@ -36,7 +42,6 @@ class OrderCart
   end
 
   private
-  attr_reader :order
 
   def update_quantities
     current_quantities = quantities

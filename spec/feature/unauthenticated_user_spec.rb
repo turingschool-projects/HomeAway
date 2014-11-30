@@ -14,7 +14,7 @@ describe 'the unauthenticated user', type: :feature do
   end
 
   let(:user_attributes) do
-    { full_name: "Boy George",
+    { name: "Boy George",
       email_address: "cultureclubforever@eighties.com",
       password: "password"
     }
@@ -34,10 +34,14 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to have_css("span", "category-id-#{item.categories.first.id}")
   end
 
-  xit "adds an item to the cart" do
-  end
-
-  xit 'views the cart' do
+  it "can add an item to the cart and view the cart" do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    expect(page).to have_content("You have 1 #{item.title}")
+    visit cart_items_path
+    expect(page).to have_content(item.title)
+    expect(page).to have_content("Quantity: 1")
   end
 
   xit 'removes an item from the cart' do
@@ -47,10 +51,28 @@ describe 'the unauthenticated user', type: :feature do
 
   end
 
-  xit 'logs in without clearing the cart' do
+  it 'logs in without clearing the cart' do
+    user_attributes[:password_confirmation] = "password"
+    user = User.create!(user_attributes)
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    fill_in "email address", with: user.email_address
+    fill_in "password", with: "password"
+    find_button("Login!").click
+    visit cart_items_path
+    expect(page).to have_content(item.title)
+    expect(page).to have_content(item.price)
+    expect(page).to have_content("Quantity: 1")
   end
 
-  xit 'cannot checkout without logging in' do
+  it 'cannot checkout without logging in' do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    visit cart_items_path
+    find_link("Checkout").click
+    expect(current_path).to eq(new_user_path)
   end
 
   it 'cannot access admin views' do
@@ -61,12 +83,12 @@ describe 'the unauthenticated user', type: :feature do
 
   it 'cannot become an administrator' do
     visit new_user_path
-    fill_in("Full Name", with: user_attributes[:full_name])
+    fill_in("Full Name", with: user_attributes[:name])
     fill_in("Email Address", with: user_attributes[:email_address])
     fill_in("Password", with: user_attributes[:password])
     fill_in("Confirm Password", with: user_attributes[:password])
     click_button("Create User")
-    expect(User.last.name).to eq(user_attributes[:full_name])
+    expect(User.last.name).to eq(user_attributes[:name])
     expect(User.last.admin?).to be false
   end
 end
