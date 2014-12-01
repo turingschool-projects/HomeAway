@@ -39,7 +39,7 @@
     <% if current_user %>
     <%= link_to "Checkout", @cart.order, method: :put, class: 'btn btn-default' %>
     <% else %>
-    <%= link_to "Checkout", new_user_path, class: 'btn btn-default' %>
+    <span class="notice login-checkout">You must be logged in to place an order.</span>
     <% end %>
   </div>
 </div>
