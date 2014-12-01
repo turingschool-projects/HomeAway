@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe CartOrderConverter do
-  let(:item1) { Item.create!(title: "Test1", description: "For a test", price: 1.5) }
-  let(:item2) { Item.create!(title: "Test2", description: "For testing", price: 1.0) }
+  let(:category) { Category.create!(name: "food")}
+  let(:item1) { Item.create!(title: "Test1", description: "For a test", price: 1.5, categories: [category]) }
+  let(:item2) { Item.create!(title: "Test2", description: "For testing", price: 1.0, categories: [category]) }
   let(:user) { User.create!(name: "Viki", email_address: "viki@example.com", password: "password", password_confirmation: "password")}
   let(:session_cart) { {item1.id => 2, item2.id => 1} }
 
