@@ -1,10 +1,12 @@
 class Order < ActiveRecord::Base
   include AASM
+  has_many :order_items
   has_many :items, through: :order_items
   belongs_to :user
-  has_many :order_items
-  validates :user_id, presence: true
+
+  validates :user, presence: true
   validates :address, presence: true, if: :delivery?
+
   before_save :calculate_total
 
   aasm column: :status do
@@ -17,7 +19,7 @@ class Order < ActiveRecord::Base
 
     # events give us bang methods, like submit! for changing order status
     event :place do
-      transitions from: :in_cart, to: :ordered
+      transitions from: :in_cart, to: :ordered, guard: :removed_retired_items?
     end
 
     event :pay do
@@ -39,5 +41,11 @@ class Order < ActiveRecord::Base
 
   def calculate_total
     self.total = items.sum(:price)
+  end
+
+  def removed_retired_items?
+    return true if order_items.retired.empty?
+    order_items.retired.delete_all
+    false
   end
 end

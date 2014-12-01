@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe Cart do
-  let(:item1) {Item.create!(title: "Test item", description: "test", price: 1.0)}
-  let(:item2) {Item.create!(title: "Another test item", description: "other test", price: 2.0)}
+  let(:category) { Category.create!(name: "food")}
+  let(:item1) {Item.create!(title: "Test item", description: "test", price: 1.0, categories: [category]) }
+  let(:item2) {Item.create!(title: "Another test item", description: "other test", price: 2.0, categories: [category]) }
   let(:session_hash) do
     {item1.id.to_s => 2, item2.id.to_s => 1}
   end
