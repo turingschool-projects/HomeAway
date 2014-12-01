@@ -9,6 +9,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   def update
     order = @cart.order
     order.place! if order.in_cart?
