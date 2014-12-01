@@ -8,11 +8,11 @@
     </thead>
     <tbody>
       <% @cart.each do |item| %>
-      <tr>
-        <td><%= item.title %></td>
-        <td>$<%= item.price %></td>
-        <td><%= item.quantity %></td>
-        <td>$<%= @cart.subtotal(item) %></td>
+      <tr class="cart_item cart_item_<%= item.id %>">
+        <td class="title"><%= item.title %></td>
+        <td class="price">$<%= item.price %></td>
+        <td class="quantity"><%= item.quantity %></td>
+        <td class="subtotal">$<%= @cart.subtotal(item) %></td>
       </tr>
       <% end %>
     </tbody>
