@@ -12,7 +12,7 @@
             <div class="caption">
               <h3><%= item.title %></h3>
               <p><%= item.description %></p>
-              <p id="modify_button"> Price:$<%= item.price %></p>
+              <p id="price"> Price:$<%= item.price %></p>
               <p><%= link_to "Add to Cart", cart_items_path(item_id: item), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
 
             </div>
