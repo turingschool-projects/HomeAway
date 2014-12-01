@@ -3,11 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
+    session[:return_to] ||= request.referer
     user = User.find_by(email_address: params[:email_address])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       convert_cart(user, session)
-      user.admin? ? redirect_to(admin_items_path) : redirect_to(root_path)
+      user.admin? ? redirect_to(admin_items_path) : redirect_to(session.delete(:return_to))
     else
       flash[:errors] = "Invalid Login"
       render :new
