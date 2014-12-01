@@ -80,6 +80,12 @@ burgers = [
   description: "Free range bear meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 9.75, categories: [burger])
 ]
+bison_burger.image = File.open(image_path.join("gourmet_hamburger_with_bacon.jpg"))
+elk_burger.image = File.open(image_path.join("stacked_burger.jpg"))
+moose_burger.image = File.open(image_path.join("burger_hangover.jpg"))
+venison_burger.image = File.open(image_path.join("black_burger.png"))
+bear_burger.image = File.open(image_path.join("grange_burger.jpg"))
+burgers.map(&:save)
 
 entrees = [
   wild_boar_tenderloin = Item.create!(title: "Wild Boar Tenderloin",
