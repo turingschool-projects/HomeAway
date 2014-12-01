@@ -15,8 +15,10 @@ class OrderCart
   end
 
   def remove_item(item)
-    binding.pry
-    order.order_items.delete(item.id)
+    order_to_destroy = order.order_items.find_by item: item
+    order_to_destroy.destroy
+    order.items.reload
+    update_quantities
   end
 
   def subtotal(item)
