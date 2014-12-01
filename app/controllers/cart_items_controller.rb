@@ -1,5 +1,4 @@
 class CartItemsController < ApplicationController
-  # before_action :set_item
 
   def create
     item = Item.find(params[:item_id])
@@ -12,6 +11,7 @@ class CartItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     @cart.remove_item(item)
+    session[:cart] = @cart.to_h unless current_user
     redirect_to cart_items_path
   end
 
