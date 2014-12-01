@@ -9,6 +9,8 @@ class Order < ActiveRecord::Base
 
   before_save :calculate_total
 
+  scope :past_orders, -> { where(status: [:completed, :cancelled]) }
+
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
     state :in_cart, initial: true
