@@ -13,6 +13,7 @@
         <td>$<%= item.price %></td>
         <td><%= item.quantity %></td>
         <td>$<%= @cart.subtotal(item) %></td>
+        <td> <%= button_to "Remove", cart_item_path(id: item), method: :delete %> </td>
       </tr>
       <% end %>
     </tbody>

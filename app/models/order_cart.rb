@@ -14,6 +14,11 @@ class OrderCart
     update_quantities
   end
 
+  def remove_item(item)
+    binding.pry
+    order.order_items.delete(item.id)
+  end
+
   def subtotal(item)
     count_of(item) * item.price
   end
