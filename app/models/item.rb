@@ -13,10 +13,9 @@ class Item < ActiveRecord::Base
   has_attached_file :image,
   styles: {
     thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
+    medium: '235x135!>',
     },
-  default_url: 'Gourmet_hamburger_with_bacon.jpg'
+  default_url: 'gourmet_hamburger_with_bacon.jpg'
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
