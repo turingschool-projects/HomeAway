@@ -41,7 +41,10 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to have_content("You have 1 #{item.title}")
     visit cart_items_path
     expect(page).to have_content(item.title)
-    expect(page).to have_content("Quantity: 1")
+    expect(page).to have_content("Quantity")
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("1")
+    end
   end
 
   xit 'removes an item from the cart' do
@@ -63,7 +66,10 @@ describe 'the unauthenticated user', type: :feature do
     visit cart_items_path
     expect(page).to have_content(item.title)
     expect(page).to have_content(item.price)
-    expect(page).to have_content("Quantity: 1")
+    expect(page).to have_content("Quantity")
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("1")
+    end
   end
 
   it 'cannot checkout without logging in' do
