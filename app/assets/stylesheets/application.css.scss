@@ -146,8 +146,8 @@ div.category-title {display: block;
 
 #main-title {
              color: #E6BC2C;
-             font-size: 450%;
-             letter-spacing: 3px;
+             font-size: 525%;
+             letter-spacing: 2px;
              }
 
 
@@ -156,8 +156,15 @@ div.category-title {display: block;
 ul.main-nav {position: inherit}
 
 .add-to-cart { position: absolute;
-                bottom: 10px;
-                right: 10px;
-                margin: 0;
-                padding: 5px 3px
-                }
+               bottom: 10px;
+               right: 10px;
+               margin: 0;
+               padding: 5px 3px
+              }
+
+.notice {color: #00CD02;
+         background-color: white;
+         border-radius: 10px;
+         text-align: center;
+         font-size: 115%;
+         letter-spacing: 1px;}
