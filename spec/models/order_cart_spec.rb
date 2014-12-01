@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe OrderCart do
-  let(:item1) { Item.create!(title: "Test item", description: "test", price: 1.0) }
-  let(:item2) { Item.create!(title: "Another test item", description: "other test", price: 2.0) }
+  let(:category) { Category.create!(name: "food")}
+  let(:item1) {Item.create!(title: "Test item", description: "test", price: 1.0, categories: [category]) }
+  let(:item2) {Item.create!(title: "Another test item", description: "other test", price: 2.0, categories: [category]) }
   let(:user)  { User.create!(name: "Viki", email_address: "viki@example.com", password: "password", password_confirmation: "password") }
   let(:order) { Order.create!(user: user) }
   let!(:order_items) { order.order_items.create!([
