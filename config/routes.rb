@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :cart_items
-  resources :orders, except: [:index]
+  resources :orders
 
   resources :items, only: [:index]
 
