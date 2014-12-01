@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   validates :user, presence: true
   validates :address, presence: true, if: :delivery?
 
-  before_save :calculate_total
+  # before_save :calculate_total
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
@@ -39,8 +39,8 @@ class Order < ActiveRecord::Base
     !delivery
   end
 
-  def calculate_total
-    self.total = items.sum(:price)
+  def total
+    items.sum(:price)
   end
 
   def removed_retired_items?
