@@ -14,6 +14,13 @@ class OrderCart
     update_quantities
   end
 
+  def remove_item(item)
+    order_to_destroy = order.order_items.find_by item: item
+    order_to_destroy.destroy
+    order.items.reload
+    update_quantities
+  end
+
   def subtotal(item)
     count_of(item) * item.price
   end
