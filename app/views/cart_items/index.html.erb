@@ -12,23 +12,23 @@
       <th>Subtotal</th>
     </thead>
     <tbody>
-        <% @cart.each do |item| %>
-        <tr class="cart_item cart_item_<%= item.id %>">
-          <td class="title"><%= item.title %></td>
-          <td class="price">$<%= item.price %></td>
-          <td class="quantity">
-            <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs decrease" do %>
-              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-            <% end %>
-            <%= item.quantity %>
-            <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs increase" do %>
-              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <% end %>
-          </td>
-          <td class="subtotal">$<%= @cart.subtotal(item) %></td>
-          <td> <%= button_to "Remove", cart_item_path(id: item), method: :delete %> </td>
-        </tr>
-        <% end %>
+      <% @cart.each do |item| %>
+      <tr class="cart_item cart_item_<%= item.id %>">
+        <td class="title"><%= item.title %></td>
+        <td class="price">$<%= item.price %></td>
+        <td class="quantity">
+          <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs decrease" do %>
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          <% end %>
+          <%= item.quantity %>
+          <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs increase" do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <% end %>
+        </td>
+        <td class="subtotal">$<%= @cart.subtotal(item) %></td>
+        <td> <%= button_to "Remove", cart_item_path(id: item), method: :delete %> </td>
+      </tr>
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
