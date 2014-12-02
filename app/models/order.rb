@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
 
   # before_save :calculate_total
 
-  scope :past_orders, -> { where(status: [:completed, :cancelled]) }
+  scope :past_orders, -> { where(status: [:ordered, :paid, :completed, :cancelled]) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
     state :cancelled
     state :completed
 
-    # events give us bang methods, like submit! for changing order status
+    # events give us bang methods, like place! for changing order status
     event :place do
       transitions from: :in_cart, to: :ordered, guard: :removed_retired_items?
     end
