@@ -45,6 +45,26 @@ class Order < ActiveRecord::Base
     items.sum(:price)
   end
 
+  def update_quantities
+    current_quantities = quantities
+    items.each do |item|
+      item.quantity = current_quantities[item.id].quantity
+    end
+  end
+
+
+  def quantities
+    items.group_by(&:id).inject({}) do |memo, (k, items)|
+      memo[k] = items.first
+      memo[k].quantity = items.count
+      memo
+    end
+  end
+
+  def subtotal(item)
+    item.quantity * item.price
+  end
+
   def removed_retired_items?
     return true if order_items.retired.empty?
     order_items.retired.delete_all

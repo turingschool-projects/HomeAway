@@ -1,1 +1,28 @@
-This will be the order show page
+<div id="item-edit-form">
+  <table class="table table-hover">
+    <thead>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </thead>
+    <tbody>
+      <% @order.items.uniq.each do |item| %>
+      <tr class="cart_item cart_item_<%= item.id %>">
+        <td class="title"><%= item.title %></td>
+        <td class="price">$<%= item.price %></td>
+        <td class="quantity"><%= item.quantity %></td>
+        <td class="subtotal">$<%= @order.subtotal(item) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total: $<%= @order.total %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
