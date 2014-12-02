@@ -1,1 +1,22 @@
-<h1 style="color:white"></h1>
+<div class="edit-form">
+  <table class="table table-hover">
+    <thead>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+      <tr class="order order_<%= order.id %>">
+        <% if current_user.admin? %>
+          <td class="date"><%= link_to order.updated_at, admin_order_path(order) %></td>
+        <% else %>
+          <td class="date"><%= link_to order.updated_at, order_path(order) %></td>
+        <% end %>
+        <td class="total">$<%= order.total %></td>
+        <td class="status"><%= order.status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
