@@ -6,7 +6,7 @@
       <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
     </div>
 
-    <% category.items.active.each do |item| %>
+    <% category.items.each do |item| %>
     <div class="thumbnail col-sm-6 col-md-4">
       <%= image_tag item.image.url(:medium) %>
       <div class="caption">

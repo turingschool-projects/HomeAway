@@ -18,9 +18,9 @@
     </tbody>
     <tfoot>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Status: <%= @order.status %></td>
+        <td>Ordered: <%= @order.created_at %></td>
+        <td>Updated: <%= @order.updated_at %></td>
         <td>Total: $<%= @order.total %></td>
       </tr>
     </tfoot>
