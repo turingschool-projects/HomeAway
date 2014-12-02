@@ -1,0 +1,25 @@
+<div class="container" id="edit-form">
+  <%= form_for @order, url: {action: :update}, role: 'form' do |f| %>
+    <h4>
+      Address:
+    </h4>
+    <%= f.text_area :address, placeholder: 'Address', size: "40x3", label: 'Address' %>
+    <h4>
+      Payment Info:
+    </h4>
+    <label class="radio">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Visa
+    </label>
+    <label class="radio">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> MasterCard
+    </label>
+    <label class="radio">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Discover
+    </label>
+    <%= label_tag "Card Number" %>
+    <%= text_field_tag "Card Number", nil %>
+    <%= label_tag "Expiration" %>
+    <%= text_field_tag "Expiration", nil %>
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-
+    @order = @cart.order
   end
 
   def update
