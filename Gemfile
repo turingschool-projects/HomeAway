@@ -20,6 +20,7 @@ gem 'heroku-deflater', group: :production
 gem 'aasm'
 gem 'dimensions-rails'
 gem 'formtastic'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'better_errors'
