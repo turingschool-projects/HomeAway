@@ -42,4 +42,14 @@ describe OrderCart do
       expect(item.quantity).to be > 0
     end
   end
+
+  it "can remove an item from the cart" do
+    expect(cart.total_items).to eq 3
+    cart.remove_item(item1)
+    expect(cart.total_items).to eq 1
+  end
+
+  it "can calculate the subtotal for an item" do
+    expect(cart.subtotal(item1)).to eq 2
+  end
 end
