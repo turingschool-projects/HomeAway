@@ -21,7 +21,11 @@ class Admin::ItemsController < Admin::BaseAdminController
 
   def update
     @item.update(item_params)
-    redirect_to admin_items_path
+    if @item.save
+      redirect_to admin_items_path
+    else
+      render :edit
+    end
   end
 
   def edit
