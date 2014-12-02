@@ -14,9 +14,20 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    @order = @cart.order
+  end
+
   def update
     order = @cart.order
+    order.update(order_update_params)
     order.place! if order.in_cart?
     redirect_to order
+  end
+
+  private
+
+  def order_update_params
+    params.require(:order).permit(:address)
   end
 end

@@ -118,8 +118,15 @@ nav.navbar {
             }
 
 
-#item-edit-form { background-image: asset-url('ricepaper.png');
-                  padding: 40px}
+.edit-form { background-image: asset-url('ricepaper.png');
+             padding: 40px;
+             margin-top: 5%;
+             margin-bottom: 5%;
+             }
+
+.better-edit-display * {display: block;
+                        margin: 5px;
+                        }
 
 head {
        margin-bottom: 0px;

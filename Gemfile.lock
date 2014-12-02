@@ -91,6 +91,8 @@ GEM
     execjs (2.2.2)
     ffi (1.9.6)
     formatador (0.2.5)
+    formtastic (3.1.2)
+      actionpack (>= 3.2.13)
     guard (2.8.2)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -265,6 +267,7 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   dimensions-rails
+  formtastic
   guard
   guard-bundler
   guard-livereload
