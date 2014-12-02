@@ -15,16 +15,25 @@
   <div class="head-banner">
 
     <div class="row container-fluid">
-      <img src="<%= image_path('lodgephotoshop3.jpg') %>" alt="lodge photo" class="img-responsive">
+
+      <div class="container title-text shadow">
+        <div id="main-title">CROSSROADS LODGE</div>
+        <div id="established">EST. 1812</div>
+      </div>
+
+      <img src="<%= image_path('lodgephotoshopNEW.jpg') %>" alt="lodge photo" class="img-responsive banner-image">
     </div>
+
     <%= render :partial => "partials/navbar" %>
 
   </div>
 
-  <% if flash[:notice] %>
-  <div class="notice">
-    <%= flash[:notice] %>
+  <% if flash %>
+  <% flash.each do |key, message| %>
+  <div class="notice container col-md-4 col-md-offset-4">
+    <%= message %>
   </div>
+  <% end %>
   <% end %>
 
   <%= yield %>
