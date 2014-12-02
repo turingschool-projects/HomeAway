@@ -17,6 +17,7 @@ class OrderCart
   def remove_item(item)
     order.order_items.where(item: item).joins(:item).destroy_all
     order.items.reload
+    order.save!
     update_quantities
   end
 
