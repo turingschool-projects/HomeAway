@@ -72,7 +72,7 @@ burgers = [
   price: 11.75, categories: [burger]),
   moose_burger = Item.create!(title: "Moose Burger",
   description: "Free range moose meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
-  price: 12.75, categories: [burger]),
+  price: 12.75, categories: [burger, local_game]),
   venison_burger = Item.create!(title: "Venison Burger",
   description: "Free range venison meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 8.75, categories: [burger]),
@@ -111,10 +111,10 @@ entrees.map(&:save)
 local_game_items = [
   mountain_lion_stew = Item.create!(title: "Mountain Lion Stew",
   description: "Free range mountain lion stewed with carrots and potatoes",
-  price: 13.50, categories: [local_game]),
+  price: 13.50, categories: [entree, local_game]),
   wild_boar_ribs = Item.create!(title: "Wild Boar Ribs",
   description: "Free range wild boar ribs with barbecue sauce and stuff",
-  price: 10.0, categories: [local_game])
+  price: 10.0, categories: [entree, local_game])
 ]
 mountain_lion_stew.image = File.open(image_path.join("mountain-lion-stew.jpg"))
 wild_boar_ribs.image = File.open(image_path.join("wild-boar-ribs.jpg"))
