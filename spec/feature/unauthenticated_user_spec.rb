@@ -1,16 +1,12 @@
 require 'rails_helper'
 
 describe 'the unauthenticated user', type: :feature do
-
+  let(:category) { Category.create!(name: "stuff") }
   let(:item) do
-    category = Category.create!(name: "stuff")
-    item_attributes = {title: "Greg's Homemade Chili",
-                      description: "just like mom made it",
-                      price: 15.50,
-                      categories: [category]
-
-                      }
-    Item.create!(item_attributes)
+    Item.create!(title: "Greg's Homemade Chili",
+    description: "just like mom made it",
+    price: 15.50,
+    categories: [category])
   end
 
   let(:user_attributes) do
@@ -64,13 +60,25 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to_not have_content(item.title)
   end
 
-  xit 'increases the quantity of an item in the cart' do
+  it 'increases the quantity of an item in the cart' do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    visit cart_items_path
+    find(:css, ".increase").click
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("2")
+    end
 
+    find(:css, ".decrease").click
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("1")
+    end
   end
 
   it 'logs in without clearing the cart' do
-    user = User.create!(user_attributes)
     item
+    user = User.create!(user_attributes)
     visit items_path
     find_link("Add to Cart").click
     fill_in "email address", with: user.email_address
