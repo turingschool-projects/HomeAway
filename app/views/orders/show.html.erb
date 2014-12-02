@@ -9,7 +9,7 @@
     <tbody>
       <% @order.items.uniq.each do |item| %>
       <tr class="cart_item cart_item_<%= item.id %>">
-        <td class="title"><%= item.title %></td>
+        <td class="title"><%= link_to item.title, item_path(item) %></a></td>
         <td class="price">$<%= item.price %></td>
         <td class="quantity"><%= item.quantity %></td>
         <td class="subtotal">$<%= @order.subtotal(item) %></td>

@@ -8,7 +8,7 @@
     <tbody>
       <% @orders.each do |order| %>
       <tr class="order order_<%= order.id %>">
-        <td class="date"><%= order.updated_at %></td>
+        <td class="date"><%= link_to order.updated_at, order_path(order) %></td>
         <td class="total">$<%= order.total %></td>
         <td class="status"><%= order.status %></td>
       </tr>

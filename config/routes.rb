@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :cart_items
   resources :orders
 
-  resources :items, only: [:index]
+  resources :items, only: [:index, :show]
 
   get 'code', to: redirect('https://github.com/larsonkonr/dinner_dash')
 
