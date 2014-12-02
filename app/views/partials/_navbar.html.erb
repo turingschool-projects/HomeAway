@@ -1,7 +1,15 @@
 <div>
   <nav class="navbar navbar-inverse" role="navigation" data-spy="affix-top">
     <ul class="main-nav nav navbar-nav">
-      <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
+      <% if !current_user %>
+        <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
+      <% elsif !current_user.admin? %>
+        <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Orders", orders_path , class: 'nav-link' %></li>
+      <% elsif current_user.admin? %>
+        <li class="menu-navbar-link"><%= link_to "Menu Dashboard", admin_items_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Orders Dashboard", admin_orders_path , class: 'nav-link' %></li>
+      <% end %>
     </ul>
 
     <div class="navbar-form navbar-right">
