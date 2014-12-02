@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   validates :user, presence: true
   validates :address, presence: true, if: :delivery?
 
-  # before_save :calculate_total
+  before_save :calculate_total
 
   scope :past_orders, -> { where(status: [:ordered, :paid, :completed, :cancelled]) }
 
@@ -41,8 +41,8 @@ class Order < ActiveRecord::Base
     !delivery
   end
 
-  def total
-    items.sum(:price)
+  def calculate_total
+    self.total = items.sum(:price)
   end
 
   def update_quantities

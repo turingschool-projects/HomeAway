@@ -37,4 +37,13 @@ describe Cart do
       expect(item.quantity).to be > 0
     end
   end
+
+  it "can delete an item" do
+    expect(cart.total_cost).to eq(4.0)
+    cart.remove_item(item1)
+    cart.each do |item|
+      expect(item).to_not eq(item1)
+      expect(item).to eq(item2)
+    end
+  end
 end
