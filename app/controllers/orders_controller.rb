@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
+  def index
+    @orders = current_user.orders.past_orders
+  end
+
   def show
     @order = current_user.orders.where(id: params[:id]).take
     if @order
+      @order.update_quantities
       render :show
     else
       flash[:error] = "You may only view your own orders"

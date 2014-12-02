@@ -8,12 +8,12 @@
 
         <% category.items.active.each do |item| %>
           <div class="thumbnail col-sm-6 col-md-4">
-            <%= image_tag item.image.url(:medium) %>
+            <%= link_to (image_tag item.image.url(:medium)), item_path(item) %>
             <div class="caption">
               <h3><%= item.title %></h3>
               <p><%= item.description %></p>
               <p id="price"> Price:$<%= item.price %></p>
-              <p><%= link_to "Add to Cart", cart_items_path(item_id: item), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
+              <p><%= link_to "Add to Cart", cart_items_path(item: item), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
 
             </div>
           </div>

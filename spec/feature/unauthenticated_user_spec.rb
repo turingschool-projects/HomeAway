@@ -16,7 +16,8 @@ describe 'the unauthenticated user', type: :feature do
   let(:user_attributes) do
     { name: "Boy George",
       email_address: "cultureclubforever@eighties.com",
-      password: "password"
+      password: "password",
+      password_confirmation: "password"
     }
   end
 
@@ -47,7 +48,20 @@ describe 'the unauthenticated user', type: :feature do
     end
   end
 
-  xit 'removes an item from the cart' do
+  it 'can remove an item from the cart' do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    visit cart_items_path
+
+    expect(page).to have_content(item.title)
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("1")
+    end
+
+    find_button("Remove").click
+    expect(page).to_not have_css(".cart_item_#{item.id}")
+    expect(page).to_not have_content(item.title)
   end
 
   xit 'increases the quantity of an item in the cart' do
@@ -55,7 +69,6 @@ describe 'the unauthenticated user', type: :feature do
   end
 
   it 'logs in without clearing the cart' do
-    user_attributes[:password_confirmation] = "password"
     user = User.create!(user_attributes)
     item
     visit items_path

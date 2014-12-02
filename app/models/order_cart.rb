@@ -15,8 +15,7 @@ class OrderCart
   end
 
   def remove_item(item)
-    order_to_destroy = order.order_items.find_by item: item
-    order_to_destroy.destroy
+    order.order_items.where(item: item).joins(:item).destroy_all
     order.items.reload
     update_quantities
   end
@@ -30,7 +29,7 @@ class OrderCart
   end
 
   def total_items
-    order.items.count
+    order.items.size
   end
 
   def total_cost

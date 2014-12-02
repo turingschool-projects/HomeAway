@@ -80,6 +80,12 @@ burgers = [
   description: "Free range bear meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 9.75, categories: [burger])
 ]
+bison_burger.image = File.open(image_path.join("gourmet_hamburger_with_bacon.jpg"))
+elk_burger.image = File.open(image_path.join("stacked_burger.jpg"))
+moose_burger.image = File.open(image_path.join("burger_hangover.jpg"))
+venison_burger.image = File.open(image_path.join("black_burger.png"))
+bear_burger.image = File.open(image_path.join("grange_burger.jpg"))
+burgers.map(&:save)
 
 entrees = [
   wild_boar_tenderloin = Item.create!(title: "Wild Boar Tenderloin",
@@ -137,47 +143,51 @@ desserts.map(&:save)
 orders = Order.create!([
   { delivery: false,
     status: "completed",
-    user_id: rachel.id,
+    user: rachel,
     items: [deviled_quail_eggs, lucky_soup, elk_burger] },
 
   { delivery: false,
     status: "completed",
-    user_id: jorge.id,
+    user: jorge,
     items: [bison_chili_cheese_fries, bison_chili_cheese_fries, wild_boar_tenderloin, apple_pie_a_la_mode]},
 
   { delivery: true,
     address: "123 Some St, Denver, CO",
     status: "cancelled",
-    user_id: jeff.id,
+    user: jeff,
     items: [lucky_soup, bear_burger, brownie_sundae]},
 
   { delivery: false,
     status: "cancelled",
-    user_id: josh.id,
+    user: josh,
     items: [chocolate_cake, brownie_sundae, apple_pie, apple_pie_a_la_mode]},
 
   { delivery: true,
     address: "123 Some Other St, Denver, CO",
-    user_id: rachel.id,
+    status: "ordered",
+    user: rachel,
     items: [bison_chili_cheese_fries, bison_burger, bison_burger]},
 
   { delivery: false,
-    user_id: rachel.id,
+    user: rachel,
     items: [deviled_quail_eggs, deviled_quail_eggs, deviled_quail_eggs, deviled_quail_eggs]},
 
   { delivery: false,
-    user_id: jeff.id,
+    user: jeff,
     items: [tomato_bruschetta, bison_burger, moose_burger, wild_boar_ribs, tomato_cheese_sandwich]},
 
   { delivery: false,
-    user_id: josh.id,
+    user: josh,
+    status: "paid",
     items: [tomato_bruschetta, shepherds_pie, moose_burger, bear_burger, brownie_sundae, apple_pie]},
 
   { delivery: false,
-    user_id: jorge.id,
+    user: jorge,
+    status: "ordered",
     items: [bison_chili_cheese_fries, tomato_cheese_sandwich, elk_burger, moose_burger]},
 
   { delivery: false,
-    user_id: josh.id,
+    user: josh,
+    status: "ordered",
     items: [lucky_soup]}
     ])

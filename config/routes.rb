@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :cart_items
-  resources :orders, except: [:index]
+  resources :orders
 
-  resources :items, only: [:index]
+  resources :items, only: [:index, :show]
 
   get 'code', to: redirect('https://github.com/larsonkonr/dinner_dash')
 
