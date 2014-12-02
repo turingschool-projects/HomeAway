@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       user.admin? ? redirect_to(admin_items_path) : redirect_to(session.delete(:return_to))
     else
       flash[:errors] = "Invalid Login"
-      render :new
+      redirect_to :back
     end
   end
 
