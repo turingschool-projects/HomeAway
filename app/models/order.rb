@@ -48,4 +48,5 @@ class Order < ActiveRecord::Base
     order_items.retired.delete_all
     false
   end
+
 end
