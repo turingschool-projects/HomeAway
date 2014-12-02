@@ -1,1 +1,1 @@
-<%= form_tag login_path do %>  <%= flash[:errors] %><%= text_field_tag "username", nil, placeholder: "username" %><%= password_field_tag "password", nil, placeholder: "password" %><%= submit_tag "Log In" %><% end %>
+<%= form_tag login_path do %>  <%= flash[:errors] %>  <%= text_field_tag "username", nil, placeholder: "username" %>  <%= password_field_tag "password", nil, placeholder: "password" %>  <%= submit_tag "Log In" %><% end %>
