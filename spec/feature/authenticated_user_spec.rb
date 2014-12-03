@@ -5,7 +5,9 @@ describe "the authenticated non-administrator", type: :feature do
                 email_address: "cultureclubforever@eighties.com",
                 password: "password",
                 password_confirmation: "password") }
+
   let(:category) { Category.create!(name: "stuff") }
+
   let(:item) do
     Item.create!(title: "Greg's Homemade Chili",
     description: "just like mom made it",
@@ -99,45 +101,69 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to have_button("Login!")
   end
 
-  it "can view their past orders" do
-    order1 = Order.create!(user: user, status: "completed")
-    order2 = Order.create!(user: user, status: "cancelled")
-    order3 = Order.create!(user: user, status: "paid")
-    item2 = Item.create!(title: "retired", description: "retired", price: 5, categories: [category])
-    order1.items << item
-    order1.items << item2
-    order2.items << item
-    order3.items << item
-    item2.retired = true
-    expect(item2.retired?).to eq true
+  let(:order1) { Order.create!(user: user, status: "completed") }
+  let(:order2) { Order.create!(user: user, status: "cancelled") }
 
+  before(:each) do
+    order1.items << item
+    order2.items << item
+  end
+
+  it "can view a list of own past orders" do
     visit orders_path
     expect(page).to have_content("completed")
     expect(page).to have_content("cancelled")
-    expect(page).to have_content("paid")
+  end
+
+  it "can visit an individual past order" do
+    visit orders_path
     find(:xpath, "//a[@href='/orders/#{order1.id}']").click
     expect(page).to have_content order1.total
+
     within(".cart_item_#{item.id} .subtotal") do
       expect(page).to have_content("15.5")
     end
+
     within(".cart_item_#{item.id} .quantity") do
       expect(page).to have_content("1")
     end
+
     within(".cart_item_#{item.id} .title") do
       expect(page).to have_link("Greg's Homemade Chili")
     end
+
     expect(page).to have_content("completed")
     expect(page).to have_content order1.total
     expect(page).to have_content order1.created_at
     expect(page).to have_content order1.updated_at
-    within(".cart_item_#{item2.id} .title") do
+  end
+
+  it "can view retired items from previous orders but not add them to cart" do
+    order = Order.create!(user: user, status: "paid")
+    retired_item = Item.create!(title: "retired", description: "retired", price: 5, categories: [category])
+    order.items << retired_item
+    retired_item.retired = true
+
+    expect(retired_item.retired?).to eq true
+    visit orders_path
+    find(:xpath, "//a[@href='/orders/#{order.id}']").click
+    within(".cart_item_#{retired_item.id} .title") do
       find_link("retired").click
-      expect(page).to_not have_link_or_button("Add to Cart")
+      expect(page).to_not have_link("Add to Cart")
     end
+  end
+
+  it "can view own user info but not other users' info" do
+    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+
+    visit user_path(user)
+    expect(page).to have_content(user.name)
+    visit user_path(user2)
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You can only view your own")
   end
 end
 #       NOT allowed to:
 #
 #       view another user’s private data (such as current order, etc.)
-#       view the administrator screens or use administrator functionality
 #       make themselves an administrator
