@@ -1,3 +1,8 @@
 <div class="edit-form">
+  <h4>Order ID: <%= @order.id %></br>
+    Customer Name: <%= @order.user.name %><br>
+    Email: <%= @order.user.email_address %><br>
+    Address: <%= @order.address %><br>
+    Delivery Status:</h4>
   <%= render :partial => 'partials/order', locals: {order: @order} %>
 </div>
