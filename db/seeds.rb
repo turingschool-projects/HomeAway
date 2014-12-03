@@ -140,54 +140,76 @@ apple_pie.image = File.open(image_path.join("apple-pie.jpg"))
 apple_pie_a_la_mode.image = File.open(image_path.join("apple-pie-a-la-mode.jpg"))
 desserts.map(&:save)
 
-orders = Order.create!([
-  { delivery: false,
-    status: "completed",
-    user: rachel,
-    items: [deviled_quail_eggs, lucky_soup, elk_burger] },
+order1 = Order.create!(status: "completed",
+           user: rachel)
+order1.items << deviled_quail_eggs
+order1.items << lucky_soup
+order1.items << elk_burger
 
-  { delivery: false,
-    status: "completed",
-    user: jorge,
-    items: [bison_chili_cheese_fries, bison_chili_cheese_fries, wild_boar_tenderloin, apple_pie_a_la_mode]},
+order2 = Order.create!(status: "completed",
+           user: jorge)
+order2.items << bison_chili_cheese_fries
+order2.items << bison_chili_cheese_fries
+order2.items << wild_boar_tenderloin
+order2.items << apple_pie_a_la_mode
 
-  { delivery: true,
-    address: "123 Some St, Denver, CO",
-    status: "cancelled",
-    user: jeff,
-    items: [lucky_soup, bear_burger, brownie_sundae]},
+order3 = Order.create!(delivery: true,
+          address: "123 Some St, Denver, CO",
+          status: "cancelled",
+          user: jeff)
+order3.items << lucky_soup
+order3.items << bear_burger
+order3.items << brownie_sundae
 
-  { delivery: false,
-    status: "cancelled",
-    user: josh,
-    items: [chocolate_cake, brownie_sundae, apple_pie, apple_pie_a_la_mode]},
+order4 = Order.create!(delivery: false,
+          status: "cancelled",
+          user: josh)
+order4.items << chocolate_cake
+order4.items << brownie_sundae
+order4.items << apple_pie
+order4.items << apple_pie_a_la_mode
 
-  { delivery: true,
-    address: "123 Some Other St, Denver, CO",
-    status: "ordered",
-    user: rachel,
-    items: [bison_chili_cheese_fries, bison_burger, bison_burger]},
+order5 = Order.create!(delivery: true,
+          address: "123 Some Other St, Denver, CO",
+          status: "ordered",
+          user: rachel)
+order5.items << bison_chili_cheese_fries
+order5.items << bison_burger
+order5.items << bison_burger
 
-  { delivery: false,
-    user: rachel,
-    items: [deviled_quail_eggs, deviled_quail_eggs, deviled_quail_eggs, deviled_quail_eggs]},
+order6 = Order.create!(user: rachel)
+order6.items << deviled_quail_eggs
+order6.items << deviled_quail_eggs
+order6.items << deviled_quail_eggs
+order6.items << deviled_quail_eggs
 
-  { delivery: false,
-    user: jeff,
-    items: [tomato_bruschetta, bison_burger, moose_burger, wild_boar_ribs, tomato_cheese_sandwich]},
+order7 = Order.create!(delivery: false,
+          user: jeff)
+order7.items << tomato_bruschetta
+order7.items << bison_burger
+order7.items << moose_burger
+order7.items << wild_boar_ribs
+order7.items << tomato_cheese_sandwich
 
-  { delivery: false,
-    user: josh,
-    status: "paid",
-    items: [tomato_bruschetta, shepherds_pie, moose_burger, bear_burger, brownie_sundae, apple_pie]},
+order8 = Order.create!(delivery: false,
+          user: josh,
+          status: "paid")
+order8.items << tomato_bruschetta
+order8.items << shepherds_pie
+order8.items << moose_burger
+order8.items << bear_burger
+order8.items << brownie_sundae
+order8.items << apple_pie
 
-  { delivery: false,
-    user: jorge,
-    status: "ordered",
-    items: [bison_chili_cheese_fries, tomato_cheese_sandwich, elk_burger, moose_burger]},
+order9 = Order.create!(delivery: false,
+          user: jorge,
+          status: "ordered")
+order9.items << bison_chili_cheese_fries
+order9.items << tomato_cheese_sandwich
+order9.items << elk_burger
+order9.items << moose_burger
 
-  { delivery: false,
-    user: josh,
-    status: "ordered",
-    items: [lucky_soup]}
-    ])
+order10 = Order.create!(delivery: false,
+            user: josh,
+            status: "ordered")
+order10.items << lucky_soup

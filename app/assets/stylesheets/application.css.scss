@@ -48,6 +48,14 @@ ul.sidenav.affix-top {
                    top: 50%;
                   }
 
+.container-fluid {  padding-left: 0px;
+                    padding-right: 0px;
+                  }
+
+.row { margin-right: 0px;
+
+}
+
 li.menu-link > a {
               color: #E6BC2C;
               font-family: 'Stardos Stencil';
@@ -187,3 +195,8 @@ p#price{position:absolute;bottom:10px;left:10px;margin:0;padding:5px 3px;}
 
 .notice.login-checkout {color: red;
                         }
+
+.role-filters {
+  width: 50%;
+  margin-top: 30px;
+}

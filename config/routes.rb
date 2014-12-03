@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+
+
   resources :users
   resources :cart_items
+
   resources :orders
 
   resources :items, only: [:index, :show]
@@ -15,7 +18,17 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :items
     resources :users, only: [:index, :show]
-    resources :orders
+
+    resources :orders do
+      collection do
+        get :ordered
+        get :cancelled
+        get :paid
+        get :completed
+      end
+    end
+
     resources :categories, only: [:new, :create, :index]
   end
+
 end
