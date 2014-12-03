@@ -38,12 +38,31 @@ describe Cart do
     end
   end
 
-  it "can delete an item" do
+  it "can remove an item from the cart" do
     expect(cart.total_cost).to eq(4.0)
     cart.remove_item(item1)
     cart.each do |item|
       expect(item).to_not eq(item1)
       expect(item).to eq(item2)
     end
+  end
+
+  it "can decrease an item in the cart by one" do
+    expect(cart.total_items).to eq(3)
+    expect(cart.subtotal(item1)).to eq(2)
+    cart.decrease(item1)
+    expect(cart.subtotal(item1)).to eq(1)
+    expect(cart.total_items).to eq(2)
+  end
+
+  it "can increase an item in the cart by one" do
+    expect(cart.total_items).to eq(3)
+    expect(cart.subtotal(item1)).to eq(2)
+    cart.increase(item1)
+    expect(cart.subtotal(item1)).to eq(3)
+  end
+
+  it "can calculate the subtotal for an item" do
+    expect(cart.subtotal(item1)).to eq 2
   end
 end

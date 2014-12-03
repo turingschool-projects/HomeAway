@@ -7,6 +7,17 @@ class CartItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    item = Item.find(params[:id])
+    if params[:decrease]
+      @cart.decrease(item)
+    elsif params[:increase]
+      @cart.increase(item)
+    end
+    session[:cart] = @cart.to_h
+    redirect_to cart_items_path
+  end
+
   def destroy
     item = Item.find(params[:id])
     @cart.remove_item(item)
