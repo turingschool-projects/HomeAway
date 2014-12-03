@@ -76,4 +76,12 @@ class Order < ActiveRecord::Base
     actions << "Cancel"
   end
 
+  def decrease(item)
+    item = order_items.where(item: item).joins(:item).take
+    item.destroy
+    items.reload
+    save!
+    update_quantities
+  end
+
 end
