@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :update]
+	before_action :set_user, only: [:update]
 	def index
 		@users = User.all
 	end
@@ -27,15 +27,23 @@ class UsersController < ApplicationController
   end
 
 	def edit
-		if current_user
-			@user = User.find(current_user.id)
-		else
-			redirect_to root_path
+		@user = User.find(params[:id])
+		unless current_user.admin?
+			unless @user == current_user
+				flash[:errors] = "You can only view your own information"
+				redirect_to root_path
+			end
 		end
 	end
 
 	def show
-
+		@user = User.find(params[:id])
+		unless current_user.admin?
+			unless @user == current_user
+				flash[:errors] = "You can only view your own information"
+				redirect_to root_path
+			end
+		end
 	end
 
   private

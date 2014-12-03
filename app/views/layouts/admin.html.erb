@@ -13,7 +13,7 @@
   </div>
 
   <div class="head-banner">
-
+    <a href="/">
     <div class="row container-fluid">
 
       <div class="container title-text shadow">
@@ -22,6 +22,7 @@
       </div>
 
       <img src="<%= image_path('lodgephotoshopNEW.jpg') %>" alt="lodge photo" class="img-responsive banner-image">
+    </a>
     </div>
 
     <%= render :partial => "partials/navbar" %>
@@ -29,11 +30,11 @@
   </div>
 
   <% if flash %>
-  <% flash.each do |key, message| %>
-  <div class="notice container col-md-4 col-md-offset-4">
-    <%= message %>
-  </div>
-  <% end %>
+    <% flash.each do |key, message| %>
+      <div class="notice container col-md-4 col-md-offset-4">
+        <%= message %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= yield %>
