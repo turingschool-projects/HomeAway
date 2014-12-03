@@ -1,2 +1,8 @@
-<h1>Show page for <%= @user.name %></h1>
-<p>Email Address: <%= @user.email_address %></p>
+<div class="edit-form better-edit-display">
+  <h3><%= @user.name %></h3>
+  <p>Email Address: <%= @user.email_address %></p>
+  <p>Display Name (optional): <%= @user.display_name %></p>
+
+  <%= link_to edit_user_path(current_user), class: "btn btn-default edit_button" do %>
+  <span class="glyphicon glyphicon-edit">Edit</span> <% end %>
+</div>
