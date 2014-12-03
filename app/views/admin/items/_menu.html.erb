@@ -1,7 +1,16 @@
+<div class="new_item">
+  <%= link_to new_admin_item_path, class: "btn btn-default" do %>
+    <span class="glyphicon glyphicon-edit"></span>
+    <span>New Item</span>
+  <% end %>
+  <%= link_to new_admin_category_path, class: "btn btn-default" do %>
+    <span class="glyphicon glyphicon-edit"></span>
+    <span>New Category</span>
+  <% end %>
+</div>
 <div class="container menu-items-block col-md-9">
   <% @categories.each do |category| %>
   <div class="category-block row">
-
     <div class= "category-title">
       <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
     </div>

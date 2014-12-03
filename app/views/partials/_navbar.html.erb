@@ -16,12 +16,14 @@
     <div class="navbar-form navbar-right">
       <div id="account">
         <%= link_to cart_items_path, class: "btn btn-success nav-link" do %>
-          <span class="glyphicon glyphicon-shopping-cart">Cart</span>
+          <span class="glyphicon glyphicon-shopping-cart"> </span>
+        <span>Cart</span>
         <% end %>
         <% if current_user  %>
           <%= link_to "Logout", logout_path, method: :delete,  class: "btn btn-default nav-link" %>
           <%= link_to user_path(current_user), class: "btn btn-default nav-link" do %>
-          <span class="glyphicon glyphicon-user">Profile</span>
+          <span class="glyphicon glyphicon-user"></span>
+        <span>Profile</span>
           <% end %>
         <% else %>
           <%= link_to "Sign Up", new_user_path, class: "btn btn-default nav-link" %>
