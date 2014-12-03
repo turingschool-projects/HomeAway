@@ -25,6 +25,12 @@ Rails.application.routes.draw do
         get :paid
         get :completed
       end
+
+      member do
+        put :pay
+        put :complete
+        put :cancel
+      end
     end
 
     resources :categories, only: [:new, :create, :index]

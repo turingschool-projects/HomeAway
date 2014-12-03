@@ -28,11 +28,9 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
-		unless current_user.admin?
-			unless @user == current_user
-				flash[:errors] = "You can only view your own information"
-				redirect_to root_path
-			end
+		unless @user == current_user
+			flash[:errors] = "You can only view your own information"
+			redirect_to root_path
 		end
 	end
 
