@@ -19,15 +19,20 @@ class OrdersController < ApplicationController
   end
 
   def update
-    order = @cart.order
-    order.update(order_update_params)
-    order.place! if order.in_cart?
-    redirect_to order
+    @order = @cart.order
+    if @order.update(order_update_params)
+      @order.place! if @order.in_cart?
+      redirect_to @order
+    else
+      redirect_to edit_order_path
+      flash[:errors] = "You need an address if you want delivery"
+      flash[:errors] = @order.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
+    end
   end
 
   private
 
   def order_update_params
-    params.require(:order).permit(:address)
+    params.require(:order).permit(:address, :delivery)
   end
 end
