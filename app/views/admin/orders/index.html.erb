@@ -1,9 +1,10 @@
 <% if current_user.admin? %>
   <div class="btn-group btn-group-justified role-filters col-md-offset-3" role="group">
+    <a class="btn btn-default" href="<%= admin_orders_path %>">All</a>
     <a class="btn btn-default" href="<%= ordered_admin_orders_path %>">Ordered</a>
+    <a class="btn btn-default" href="<%= paid_admin_orders_path %>">Paid</a>
     <a class="btn btn-default" href="<%= completed_admin_orders_path %>">Completed</a>
     <a class="btn btn-default" href="<%= cancelled_admin_orders_path %>">Cancelled</a>
-    <a class="btn btn-default" href="<%= paid_admin_orders_path %>">Paid</a>
   </div>
 <% end %>
 
