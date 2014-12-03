@@ -21,6 +21,21 @@ class OrderCart
     update_quantities
   end
 
+  def decrease(item)
+    item = order.order_items.where(item: item).joins(:item).take
+    item.destroy
+    order.items.reload
+    order.save!
+    update_quantities
+  end
+
+  def increase(item)
+    order.items << item
+    order.items.reload
+    order.save!
+    update_quantities
+  end
+
   def subtotal(item)
     count_of(item) * item.price
   end

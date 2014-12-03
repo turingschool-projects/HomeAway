@@ -49,6 +49,21 @@ describe OrderCart do
     expect(cart.total_items).to eq 1
   end
 
+  it "can decrease an item in the cart by one" do
+    expect(cart.total_items).to eq(3)
+    expect(cart.subtotal(item1)).to eq(2)
+    cart.decrease(item1)
+    expect(cart.subtotal(item1)).to eq(1)
+    expect(cart.total_items).to eq(2)
+  end
+
+  it "can increase an item in the cart by one" do
+    expect(cart.total_items).to eq(3)
+    expect(cart.subtotal(item1)).to eq(2)
+    cart.increase(item1)
+    expect(cart.subtotal(item1)).to eq(3)
+  end
+
   it "can calculate the subtotal for an item" do
     expect(cart.subtotal(item1)).to eq 2
   end
