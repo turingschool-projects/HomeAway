@@ -15,6 +15,14 @@ class Cart
     data.delete(item.id)
   end
 
+  def decrease(item)
+    data[item.id].quantity -= 1
+  end
+
+  def increase(item)
+    data[item.id].quantity += 1
+  end
+
   def subtotal(item)
     count_of(item) * item.price
   end
