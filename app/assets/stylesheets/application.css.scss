@@ -95,7 +95,24 @@ h2.menu-category {font-family: 'Stardos Stencil';
 div.thumbnail {height: 350px;
              width: 250px;
              margin: 10px;
+             background-image: asset-url('thumb-background.jpg');
+             background-size: contain;
+             border: none;
              }
+
+div.thumbnail * {
+  font-family: 'Stardos Stencil';
+  color: white;
+}
+
+div.thumbnail h3 {
+  font-weight: bold;
+}
+
+div.thumbnail a {
+  color: black;
+  font-family: 'Stardos Stencil';
+}
 
 .shadow {text-shadow:
                     -1px -1px 0px #000,
@@ -116,11 +133,14 @@ div.thumbnail {height: 350px;
 a.btn-success {background-color: none;
                background-image: asset-url('cart-background.png');
                border-color: #E30908;
-               color: black;
+               color: #e0e0e0;
                font-family: 'Stardos Stencil';
               }
 
-a.btn-success:hover {border-color: #E30908}
+a.btn-success:hover {
+  border-color: #E30908;
+  color: black;
+  }
 
 nav.navbar {
    width: 100%;
@@ -137,7 +157,14 @@ nav.navbar {
             display: inline;
 }
 
-.menu-navbar-link {font-size: 150%}
+.navbar-inverse .navbar-nav > li > a {
+  font-size: 130%;
+  color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #E6BC2C;
+}
 
 
 
@@ -201,7 +228,13 @@ ul.main-nav {position: inherit}
                padding: 5px 3px
               }
 
-p#price{position:absolute;bottom:10px;left:10px;margin:0;padding:5px 3px;}
+p#price{position:absolute;
+  bottom:10px;
+  left:10px;
+  margin:0;
+  padding:5px 3px;
+  font-size: 125%
+  }
 
 .modify_button {  position:absolute;bottom:10px;right:10px;margin:0;padding:5px 3px;}
 
