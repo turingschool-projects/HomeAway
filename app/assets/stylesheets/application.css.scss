@@ -36,6 +36,17 @@ div#background-fence {background-image: asset-url('fence-background.jpg');
                       z-index: -1;
                       }
 
+.glyphicon-plus { float:right;
+}
+
+.glyphicon-minus { float:left;
+}
+
+.float_left { float:left;
+  padding:3px;
+  margin:3px;
+}
+
 span.anchor {position:relative;
              display: block;
              }
