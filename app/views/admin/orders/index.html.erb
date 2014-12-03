@@ -2,6 +2,9 @@
   <table class="table table-hover">
     <thead>
       <th>Date</th>
+      <% if current_user.admin? %>
+        <th>User (id)</th>
+      <% end %>
       <th>Total</th>
       <th>Status</th>
     </thead>
@@ -10,6 +13,7 @@
       <tr class="order order_<%= order.id %>">
         <% if current_user.admin? %>
           <td class="date"><%= link_to order.updated_at, admin_order_path(order) %></td>
+          <td class="user"><%= link_to "#{order.user.name} (#{order.user.id})", user_path(order.user) %></td>
         <% else %>
           <td class="date"><%= link_to order.updated_at, order_path(order) %></td>
         <% end %>
