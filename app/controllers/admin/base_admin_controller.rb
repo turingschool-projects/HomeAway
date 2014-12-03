@@ -6,10 +6,4 @@ class Admin::BaseAdminController < ApplicationController
 
   protected
 
-  def require_admin
-    unless current_user && current_user.admin?
-      flash[:notice] = "Unauthorized"
-      redirect_to root_path
-    end
-  end
 end

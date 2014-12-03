@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:update]
 	def index
+		require_admin
 		@users = User.all
 	end
 
