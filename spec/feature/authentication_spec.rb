@@ -19,6 +19,19 @@ describe 'the application', type: :feature do
     it 'does not have a logout link' do
       expect(page).not_to have_link('Logout')
     end
+
+    it 'has a cart button' do
+      expect(page).to have_link('Cart')
+    end
+
+    it 'does not have a profile link' do
+      expect(page).not_to have_link('Profile')
+    end
+
+    it 'cannot edit user information' do
+      visit '/users/1/edit'
+      expect(current_path).to eq(root_path)
+    end
   end
 
   context 'when logged in' do
@@ -47,6 +60,35 @@ describe 'the application', type: :feature do
       visit admin_items_path
       expect(page).to have_content("Unauthorized")
     end
+
+    it 'it can view its profile' do
+      expect(page).to have_link('Profile')
+      click_link "Profile"
+      expect(page).to have_content("Viki")
+    end
+
+    it 'can edit its profile' do
+      click_link "Profile"
+      expect(page).to have_link('Edit')
+      click_link "Edit"
+      expect(page).to have_content("Editing User Info")
+      fill_in "user[email_address]", with: "joe@gmail.com"
+      fill_in "user[name]", with: "joe"
+      fill_in "user[display_name]", with: "joey99"
+      click_link_or_button "Update User"
+      expect(page).to have_content("joe@gmail.com")
+      expect(page).to have_content("joe")
+      expect(page).to have_content("joey99")
+    end
+
+    it 'edits profile invalid params redirect to edit form' do
+      click_link "Profile"
+      click_link "Edit"
+      fill_in "user[display_name]", with: "this display name is going to be way too long so it will not pass the validations and redirect"
+      click_link_or_button "Update User"
+      expect(page).to have_content("Editing User Info")
+    end
+
   end
 
   context 'invalid credentials' do
