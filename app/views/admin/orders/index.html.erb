@@ -17,6 +17,7 @@
       <% end %>
       <th>Total</th>
       <th>Status</th>
+      <th>Actions</th>
     </thead>
     <tbody>
       <% @orders.each do |order| %>
@@ -29,6 +30,26 @@
         <% end %>
         <td class="total">$<%= order.total %></td>
         <td class="status"><%= order.status %></td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Actions <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <% if order.ordered? %>
+                <li><%= link_to "Mark as paid", pay_admin_order_path(order), method: :put %></li>
+              <% elsif order.paid? %>
+                <li><%= link_to "Mark as completed", complete_admin_order_path(order), method: :put %></li>
+              <% else %>
+                <li><a>[None]</a></li>
+              <% end %>
+
+              <% if order.ordered? || order.paid? %>
+                <li><%= link_to "Cancel Order", cancel_admin_order_path(order), method: :put %></li>
+              <% end %>
+            </ul>
+          </div>
+        </td>
       </tr>
       <% end %>
     </tbody>

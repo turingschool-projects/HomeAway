@@ -71,4 +71,9 @@ class Order < ActiveRecord::Base
     false
   end
 
+  def possible_actions
+    actions = []
+    actions << "Cancel"
+  end
+
 end

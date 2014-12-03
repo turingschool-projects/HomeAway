@@ -20,7 +20,7 @@ class Admin::OrdersController < Admin::BaseAdminController
   end
 
   def paid
-    @orders = Order.paid 
+    @orders = Order.paid
     render :index
   end
 
@@ -28,4 +28,23 @@ class Admin::OrdersController < Admin::BaseAdminController
     @orders = Order.completed
     render :index
   end
+
+  def pay
+    order = Order.find(params[:id])
+    order.pay!
+    redirect_to admin_orders_path
+  end
+
+  def complete
+    order = Order.find(params[:id])
+    order.complete!
+    redirect_to admin_orders_path
+  end
+
+  def cancel
+    order = Order.find(params[:id])
+    order.cancel!
+    redirect_to admin_orders_path
+  end
+
 end
