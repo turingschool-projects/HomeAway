@@ -1,13 +1,36 @@
-<div class="register">
-  <%= form_tag users_path do %>
-    <%= flash[:errors] %>
+<div class="edit-form">
+  <form role="form">
+    <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-  <%= text_field_tag "user[name]", nil, placeholder: "Full Name", class: "form-control" %>
-  <%= text_field_tag "user[email_address]", nil, placeholder: "Email Address", class: "form-control" %>
-  <%= text_field_tag "user[display_name]", nil, placeholder: "(Optional) Display Name", class: "form-control" %>
-  <%= password_field_tag "user[password]", nil, placeholder: "Password", class: "form-control" %>
-  <%= password_field_tag "user[password_confirmation]", nil, placeholder: "Confirm Password", class: "form-control" %>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
 
-  <%= submit_tag "Create User", class: "btn btn-default" %>
-  <% end %>
+    <div class="form-group">
+      <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :email_address, placeholder: "Email Address", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :display_name, placeholder: "(Optional) Display Name", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :password, placeholder: "Password", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Create User", class: "btn btn-default" %>
+    </div>
+    <% end %>
+  </form>
 </div>
