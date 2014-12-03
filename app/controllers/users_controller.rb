@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:update]
 	def index
+		require_admin
 		@users = User.all
 	end
 
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
   end
 
 	def edit
-		return unauthorized if !current_user
+		return unauthorized unless current_user
 		@user = User.find(params[:id])
 		unless @user == current_user
 			unauthorized
@@ -38,8 +39,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		unless current_user && current_user.admin?
 			unless @user == current_user
-				flash[:errors] = "You can only view your own information"
-				redirect_to root_path
+				unauthorized
 			end
 		end
 	end
