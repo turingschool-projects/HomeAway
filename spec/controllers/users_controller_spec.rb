@@ -24,7 +24,7 @@ RSpec.describe UsersController, :type => :controller do
     it "returns http success" do
       post :create, {user: valid_attributes}
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(User.last)
+      expect(response).to redirect_to(root_path)
     end
 
     it "increases the User count by 1" do
