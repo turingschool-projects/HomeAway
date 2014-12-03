@@ -17,11 +17,11 @@
         <td class="title"><%= item.title %></td>
         <td class="price">$<%= item.price %></td>
         <td class="quantity">
-          <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs decrease" do %>
+          <%= button_to cart_item_path(item), method: :put, class: "btn btn-xs decrease", name: "decrease" do %>
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
           <% end %>
           <%= item.quantity %>
-          <%= button_to cart_item_path(id: item), method: :put, class: "btn btn-xs increase" do %>
+          <%= button_to cart_item_path(item), method: :put, class: "btn btn-xs increase", name: "increase" do %>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           <% end %>
         </td>

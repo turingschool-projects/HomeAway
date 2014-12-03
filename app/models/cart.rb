@@ -17,6 +17,7 @@ class Cart
 
   def decrease(item)
     data[item.id].quantity -= 1
+    data.delete(item.id) if data[item.id].quantity < 1
   end
 
   def increase(item)

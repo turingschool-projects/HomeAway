@@ -67,12 +67,17 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to_not have_content(item.title)
   end
 
-  it 'increases the quantity of an item in the cart' do
+  it 'can change the quantity of an item in the cart' do
     item
     visit items_path
     find_link("Add to Cart").click
     visit cart_items_path
+    within(".cart_item_#{item.id} .quantity") do
+      expect(page).to have_content("1")
+    end
+
     find(:css, ".increase").click
+    expect(current_path).to eq(cart_items_path)
     within(".cart_item_#{item.id} .quantity") do
       expect(page).to have_content("2")
     end
