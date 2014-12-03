@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show]
+	before_action :set_user, only: [:show, :update]
 	def index
 		@users = User.all
 	end
@@ -11,13 +11,31 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			redirect_to @user
+			redirect_to root_path
 		else
 			render :new
 		end
 	end
 
+	def update
+    @user.update(user_params)
+    if @user.save
+      redirect_to user_path(@user.id)
+    else
+      render :edit
+    end
+  end
+
+	def edit
+		if current_user
+			@user = User.find(params[:id])
+		else
+			redirect_to root_path
+		end
+	end
+
 	def show
+
 	end
 
   private
