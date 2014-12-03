@@ -27,6 +27,11 @@ describe 'the application', type: :feature do
     it 'does not have a profile link' do
       expect(page).not_to have_link('Profile')
     end
+
+    it 'cannot edit user information' do
+      visit '/users/1/edit'
+      expect(current_path).to eq(root_path)
+    end
   end
 
   context 'when logged in' do
@@ -74,6 +79,14 @@ describe 'the application', type: :feature do
       expect(page).to have_content("joe@gmail.com")
       expect(page).to have_content("joe")
       expect(page).to have_content("joey99")
+    end
+
+    it 'edits profile invalid params redirect to edit form' do
+      click_link "Profile"
+      click_link "Edit"
+      fill_in "user[display_name]", with: "this display name is going to be way too long so it will not pass the validations and redirect"
+      click_link_or_button "Update User"
+      expect(page).to have_content("Editing User Info")
     end
 
   end
