@@ -24,6 +24,13 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to have_content(item.description)
   end
 
+  it "can view a single item" do
+    item
+    visit item_path(item)
+    expect(page).to have_content(item.title)
+    expect(page).to have_content(item.description)
+  end
+
   it 'browses items by category' do
     item
     visit items_path

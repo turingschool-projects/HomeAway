@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
 
     # events give us bang methods, like place! for changing order status
     event :place do
-      transitions from: :in_cart, to: :ordered, guard: :removed_retired_items?
+      transitions from: :in_cart, to: :ordered, guard: :no_retired_items?
     end
 
     event :pay do
@@ -65,7 +65,7 @@ class Order < ActiveRecord::Base
     item.quantity * item.price
   end
 
-  def removed_retired_items?
+  def no_retired_items?
     return true if order_items.retired.empty?
     order_items.retired.delete_all
     false

@@ -60,6 +60,26 @@ context 'authenticated admin', type: :feature do
     expect(page).not_to have_content(9.0)
   end
 
+  it 'cannot update item listings to have invalid attributes' do
+    burgers = Category.create!(name: "Burgers")
+    item = Item.create!(title: "Yummiest Burger",
+                        description: "Juicy and yummy burger",
+                        price: 5.0,
+                        categories: [burgers]
+                        )
+
+    visit admin_items_path
+    find_link("Modify").click
+    fill_in "Title", with: ""
+    fill_in "Description", with: ""
+    fill_in "Price", with: 0
+    click_button "Update Item"
+    expect(current_path).to eq(admin_item_path(item))
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Price must be greater than 0")
+  end
+
   it 'can create named categories for items (eg: "Small Plates")' do
     visit new_admin_category_path
     fill_in "Name", with: "Appetizers"
