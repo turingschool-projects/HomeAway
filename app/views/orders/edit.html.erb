@@ -1,12 +1,24 @@
 <div class="container edit-form better-edit-display">
+    <% if @order.errors.any? %>
+      <div>
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+        <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
   <%= form_for @order, url: {action: :update}, role: 'form' do |f| %>
-    <h4>
-      Address:
-    </h4>
+    <h4>Delivery(check box for delivery):</h4>
+      <div class="checkbox">
+        <label><%= f.check_box :delivery %>Delivery?</label>
+      </div>
+    <h4>Address:</h4>
     <%= f.text_area :address, placeholder: 'Address', size: "40x3", label: 'Address' %>
-    <h4>
-      Payment Info:
-    </h4>
+    <h4>Payment Info:</h4>
     <label class="radio">
       <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Visa
     </label>
