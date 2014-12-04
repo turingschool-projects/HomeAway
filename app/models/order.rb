@@ -67,6 +67,13 @@ class Order < ActiveRecord::Base
     update_quantities
   end
 
+  def remove_item(item)
+    order_items.where(item: item).joins(:item).destroy_all
+    items.reload
+    save!
+    update_quantities
+  end
+
   def increase(item)
     items << item
     items.reload

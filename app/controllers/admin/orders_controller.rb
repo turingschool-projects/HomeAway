@@ -1,11 +1,11 @@
 class Admin::OrdersController < Admin::BaseAdminController
+  before_action :set_order, except: [:index, :completed, :ordered, :cancelled, :paid]
 
   def index
     @orders = Order.past_orders
   end
 
   def update
-    @order = Order.find(params[:id])
     if params[:decrease]
       item = Item.find(params[:decrease])
       @order.decrease(item)
@@ -16,8 +16,13 @@ class Admin::OrdersController < Admin::BaseAdminController
     redirect_to admin_order_path(@order)
   end
 
+  def destroy
+    item = Item.find(params[:remove])
+    @order.remove_item(item)
+    redirect_to admin_order_path(@order)
+  end
+
   def show
-    @order = Order.find(params[:id])
     @order.update_quantities
   end
 
@@ -42,20 +47,17 @@ class Admin::OrdersController < Admin::BaseAdminController
   end
 
   def pay
-    order = Order.find(params[:id])
-    order.pay!
+    @order.pay!
     redirect_to admin_orders_path
   end
 
   def complete
-    order = Order.find(params[:id])
-    order.complete!
+    @order.complete!
     redirect_to admin_orders_path
   end
 
   def cancel
-    order = Order.find(params[:id])
-    order.cancel!
+    @order.cancel!
     redirect_to admin_orders_path
   end
 
