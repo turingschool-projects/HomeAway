@@ -134,7 +134,7 @@ describe Order do
       expect(order.subtotal(item2)).to eq 2
     end
 
-    it "can increase item quantity", t:true do
+    it "can increase item quantity" do
       item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
       item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
       order = Order.create!(user: user)
@@ -145,6 +145,18 @@ describe Order do
       expect(order.subtotal(item2)).to eq 2
       order.increase(item2)
       expect(order.subtotal(item2)).to eq 4
+    end
+
+    it "can remove an item" do
+      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+      order = Order.create!(user: user)
+      order.items << item1
+      order.items << item2
+      order.update_quantities
+      expect(order.items.count).to eq 2
+      order.remove_item(item2)
+      expect(order.items.count).to eq 1
     end
   end
 end

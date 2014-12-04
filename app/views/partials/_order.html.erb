@@ -20,6 +20,10 @@
         <% end %>
       </td>
       <td class="subtotal">$<%= order.subtotal(item) %></td>
+      <td> <%= button_to admin_order_path(order), method: :delete, name: :remove, name: "remove", value: "#{item.id}" do %>
+        <span>Remove</span>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
