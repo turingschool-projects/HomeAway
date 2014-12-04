@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 
   def load_cart
     if current_user
-      order = Order.where(id: session[:order_id]).take
-      order ||= Order.find_or_create_by(user: current_user, status: "in_cart")
+      order = Order.where(id: session[:order_id]).where(status: "in_cart").take
+      order ||= Order.create!(user: current_user, status: "in_cart")
       session[:order_id] = order.id unless session[:order_id] == order.id
       @cart = OrderCart.new(order)
     else
