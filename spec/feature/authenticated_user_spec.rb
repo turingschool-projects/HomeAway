@@ -195,4 +195,33 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to have_content("You may only view your own orders")
     expect(current_path).to eq(root_path)
   end
+
+  it "can check out" do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    visit cart_items_path
+    find_link("Checkout").click
+    fill_in "Card number", with: "4242424242424242"
+    fill_in "Expiration", with: "10/16"
+    find_button("Update Order").click
+    expect(page).to have_content("Greg's Homemade Chili")
+    expect(page).to have_content("ordered")
+    visit cart_items_path
+    expect(page).to_not have_content("Greg's Homemade Chili")
+    expect(page).to have_content("empty")
+  end
+
+  it "must put an address to check out a delivery order" do
+    item
+    visit items_path
+    find_link("Add to Cart").click
+    visit cart_items_path
+    find_link("Checkout").click
+    check("Delivery?")
+    fill_in "Card number", with: "4242424242424242"
+    fill_in "Expiration", with: "10/16"
+    find_button("Update Order").click
+    expect(page).to have_content("address: can't be blank")
+  end
 end
