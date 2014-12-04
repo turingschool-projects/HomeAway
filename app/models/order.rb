@@ -41,6 +41,10 @@ class Order < ActiveRecord::Base
     !delivery
   end
 
+  def editable?
+    in_cart? || ordered? || paid?
+  end
+
   def calculate_total
     self.total = items.sum(:price)
   end

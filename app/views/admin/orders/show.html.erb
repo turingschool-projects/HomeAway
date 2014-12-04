@@ -2,7 +2,12 @@
   <h4>Order ID: <%= @order.id %></br>
     Customer Name: <%= @order.user.name %><br>
     Email: <%= @order.user.email_address %><br>
-    Address: <%= @order.address %><br>
-    Delivery Status:</h4>
-  <%= render :partial => 'partials/order', locals: {order: @order} %>
+    <% if @order.address %>
+      Address: <%= @order.address %><br>
+    <% end %>
+  <% if @order.editable? %>
+    <%= render :partial => 'partials/pending_order', locals: {order: @order} %>
+  <% else %>
+    <%= render :partial => 'partials/completed_order', locals: {order: @order} %>
+  <% end %>  
 </div>
