@@ -63,9 +63,6 @@ ul.sidenav.affix-top {
                     padding-right: 0px;
                   }
 
-div.new_item { margin-left: 50%;
-             }
-
 .row { margin-right: 0px;
 
 }
@@ -152,8 +149,12 @@ nav.navbar {
 .nav-link {font-family: 'Stardos Stencil';
                      }
 
-.new_item { font-family: 'Stardos Stencil';
+.admin-new-stuff-buttons { font-family: 'Stardos Stencil';
             display: inline;
+            padding-top: 5px;
+            margin-left: 50%;
+            margin-right: 10px;
+            float: right
 }
 
 .navbar-inverse .navbar-nav > li > a {
