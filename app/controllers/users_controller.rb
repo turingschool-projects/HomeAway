@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:update]
-	def index
-		require_admin
-		@users = User.all
-	end
+	before_action :require_current_user, except: [:new, :create]
 
 	def new
 		@user = User.new
@@ -50,8 +46,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation)
   end
 
-	def set_user
-		@user = User.find(params[:id])
+	def require_current_user
+		@user = current_user
 	end
 
 	def unauthorized
