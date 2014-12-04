@@ -1,0 +1,9 @@
+<div class="edit-form">
+  <div class='form-group new-user-form'>
+    <%= form_tag login_path do %>
+    <%= text_field_tag :email_address, nil, placeholder: "email address", class: "form-control" %><br>
+    <%= password_field_tag :password, nil, placeholder: "password", class: "form-control" %><br>
+    <%= submit_tag "Login!", class: "btn btn-default" %>
+    <% end %>
+  </div>
+</div>

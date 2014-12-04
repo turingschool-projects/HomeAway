@@ -110,8 +110,8 @@ describe 'the unauthenticated user', type: :feature do
     visit items_path
     find_link("Add to Cart").click
     visit cart_items_path
-    expect(page).to_not have_link('Checkout')
-    expect(page).to have_css('span', 'You must be logged in to place an order.')
+    find_link("Checkout").click
+    expect(current_path).to eq(login_path)
   end
 
   it 'cannot access admin views' do

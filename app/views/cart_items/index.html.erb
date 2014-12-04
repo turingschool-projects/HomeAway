@@ -44,7 +44,7 @@
     <% if current_user %>
     <%= link_to "Checkout", edit_order_path(@cart.order), class: 'btn btn-default' %>
     <% else %>
-    <span class="notice login-checkout">You must be logged in to place an order.</span>
+    <%= link_to "Checkout", login_path, class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

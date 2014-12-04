@@ -12,6 +12,13 @@ describe 'the application', type: :feature do
       expect(page).to have_button('Login!')
     end
 
+    it 'can visit a login page' do
+      visit login_path
+      expect(page).to have_field("email address")
+      expect(page).to have_field("password")
+      expect(page).to have_button("Login!")
+    end
+
     it 'has a signup link' do
       expect(page).to have_link('Sign Up')
     end
