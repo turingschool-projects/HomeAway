@@ -158,5 +158,12 @@ describe Order do
       order.remove_item(item2)
       expect(order.items.count).to eq 1
     end
+
+    it "can identify editable orders" do
+      editable_order = Order.create!(user: user, status: "paid")
+      non_editable_order = Order.create!(user: user, status: "completed")
+      expect(editable_order.editable?).to eq true
+      expect(non_editable_order.editable?).to eq false
+    end
   end
 end
