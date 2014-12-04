@@ -180,7 +180,3 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to have_content("You can only view your own")
   end
 end
-#       NOT allowed to:
-#
-#       view another user’s private data (such as current order, etc.)
-#       make themselves an administrator
