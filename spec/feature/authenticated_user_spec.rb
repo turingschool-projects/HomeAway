@@ -161,9 +161,38 @@ describe "the authenticated non-administrator", type: :feature do
     visit user_path(user2)
     expect(current_path).to eq(root_path)
     expect(page).to have_content("You can only view your own")
+
+    visit edit_user_path(user2)
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You can only view your own")
+  end
+
+  it "can edit own user info but not other users' info" do
+    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+
+    visit edit_user_path(user)
+    fill_in "Email address", with: "boy_george@example.com"
+    find_button("Update User").click
+    expect(page).to have_content("boy_george@example.com")
+
+    visit edit_user_path(user2)
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You can only view your own")
+  end
+
+  it "can view own orders but not other users' orders" do
+    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+    order3 = Order.create!(user: user2)
+    order3.items << item
+
+    visit orders_path
+    expect(page).to have_content(order1.status)
+    visit order_path(order1.id)
+    expect(page).to have_content(order1.total)
+    expect(page).to have_content(order1.status)
+
+    visit order_path(order3.id)
+    expect(page).to have_content("You may only view your own orders")
+    expect(current_path).to eq(root_path)
   end
 end
-#       NOT allowed to:
-#
-#       view another user’s private data (such as current order, etc.)
-#       make themselves an administrator
