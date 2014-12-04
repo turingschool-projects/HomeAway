@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
       render :show
     else
       flash[:error] = "You may only view your own orders"
-      redirect_to @cart.order
+      redirect_to root_path
     end
   end
 
