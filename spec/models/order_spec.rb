@@ -117,7 +117,34 @@ describe Order do
       order.items << item1
       order.items << item2
       order.items << item2
-      expect(order.total).to eq(5)
+      expect(order.total).to eq 5
+    end
+
+    it "can decrease item quantity" do
+      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+      order = Order.create!(user: user)
+      order.items << item1
+      order.items << item2
+      order.items << item2
+      order.update_quantities
+      expect(order.subtotal(item1)).to eq 1
+      expect(order.subtotal(item2)).to eq 4
+      order.decrease(item2)
+      expect(order.subtotal(item2)).to eq 2
+    end
+
+    it "can increase item quantity", t:true do
+      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+      order = Order.create!(user: user)
+      order.items << item1
+      order.items << item2
+      order.update_quantities
+      expect(order.subtotal(item1)).to eq 1
+      expect(order.subtotal(item2)).to eq 2
+      order.increase(item2)
+      expect(order.subtotal(item2)).to eq 4
     end
   end
 end
