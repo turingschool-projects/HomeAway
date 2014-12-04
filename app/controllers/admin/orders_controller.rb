@@ -61,4 +61,9 @@ class Admin::OrdersController < Admin::BaseAdminController
     redirect_to admin_orders_path
   end
 
+  private
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
 end
