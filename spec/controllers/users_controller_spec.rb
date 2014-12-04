@@ -9,16 +9,6 @@ RSpec.describe UsersController, :type => :controller do
   let(:invalid_attributes) { {name: nil,
                               email_address: nil,
                               password: nil} }
-  describe "GET index" do
-    it "assigns all users as @users" do
-      user = User.create(valid_attributes)
-      user2 = User.create({name: "Chase",
-                          email_address: "chase@example.com",
-                          password: "l33tp@55w0rd"})
-      get :index
-      expect(assigns(:users)).to eq([user, user2])
-    end
-  end
 
   describe "POST create" do
     it "returns http success" do
