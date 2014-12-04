@@ -52,7 +52,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-
   def quantities
     items.group_by(&:id).inject({}) do |memo, (k, items)|
       memo[k] = items.first
@@ -61,8 +60,23 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def decrease(item)
+    order_items.find_by(item_id: item.id).destroy
+    reload
+    calculate_total
+    update_quantities
+  end
+
+  def increase(item)
+    items << item
+    items.reload
+    save!
+    update_quantities
+  end
+
   def subtotal(item)
-    item.quantity * item.price
+    quantity = quantities[item.id].quantity
+    quantity * item.price
   end
 
   def no_retired_items?
@@ -70,18 +84,4 @@ class Order < ActiveRecord::Base
     order_items.retired.delete_all
     false
   end
-
-  def possible_actions
-    actions = []
-    actions << "Cancel"
-  end
-
-  def decrease(item)
-    item = order_items.where(item: item).joins(:item).take
-    item.destroy
-    items.reload
-    save!
-    update_quantities
-  end
-
 end
