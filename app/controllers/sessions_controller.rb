@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       convert_cart(user, session)
-      user.admin? ? redirect_to(admin_items_path) : redirect_to(session.delete(:return_to))
+      flash[:notice] = "Welcome, #{user.name}!"
+      user.admin? ? redirect_to(admin_items_path) : redirect_to(root_path)
     else
       flash[:errors] = "Invalid Login"
       redirect_to :back
