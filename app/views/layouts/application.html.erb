@@ -1,44 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>DinnerDash</title>
-  <!-- <link href='http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400italic' rel='stylesheet' type='text/css'> -->
-  <%= stylesheet_link_tag    'application', 'http://fonts.googleapis.com/css?family=Stardos+Stencil:700' %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class= "container-fluid col-xs-12" id="background-fence">
-  </div>
-
-  <div class="head-banner">
-    <a href="/">
-    <div class="row container-fluid">
-
-      <div class="container title-text shadow">
-        <div id="main-title">CROSSROADS LODGE</div>
-        <div id="established">EST. 1812</div>
-      </div>
-
-      <img src="<%= image_path('lodgephotoshopNEW.jpg') %>" alt="lodge photo" class="img-responsive banner-image">
-    </a>
+  <head>
+    <title>TravelHome</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <%= render 'layouts/notices' %>
+      <%= render 'layouts/header' %>
+      <%= yield %>
     </div>
-
-    <%= render :partial => "partials/navbar" %>
-
-  </div>
-
-  <% if flash %>
-    <% flash.each do |key, message| %>
-      <div class="notice container col-md-4 col-md-offset-4">
-        <%= message %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <%= yield %>
-</body>
-
-
+  </body>
 </html>
