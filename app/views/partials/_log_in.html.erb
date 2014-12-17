@@ -1,0 +1,27 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalLogIn">
+  Log In
+</button>
+
+
+<div class="modal fade" id="myModalLogIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Log into your account</h3>
+      </div>
+      <div class="modal-body">
+        <div class="edit-form">
+          <div class='form-group new-user-form'>
+            <%= form_tag login_path do %>
+              <%= text_field_tag :email_address, nil, placeholder: "email address", class: "form-control" %><br>
+            <%= password_field_tag :password, nil, placeholder: "password", class: "form-control" %><br>
+            <%= submit_tag "Login!", class: "btn btn-default" %>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
