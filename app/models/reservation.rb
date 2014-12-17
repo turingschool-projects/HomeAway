@@ -5,7 +5,6 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
 
   validates :user, presence: true
-  validates :address, presence: true, if: :delivery?
 
   before_save :calculate_total
 
@@ -35,10 +34,6 @@ class Reservation < ActiveRecord::Base
     event :complete do
       transitions from: :paid, to: :completed
     end
-  end
-
-  def pickup?
-    !delivery
   end
 
   def editable?
