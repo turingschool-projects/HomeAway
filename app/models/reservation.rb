@@ -1,12 +1,12 @@
 class Reservation < ActiveRecord::Base
   include AASM
-  has_many :reservation_properties
-  has_many :properties, through: :reservation_properties
+  belongs_to :property
   belongs_to :user
 
   validates :user, presence: true
 
-  before_save :calculate_total
+  # We still need to do this, probably, but right now it doesn't work
+  # before_save :calculate_total
 
   scope :past_reservations, -> { where(status: [:reserved, :paid, :completed, :cancelled]) }
 
