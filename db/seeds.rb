@@ -1,10 +1,49 @@
 class Seed
   def initialize
+    generate_users
     generate_categories
     generate_items
     generate_fillings
     generate_item_fillings
     generate_orders
+  end
+
+  def generate_users
+    User.create!({
+      display_name: "Horace Williams",
+      email_address: "demo+horace@jumpstartlab.com",
+      password: "password",
+      password_confirmation: "password" 
+      admin: true,
+      host: true  
+    })
+
+    User.create!({
+      display_name: "Jorge Tellez",
+      email_address: "demo+jorge@jumpstartlab.com",
+      password: "password",
+      password_confirmation: "password",
+      admin: true,
+      host: true
+    })
+
+    User.create!({
+      display_name: "Trevor",
+      email_address: "trevor@email.com",
+      password: "password",
+      password_confirmation: "password",
+      admin: false,
+      host: false
+    })
+
+    User.create!({
+      display_name: "Hostess",
+      email_address: "hostess@email.com",
+      password: "password",
+      password_confirmation: "password",
+      admin: false,
+      host: true
+    })
   end
 
   def generate_categories
@@ -17,32 +56,6 @@ class Seed
     Category.create!(name: "Shack")
   end
 
-  rachel = User.create!({
-    name: "Rachel Warbelow",
-    email_address: "demo+rachel@jumpstartlab.com",
-    password: "password",
-    password_confirmation: "password" })
-
-  jeff = User.create!({
-    name: "Jeff",
-    email_address: "demo+jeff@jumpstartlab.com",
-    password: "password",
-    password_confirmation: "password",
-    display_name: "j3" })
-
-  jorge = User.create!({
-    name: "Jorge Tellez",
-    email_address: "demo+jorge@jumpstartlab.com",
-    password: "password",
-    password_confirmation: "password",
-    display_name: "novohispano" })
-
-  josh = User.create!({ name: "Josh Cheek",
-                        email_address: "demo+josh@jumpstartlab.com",
-                        password: "password",
-                        password_confirmation: "password",
-                        display_name: "josh",
-                        admin: true })
 
   appetizers = [
     deviled_quail_eggs = Property.create!(title: "Deviled Quail Eggs",

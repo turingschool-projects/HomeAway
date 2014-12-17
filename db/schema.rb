@@ -33,45 +33,6 @@ ActiveRecord::Schema.define(version: 20141217043830) do
     t.datetime "updated_at"
   end
 
-  create_table "fillings", force: true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "price",              default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "food_group"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.boolean  "retired",            default: false
-  end
-
-  create_table "item_fillings", force: true do |t|
-    t.integer  "item_id"
-    t.integer  "filling_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "item_fillings", ["filling_id"], name: "index_item_fillings_on_filling_id", using: :btree
-  add_index "item_fillings", ["item_id"], name: "index_item_fillings_on_item_id", using: :btree
-
-  create_table "line_item_fillings", force: true do |t|
-    t.integer  "line_item_id"
-    t.integer  "filling_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "line_items", force: true do |t|
-    t.integer  "order_id"
-    t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "quantity"
-  end
-
   create_table "photos", force: true do |t|
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -116,22 +77,6 @@ ActiveRecord::Schema.define(version: 20141217043830) do
     t.datetime "start_date"
     t.datetime "end_date"
   end
-
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_roles", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email_address"
