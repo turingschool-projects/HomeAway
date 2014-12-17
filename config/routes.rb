@@ -21,12 +21,10 @@ Rails.application.routes.draw do
       collection do
         get :reserved
         get :cancelled
-        get :paid
         get :completed
       end
 
       member do
-        put :pay
         put :complete
         put :cancel
       end
