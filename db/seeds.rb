@@ -125,8 +125,8 @@ class Seed
     Reservation.create!(status: "reserved",
                         user_id: 3,
                         property_id: 2,
-                        start_date: date.advance(10),
-                        end_date: date.advance(20))
+                        start_date: date.advance(days: 10),
+                        end_date: date.advance(days: 20))
 
     puts "Reservations generated"
   end
