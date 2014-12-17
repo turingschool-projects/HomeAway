@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217043830) do
+ActiveRecord::Schema.define(version: 20141217204557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20141217043830) do
   add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
 
   create_table "reservations", force: true do |t|
-    t.string   "status",      default: "in_cart"
+    t.string   "status",      default: "pending"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
