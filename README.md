@@ -1,4 +1,7 @@
-### The Pivot  
+### The Pivot
+We use code shit
+![Codeship](https://codeship.com/projects/11111111111/status?branch=master)
+
 Started from the bottom: [Crossroads Lodge](https://crossroads-lodge.herokuapp.com/)  
 Now we're here: [TravelHome](http://mighty-escarpment-8434.herokuapp.com/)  
    
