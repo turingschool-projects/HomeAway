@@ -1,0 +1,12 @@
+<div class="thumbnail col-sm-6 col-md-4">
+  <%= image_tag @property.image.url(:medium) %>
+  <div class="caption">
+    <h3><%= @property.title %></h3>
+    <p><%= @property.description %></p>
+    <p id="price"> Price:$<%= @property.price %></p>
+    <% if !@property.retired? %>
+      <p><%= link_to "Add to Cart", cart_properties_path(property: @property), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
+    <% end %>
+
+  </div>
+</div>

@@ -1,14 +1,11 @@
-class Item < ActiveRecord::Base
+class Property < ActiveRecord::Base
   attr_accessor :quantity
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true, length: { maximum: 120 }
   validates :price, numericality: {greater_than: 0}
   validates :categories, presence: true
 
-  has_many :item_categories
-  has_many :categories, through: :item_categories
-  has_many :order_items
-  has_many :orders, through: :order_items
+  has_many :reservations
 
   has_attached_file :image,
   styles: {

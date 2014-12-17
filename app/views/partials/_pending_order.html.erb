@@ -1,26 +1,26 @@
 <table class="table table-hover">
   <thead>
-    <th>Item</th>
+    <th>Property</th>
     <th>Price</th>
     <th>Quantity</th>
     <th>Subtotal</th>
   </thead>
   <tbody>
-    <% order.items.uniq.each do |item| %>
-    <tr class="cart_item cart_item_<%= item.id %>">
-      <td class="title"><%= link_to item.title, item_path(item) %></a></td>
-      <td class="price">$<%= item.price %></td>
+    <% reservation.properties.uniq.each do |property| %>
+    <tr class="cart_property cart_property_<%= property.id %>">
+      <td class="title"><%= link_to property.title, property_path(property) %></a></td>
+      <td class="price">$<%= property.price %></td>
       <td class="quantity">
-        <%= button_to admin_order_path(order), method: :put, class: "btn btn-xs decrease float_left", name: "decrease", value: "#{item.id}" do %>
+        <%= button_to admin_reservation_path(reservation), method: :put, class: "btn btn-xs decrease float_left", name: "decrease", value: "#{property.id}" do %>
         <span class="glyphicon glyphicon-minus"></span>
         <% end %>
-        <div class="float_left"><%= item.quantity %></div>
-        <%= button_to admin_order_path(order), method: :put, class: "btn btn-xs increase float_left", name: "increase", value: "#{item.id}" do %>
+        <div class="float_left"><%= property.quantity %></div>
+        <%= button_to admin_reservation_path(reservation), method: :put, class: "btn btn-xs increase float_left", name: "increase", value: "#{property.id}" do %>
         <span class="glyphicon glyphicon-plus"></span>
         <% end %>
       </td>
-      <td class="subtotal">$<%= order.subtotal(item) %></td>
-      <td> <%= button_to admin_order_path(order), method: :delete, name: :remove, name: "remove", value: "#{item.id}" do %>
+      <td class="subtotal">$<%= reservation.subtotal(property) %></td>
+      <td> <%= button_to admin_reservation_path(reservation), method: :delete, name: :remove, name: "remove", value: "#{property.id}" do %>
         <span>Remove</span>
         <% end %>
       </td>
@@ -29,10 +29,10 @@
   </tbody>
   <tfoot>
     <tr>
-      <td>Status: <%= order.status %></td>
-      <td>Ordered: <%= order.created_at %></td>
-      <td>Updated: <%= order.updated_at %></td>
-      <td>Total: $<%= order.total %></td>
+      <td>Status: <%= reservation.status %></td>
+      <td>Reserved: <%= reservation.created_at %></td>
+      <td>Updated: <%= reservation.updated_at %></td>
+      <td>Total: $<%= reservation.total %></td>
     </tr>
   </tfoot>
 </table>

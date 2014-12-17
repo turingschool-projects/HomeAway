@@ -1,38 +1,37 @@
-class OrdersController < ApplicationController
+class ReservationsController < ApplicationController
   def index
-    @orders = current_user.orders.past_orders
+    @reservations = current_user.reservations.past_reservations
   end
 
   def show
-    @order = current_user.orders.where(id: params[:id]).take
-    if @order
-      @order.update_quantities
+    @reservation = current_user.reservations.where(id: params[:id]).take
+    if @reservation
+      @reservation.update_quantities
       render :show
     else
-      flash[:error] = "You may only view your own orders"
+      flash[:error] = "You may only view your own reservations"
       redirect_to root_path
     end
   end
 
   def edit
-    @order = @cart.order
+    @reservation = @cart.reservation
   end
 
   def update
-    @order = @cart.order
-    if @order.update(order_update_params)
-      @order.place! if @order.in_cart?
-      redirect_to @order
+    @reservation = @cart.reservation
+    if @reservation.update(reservation_update_params)
+      @reservation.place! if @reservation.in_cart?
+      redirect_to @reservation
     else
-      redirect_to edit_order_path
-      flash[:errors] = "You need an address if you want delivery"
-      flash[:errors] = @order.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
+      redirect_to edit_reservation_path
+      flash[:errors] = @reservation.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
     end
   end
 
   private
 
-  def order_update_params
-    params.require(:order).permit(:address, :delivery)
+  def reservation_update_params
+    params.require(:reservation).permit(:address)
   end
 end

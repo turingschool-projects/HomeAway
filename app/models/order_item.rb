@@ -1,14 +1,14 @@
-class OrderItem < ActiveRecord::Base
-  belongs_to :order
-  belongs_to :item
+class ReservationProperty < ActiveRecord::Base
+  belongs_to :reservation
+  belongs_to :property
 
-  after_create :update_order
+  after_create :update_reservation
 
-  scope :retired, -> { joins(:item).where(items: { retired: true }) }
+  scope :retired, -> { joins(:property).where(properties: { retired: true }) }
 
   private
 
-  def update_order
-    order.save
+  def update_reservation
+    reservation.save
   end
 end

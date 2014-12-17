@@ -1,27 +1,27 @@
-class CartItemsController < ApplicationController
+class CartPropertiesController < ApplicationController
   def create
-    item = Item.find(params[:item])
-    @cart.add_item(item)
+    property = Property.find(params[:property])
+    @cart.add_property(property)
     session[:cart] = @cart.to_h
-    flash[:notice] = "You have #{pluralize(@cart.count_of(item), item.title)} in your cart."
+    flash[:notice] = "You have #{pluralize(@cart.count_of(property), property.title)} in your cart."
     redirect_to root_path
   end
 
   def update
-    item = Item.find(params[:id])
+    property = Property.find(params[:id])
     if params[:decrease]
-      @cart.decrease(item)
+      @cart.decrease(property)
     elsif params[:increase]
-      @cart.increase(item)
+      @cart.increase(property)
     end
     session[:cart] = @cart.to_h
-    redirect_to cart_items_path
+    redirect_to cart_properties_path
   end
 
   def destroy
-    item = Item.find(params[:id])
-    @cart.remove_item(item)
+    property = Property.find(params[:id])
+    @cart.remove_property(property)
     session[:cart] = @cart.to_h unless current_user
-    redirect_to cart_items_path
+    redirect_to cart_properties_path
   end
 end

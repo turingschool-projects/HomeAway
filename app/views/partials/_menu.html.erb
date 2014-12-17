@@ -1,4 +1,4 @@
-<div class="container menu-items-block col-md-9">
+<div class="container menu-properties-block col-md-9">
   <% @categories.each do |category| %>
     <div class="category-block row">
 
@@ -6,14 +6,14 @@
         <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
       </div>
 
-        <% category.items.active.each do |item| %>
+        <% category.properties.active.each do |property| %>
           <div class="thumbnail col-sm-6 col-md-4">
-            <%= link_to (image_tag item.image.url(:medium)), item_path(item) %>
+            <%= link_to (image_tag property.image.url(:medium)), property_path(property) %>
             <div class="caption">
-              <h3 class="shadow"><%= item.title %></h3>
-              <p class="shadow"><%= item.description %></p>
-              <p id="price" class="shadow"> Price:$<%= item.price %></p>
-              <p><%= link_to "Add to Cart", cart_items_path(item: item), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
+              <h3 class="shadow"><%= property.title %></h3>
+              <p class="shadow"><%= property.description %></p>
+              <p id="price" class="shadow"> Price:$<%= property.price %></p>
+              <p><%= link_to "Add to Cart", cart_properties_path(property: property), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
 
             </div>
           </div>

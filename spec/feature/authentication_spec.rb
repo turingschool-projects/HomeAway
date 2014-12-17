@@ -64,7 +64,7 @@ describe 'the application', type: :feature do
 
     it 'can log out' do
       click_link "Logout"
-      visit admin_items_path
+      visit admin_properties_path
       expect(page).to have_content("Unauthorized")
     end
 

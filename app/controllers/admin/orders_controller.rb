@@ -1,69 +1,69 @@
-class Admin::OrdersController < Admin::BaseAdminController
-  before_action :set_order, except: [:index, :completed, :ordered, :cancelled, :paid]
+class Admin::ReservationsController < Admin::BaseAdminController
+  before_action :set_reservation, except: [:index, :completed, :reserved, :cancelled, :paid]
 
   def index
-    @orders = Order.past_orders
+    @reservations = Reservation.past_reservations
   end
 
   def update
     if params[:decrease]
-      item = Item.find(params[:decrease])
-      @order.decrease(item)
+      property = Property.find(params[:decrease])
+      @reservation.decrease(property)
     elsif params[:increase]
-      item = Item.find(params[:increase])
-      @order.increase(item)
+      property = Property.find(params[:increase])
+      @reservation.increase(property)
     end
-    redirect_to admin_order_path(@order)
+    redirect_to admin_reservation_path(@reservation)
   end
 
   def destroy
-    item = Item.find(params[:remove])
-    @order.remove_item(item)
-    redirect_to admin_order_path(@order)
+    property = Property.find(params[:remove])
+    @reservation.remove_property(property)
+    redirect_to admin_reservation_path(@reservation)
   end
 
   def show
-    @order.update_quantities
+    @reservation.update_quantities
   end
 
-  def ordered
-    @orders = Order.ordered
+  def reserved
+    @reservations = Reservation.reserved
     render :index
   end
 
   def cancelled
-    @orders = Order.cancelled
+    @reservations = Reservation.cancelled
     render :index
   end
 
   def paid
-    @orders = Order.paid
+    @reservations = Reservation.paid
     render :index
   end
 
   def completed
-    @orders = Order.completed
+    @reservations = Reservation.completed
     render :index
   end
 
   def pay
-    @order.pay!
-    redirect_to admin_orders_path
+    @reservation.pay!
+    redirect_to admin_reservations_path
   end
 
   def complete
-    @order.complete!
-    redirect_to admin_orders_path
+    @reservation.complete!
+    redirect_to admin_reservations_path
   end
 
   def cancel
-    @order.cancel!
-    redirect_to admin_orders_path
+    @reservation.cancel!
+    redirect_to admin_reservations_path
   end
 
   private
 
-  def set_order
-    @order = Order.find(params[:id])
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
   end
 end
