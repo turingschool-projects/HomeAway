@@ -1,10 +1,11 @@
 class CartController < ApplicationController
+  protect_from_forgery except: :show
   def show
   end
 
   def update
-    property = Property.find(params[:id])
-    redirect_to :back
+    @cart.add_property params[:property].merge(property_id: params[:id])
+    redirect_to cart_path
   end
 
   def destroy
