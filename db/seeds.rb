@@ -5,6 +5,7 @@ class Seed
     generate_users
     generate_categories
     generate_properties
+    generate_reservations
   end
 
   def generate_users
@@ -13,9 +14,9 @@ class Seed
       name: "Horace Williams",
       email_address: "demo+horace@jumpstartlab.com",
       password: "password",
-      password_confirmation: "password", 
+      password_confirmation: "password",
       admin: true,
-      host: true  
+      host: true
     })
 
     User.create!({
@@ -47,6 +48,8 @@ class Seed
       admin: false,
       host: true
     })
+
+    puts "Users generated"
   end
 
   def generate_categories
@@ -57,87 +60,80 @@ class Seed
     Category.create!(name: "Boat")
     Category.create!(name: "Balloon")
     Category.create!(name: "Shack")
+
+    puts "Categories generated"
   end
 
 
   def generate_properties
-    Property.create!(title: "Sam's House",
-                    price: 500,
+    Property.create!(title: "Hill House",
+                    price: 5500,
                     description: Faker::Lorem.sentence(2),
                     category_id: 1,
                     occupancy: 4)
 
-                     
+    Property.create!(title: "Run's House",
+                    price: 15000,
+                    description: Faker::Lorem.sentence(3),
+                    category_id: 1,
+                    occupancy: 9)
+
+     Property.create!(title: "Paul's Boutique",
+                    price: 1000,
+                    description: Faker::Lorem.sentence(3),
+                    category_id: 2,
+                    occupancy: 2)
+
+      Property.create!(title: "The Room",
+                    price: 500,
+                    description: Faker::Lorem.sentence(1),
+                    category_id: 3,
+                    occupancy: 1)
+
+      Property.create!(title: "Log Cabin",
+                    price: 44500,
+                    description: Faker::Lorem.sentence(1),
+                    category_id: 4,
+                    occupancy: 12)
+
+    puts "Properties generated"
   end
-#  image_path = Rails.root.join("app", "assets", "images") 
+
+  def generate_reservations
+
+    date = Date.current
+
+    Reservation.create!(status: "pending",
+                        user_id: 3,
+                        property_id: 1,
+                        start_date: date,
+                        end_date: date.advance(days: 4))
+
+
+    Reservation.create!(status: "completed",
+                        user_id: 3,
+                        property_id: 3,
+                        start_date: date.advance(days:-30),
+                        end_date: date.advance(days:-25))
+
+    Reservation.create!(status: "cancelled",
+                        user_id: 2,
+                        property_id: 4,
+                        start_date: date.advance(days: -5),
+                        end_date: date)
+
+    Reservation.create!(status: "reserved",
+                        user_id: 3,
+                        property_id: 2,
+                        start_date: date.advance(days: 10),
+                        end_date: date.advance(days: 20))
+
+    puts "Reservations generated"
+  end
+
+
+#  image_path = Rails.root.join("app", "assets", "images")
 #  deviled_quail_eggs.image = File.open(image_path.join("deviled-quail-eggs.png"))
-#  reservation1 = Reservation.create!(status: "completed",
-#                                     user: rachel)
-#  reservation1.properties << deviled_quail_eggs
-#  reservation1.properties << lucky_soup
-#  reservation1.properties << elk_burger
-#
-#  reservation2 = Reservation.create!(status: "completed",
-#                                     user: jorge)
-#  reservation2.properties << bison_chili_cheese_fries
-#  reservation2.properties << bison_chili_cheese_fries
-#  reservation2.properties << wild_boar_tenderloin
-#  reservation2.properties << apple_pie_a_la_mode
-#
-#  reservation3 = Reservation.create!(address: "123 Some St, Denver, CO",
-#                                     status: "cancelled",
-#                                     user: jeff)
-#  reservation3.properties << lucky_soup
-#  reservation3.properties << bear_burger
-#  reservation3.properties << brownie_sundae
-#
-#  reservation4 = Reservation.create!(status: "cancelled",
-#                                     user: josh)
-#  reservation4.properties << chocolate_cake
-#  reservation4.properties << brownie_sundae
-#  reservation4.properties << apple_pie
-#  reservation4.properties << apple_pie_a_la_mode
-#
-#  reservation5 = Reservation.create!(address: "123 Some Other St, Denver, CO",
-#                                     status: "reserved",
-#                                     user: rachel)
-#  reservation5.properties << bison_chili_cheese_fries
-#  reservation5.properties << bison_burger
-#  reservation5.properties << bison_burger
-#
-#  reservation6 = Reservation.create!(user: rachel)
-#  reservation6.properties << deviled_quail_eggs
-#  reservation6.properties << deviled_quail_eggs
-#  reservation6.properties << deviled_quail_eggs
-#  reservation6.properties << deviled_quail_eggs
-#
-#  reservation7 = Reservation.create!(user: jeff)
-#  reservation7.properties << tomato_bruschetta
-#  reservation7.properties << bison_burger
-#  reservation7.properties << moose_burger
-#  reservation7.properties << wild_boar_ribs
-#  reservation7.properties << tomato_cheese_sandwich
-#
-#  reservation8 = Reservation.create!(user: josh,
-#                                     status: "paid")
-#  reservation8.properties << tomato_bruschetta
-#  reservation8.properties << shepherds_pie
-#  reservation8.properties << moose_burger
-#  reservation8.properties << bear_burger
-#  reservation8.properties << brownie_sundae
-#  reservation8.properties << apple_pie
-#
-#  reservation9 = Reservation.create!(user: jorge,
-#                                     status: "reserved")
-#  reservation9.properties << bison_chili_cheese_fries
-#  reservation9.properties << tomato_cheese_sandwich
-#  reservation9.properties << elk_burger
-#  reservation9.properties << moose_burger
-#
-#  reservation10 = Reservation.create!(user: josh,
-#                                      status: "reserved")
-#  reservation10.properties << lucky_soup
-#
 end
 
 Seed.new
