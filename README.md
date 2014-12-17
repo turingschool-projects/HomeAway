@@ -1,11 +1,9 @@
-![banner](https://raw.githubusercontent.com/larsonkonr/dinner_dash/master/app/assets/images/lodgephotoshop3.jpg "Crossroads-lodge-banner")
-### Module 2 Turing School Software & Design<br> ###
-#### Due Thursday, December 4th 2014 ####
-
-Live Heroku Site: [Crossroads Lodge](https://crossroads-lodge.herokuapp.com/)
+### The Pivot  
+Started from the bottom: [Crossroads Lodge](https://crossroads-lodge.herokuapp.com/)  
+Now we're here: [TravelHome](http://mighty-escarpment-8434.herokuapp.com/)  
    
-Created By:<br>
-* Greg<br>
-* Konr<br>
-* Viki<br>
-* Chase<br>
+Created By:  
+* [Alex](https://github.com/dalexj)    
+* [Viki](https://github.com/VikiAnn)  
+* [Sam](https://github.com/skuhlmann)  
+* [Danny](https://github.com/dglunz)  
