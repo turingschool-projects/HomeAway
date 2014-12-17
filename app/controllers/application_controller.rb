@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  before_action :load_cart
+  # Do we still want to do this?
+  # before_action :load_cart
 
 end
