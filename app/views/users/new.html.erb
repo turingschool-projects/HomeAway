@@ -1,3 +1,14 @@
+
+<%= render partial: "partials/sign_up", locals: {user: @user} %>
+
+<hr>
+
+<%= render partial: "partials/log_in" %>
+
+<hr>
+
+
+
 <div class="edit-form better-edit-display">
   <%= form_for @user do |f| %>
     <% if @user.errors.any? %>

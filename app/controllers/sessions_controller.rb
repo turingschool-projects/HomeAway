@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       convert_cart(user, session)
       flash[:notice] = "Welcome, #{user.name}!"
-      user.admin? ? redirect_to(admin_properties_path) : redirect_to(root_path)
+      redirect_to :back
+      #user.admin? ? redirect_to(admin_properties_path) : redirect_to(root_path)
     else
       flash[:errors] = "Invalid Login"
       redirect_to :back
