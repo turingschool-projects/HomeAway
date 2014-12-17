@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'the unauthenticated user', type: :feature do
+xdescribe 'the unauthenticated user', type: :feature do
   let(:category) { Category.create!(name: "stuff") }
   let(:property) do
     Property.create!(title: "Greg's Homemade Chili",

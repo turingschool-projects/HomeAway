@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "sign up process", type: :feature do
+xdescribe "sign up process", type: :feature do
   it "should have a new user page" do
     visit new_user_path
     expect(page).to have_field("Full Name")
