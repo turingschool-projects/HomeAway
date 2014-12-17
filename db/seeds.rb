@@ -140,6 +140,7 @@ class Seed
                       zip: Faker::Address.postcode,
                       country: Faker::Address.country)
       property.address_id = Address.last.id
+      property.save!
     end
 
     User.all.each do |user|
@@ -149,6 +150,7 @@ class Seed
                       zip: Faker::Address.postcode,
                       country: Faker::Address.country)
       user.address_id = Address.last.id
+      user.save!
     end
   puts "Addresses generated"
 
