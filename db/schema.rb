@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204011753) do
+ActiveRecord::Schema.define(version: 20141217002159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.string   "line_1"
+    t.string   "line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -22,12 +33,19 @@ ActiveRecord::Schema.define(version: 20141204011753) do
     t.datetime "updated_at"
   end
 
-  create_table "item_categories", force: true do |t|
-    t.integer "item_id"
-    t.integer "category_id"
+  create_table "photos", force: true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.integer  "property_id"
+    t.boolean  "primary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "items", force: true do |t|
+  add_index "photos", ["property_id"], name: "index_photos_on_property_id", using: :btree
+
+  create_table "properties", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.decimal  "price"
@@ -38,37 +56,42 @@ ActiveRecord::Schema.define(version: 20141204011753) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "retired",            default: false
+    t.integer  "occupancy"
+    t.integer  "address_id"
+    t.boolean  "bathroom_private",   default: true
+    t.integer  "user_id"
+    t.integer  "category_id"
   end
 
-  add_index "items", ["title"], name: "index_items_on_title", unique: true, using: :btree
+  add_index "properties", ["address_id"], name: "index_properties_on_address_id", using: :btree
+  add_index "properties", ["category_id"], name: "index_properties_on_category_id", using: :btree
+  add_index "properties", ["title"], name: "index_properties_on_title", unique: true, using: :btree
+  add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
 
-  create_table "order_items", force: true do |t|
-    t.integer  "order_id"
-    t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "orders", force: true do |t|
-    t.boolean  "delivery"
-    t.string   "address"
-    t.string   "status",     default: "in_cart"
+  create_table "reservations", force: true do |t|
+    t.string   "status",      default: "in_cart"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "total"
+    t.integer  "property_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "users", force: true do |t|
     t.string   "email_address"
-    t.string   "name"
+    t.string   "first_name"
     t.string   "display_name"
     t.string   "password_digest"
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "host"
+    t.integer  "address_id"
+    t.string   "last_name"
   end
 
+  add_index "users", ["address_id"], name: "index_users_on_address_id", using: :btree
   add_index "users", ["email_address"], name: "index_users_on_email_address", unique: true, using: :btree
 
 end
