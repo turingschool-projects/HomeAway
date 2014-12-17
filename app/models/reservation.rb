@@ -8,36 +8,31 @@ class Reservation < ActiveRecord::Base
   # We still need to do this, probably, but right now it doesn't work
   # before_save :calculate_total
 
-  scope :past_reservations, -> { where(status: [:reserved, :paid, :completed, :cancelled]) }
+  scope :past_reservations, -> { where(status: [:reserved, :completed, :cancelled]) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
-    state :in_cart, initial: true
+    state :pending, initial: true
     state :reserved
-    state :paid
     state :cancelled
     state :completed
 
     # events give us bang methods, like place! for changing reservation status
-    event :place do
-      transitions from: :in_cart, to: :reserved, guard: :no_retired_properties?
-    end
-
-    event :pay do
-      transitions from: :reserved, to: :paid
+    event :confirm do
+      transitions from: :pending, to: :reserved, guard: :no_retired_properties?
     end
 
     event :cancel do
-      transitions from: [:reserved, :paid], to: :cancelled
+      transitions from: [:pending, :reserved], to: :cancelled
     end
 
     event :complete do
-      transitions from: :paid, to: :completed
+      transitions from: :reserved, to: :completed
     end
   end
 
   def editable?
-    in_cart? || reserved? || paid?
+    pending? || reserved?
   end
 
   def calculate_total

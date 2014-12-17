@@ -46,11 +46,6 @@ class Admin::ReservationsController < Admin::BaseAdminController
     render :index
   end
 
-  def pay
-    @reservation.pay!
-    redirect_to admin_reservations_path
-  end
-
   def complete
     @reservation.complete!
     redirect_to admin_reservations_path
