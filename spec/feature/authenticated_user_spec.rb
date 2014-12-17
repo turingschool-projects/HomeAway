@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "the authenticated non-administrator", type: :feature do
+xdescribe "the authenticated non-administrator", type: :feature do
   let(:user) { User.create!(name: "Boy George",
                 email_address: "cultureclubforever@eighties.com",
                 password: "password",

@@ -1,6 +1,6 @@
 require 'rails_helper'
-
-context 'authenticated admin', type: :feature do
+# another skip line 128
+xcontext 'authenticated admin', type: :feature do
   before(:each) do
     admin_data = { name: "Viki",
                    email_address: "viki@example.com",
@@ -125,7 +125,7 @@ context 'authenticated admin', type: :feature do
   end
 end
 
-context 'authenticated non-admin', type: :feature do
+xcontext 'authenticated non-admin', type: :feature do
   before(:each) do
     admin_data = { name: "Viki",
                    email_address: "viki@example.com",
