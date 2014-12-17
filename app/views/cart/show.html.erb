@@ -11,8 +11,11 @@
   <%= button_to "Don't go to #{@cart.property.title}", cart_path, method: :delete %>
 <% end %>
 
+<!--
+DELETE ME
 <%= form_tag "/properties/5/add_to_cart", method: :post do %>
   <%= date_field_tag "property[start_date]" %>
   <%= date_field_tag "property[end_date]" %>
   <%= submit_tag "Request reservation mofo" %>
 <% end %>
+-->

@@ -1,5 +1,4 @@
 class CartController < ApplicationController
-  protect_from_forgery except: :show
   def show
   end
 
