@@ -61,13 +61,37 @@ class Seed
 
 
   def generate_properties
-    Property.create!(title: "Sam's House",
-                    price: 500,
+    Property.create!(title: "Hill House",
+                    price: 5500,
                     description: Faker::Lorem.sentence(2),
                     category_id: 1,
                     occupancy: 4)
 
-                     
+    Property.create!(title: "Run's House",
+                    price: 15000,
+                    description: Faker::Lorem.sentence(3),
+                    category_id: 1,
+                    occupancy: 9)
+
+     Property.create!(title: "Paul's Boutique",
+                    price: 1000,
+                    description: Faker::Lorem.sentence(3),
+                    category_id: 2,
+                    occupancy: 2)
+
+      Property.create!(title: "The Room",
+                    price: 500,
+                    description: Faker::Lorem.sentence(1),
+                    category_id: 3,
+                    occupancy: 1)
+
+      Property.create!(title: "Log Cabin",
+                    price: 44500,
+                    description: Faker::Lorem.sentence(1),
+                    category_id: 4,
+                    occupancy: 12)
+
+                  
   end
 #  image_path = Rails.root.join("app", "assets", "images") 
 #  deviled_quail_eggs.image = File.open(image_path.join("deviled-quail-eggs.png"))
