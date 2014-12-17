@@ -65,6 +65,7 @@ a:focus {
 
 .navbar-custom .navbar-brand {
     font-weight: 700;
+    color: #D88A8A;
 }
 
 .navbar-custom .navbar-brand:focus {
@@ -74,7 +75,6 @@ a:focus {
 .navbar-custom .navbar-brand .navbar-toggle {
     padding: 4px 6px;
     font-size: 16px;
-    color: #fff;
 }
 
 .navbar-custom .navbar-brand .navbar-toggle:focus,
@@ -132,7 +132,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: image-url("homepage.jpg") no-repeat bottom center scroll;
+    background: image-url("hot-air.jpg") no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -143,6 +143,11 @@ a:focus {
 .intro .intro-body {
     display: table-cell;
     vertical-align: middle;
+}
+
+.brand-box {
+  margin: 150px 0;
+  color: #474843;
 }
 
 .intro .intro-body .brand-heading {
@@ -173,11 +178,11 @@ a:focus {
     height: 70px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #fff;
+    border: 2px solid #474843;
     border-radius: 35px;
     font-size: 40px;
-    color: #fff;
     background: 0 0;
+    color: #474843;
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
@@ -186,7 +191,6 @@ a:focus {
 .btn-circle:hover,
 .btn-circle:focus {
     outline: 0;
-    color: #fff;
     background: rgba(255,255,255,.1);
 }
 
