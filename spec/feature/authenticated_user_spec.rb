@@ -101,24 +101,24 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to have_button("Login!")
   end
 
-  let(:order1) { Order.create!(user: user, status: "completed") }
-  let(:order2) { Order.create!(user: user, status: "cancelled") }
+  let(:reservation1) { Reservation.create!(user: user, status: "completed") }
+  let(:reservation2) { Reservation.create!(user: user, status: "cancelled") }
 
   before(:each) do
-    order1.items << item
-    order2.items << item
+    reservation1.items << item
+    reservation2.items << item
   end
 
-  it "can view a list of own past orders" do
-    visit orders_path
+  it "can view a list of own past reservations" do
+    visit reservations_path
     expect(page).to have_content("completed")
     expect(page).to have_content("cancelled")
   end
 
-  it "can visit an individual past order" do
-    visit orders_path
-    find(:xpath, "//a[@href='/orders/#{order1.id}']").click
-    expect(page).to have_content order1.total
+  it "can visit an individual past reservation" do
+    visit reservations_path
+    find(:xpath, "//a[@href='/reservations/#{reservation1.id}']").click
+    expect(page).to have_content reservation1.total
 
     within(".cart_item_#{item.id} .subtotal") do
       expect(page).to have_content("15.5")
@@ -133,20 +133,20 @@ describe "the authenticated non-administrator", type: :feature do
     end
 
     expect(page).to have_content("completed")
-    expect(page).to have_content order1.total
-    expect(page).to have_content order1.created_at
-    expect(page).to have_content order1.updated_at
+    expect(page).to have_content reservation1.total
+    expect(page).to have_content reservation1.created_at
+    expect(page).to have_content reservation1.updated_at
   end
 
-  it "can view retired items from previous orders but not add them to cart" do
-    order = Order.create!(user: user, status: "paid")
+  it "can view retired items from previous reservations but not add them to cart" do
+    reservation = Reservation.create!(user: user, status: "paid")
     retired_item = Item.create!(title: "retired", description: "retired", price: 5, categories: [category])
-    order.items << retired_item
+    reservation.items << retired_item
     retired_item.retired = true
 
     expect(retired_item.retired?).to eq true
-    visit orders_path
-    find(:xpath, "//a[@href='/orders/#{order.id}']").click
+    visit reservations_path
+    find(:xpath, "//a[@href='/reservations/#{reservation.id}']").click
     within(".cart_item_#{retired_item.id} .title") do
       find_link("retired").click
       expect(page).to_not have_link("Add to Cart")
@@ -180,19 +180,19 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to have_content("You can only view your own")
   end
 
-  it "can view own orders but not other users' orders" do
+  it "can view own reservations but not other users' reservations" do
     user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
-    order3 = Order.create!(user: user2)
-    order3.items << item
+    reservation3 = Reservation.create!(user: user2)
+    reservation3.items << item
 
-    visit orders_path
-    expect(page).to have_content(order1.status)
-    visit order_path(order1.id)
-    expect(page).to have_content(order1.total)
-    expect(page).to have_content(order1.status)
+    visit reservations_path
+    expect(page).to have_content(reservation1.status)
+    visit reservation_path(reservation1.id)
+    expect(page).to have_content(reservation1.total)
+    expect(page).to have_content(reservation1.status)
 
-    visit order_path(order3.id)
-    expect(page).to have_content("You may only view your own orders")
+    visit reservation_path(reservation3.id)
+    expect(page).to have_content("You may only view your own reservations")
     expect(current_path).to eq(root_path)
   end
 
@@ -204,15 +204,15 @@ describe "the authenticated non-administrator", type: :feature do
     find_link("Checkout").click
     fill_in "Card number", with: "4242424242424242"
     fill_in "Expiration", with: "10/16"
-    find_button("Update Order").click
+    find_button("Update Reservation").click
     expect(page).to have_content("Greg's Homemade Chili")
-    expect(page).to have_content("ordered")
+    expect(page).to have_content("reserved")
     visit cart_items_path
     expect(page).to_not have_content("Greg's Homemade Chili")
     expect(page).to have_content("empty")
   end
 
-  it "must put an address to check out a delivery order" do
+  it "must put an address to check out a delivery reservation" do
     item
     visit items_path
     find_link("Add to Cart").click
@@ -221,7 +221,7 @@ describe "the authenticated non-administrator", type: :feature do
     check("Delivery?")
     fill_in "Card number", with: "4242424242424242"
     fill_in "Expiration", with: "10/16"
-    find_button("Update Order").click
+    find_button("Update Reservation").click
     expect(page).to have_content("address: can't be blank")
   end
 end

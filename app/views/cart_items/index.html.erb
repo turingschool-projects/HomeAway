@@ -42,7 +42,7 @@
 
   <div class="checkout-button">
     <% if current_user %>
-    <%= link_to "Checkout", edit_order_path(@cart.order), class: 'btn btn-default' %>
+    <%= link_to "Checkout", edit_reservation_path(@cart.reservation), class: 'btn btn-default' %>
     <% else %>
     <%= link_to "Checkout", login_path, class: 'btn btn-default' %>
     <% end %>

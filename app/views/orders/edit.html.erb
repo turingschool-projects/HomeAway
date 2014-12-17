@@ -1,9 +1,9 @@
 <div class="container edit-form better-edit-display">
-    <% if @order.errors.any? %>
+    <% if @reservation.errors.any? %>
       <div>
-        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+        <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
         <ul>
-        <% @order.errors.full_messages.each do |message| %>
+        <% @reservation.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>
@@ -11,7 +11,7 @@
     <% end %>
 
 
-  <%= form_for @order, url: {action: :update}, role: 'form' do |f| %>
+  <%= form_for @reservation, url: {action: :update}, role: 'form' do |f| %>
     <h4>Delivery(check box for delivery):</h4>
       <div class="checkbox">
         <label><%= f.check_box :delivery %>Delivery?</label>

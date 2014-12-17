@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-describe OrderCart do
+describe ReservationCart do
   let(:category) { Category.create!(name: "food")}
   let(:item1) {Item.create!(title: "Test item", description: "test", price: 1.0, categories: [category]) }
   let(:item2) {Item.create!(title: "Another test item", description: "other test", price: 2.0, categories: [category]) }
   let(:user)  { User.create!(name: "Viki", email_address: "viki@example.com", password: "password", password_confirmation: "password") }
-  let(:order) { Order.create!(user: user) }
-  let!(:order_items) { order.order_items.create!([
+  let(:reservation) { Reservation.create!(user: user) }
+  let!(:reservation_items) { reservation.reservation_items.create!([
     {item: item1},
     {item: item1},
     {item: item2}
     ]) }
 
 
-  subject(:cart) {OrderCart.new(order)}
-  it "loads the correct order" do
+  subject(:cart) {ReservationCart.new(reservation)}
+  it "loads the correct reservation" do
     expect(cart.to_h).to eq({item1.id => 2, item2.id => 1})
   end
 

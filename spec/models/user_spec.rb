@@ -93,16 +93,16 @@ RSpec.describe User, :type => :model do
   describe "relationships" do
     let(:user) { User.create(valid_attributes) }
 
-    it "can have many orders" do
-      order = Order.create(delivery: true,
+    it "can have many reservations" do
+      reservation = Reservation.create(delivery: true,
                            address: "123 Baker St",
                            user_id: user.id)
-      order2 = Order.create(delivery: false,
+      reservation2 = Reservation.create(delivery: false,
                             user_id: user.id)
 
-      expect(user.orders.first).to eq(order)
-      expect(user.orders.last).to eq(order2)
-      expect(user.orders.count).to eq(2)
+      expect(user.reservations.first).to eq(reservation)
+      expect(user.reservations.last).to eq(reservation2)
+      expect(user.reservations.count).to eq(2)
     end
 
   end

@@ -1,7 +1,7 @@
-class Order < ActiveRecord::Base
+class Reservation < ActiveRecord::Base
   include AASM
-  has_many :order_items
-  has_many :items, through: :order_items
+  has_many :reservation_items
+  has_many :items, through: :reservation_items
   belongs_to :user
 
   validates :user, presence: true
@@ -9,27 +9,27 @@ class Order < ActiveRecord::Base
 
   before_save :calculate_total
 
-  scope :past_orders, -> { where(status: [:ordered, :paid, :completed, :cancelled]) }
+  scope :past_reservations, -> { where(status: [:reserved, :paid, :completed, :cancelled]) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
     state :in_cart, initial: true
-    state :ordered
+    state :reserved
     state :paid
     state :cancelled
     state :completed
 
-    # events give us bang methods, like place! for changing order status
+    # events give us bang methods, like place! for changing reservation status
     event :place do
-      transitions from: :in_cart, to: :ordered, guard: :no_retired_items?
+      transitions from: :in_cart, to: :reserved, guard: :no_retired_items?
     end
 
     event :pay do
-      transitions from: :ordered, to: :paid
+      transitions from: :reserved, to: :paid
     end
 
     event :cancel do
-      transitions from: [:ordered, :paid], to: :cancelled
+      transitions from: [:reserved, :paid], to: :cancelled
     end
 
     event :complete do
@@ -42,7 +42,7 @@ class Order < ActiveRecord::Base
   end
 
   def editable?
-    in_cart? || ordered? || paid?
+    in_cart? || reserved? || paid?
   end
 
   def calculate_total
@@ -65,14 +65,14 @@ class Order < ActiveRecord::Base
   end
 
   def decrease(item)
-    order_items.find_by(item_id: item.id).destroy
+    reservation_items.find_by(item_id: item.id).destroy
     reload
     calculate_total
     update_quantities
   end
 
   def remove_item(item)
-    order_items.where(item: item).joins(:item).destroy_all
+    reservation_items.where(item: item).joins(:item).destroy_all
     items.reload
     save!
     update_quantities
@@ -91,8 +91,8 @@ class Order < ActiveRecord::Base
   end
 
   def no_retired_items?
-    return true if order_items.retired.empty?
-    order_items.retired.delete_all
+    return true if reservation_items.retired.empty?
+    reservation_items.retired.delete_all
     false
   end
 end

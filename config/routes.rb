@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :cart_items
 
-  resources :orders
+  resources :reservations
 
   resources :items, only: [:index, :show]
 
@@ -19,9 +19,9 @@ Rails.application.routes.draw do
     resources :items
     resources :users, only: [:index, :show]
 
-    resources :orders do
+    resources :reservations do
       collection do
-        get :ordered
+        get :reserved
         get :cancelled
         get :paid
         get :completed

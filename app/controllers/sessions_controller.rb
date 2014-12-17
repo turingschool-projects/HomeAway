@@ -24,9 +24,9 @@ class SessionsController < ApplicationController
 
   private
   def convert_cart(user, session)
-    return if session[:order_id] || !session[:cart].present?
-    order = CartOrderConverter.convert(@cart.to_h, user)
-    session[:order_id] = order.id
+    return if session[:reservation_id] || !session[:cart].present?
+    reservation = CartReservationConverter.convert(@cart.to_h, user)
+    session[:reservation_id] = reservation.id
     session[:cart] = nil
   end
 end

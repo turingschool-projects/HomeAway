@@ -1,13 +1,13 @@
 <div class="edit-form">
-  <h4>Order ID: <%= @order.id %></br>
-    Customer Name: <%= @order.user.name %><br>
-    Email: <%= @order.user.email_address %><br>
-    <% if @order.address %>
-      Address: <%= @order.address %><br>
+  <h4>Reservation ID: <%= @reservation.id %></br>
+    Customer Name: <%= @reservation.user.name %><br>
+    Email: <%= @reservation.user.email_address %><br>
+    <% if @reservation.address %>
+      Address: <%= @reservation.address %><br>
     <% end %>
-  <% if @order.editable? %>
-    <%= render :partial => 'partials/pending_order', locals: {order: @order} %>
+  <% if @reservation.editable? %>
+    <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
   <% else %>
-    <%= render :partial => 'partials/completed_order', locals: {order: @order} %>
+    <%= render :partial => 'partials/completed_reservation', locals: {reservation: @reservation} %>
   <% end %>  
 </div>

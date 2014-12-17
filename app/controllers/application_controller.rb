@@ -15,10 +15,10 @@ class ApplicationController < ActionController::Base
 
   def load_cart
     if current_user
-      order = Order.where(id: session[:order_id]).where(status: "in_cart").take
-      order ||= Order.create!(user: current_user, status: "in_cart")
-      session[:order_id] = order.id unless session[:order_id] == order.id
-      @cart = OrderCart.new(order)
+      reservation = Reservation.where(id: session[:reservation_id]).where(status: "in_cart").take
+      reservation ||= Reservation.create!(user: current_user, status: "in_cart")
+      session[:reservation_id] = reservation.id unless session[:reservation_id] == reservation.id
+      @cart = ReservationCart.new(reservation)
     else
       @cart = Cart.new(session[:cart])
     end

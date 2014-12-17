@@ -1,21 +1,21 @@
-class CartOrderConverter
+class CartReservationConverter
   def self.convert(session_cart, user)
     new.convert(session_cart, user)
   end
 
   def convert(session_cart, user)
-    order = Order.create!(user: user)
+    reservation = Reservation.create!(user: user)
     items = Item.where(id: session_cart.keys)
     items.each do |item|
-      create_order_items(session_cart, item, order)
+      create_reservation_items(session_cart, item, reservation)
     end
-    order
+    reservation
   end
 
-  def create_order_items(session_cart, item, order)
+  def create_reservation_items(session_cart, item, reservation)
     quantity = session_cart[item.id]
     quantity.times do
-      OrderItem.create!(item: item, order: order)
+      ReservationItem.create!(item: item, reservation: reservation)
     end
   end
 end

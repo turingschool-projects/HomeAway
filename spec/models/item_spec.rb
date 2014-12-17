@@ -36,9 +36,9 @@ describe Item do
       expect(item.categories).to eq([category])
     end
 
-    it "has many orders" do
-      order = Order.create(user: user, items: [item])
-      expect(item.orders).to eq([order])
+    it "has many reservations" do
+      reservation = Reservation.create(user: user, items: [item])
+      expect(item.reservations).to eq([reservation])
     end
   end
 end

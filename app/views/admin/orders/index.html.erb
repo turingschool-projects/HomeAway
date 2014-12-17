@@ -1,10 +1,10 @@
 <% if current_user.admin? %>
   <div class="btn-group btn-group-justified role-filters col-md-offset-3" role="group">
-    <a class="btn btn-default" href="<%= admin_orders_path %>">All</a>
-    <a class="btn btn-default" href="<%= ordered_admin_orders_path %>">Ordered</a>
-    <a class="btn btn-default" href="<%= paid_admin_orders_path %>">Paid</a>
-    <a class="btn btn-default" href="<%= completed_admin_orders_path %>">Completed</a>
-    <a class="btn btn-default" href="<%= cancelled_admin_orders_path %>">Cancelled</a>
+    <a class="btn btn-default" href="<%= admin_reservations_path %>">All</a>
+    <a class="btn btn-default" href="<%= reserved_admin_reservations_path %>">Reserved</a>
+    <a class="btn btn-default" href="<%= paid_admin_reservations_path %>">Paid</a>
+    <a class="btn btn-default" href="<%= completed_admin_reservations_path %>">Completed</a>
+    <a class="btn btn-default" href="<%= cancelled_admin_reservations_path %>">Cancelled</a>
   </div>
 <% end %>
 
@@ -20,32 +20,32 @@
       <th>Actions</th>
     </thead>
     <tbody>
-      <% @orders.each do |order| %>
-      <tr class="order order_<%= order.id %>">
+      <% @reservations.each do |reservation| %>
+      <tr class="reservation reservation_<%= reservation.id %>">
         <% if current_user.admin? %>
-          <td class="date"><%= link_to order.updated_at, admin_order_path(order) %></td>
-          <td class="user"><%= link_to "#{order.user.name} (#{order.user.id})", user_path(order.user) %></td>
+          <td class="date"><%= link_to reservation.updated_at, admin_reservation_path(reservation) %></td>
+          <td class="user"><%= link_to "#{reservation.user.name} (#{reservation.user.id})", user_path(reservation.user) %></td>
         <% else %>
-          <td class="date"><%= link_to order.updated_at, order_path(order) %></td>
+          <td class="date"><%= link_to reservation.updated_at, reservation_path(reservation) %></td>
         <% end %>
-        <td class="total">$<%= order.total %></td>
-        <td class="status"><%= order.status %></td>
+        <td class="total">$<%= reservation.total %></td>
+        <td class="status"><%= reservation.status %></td>
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               Actions <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <% if order.ordered? %>
-                <li><%= link_to "Mark as paid", pay_admin_order_path(order), method: :put %></li>
-              <% elsif order.paid? %>
-                <li><%= link_to "Mark as completed", complete_admin_order_path(order), method: :put %></li>
+              <% if reservation.reserved? %>
+                <li><%= link_to "Mark as paid", pay_admin_reservation_path(reservation), method: :put %></li>
+              <% elsif reservation.paid? %>
+                <li><%= link_to "Mark as completed", complete_admin_reservation_path(reservation), method: :put %></li>
               <% else %>
                 <li><a>[None]</a></li>
               <% end %>
 
-              <% if order.ordered? || order.paid? %>
-                <li><%= link_to "Cancel Order", cancel_admin_order_path(order), method: :put %></li>
+              <% if reservation.reserved? || reservation.paid? %>
+                <li><%= link_to "Cancel Reservation", cancel_admin_reservation_path(reservation), method: :put %></li>
               <% end %>
             </ul>
           </div>
