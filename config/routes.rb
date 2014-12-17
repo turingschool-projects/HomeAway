@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-
-
   resources :users
   resources :cart_properties
 
@@ -12,8 +10,8 @@ Rails.application.routes.draw do
 
   resources :properties, only: [:index, :show]
 
-  get 'code', to: redirect('https://github.com/larsonkonr/dinner_dash')
-  root 'properties#index'
+  get 'code', to: redirect('https://github.com/dalexj/da_pivot')
+  root 'pages#home'
 
   namespace :admin do
     resources :properties
