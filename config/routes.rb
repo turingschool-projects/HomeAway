@@ -6,17 +6,17 @@ Rails.application.routes.draw do
 
 
   resources :users
-  resources :cart_items
+  resources :cart_properties
 
   resources :reservations
 
-  resources :items, only: [:index, :show]
+  resources :properties, only: [:index, :show]
 
   get 'code', to: redirect('https://github.com/larsonkonr/dinner_dash')
-  root 'items#index'
+  root 'properties#index'
 
   namespace :admin do
-    resources :items
+    resources :properties
     resources :users, only: [:index, :show]
 
     resources :reservations do

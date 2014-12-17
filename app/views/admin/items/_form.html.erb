@@ -1,10 +1,10 @@
-<%= form_for([:admin, @item]) do |f| %>
-  <% if @item.errors.any? %>
+<%= form_for([:admin, @property]) do |f| %>
+  <% if @property.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
 
       <ul>
-      <% @item.errors.full_messages.each do |message| %>
+      <% @property.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

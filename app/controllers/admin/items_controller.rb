@@ -1,28 +1,28 @@
-class Admin::ItemsController < Admin::BaseAdminController
-  before_action :set_item, only: [:edit, :update]
+class Admin::PropertiesController < Admin::BaseAdminController
+  before_action :set_property, only: [:edit, :update]
 
   def index
-    @items      = Item.all
+    @properties      = Property.all
     @categories = Category.all
   end
 
   def new
-    @item = Item.new
+    @property = Property.new
   end
 
   def create
-    @item = Item.new(item_params)
-    if @item.save
-      redirect_to admin_items_path
+    @property = Property.new(property_params)
+    if @property.save
+      redirect_to admin_properties_path
     else
       render :new
     end
   end
 
   def update
-    @item.update(item_params)
-    if @item.save
-      redirect_to admin_items_path
+    @property.update(property_params)
+    if @property.save
+      redirect_to admin_properties_path
     else
       render :edit
     end
@@ -33,12 +33,12 @@ class Admin::ItemsController < Admin::BaseAdminController
 
   private
 
-  def set_item
-    @item = Item.find(params[:id])
+  def set_property
+    @property = Property.find(params[:id])
   end
 
-  def item_params
-    params.require(:item).permit(:title, :description, :price, :image, :retired, category_ids: [])
+  def property_params
+    params.require(:property).permit(:title, :description, :price, :image, :retired, category_ids: [])
   end
 
 end

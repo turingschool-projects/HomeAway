@@ -1,10 +1,10 @@
-class ReservationItem < ActiveRecord::Base
+class ReservationProperty < ActiveRecord::Base
   belongs_to :reservation
-  belongs_to :item
+  belongs_to :property
 
   after_create :update_reservation
 
-  scope :retired, -> { joins(:item).where(items: { retired: true }) }
+  scope :retired, -> { joins(:property).where(properties: { retired: true }) }
 
   private
 

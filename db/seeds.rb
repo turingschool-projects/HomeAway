@@ -39,19 +39,19 @@ josh = User.create!({ name: "Josh Cheek",
   admin: true })
 
 appetizers = [
-  deviled_quail_eggs = Item.create!(title: "Deviled Quail Eggs",
+  deviled_quail_eggs = Property.create!(title: "Deviled Quail Eggs",
   description: "Free range quail eggs, perfect for sharing",
   price: 5.50, categories: [appetizer]),
-  bison_chili_cheese_fries = Item.create!(title: "Bison Chili Cheese Fries",
+  bison_chili_cheese_fries = Property.create!(title: "Bison Chili Cheese Fries",
   description: "Just like your regular chili cheese fries, but bison",
   price: 5.50, categories: [appetizer]),
-  tomato_bruschetta = Item.create!(title: "Tomato Bruschetta",
+  tomato_bruschetta = Property.create!(title: "Tomato Bruschetta",
   description: "Home grown tomatoes, herbs and onions on sliced baguette",
   price: 5.50, categories: [appetizer]),
-  tomato_cheese_sandwich = Item.create!(title: "Tomato Cheese Sandwich",
+  tomato_cheese_sandwich = Property.create!(title: "Tomato Cheese Sandwich",
   description: "Fresh tomatoes, spinach and cheese top a slice of fresh mountain bread",
   price: 5.50, categories: [appetizer]),
-  lucky_soup = Item.create!(title: "Lucky Soup",
+  lucky_soup = Property.create!(title: "Lucky Soup",
   description: "Creamy cheese soup topped with a four-leaf clover",
   price: 5.50, categories: [appetizer])
 ]
@@ -64,19 +64,19 @@ lucky_soup.image = File.open(image_path.join("lucky-soup.jpg"))
 appetizers.map(&:save)
 
 burgers = [
-  bison_burger = Item.create!(title: "Bison Burger",
+  bison_burger = Property.create!(title: "Bison Burger",
   description: "Free range bison meat with cheddar cheese grilled onions and mushrooms topped with a homemade pickle",
   price: 9.50, categories: [burger]),
-  elk_burger = Item.create!(title: "Elk Burger",
+  elk_burger = Property.create!(title: "Elk Burger",
   description: "Free range elk meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 11.75, categories: [burger]),
-  moose_burger = Item.create!(title: "Moose Burger",
+  moose_burger = Property.create!(title: "Moose Burger",
   description: "Free range moose meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 12.75, categories: [burger, local_game]),
-  venison_burger = Item.create!(title: "Venison Burger",
+  venison_burger = Property.create!(title: "Venison Burger",
   description: "Free range venison meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 8.75, categories: [burger]),
-  bear_burger = Item.create!(title: "Bear Burger",
+  bear_burger = Property.create!(title: "Bear Burger",
   description: "Free range bear meat with swiss cheese peppers and grilled onions topped with a homemade pickle",
   price: 9.75, categories: [burger])
 ]
@@ -88,16 +88,16 @@ bear_burger.image = File.open(image_path.join("grange_burger.jpg"))
 burgers.map(&:save)
 
 entrees = [
-  wild_boar_tenderloin = Item.create!(title: "Wild Boar Tenderloin",
+  wild_boar_tenderloin = Property.create!(title: "Wild Boar Tenderloin",
   description: "Free range wild boar with tusks and stuff",
   price: 14.50, categories: [entree]),
-  mountain_lion = Item.create!(title: "Mountain Lion",
+  mountain_lion = Property.create!(title: "Mountain Lion",
   description: "Free range mountain lion steak with home grown french fries",
   price: 13.50, categories: [entree]),
-  shepherds_pie = Item.create!(title: "Shepherd's Pie",
+  shepherds_pie = Property.create!(title: "Shepherd's Pie",
   description: "Free range mountain lamb baked in vegetables and potatoes",
   price: 12.50, categories: [entree]),
-  chicken_pot_pie = Item.create!(title: "Mountain Chicken Pot Pie",
+  chicken_pot_pie = Property.create!(title: "Mountain Chicken Pot Pie",
   description: "Free range mountain chicken baked in a pie with veggies",
   price: 11.50, categories: [entree])
 ]
@@ -108,29 +108,29 @@ shepherds_pie.image = File.open(image_path.join("shepherds-pie.jpg"))
 chicken_pot_pie.image = File.open(image_path.join("chicken-pot-pie.jpg"))
 entrees.map(&:save)
 
-local_game_items = [
-  mountain_lion_stew = Item.create!(title: "Mountain Lion Stew",
+local_game_properties = [
+  mountain_lion_stew = Property.create!(title: "Mountain Lion Stew",
   description: "Free range mountain lion stewed with carrots and potatoes",
   price: 13.50, categories: [entree, local_game]),
-  wild_boar_ribs = Item.create!(title: "Wild Boar Ribs",
+  wild_boar_ribs = Property.create!(title: "Wild Boar Ribs",
   description: "Free range wild boar ribs with barbecue sauce and stuff",
   price: 10.0, categories: [entree, local_game])
 ]
 mountain_lion_stew.image = File.open(image_path.join("mountain-lion-stew.jpg"))
 wild_boar_ribs.image = File.open(image_path.join("wild-boar-ribs.jpg"))
-local_game_items.map(&:save)
+local_game_properties.map(&:save)
 
 desserts = [
-  chocolate_cake = Item.create!(title: "Chocolate Cake",
+  chocolate_cake = Property.create!(title: "Chocolate Cake",
   description: "Free range cocoa beans and cane sugar",
   price: 4.50, categories: [dessert]),
-  brownie_sundae = Item.create!(title: "Brownie Sundae",
+  brownie_sundae = Property.create!(title: "Brownie Sundae",
   description: "Free range cocoa beans and cane sugar, plus ice cream",
   price: 4.50, categories: [dessert]),
-  apple_pie = Item.create!(title: "Apple Pie",
+  apple_pie = Property.create!(title: "Apple Pie",
   description: "Home grown apples baked in a delicious pie",
   price: 4.50, categories: [dessert]),
-  apple_pie_a_la_mode = Item.create!(title: "Apple Pie A La Mode",
+  apple_pie_a_la_mode = Property.create!(title: "Apple Pie A La Mode",
   description: "Home grown apples baked in a delicious pie, plus ice cream",
   price: 4.50, categories: [dessert])
 ]
@@ -142,74 +142,74 @@ desserts.map(&:save)
 
 reservation1 = Reservation.create!(status: "completed",
            user: rachel)
-reservation1.items << deviled_quail_eggs
-reservation1.items << lucky_soup
-reservation1.items << elk_burger
+reservation1.properties << deviled_quail_eggs
+reservation1.properties << lucky_soup
+reservation1.properties << elk_burger
 
 reservation2 = Reservation.create!(status: "completed",
            user: jorge)
-reservation2.items << bison_chili_cheese_fries
-reservation2.items << bison_chili_cheese_fries
-reservation2.items << wild_boar_tenderloin
-reservation2.items << apple_pie_a_la_mode
+reservation2.properties << bison_chili_cheese_fries
+reservation2.properties << bison_chili_cheese_fries
+reservation2.properties << wild_boar_tenderloin
+reservation2.properties << apple_pie_a_la_mode
 
 reservation3 = Reservation.create!(delivery: true,
           address: "123 Some St, Denver, CO",
           status: "cancelled",
           user: jeff)
-reservation3.items << lucky_soup
-reservation3.items << bear_burger
-reservation3.items << brownie_sundae
+reservation3.properties << lucky_soup
+reservation3.properties << bear_burger
+reservation3.properties << brownie_sundae
 
 reservation4 = Reservation.create!(delivery: false,
           status: "cancelled",
           user: josh)
-reservation4.items << chocolate_cake
-reservation4.items << brownie_sundae
-reservation4.items << apple_pie
-reservation4.items << apple_pie_a_la_mode
+reservation4.properties << chocolate_cake
+reservation4.properties << brownie_sundae
+reservation4.properties << apple_pie
+reservation4.properties << apple_pie_a_la_mode
 
 reservation5 = Reservation.create!(delivery: true,
           address: "123 Some Other St, Denver, CO",
           status: "reserved",
           user: rachel)
-reservation5.items << bison_chili_cheese_fries
-reservation5.items << bison_burger
-reservation5.items << bison_burger
+reservation5.properties << bison_chili_cheese_fries
+reservation5.properties << bison_burger
+reservation5.properties << bison_burger
 
 reservation6 = Reservation.create!(user: rachel)
-reservation6.items << deviled_quail_eggs
-reservation6.items << deviled_quail_eggs
-reservation6.items << deviled_quail_eggs
-reservation6.items << deviled_quail_eggs
+reservation6.properties << deviled_quail_eggs
+reservation6.properties << deviled_quail_eggs
+reservation6.properties << deviled_quail_eggs
+reservation6.properties << deviled_quail_eggs
 
 reservation7 = Reservation.create!(delivery: false,
           user: jeff)
-reservation7.items << tomato_bruschetta
-reservation7.items << bison_burger
-reservation7.items << moose_burger
-reservation7.items << wild_boar_ribs
-reservation7.items << tomato_cheese_sandwich
+reservation7.properties << tomato_bruschetta
+reservation7.properties << bison_burger
+reservation7.properties << moose_burger
+reservation7.properties << wild_boar_ribs
+reservation7.properties << tomato_cheese_sandwich
 
 reservation8 = Reservation.create!(delivery: false,
           user: josh,
           status: "paid")
-reservation8.items << tomato_bruschetta
-reservation8.items << shepherds_pie
-reservation8.items << moose_burger
-reservation8.items << bear_burger
-reservation8.items << brownie_sundae
-reservation8.items << apple_pie
+reservation8.properties << tomato_bruschetta
+reservation8.properties << shepherds_pie
+reservation8.properties << moose_burger
+reservation8.properties << bear_burger
+reservation8.properties << brownie_sundae
+reservation8.properties << apple_pie
 
 reservation9 = Reservation.create!(delivery: false,
           user: jorge,
           status: "reserved")
-reservation9.items << bison_chili_cheese_fries
-reservation9.items << tomato_cheese_sandwich
-reservation9.items << elk_burger
-reservation9.items << moose_burger
+reservation9.properties << bison_chili_cheese_fries
+reservation9.properties << tomato_cheese_sandwich
+reservation9.properties << elk_burger
+reservation9.properties << moose_burger
 
 reservation10 = Reservation.create!(delivery: false,
             user: josh,
             status: "reserved")
-reservation10.items << lucky_soup
+reservation10.properties << lucky_soup

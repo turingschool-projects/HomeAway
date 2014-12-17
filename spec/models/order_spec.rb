@@ -4,10 +4,10 @@ describe Reservation do
   let(:category) { Category.create!(name: "food")}
   let(:user)  { User.create!(name: "Viki", email_address: "viki@example.com", password: "password", password_confirmation: "password") }
   describe "relationships" do
-    it "has many items" do
-      item = Item.create(title: "title", price: 10, description: "description", categories: [category])
-      reservation = Reservation.create(user: user, items: [item])
-      expect(reservation.items).to eq([item])
+    it "has many properties" do
+      property = Property.create(title: "title", price: 10, description: "description", categories: [category])
+      reservation = Reservation.create(user: user, properties: [property])
+      expect(reservation.properties).to eq([property])
     end
 
     it "belongs to a user" do
@@ -48,11 +48,11 @@ describe Reservation do
       expect(reservation.status).to eq("reserved")
     end
 
-    it "cannot be placed with retired items" do
+    it "cannot be placed with retired properties" do
       category = Category.create!(name: "foo things")
-      item = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
+      property = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
       reservation = Reservation.create!(user: user)
-      reservation.items << item
+      reservation.properties << property
       expect { reservation.place }.to raise_error
     end
 
@@ -89,74 +89,74 @@ describe Reservation do
   end
 
   describe "calculations" do
-    it "has quantities for each item" do
-      item = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
+    it "has quantities for each property" do
+      property = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
 
-      reservation = Reservation.create!(user: user, items: [item, item])
+      reservation = Reservation.create!(user: user, properties: [property, property])
       reservation.update_quantities
-      expect(reservation.items.first.quantity).to eq 2
+      expect(reservation.properties.first.quantity).to eq 2
     end
 
-    it "has subtotals for each item" do
-      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
-      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: true)
+    it "has subtotals for each property" do
+      property1 = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: true)
+      property2 = Property.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: true)
 
       reservation = Reservation.create!(user: user)
-      reservation.items << item1
-      reservation.items << item2
-      reservation.items << item2
+      reservation.properties << property1
+      reservation.properties << property2
+      reservation.properties << property2
       reservation.update_quantities
-      expect(reservation.subtotal(item1)).to eq 1
-      expect(reservation.subtotal(item2)).to eq 4
+      expect(reservation.subtotal(property1)).to eq 1
+      expect(reservation.subtotal(property2)).to eq 4
     end
 
     it "has a total" do
-      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
-      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+      property1 = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      property2 = Property.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
       reservation = Reservation.create!(user: user)
-      reservation.items << item1
-      reservation.items << item2
-      reservation.items << item2
+      reservation.properties << property1
+      reservation.properties << property2
+      reservation.properties << property2
       expect(reservation.total).to eq 5
     end
 
-    it "can decrease item quantity" do
-      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
-      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+    it "can decrease property quantity" do
+      property1 = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      property2 = Property.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
       reservation = Reservation.create!(user: user)
-      reservation.items << item1
-      reservation.items << item2
-      reservation.items << item2
+      reservation.properties << property1
+      reservation.properties << property2
+      reservation.properties << property2
       reservation.update_quantities
-      expect(reservation.subtotal(item1)).to eq 1
-      expect(reservation.subtotal(item2)).to eq 4
-      reservation.decrease(item2)
-      expect(reservation.subtotal(item2)).to eq 2
+      expect(reservation.subtotal(property1)).to eq 1
+      expect(reservation.subtotal(property2)).to eq 4
+      reservation.decrease(property2)
+      expect(reservation.subtotal(property2)).to eq 2
     end
 
-    it "can increase item quantity" do
-      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
-      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+    it "can increase property quantity" do
+      property1 = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      property2 = Property.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
       reservation = Reservation.create!(user: user)
-      reservation.items << item1
-      reservation.items << item2
+      reservation.properties << property1
+      reservation.properties << property2
       reservation.update_quantities
-      expect(reservation.subtotal(item1)).to eq 1
-      expect(reservation.subtotal(item2)).to eq 2
-      reservation.increase(item2)
-      expect(reservation.subtotal(item2)).to eq 4
+      expect(reservation.subtotal(property1)).to eq 1
+      expect(reservation.subtotal(property2)).to eq 2
+      reservation.increase(property2)
+      expect(reservation.subtotal(property2)).to eq 4
     end
 
-    it "can remove an item" do
-      item1 = Item.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
-      item2 = Item.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
+    it "can remove an property" do
+      property1 = Property.create!(title: "foo", description: "bar", price: 1, categories: [category], retired: false)
+      property2 = Property.create!(title: "foo!", description: "bar", price: 2, categories: [category], retired: false)
       reservation = Reservation.create!(user: user)
-      reservation.items << item1
-      reservation.items << item2
+      reservation.properties << property1
+      reservation.properties << property2
       reservation.update_quantities
-      expect(reservation.items.count).to eq 2
-      reservation.remove_item(item2)
-      expect(reservation.items.count).to eq 1
+      expect(reservation.properties.count).to eq 2
+      reservation.remove_property(property2)
+      expect(reservation.properties.count).to eq 1
     end
 
     it "can identify editable reservations" do

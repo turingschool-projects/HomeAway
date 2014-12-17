@@ -2,13 +2,13 @@
   <nav class="navbar navbar-inverse" role="navigation" data-spy="affix-top">
     <ul class="main-nav nav navbar-nav">
       <% if !current_user %>
-        <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Menu", properties_path, class: 'nav-link' %></li>
       <% elsif !current_user.admin? %>
-        <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Menu", properties_path, class: 'nav-link' %></li>
         <li class="menu-navbar-link"><%= link_to "Reservations", reservations_path , class: 'nav-link' %></li>
       <% elsif current_user.admin? %>
-        <li class="menu-navbar-link"><%= link_to "Menu", items_path, class: 'nav-link' %></li>
-        <li class="menu-navbar-link"><%= link_to "Menu Dashboard", admin_items_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Menu", properties_path, class: 'nav-link' %></li>
+        <li class="menu-navbar-link"><%= link_to "Menu Dashboard", admin_properties_path, class: 'nav-link' %></li>
         <li class="menu-navbar-link"><%= link_to "Reservations Dashboard", admin_reservations_path , class: 'nav-link' %></li>
         <li class="menu-navbar-link"><%= link_to "All Users", admin_users_path , class: 'nav-link' %></li>
       <% end %>
@@ -16,7 +16,7 @@
 
     <div class="navbar-form navbar-right">
       <div id="account">
-        <%= link_to cart_items_path, class: "btn btn-success nav-link" do %>
+        <%= link_to cart_properties_path, class: "btn btn-success nav-link" do %>
           <span class="glyphicon glyphicon-shopping-cart"> </span>
         <span>Cart</span>
         <% end %>

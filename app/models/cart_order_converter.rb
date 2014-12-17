@@ -5,17 +5,17 @@ class CartReservationConverter
 
   def convert(session_cart, user)
     reservation = Reservation.create!(user: user)
-    items = Item.where(id: session_cart.keys)
-    items.each do |item|
-      create_reservation_items(session_cart, item, reservation)
+    properties = Property.where(id: session_cart.keys)
+    properties.each do |property|
+      create_reservation_properties(session_cart, property, reservation)
     end
     reservation
   end
 
-  def create_reservation_items(session_cart, item, reservation)
-    quantity = session_cart[item.id]
+  def create_reservation_properties(session_cart, property, reservation)
+    quantity = session_cart[property.id]
     quantity.times do
-      ReservationItem.create!(item: item, reservation: reservation)
+      ReservationProperty.create!(property: property, reservation: reservation)
     end
   end
 end

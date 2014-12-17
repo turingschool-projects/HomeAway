@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
   include AASM
-  has_many :reservation_items
-  has_many :items, through: :reservation_items
+  has_many :reservation_properties
+  has_many :properties, through: :reservation_properties
   belongs_to :user
 
   validates :user, presence: true
@@ -21,7 +21,7 @@ class Reservation < ActiveRecord::Base
 
     # events give us bang methods, like place! for changing reservation status
     event :place do
-      transitions from: :in_cart, to: :reserved, guard: :no_retired_items?
+      transitions from: :in_cart, to: :reserved, guard: :no_retired_properties?
     end
 
     event :pay do
@@ -46,53 +46,53 @@ class Reservation < ActiveRecord::Base
   end
 
   def calculate_total
-    self.total = items.sum(:price)
+    self.total = properties.sum(:price)
   end
 
   def update_quantities
     current_quantities = quantities
-    items.each do |item|
-      item.quantity = current_quantities[item.id].quantity
+    properties.each do |property|
+      property.quantity = current_quantities[property.id].quantity
     end
   end
 
   def quantities
-    items.group_by(&:id).inject({}) do |memo, (k, items)|
-      memo[k] = items.first
-      memo[k].quantity = items.count
+    properties.group_by(&:id).inject({}) do |memo, (k, properties)|
+      memo[k] = properties.first
+      memo[k].quantity = properties.count
       memo
     end
   end
 
-  def decrease(item)
-    reservation_items.find_by(item_id: item.id).destroy
+  def decrease(property)
+    reservation_properties.find_by(property_id: property.id).destroy
     reload
     calculate_total
     update_quantities
   end
 
-  def remove_item(item)
-    reservation_items.where(item: item).joins(:item).destroy_all
-    items.reload
+  def remove_property(property)
+    reservation_properties.where(property: property).joins(:property).destroy_all
+    properties.reload
     save!
     update_quantities
   end
 
-  def increase(item)
-    items << item
-    items.reload
+  def increase(property)
+    properties << property
+    properties.reload
     save!
     update_quantities
   end
 
-  def subtotal(item)
-    quantity = quantities[item.id].quantity
-    quantity * item.price
+  def subtotal(property)
+    quantity = quantities[property.id].quantity
+    quantity * property.price
   end
 
-  def no_retired_items?
-    return true if reservation_items.retired.empty?
-    reservation_items.retired.delete_all
+  def no_retired_properties?
+    return true if reservation_properties.retired.empty?
+    reservation_properties.retired.delete_all
     false
   end
 end

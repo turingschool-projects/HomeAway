@@ -7,18 +7,18 @@ class Admin::ReservationsController < Admin::BaseAdminController
 
   def update
     if params[:decrease]
-      item = Item.find(params[:decrease])
-      @reservation.decrease(item)
+      property = Property.find(params[:decrease])
+      @reservation.decrease(property)
     elsif params[:increase]
-      item = Item.find(params[:increase])
-      @reservation.increase(item)
+      property = Property.find(params[:increase])
+      @reservation.increase(property)
     end
     redirect_to admin_reservation_path(@reservation)
   end
 
   def destroy
-    item = Item.find(params[:remove])
-    @reservation.remove_item(item)
+    property = Property.find(params[:remove])
+    @reservation.remove_property(property)
     redirect_to admin_reservation_path(@reservation)
   end
 

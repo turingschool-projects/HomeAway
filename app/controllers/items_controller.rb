@@ -1,10 +1,10 @@
-class ItemsController < ApplicationController
+class PropertiesController < ApplicationController
   def show
-    @item = Item.find(params[:id])
+    @property = Property.find(params[:id])
   end
 
   def index
-    @items      = Item.all
+    @properties      = Property.all
     @categories = Category.all
   end
 end

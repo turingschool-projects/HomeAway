@@ -1,32 +1,32 @@
 <div class="col-md-4 col-md-offset-5">
-  <% if @cart.total_items == 0 %>
+  <% if @cart.total_properties == 0 %>
     <span class="notice empty-cart">Your cart is empty</span>
   <% end %>
 </div>
 <div class="edit-form">
   <table class="table table-hover">
     <thead>
-      <th>Item</th>
+      <th>Property</th>
       <th>Price</th>
       <th>Quantity</th>
       <th>Subtotal</th>
     </thead>
     <tbody>
-      <% @cart.each do |item| %>
-      <tr class="cart_item cart_item_<%= item.id %>">
-        <td class="title"><%= item.title %></td>
-        <td class="price">$<%= item.price %></td>
+      <% @cart.each do |property| %>
+      <tr class="cart_property cart_property_<%= property.id %>">
+        <td class="title"><%= property.title %></td>
+        <td class="price">$<%= property.price %></td>
         <td class="quantity">
-          <%= button_to cart_item_path(item), method: :put, class: "btn btn-xs decrease float_left", name: "decrease" do %>
+          <%= button_to cart_property_path(property), method: :put, class: "btn btn-xs decrease float_left", name: "decrease" do %>
             <span class="glyphicon glyphicon-minus"></span>
           <% end %>
-          <div class="float_left"><%= item.quantity %></div>
-          <%= button_to cart_item_path(item), method: :put, class: "btn btn-xs increase float_left", name: "increase" do %>
+          <div class="float_left"><%= property.quantity %></div>
+          <%= button_to cart_property_path(property), method: :put, class: "btn btn-xs increase float_left", name: "increase" do %>
             <span class="glyphicon glyphicon-plus"></span>
           <% end %>
         </td>
-        <td class="subtotal">$<%= @cart.subtotal(item) %></td>
-        <td> <%= button_to "Remove", cart_item_path(id: item), method: :delete %> </td>
+        <td class="subtotal">$<%= @cart.subtotal(property) %></td>
+        <td> <%= button_to "Remove", cart_property_path(id: property), method: :delete %> </td>
       </tr>
       <% end %>
     </tbody>

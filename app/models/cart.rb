@@ -5,48 +5,48 @@ class Cart
     @data = cart_contents(input_data) || Hash.new
   end
 
-  def add_item(item)
-    data[item.id] ||= item
-    data[item.id].quantity ||= 0
-    data[item.id].quantity += 1
+  def add_property(property)
+    data[property.id] ||= property
+    data[property.id].quantity ||= 0
+    data[property.id].quantity += 1
   end
 
-  def remove_item(item)
-    data.delete(item.id)
+  def remove_property(property)
+    data.delete(property.id)
   end
 
-  def decrease(item)
-    data[item.id].quantity -= 1
-    data.delete(item.id) if data[item.id].quantity < 1
+  def decrease(property)
+    data[property.id].quantity -= 1
+    data.delete(property.id) if data[property.id].quantity < 1
   end
 
-  def increase(item)
-    data[item.id].quantity += 1
+  def increase(property)
+    data[property.id].quantity += 1
   end
 
-  def subtotal(item)
-    count_of(item) * item.price
+  def subtotal(property)
+    count_of(property) * property.price
   end
 
-  def count_of(item)
-    data[item.id].quantity
+  def count_of(property)
+    data[property.id].quantity
   end
 
-  def total_items
+  def total_properties
     to_h.values.sum
   end
 
 
   def total_cost
-    data.inject(0) do |sum, (_, item)|
-      sum += (item.price * item.quantity)
+    data.inject(0) do |sum, (_, property)|
+      sum += (property.price * property.quantity)
     end
   end
 
   def to_h
     hash = {}
-    data.inject(hash) do |hash, (id, item)|
-      hash[id] = item.quantity
+    data.inject(hash) do |hash, (id, property)|
+      hash[id] = property.quantity
       hash
     end
   end
@@ -61,9 +61,9 @@ class Cart
   def cart_contents(cart_data)
     contents = {}
     return contents unless cart_data
-    Item.where(id: cart_data.keys).inject(contents) do |memo, item|
-      item.quantity = cart_data[item.id.to_s]
-      memo[item.id] = item
+    Property.where(id: cart_data.keys).inject(contents) do |memo, property|
+      property.quantity = cart_data[property.id.to_s]
+      memo[property.id] = property
       memo
     end
     contents

@@ -13,10 +13,10 @@ describe Category do
   end
 
   describe "relationships" do
-    it "has many items" do
+    it "has many properties" do
       category = Category.create(name: "name")
-      item = Item.create!(title: "title", description: "description", price: 1, categories: [category])
-      expect(category.items).to eq([item])
+      property = Property.create!(title: "title", description: "description", price: 1, categories: [category])
+      expect(category.properties).to eq([property])
     end
   end
 end
