@@ -140,76 +140,76 @@ apple_pie.image = File.open(image_path.join("apple-pie.jpg"))
 apple_pie_a_la_mode.image = File.open(image_path.join("apple-pie-a-la-mode.jpg"))
 desserts.map(&:save)
 
-order1 = Order.create!(status: "completed",
+reservation1 = Reservation.create!(status: "completed",
            user: rachel)
-order1.items << deviled_quail_eggs
-order1.items << lucky_soup
-order1.items << elk_burger
+reservation1.items << deviled_quail_eggs
+reservation1.items << lucky_soup
+reservation1.items << elk_burger
 
-order2 = Order.create!(status: "completed",
+reservation2 = Reservation.create!(status: "completed",
            user: jorge)
-order2.items << bison_chili_cheese_fries
-order2.items << bison_chili_cheese_fries
-order2.items << wild_boar_tenderloin
-order2.items << apple_pie_a_la_mode
+reservation2.items << bison_chili_cheese_fries
+reservation2.items << bison_chili_cheese_fries
+reservation2.items << wild_boar_tenderloin
+reservation2.items << apple_pie_a_la_mode
 
-order3 = Order.create!(delivery: true,
+reservation3 = Reservation.create!(delivery: true,
           address: "123 Some St, Denver, CO",
           status: "cancelled",
           user: jeff)
-order3.items << lucky_soup
-order3.items << bear_burger
-order3.items << brownie_sundae
+reservation3.items << lucky_soup
+reservation3.items << bear_burger
+reservation3.items << brownie_sundae
 
-order4 = Order.create!(delivery: false,
+reservation4 = Reservation.create!(delivery: false,
           status: "cancelled",
           user: josh)
-order4.items << chocolate_cake
-order4.items << brownie_sundae
-order4.items << apple_pie
-order4.items << apple_pie_a_la_mode
+reservation4.items << chocolate_cake
+reservation4.items << brownie_sundae
+reservation4.items << apple_pie
+reservation4.items << apple_pie_a_la_mode
 
-order5 = Order.create!(delivery: true,
+reservation5 = Reservation.create!(delivery: true,
           address: "123 Some Other St, Denver, CO",
-          status: "ordered",
+          status: "reserved",
           user: rachel)
-order5.items << bison_chili_cheese_fries
-order5.items << bison_burger
-order5.items << bison_burger
+reservation5.items << bison_chili_cheese_fries
+reservation5.items << bison_burger
+reservation5.items << bison_burger
 
-order6 = Order.create!(user: rachel)
-order6.items << deviled_quail_eggs
-order6.items << deviled_quail_eggs
-order6.items << deviled_quail_eggs
-order6.items << deviled_quail_eggs
+reservation6 = Reservation.create!(user: rachel)
+reservation6.items << deviled_quail_eggs
+reservation6.items << deviled_quail_eggs
+reservation6.items << deviled_quail_eggs
+reservation6.items << deviled_quail_eggs
 
-order7 = Order.create!(delivery: false,
+reservation7 = Reservation.create!(delivery: false,
           user: jeff)
-order7.items << tomato_bruschetta
-order7.items << bison_burger
-order7.items << moose_burger
-order7.items << wild_boar_ribs
-order7.items << tomato_cheese_sandwich
+reservation7.items << tomato_bruschetta
+reservation7.items << bison_burger
+reservation7.items << moose_burger
+reservation7.items << wild_boar_ribs
+reservation7.items << tomato_cheese_sandwich
 
-order8 = Order.create!(delivery: false,
+reservation8 = Reservation.create!(delivery: false,
           user: josh,
           status: "paid")
-order8.items << tomato_bruschetta
-order8.items << shepherds_pie
-order8.items << moose_burger
-order8.items << bear_burger
-order8.items << brownie_sundae
-order8.items << apple_pie
+reservation8.items << tomato_bruschetta
+reservation8.items << shepherds_pie
+reservation8.items << moose_burger
+reservation8.items << bear_burger
+reservation8.items << brownie_sundae
+reservation8.items << apple_pie
 
-order9 = Order.create!(delivery: false,
+reservation9 = Reservation.create!(delivery: false,
           user: jorge,
-          status: "ordered")
-order9.items << bison_chili_cheese_fries
-order9.items << tomato_cheese_sandwich
-order9.items << elk_burger
-order9.items << moose_burger
+          status: "reserved")
+reservation9.items << bison_chili_cheese_fries
+reservation9.items << tomato_cheese_sandwich
+reservation9.items << elk_burger
+reservation9.items << moose_burger
 
-order10 = Order.create!(delivery: false,
+reservation10 = Reservation.create!(delivery: false,
             user: josh,
-            status: "ordered")
-order10.items << lucky_soup
+            status: "reserved")
+reservation10.items << lucky_soup
