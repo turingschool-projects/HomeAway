@@ -99,31 +99,34 @@ class Seed
     puts "Properties generated"
   end
 
-  def generate_reservation
-    Reservation.create!(status: "Pending",
+  def generate_reservations
+
+    date = Date.current
+
+    Reservation.create!(status: "pending",
                         user_id: 3,
                         property_id: 1,
-                        start_date: Faker::Date.between(Date.forward(30), Date.forward(40)),
-                        end_date: Faker::Date.between(Date.forward(41), Date.forward(44)))
+                        start_date: date,
+                        end_date: date.advance(days: 4))
 
 
-    Reservation.create!(status: "Completed",
+    Reservation.create!(status: "completed",
                         user_id: 3,
                         property_id: 3,
-                        start_date: Faker::Date.between(Date.backward(33), Date.backward(30)),
-                        end_date: Faker::Date.between(Date.backward(20), Date.backward(15)))
+                        start_date: date.advance(days:-30),
+                        end_date: date.advance(days:-25))
 
-    Reservation.create!(status: "Cancelled",
+    Reservation.create!(status: "cancelled",
                         user_id: 2,
                         property_id: 4,
-                        start_date: Faker::Date.between(Date.backward(10), Date.backward(5)),
-                        end_date: Faker::Date.between(Date.backward(4), Date.backward(1)))
+                        start_date: date.advance(days: -5),
+                        end_date: date)
 
-    Reservation.create!(status: "Reserved",
+    Reservation.create!(status: "reserved",
                         user_id: 3,
                         property_id: 2,
-                        start_date: Faker::Date.between(Date.forward(10), Date.forward(15)),
-                        end_date: Faker::Date.between(Date.forward(16), Date.forward(19)))
+                        start_date: date.advance(10),
+                        end_date: date.advance(20))
 
     puts "Reservations generated"
   end
