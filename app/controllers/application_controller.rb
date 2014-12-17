@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   include ActionView::Helpers::TextHelper
 
+  before_action :load_cart
+  after_action  :save_cart
+
   def current_user
     @current_user ||= if session[:user_id]
       user = User.where(id: session[:user_id]).first
@@ -14,14 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_cart
-    if current_user
-      reservation = Reservation.where(id: session[:reservation_id]).where(status: "in_cart").take
-      reservation ||= Reservation.create!(user: current_user, status: "in_cart")
-      session[:reservation_id] = reservation.id unless session[:reservation_id] == reservation.id
-      @cart = ReservationCart.new(reservation)
-    else
-      @cart = Cart.new(session[:cart])
-    end
+    @cart = Cart.new session[:cart]
+  end
+
+  def save_cart
+    session[:cart] = @cart.to_h
   end
 
   def require_admin
@@ -31,7 +31,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Do we still want to do this?
-  # before_action :load_cart
 
 end
