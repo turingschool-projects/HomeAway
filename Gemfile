@@ -20,6 +20,7 @@ gem 'aasm'
 gem 'dimensions-rails'
 gem 'formtastic'
 gem 'jquery-turbolinks'
+gem 'faker'
 
 group :development, :test do
   gem 'better_errors'
