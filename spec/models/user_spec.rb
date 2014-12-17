@@ -94,11 +94,9 @@ RSpec.describe User, :type => :model do
     let(:user) { User.create(valid_attributes) }
 
     it "can have many reservations" do
-      reservation = Reservation.create(delivery: true,
-                           address: "123 Baker St",
+      reservation = Reservation.create(address: "123 Baker St",
                            user_id: user.id)
-      reservation2 = Reservation.create(delivery: false,
-                            user_id: user.id)
+      reservation2 = Reservation.create(user_id: user.id)
 
       expect(user.reservations.first).to eq(reservation)
       expect(user.reservations.last).to eq(reservation2)

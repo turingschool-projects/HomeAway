@@ -153,24 +153,21 @@ reservation2.properties << bison_chili_cheese_fries
 reservation2.properties << wild_boar_tenderloin
 reservation2.properties << apple_pie_a_la_mode
 
-reservation3 = Reservation.create!(delivery: true,
-          address: "123 Some St, Denver, CO",
+reservation3 = Reservation.create!(address: "123 Some St, Denver, CO",
           status: "cancelled",
           user: jeff)
 reservation3.properties << lucky_soup
 reservation3.properties << bear_burger
 reservation3.properties << brownie_sundae
 
-reservation4 = Reservation.create!(delivery: false,
-          status: "cancelled",
+reservation4 = Reservation.create!(status: "cancelled",
           user: josh)
 reservation4.properties << chocolate_cake
 reservation4.properties << brownie_sundae
 reservation4.properties << apple_pie
 reservation4.properties << apple_pie_a_la_mode
 
-reservation5 = Reservation.create!(delivery: true,
-          address: "123 Some Other St, Denver, CO",
+reservation5 = Reservation.create!(address: "123 Some Other St, Denver, CO",
           status: "reserved",
           user: rachel)
 reservation5.properties << bison_chili_cheese_fries
@@ -183,16 +180,14 @@ reservation6.properties << deviled_quail_eggs
 reservation6.properties << deviled_quail_eggs
 reservation6.properties << deviled_quail_eggs
 
-reservation7 = Reservation.create!(delivery: false,
-          user: jeff)
+reservation7 = Reservation.create!(user: jeff)
 reservation7.properties << tomato_bruschetta
 reservation7.properties << bison_burger
 reservation7.properties << moose_burger
 reservation7.properties << wild_boar_ribs
 reservation7.properties << tomato_cheese_sandwich
 
-reservation8 = Reservation.create!(delivery: false,
-          user: josh,
+reservation8 = Reservation.create!(user: josh,
           status: "paid")
 reservation8.properties << tomato_bruschetta
 reservation8.properties << shepherds_pie
@@ -201,15 +196,13 @@ reservation8.properties << bear_burger
 reservation8.properties << brownie_sundae
 reservation8.properties << apple_pie
 
-reservation9 = Reservation.create!(delivery: false,
-          user: jorge,
+reservation9 = Reservation.create!(user: jorge,
           status: "reserved")
 reservation9.properties << bison_chili_cheese_fries
 reservation9.properties << tomato_cheese_sandwich
 reservation9.properties << elk_burger
 reservation9.properties << moose_burger
 
-reservation10 = Reservation.create!(delivery: false,
-            user: josh,
+reservation10 = Reservation.create!(user: josh,
             status: "reserved")
 reservation10.properties << lucky_soup

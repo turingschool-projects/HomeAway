@@ -23,18 +23,6 @@ describe Reservation do
     end
   end
 
-  describe "delivery or pickup" do
-    it "has an address if it's delivery" do
-      reservation = Reservation.create(user_id: 1, delivery: true, address: nil)
-      expect(reservation).to_not be_valid
-    end
-
-    it "is pickup if it's not delivery" do
-      reservation = Reservation.create(user_id: 1, delivery: false)
-      expect(reservation.pickup?).to eq(true)
-    end
-  end
-
   describe "status" do
     it 'should default status to in_cart' do
       reservation = Reservation.create!(user: user)

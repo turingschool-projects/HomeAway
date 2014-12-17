@@ -25,7 +25,6 @@ class ReservationsController < ApplicationController
       redirect_to @reservation
     else
       redirect_to edit_reservation_path
-      flash[:errors] = "You need an address if you want delivery"
       flash[:errors] = @reservation.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
     end
   end
@@ -33,6 +32,6 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_update_params
-    params.require(:reservation).permit(:address, :delivery)
+    params.require(:reservation).permit(:address)
   end
 end

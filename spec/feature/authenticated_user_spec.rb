@@ -211,17 +211,4 @@ describe "the authenticated non-administrator", type: :feature do
     expect(page).to_not have_content("Greg's Homemade Chili")
     expect(page).to have_content("empty")
   end
-
-  it "must put an address to check out a delivery reservation" do
-    property
-    visit properties_path
-    find_link("Add to Cart").click
-    visit cart_properties_path
-    find_link("Checkout").click
-    check("Delivery?")
-    fill_in "Card number", with: "4242424242424242"
-    fill_in "Expiration", with: "10/16"
-    find_button("Update Reservation").click
-    expect(page).to have_content("address: can't be blank")
-  end
 end
