@@ -8,6 +8,12 @@
     <p>Maximum Occupancy: <%= @property.occupancy %></p>
     <p>Location: <%= @property.address.city %></p>
     <p>Bathroom: <%= @property.bathroom %></p>
+    <p>Booked Dates: </p>
+    <ul>
+      <% @property.reservations.each do |reservation| %>
+        <li><%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></li>
+      <% end %>
+    </ul>
     <% if !@property.retired? %>
       <p><%= link_to "Add to Cart", cart_properties_path(property: @property), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
     <% end %>
