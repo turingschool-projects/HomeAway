@@ -1,9 +1,9 @@
 class Property < ActiveRecord::Base
   attr_accessor :quantity
   validates :title, presence: true, uniqueness: true
-  validates :description, presence: true, length: { maximum: 120 }
+  validates :description, presence: true, length: { maximum: 500 }
   validates :price, numericality: {greater_than: 0}
-  validates :categories, presence: true
+  validates :category_id, presence: true
 
   has_many :reservations
 
