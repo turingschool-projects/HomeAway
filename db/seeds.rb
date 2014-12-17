@@ -6,6 +6,7 @@ class Seed
     generate_categories
     generate_properties
     generate_reservations
+    generate_addresses
   end
 
   def generate_users
@@ -129,6 +130,28 @@ class Seed
                         end_date: date.advance(days: 20))
 
     puts "Reservations generated"
+  end
+
+  def generate_addresses
+    Property.all.each do |property|
+      Address.create!(line_1: Faker::Address.street_address,
+                      city: Faker::Address.city,
+                      state: Faker::Address.state,
+                      zip: Faker::Address.postcode,
+                      country: Faker::Address.country)
+      property.address_id = Address.last.id
+    end
+
+    User.all.each do |user|
+      Address.create!(line_1: Faker::Address.street_address,
+                      city: Faker::Address.city,
+                      state: Faker::Address.state,
+                      zip: Faker::Address.postcode,
+                      country: Faker::Address.country)
+      user.address_id = Address.last.id
+    end
+  puts "Addresses generated"
+
   end
 
 
