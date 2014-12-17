@@ -5,6 +5,9 @@ class Property < ActiveRecord::Base
   validates :price, numericality: {greater_than: 0}
   validates :category_id, presence: true
 
+  belongs_to :user
+  belongs_to :category
+  belongs_to :address
   has_many :reservations
 
   has_attached_file :image,
@@ -18,4 +21,8 @@ class Property < ActiveRecord::Base
 
   scope :active, -> { where(retired: false) }
   scope :retired, -> { where(retired: true) }
+
+  def bathroom
+    bathroom_private == true ? "Private" : "Shared"
+  end
 end
