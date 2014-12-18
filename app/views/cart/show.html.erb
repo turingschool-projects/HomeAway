@@ -1,17 +1,23 @@
-<h1>HI</h1>
+<br>
+<br>
+<br>
+<br>
+<h1>My Trip</h1>
 <% if @cart.empty? %>
   <h3>Don't you want to go somewhere?</h3>
-<% else %>
-    It appears you want to go to
-    <h4><%= @cart.property.title %></h4>
-    from
-    <h4><%= @cart.start_date %></h4>
-    to
-    <h4><%= @cart.end_date %></h4>
-  <%= button_to "Don't go to #{@cart.property.title}", cart_path, method: :delete %>
-  <% if current_user %>
-    <%= link_to "Book Reservation", new_reservation_path, class: "btn btn-default" %>
   <% else %>
-    <%= render partial: 'partials/log_in' %>
+    It appears you want to go to
+  <h4><%= @cart.property.title %></h4>
+  <h5>Location: <%= @cart.property.location %></h5>
+
+  <h5> from</h5>
+<h4><%= @cart.start_date %></h4>
+<h5>to</h5>
+<h4><%= @cart.end_date %></h4>
+<%= button_to "Remove From My Trip", cart_path, method: :delete, class: "btn btn-default" %>
+<% if current_user %>
+  <%= button_to "Request Reservation", reservations_path, method: :post, class: "btn btn-default"  %>
+  <% else %>
+  <%= render partial: 'partials/log_in' %>
   <% end %>
 <% end %>
