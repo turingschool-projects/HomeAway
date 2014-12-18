@@ -4,8 +4,8 @@ class Photo < ActiveRecord::Base
     hero: '1280x768',
     thumb: '100x100>',
     medium: '235x135',
-  },
-  default_url: 'ext_balloon_1.jpg'
+    gallery: '800x500',
+  }
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
