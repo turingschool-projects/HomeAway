@@ -10,5 +10,7 @@ Now we're here: [TravelHome](http://mighty-escarpment-8434.herokuapp.com/)
 * [Sam](https://github.com/skuhlmann)
 * [Danny](https://github.com/dglunz)
 
+Be sure you run `$ brew install imagemagick`
+
 #### Our Mascot
 <img src="http://i.imgur.com/VeOaXu0.jpg" width="200">

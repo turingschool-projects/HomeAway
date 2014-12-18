@@ -8,6 +8,5 @@
     <h4><%= @cart.start_date %></h4>
     to
     <h4><%= @cart.end_date %></h4>
-  <%= button_to "Don't go to #{@cart.property.title}", cart_path, method: :delete %>
-  <%= link_to "Book Reservation", new_reservation_path, class: "btn btn-default" %>
+  <%= button_to "Checkout", reservations_path, method: :post %>
 <% end %>

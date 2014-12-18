@@ -40,4 +40,13 @@ class Cart
   def set_property
     @property = Property.find_by(id: to_h["property_id"])
   end
+
+  def save_reservation_for(user)
+    raise "no user" unless user
+    Reservation.create( status: "pending",
+                        user: user,
+                        property: property,
+                        start_date: Date.parse(start_date),
+                        end_date: Date.parse(end_date))
+  end
 end

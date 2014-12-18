@@ -1,4 +1,18 @@
 class ReservationsController < ApplicationController
+  def new
+    redirect_to login_path unless current_user
+  end
+
+  def create
+    if current_user
+      @cart.save_reservation_for current_user
+      redirect_to root_path
+    else
+      flash[:error] = "You must be logged in to checkout"
+      redirect_to :back
+    end
+  end
+
   def index
     @reservations = current_user.reservations
   end
