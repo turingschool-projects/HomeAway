@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = current_user.reservations.where(id: params[:id]).take
+    @reservation = current_user && current_user.reservations.where(id: params[:id]).take
     if @reservation
       render :show
     else

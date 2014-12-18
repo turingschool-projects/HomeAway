@@ -34,7 +34,7 @@ class Seed
     User.create!({
       display_name: "Traveler",
       name: "Jim Jones",
-      email_address: "travel@email.com",
+      email_address: "travel@example.com",
       password: "password",
       password_confirmation: "password",
       admin: false,
@@ -44,7 +44,7 @@ class Seed
     User.create!({
       display_name: "Hostess",
       name: "Hostess Hosterson",
-      email_address: "host@email.com",
+      email_address: "host@example.com",
       password: "password",
       password_confirmation: "password",
       admin: false,
