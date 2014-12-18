@@ -1,36 +1,34 @@
-<br>
-<br>
-<br>
-<br>
-<div class="thumbnail col-sm-6 col-md-4">
-  <%= image_tag @property.primary ? @property.primary.image.url(:hero) : "https://placekitten.com/g/1280/768" %>
-  <% @property.other_photos.each do |photo| %>
-    <span><%= image_tag photo ? photo.image.url(:thumb) : "http://placekitten.com/g/100/100" %></span>
-  <% end %>
-  <div class="caption">
-    <h3><%= @property.title %></h3>
-    <p><%= @property.description %></p>
-    <p id="daily_rate"> Price: <%= number_to_currency(@property.daily_rate) %></p>
-    <p>Category: <%= @property.category.name %></p>
-    <p>Maximum Occupancy: <%= @property.occupancy %></p>
-    <p>Location: <%= @property.location %></p>
-    <p>Bathroom: <%= @property.bathroom %></p>
-    <p>Booked Dates: </p>
-    <ul>
-      <% @property.reservations.each do |reservation| %>
-        <li><%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></li>
-      <% end %>
-    </ul>
-    <% if !@property.retired? %>
-      <p>
-      <%= form_tag  "/properties/#{@property.id}/add_to_cart", method: :post do %>
-        <label for="reservationtime">Reservation dates:</label>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="property[reservation]" id="reservation" class="form-control"/>
-        </div>
-        <%= submit_tag "Request reservation", class: "btn btn-default add-to-cart" %>
-      <% end %>
-      </p>
+<div class="container">
+  <div class="thumbnail col-sm-6 col-md-4">
+    <%= image_tag @property.primary ? @property.primary.image.url(:hero) : "https://placekitten.com/g/1280/768" %>
+    <% @property.other_photos.each do |photo| %>
+      <span><%= image_tag photo ? photo.image.url(:thumb) : "http://placekitten.com/g/100/100" %></span>
     <% end %>
+    <div class="caption">
+      <h3><%= @property.title %></h3>
+      <p><%= @property.description %></p>
+      <p id="daily_rate"> Price: <%= number_to_currency(@property.daily_rate) %></p>
+      <p>Category: <%= @property.category.name %></p>
+      <p>Maximum Occupancy: <%= @property.occupancy %></p>
+      <p>Location: <%= @property.location %></p>
+      <p>Bathroom: <%= @property.bathroom %></p>
+      <p>Booked Dates: </p>
+      <ul>
+        <% @property.reservations.each do |reservation| %>
+          <li><%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></li>
+        <% end %>
+      </ul>
+      <% if !@property.retired? %>
+        <p>
+        <%= form_tag  "/properties/#{@property.id}/add_to_cart", method: :post do %>
+          <label for="reservationtime">Reservation dates:</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="property[reservation]" id="reservation" class="form-control"/>
+          </div>
+          <%= submit_tag "Request reservation", class: "btn btn-default" %>
+        <% end %>
+        </p>
+      <% end %>
+    </div>
   </div>
 </div>

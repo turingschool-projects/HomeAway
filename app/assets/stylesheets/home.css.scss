@@ -35,7 +35,7 @@ p {
     margin: 0 0 35px;
     font-size: 20px;
     line-height: 1.6;
-  }
+}
 }
 
 a {
@@ -113,16 +113,16 @@ a:focus {
     -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
     -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
     transition: background .5s ease-in-out,padding .5s ease-in-out;
-  }
+}
 
-  .top-nav-collapse {
-    padding: 0;
-    background-color: #000;
-  }
+.top-nav-collapse {
+  padding: 0;
+  background-color: #000;
+}
 
-  .navbar-custom.top-nav-collapse {
-    border-bottom: 1px solid rgba(255,255,255,.3);
-  }
+.navbar-custom.top-nav-collapse {
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
 }
 
 .intro {
@@ -170,15 +170,15 @@ a:focus {
   .intro {
     height: 100%;
     padding: 0;
-  }
+}
 
-  .intro .intro-body .brand-heading {
-    font-size: 100px;
-  }
+.intro .intro-body .brand-heading {
+  font-size: 100px;
+}
 
-  .intro .intro-body .intro-text {
-    font-size: 38px;
-  }
+.intro .intro-body .intro-text {
+  font-size: 38px;
+}
 }
 
 .btn-circle {
@@ -224,34 +224,34 @@ a:focus {
   0 {
     -webkit-transform: scale(1);
     transform: scale(1);
-  }
+}
 
-  50% {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-  }
+50% {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
 
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
+100% {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
 }
 
 @-moz-keyframes pulse {
   0 {
     -moz-transform: scale(1);
     transform: scale(1);
-  }
+}
 
-  50% {
-    -moz-transform: scale(1.2);
-    transform: scale(1.2);
-  }
+50% {
+  -moz-transform: scale(1.2);
+  transform: scale(1.2);
+}
 
-  100% {
-    -moz-transform: scale(1);
-    transform: scale(1);
-  }
+100% {
+  -moz-transform: scale(1);
+  transform: scale(1);
+}
 }
 
 .content-section {
@@ -261,7 +261,7 @@ a:focus {
 @media(min-width:767px) {
   .content-section {
     padding-top: 100px;
-  }
+}
 }
 
 .btn {
@@ -298,7 +298,7 @@ ul.banner-social-buttons {
 @media(max-width:1199px) {
   ul.banner-social-buttons {
     margin-top: 15px;
-  }
+}
 }
 
 @media(max-width:767px) {
@@ -306,11 +306,16 @@ ul.banner-social-buttons {
     display: block;
     margin-bottom: 20px;
     padding: 0;
-  }
+}
 
-  ul.banner-social-buttons li:last-child {
-    margin-bottom: 0;
-  }
+ul.banner-social-buttons li:last-child {
+  margin-bottom: 0;
+}
+.navbar-custom .nav li a{
+  color: #474843;
+  text-align: left;
+}
+
 }
 
 footer {
@@ -353,3 +358,9 @@ body {
   color: #474843;
   background-color: #D88A8A;
 }
+
+.navbar-custom-all .nav li a{
+  color: #474843;
+}
+
+

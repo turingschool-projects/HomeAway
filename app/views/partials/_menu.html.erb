@@ -1,34 +1,13 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Browse All Properties</h1>
 <div class="container menu-properties-block col-md-9">
   <% @categories.each do |category| %>
     <div class="category-block row">
-
       <div class= "category-title">
         <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name.pluralize %></h2>
       </div>
-
-        <% category.properties.active.each do |property| %>
-          <div class="thumbnail col-sm-6 col-md-4">
-            <%= link_to (image_tag property.primary ? property.primary.image.url(:medium) : "https://placekitten.com/g/235/135" ), property_path(property) %>
-            <div class="caption">
-              <h3 class="shadow"><%= link_to property.title, property_path(property) %></h3>
-              <h4>Location:<%= property.location %></h4>
-              <hr>
-              <p class="shadow"><%= property.description %></p>
-              <hr>
-              <p id="daily_rate" class="shadow"> Price: <%= number_to_currency(property.daily_rate) %></p>
-
-              <%= link_to "View Property Details", property_path(property) %>
-            </div>
-          </div>
-        <%end%>
-
+      <% category.properties.active.each do |property| %>
+        <%= render partial: property %>
+      <%end%>
     </div>
   <%end%>
 </div>

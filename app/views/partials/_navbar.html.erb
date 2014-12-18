@@ -1,4 +1,8 @@
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+<% if current_page? root_path %>
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+<% else %>
+  <nav class="navbar navbar-custom navbar-custom-all" role="navigation">
+<% end %>
 <div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
@@ -14,14 +18,14 @@
       <li class="hidden">
       <a href="#page-top"></a>
       </li>
-      <li>
-      <a class="page-scroll" href="#about">About</a>
-      </li>
+      <% if current_page? root_path %>
+        <li><a class="page-scroll" href="#about">About</a></li>
+      <% end %>
       <li>
       <a href="<%= properties_path %>">Properties</a>
       </li>
       <% if current_user %>
-        <li><%= link_to "My Reservations", reservations_path %></li>
+        <li><%= link_to "My Trips", reservations_path %></li>
         <li><%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %></li>
       <% else %>
         <li><%= render partial: 'partials/log_in' %></li>
