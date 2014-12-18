@@ -1,110 +1,99 @@
 require "rails_helper"
 
-# delete the x here to unskip when ready
-xdescribe "can add things to the trip", type: :feature do
+describe "can add things to the trip", type: :feature do
   context "when logged out" do
     before(:each) do
-      # rename these whatever the column names are
-      Property.create title: "My Cool Home", description: "cool description",
-                      people_it_can_hold: 4, price: 666,
-                      bathroom_shared: true
-      Property.create title: "Another Home", description: "lame description",
-                      people_it_can_hold: 4, price: 666,
-                      bathroom_shared: false
-      Property.create title: "A Retired Home", description: "retired description",
-                      people_it_can_hold: 4, price: 666,
-                      bathroom_shared: true, retired: true
-      # rails helper method here?
-      visit "/listings"
+      address = Address.create!(line_1: "fake as hell",
+                      city: "fake as hell",
+                      state: "fake as hell",
+                      zip: "fake as hell",
+                      country: "fake as hell")
+      category = Category.create name: "test category"
+      Property.create(title: "My Cool Home",
+                      price: 1000,
+                      description: "cool description",
+                      category: category,
+                      occupancy: 2,
+                      address: address)
+      Property.create(title: "Another Home",
+                      price: 500,
+                      description: "lame description",
+                      category: category,
+                      occupancy: 1,
+                      address: address)
+      Property.create(title: "A Retired Home",
+                      price: 44500,
+                      description: "retired description",
+                      category: category,
+                      occupancy: 12,
+                      address: address)
+      visit properties_path
     end
 
     it "can add things to the trip" do
-      # change these to the rails generated helper path methods probably
-      visit "/my_trip"
+      visit cart_path
       expect(page).to_not have_content "My Cool Home"
       expect(page).to_not have_content "cool description"
-      expect(page).to_not have_content "Another Home"
-      expect(page).to_not have_content "lame description"
 
-      visit "/listings"
+      visit properties_path
       click_link_or_button "My Cool Home"
-      pending "figure out how dates are filled in"
-      # also change "start date" and "end date" to what these actually are
-      fill_in "start date", with: ""
-      fill_in "end date", with: ""
-      click_link_or_button "Add To Trip"
+      fill_in "property[start_date]", with: "2014-12-26"
+      fill_in "property[end_date]", with: "2014-12-31"
+      click_link_or_button "Request reservation"
 
-      # does this bring you back to the listing page?
-      visit "/listings"
-      click_link_or_button "Another Home"
-      pending "figure out how dates are filled in"
-      # also change "start date" and "end date" to what these actually are
-      fill_in "start date", with: ""
-      fill_in "end date", with: ""
-      click_link_or_button "Add To Trip"
-
-      visit "/my_trip"
+      visit cart_path
       expect(page).to have_content "My Cool Home"
-      expect(page).to have_content "cool description"
-      expect(page).to have_content "Another Home"
-      expect(page).to have_content "lame description"
     end
 
     it "can remove things from the trip" do
       click_link_or_button "My Cool Home"
-      pending "figure out how dates are filled in"
-      # also change "start date" and "end date" to what these actually are
-      fill_in "start date", with: ""
-      fill_in "end date", with: ""
-      click_link_or_button "Add To Trip"
+      fill_in "property[start_date]", with: "2014-12-26"
+      fill_in "property[end_date]", with: "2014-12-31"
+      click_link_or_button "Request reservation"
 
-      visit "/my_trip"
+      visit cart_path
       expect(page).to have_content "My Cool Home"
-      expect(page).to have_content "cool description"
-      # might need a within scope, and some renaming
-      click_link_or_button "Remove from trip"
+      click_link_or_button "Remove From My Trip"
       expect(page).to_not have_content "My Cool Home"
-      expect(page).to_not have_content "cool description"
     end
 
     it "can't checkout without logging in" do
       click_link_or_button "My Cool Home"
-      pending "figure out how dates are filled in"
-      # also change "start date" and "end date" to what these actually are
-      fill_in "start date", with: ""
-      fill_in "end date", with: ""
-      click_link_or_button "Add To Trip"
+      fill_in "property[start_date]", with: "2014-12-26"
+      fill_in "property[end_date]", with: "2014-12-31"
+      click_link_or_button "Request reservation"
 
-      visit "/my_trip"
-      # Checkout seems kinda weird
-      click_link_or_button "Checkout"
+      visit cart_path
+      expect(page).to_not have_link "Request Reservation"
       expect(page).to have_content "Log in"
-      expect(page.current_path).to eq "/login"
     end
 
     it "continutes checkout after logging in" do
-      visit "/my_orders"
+      User.create!(
+        display_name: "Jorge",
+        name: "Jorge Tellez",
+        email_address: "test@example.com",
+        password: "password",
+        password_confirmation: "password",
+        admin: false,
+        host: false)
+      visit reservations_path
       expect(page).to_not have_content "My Cool Home"
 
-      visit "/listings"
+      visit properties_path
       click_link_or_button "My Cool Home"
-      pending "figure out how dates are filled in"
-      # also change "start date" and "end date" to what these actually are
-      fill_in "start date", with: ""
-      fill_in "end date", with: ""
-      click_link_or_button "Add To Trip"
+      fill_in "property[start_date]", with: "2014-12-26"
+      fill_in "property[end_date]", with: "2014-12-31"
+      click_link_or_button "Request reservation"
 
-      visit "/my_trip"
-      # Checkout seems kinda weird
-      click_link_or_button "Checkout"
-      expect(page).to have_content "Log in"
-      expect(page.current_path).to eq "/login"
-      pending "How do we log in?"
+      visit cart_path
+      fill_in "email_address", with: "test@example.com"
+      fill_in "password", with: "password"
+      click_link_or_button "Login"
       expect(page).to have_content "My Cool Home"
-      # I forgot the name of this button, might be right
-      expect(page).to have_content "Request reservation"
+      click_link_or_button "Request Reservation"
 
-      visit "/my_orders"
+      visit reservations_path
       expect(page).to have_content "My Cool Home"
     end
 

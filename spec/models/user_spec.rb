@@ -94,10 +94,15 @@ RSpec.describe User, :type => :model do
     let(:user) { User.create(valid_attributes) }
 
     it "can have many reservations" do
-      pending "set up reservations"
-      reservation = Reservation.create(address: "123 Baker St",
-                           user_id: user.id)
-      reservation2 = Reservation.create(user_id: user.id)
+      date = Date.today
+      reservation = Reservation.create( property_id: 1,
+                                        start_date: date,
+                                        end_date: date.advance(days: 4),
+                                        user: user)
+      reservation2 = Reservation.create( property_id: 1,
+                                        start_date: date,
+                                        end_date: date.advance(days: 11),
+                                        user: user)
 
       expect(user.reservations.first).to eq(reservation)
       expect(user.reservations.last).to eq(reservation2)

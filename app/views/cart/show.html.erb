@@ -18,6 +18,8 @@
 <% if current_user %>
   <%= button_to "Request Reservation", reservations_path, method: :post, class: "btn btn-default"  %>
   <% else %>
-  <%= render partial: 'partials/log_in' %>
+  <a href="#" data-toggle="modal" data-target="#myModalLogIn" class="btn btn-default">
+    Log In
+  </a>
   <% end %>
 <% end %>
