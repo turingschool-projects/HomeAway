@@ -18,8 +18,8 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: 'GeoSans',Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 800;
     letter-spacing: 1px;
     color: #474843;
 }
@@ -59,7 +59,7 @@ a:focus {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #fff;
 }
 
@@ -153,10 +153,18 @@ a:focus {
 
 .intro .brand-box .brand-heading {
     font-size: 60px;
+    margin-bottom: 0;
 }
 
 .intro .brand-box .intro-text {
-    font-size: 28px;
+        font-size: 28px;
+}
+
+.brand-heading span {
+  font-family: 'Gentium Book Basic', serif;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: lowercase;
 }
 
 @media(min-width:767px) {
