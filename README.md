@@ -12,5 +12,5 @@ Now we're here: [TravelHome](http://mighty-escarpment-8434.herokuapp.com/)
 
 Be sure you run `$ brew install imagemagick`
 
-#### Our Mascot
-<img src="http://i.imgur.com/VeOaXu0.jpg" width="200">
+#### Our Mascots
+<img src="http://i.imgur.com/VeOaXu0.jpg" width="200"> <img src="http://i.imgur.com/43OQPVM.jpg" width="200">
