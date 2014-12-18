@@ -20,13 +20,12 @@
       <li>
       <a href="<%= properties_path %>">Properties</a>
       </li>
-      <li>
       <% if current_user %>
-        <%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %>
+        <li><%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %></li>
       <% else %>
-        <%= render partial: 'partials/log_in' %>
+        <li><%= render partial: 'partials/log_in' %></li>
+        <li><%= render partial: 'partials/sign_up' %></li>
       <% end %>
-      </li>
     </ul>
   </div>
 </div>

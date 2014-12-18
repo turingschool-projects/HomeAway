@@ -1,6 +1,6 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+<a href="#" data-toggle="modal" data-target="#myModal">
     Sign Up
-  </button>
+  </a>
 
 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -13,19 +13,8 @@
         <div class="modal-body">
 
           <div class="edit-form better-edit-display">
-            <%= form_for @user do |f| %>
-              <% if @user.errors.any? %>
-              <div id="error_explanation">
-              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-              <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
-            <div class="new-user-form">
+            <%= form_for new_user_path do |f| %>
+                       <div class="new-user-form">
               <div class="form-group">
                 <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
               </div>
