@@ -7,8 +7,7 @@ class Reservation < ActiveRecord::Base
 
   # We still need to do this, probably, but right now it doesn't work
   # before_save :calculate_total
-
-  scope :past_reservations, -> { where(status: [:reserved, :completed, :cancelled]) }
+  scope :upcoming, -> { where(status: :reserved)}
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
@@ -35,49 +34,12 @@ class Reservation < ActiveRecord::Base
     pending? || reserved?
   end
 
-  def calculate_total
-    self.total = properties.sum(:price)
+  def total
+    property.price * duration
   end
 
-  def update_quantities
-    current_quantities = quantities
-    properties.each do |property|
-      property.quantity = current_quantities[property.id].quantity
-    end
-  end
-
-  def quantities
-    properties.group_by(&:id).inject({}) do |memo, (k, properties)|
-      memo[k] = properties.first
-      memo[k].quantity = properties.count
-      memo
-    end
-  end
-
-  def decrease(property)
-    reservation_properties.find_by(property_id: property.id).destroy
-    reload
-    calculate_total
-    update_quantities
-  end
-
-  def remove_property(property)
-    reservation_properties.where(property: property).joins(:property).destroy_all
-    properties.reload
-    save!
-    update_quantities
-  end
-
-  def increase(property)
-    properties << property
-    properties.reload
-    save!
-    update_quantities
-  end
-
-  def subtotal(property)
-    quantity = quantities[property.id].quantity
-    quantity * property.price
+  def duration
+    end_date - start_date
   end
 
   def no_retired_properties?

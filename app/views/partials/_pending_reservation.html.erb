@@ -1,0 +1,19 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Your Reservation</h1>
+<h2><%= link_to reservation.property.title, property_path(reservation.property) %></h2>
+<h3>Status: <%= reservation.status %></h3>
+<p>From <%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></p>
+<p>Length of Stay: <%= reservation.duration.floor %> days</p>
+<p>Daily Rate: <%= number_to_currency(reservation.property.price) %></p>
+<p>Total: <%= number_to_currency(reservation.total) %></p>
+<% unless reservation.cancelled? %>
+  <%= button_to admin_reservation_path(reservation), method: :delete, name: :remove, name: "remove", value: "#{reservation.property.id}" do %>
+    <span>Cancel Reservation</span>
+  <% end %>
+<% end %>
+<p>Reserved on <%= reservation.created_at.strftime("%B %d, %Y at %l:%M %P") %></p>
+<p>Last updated on <%= reservation.updated_at.strftime("%B %d, %Y at %l:%M %P") %></p>

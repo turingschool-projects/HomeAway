@@ -1,15 +1,43 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>Upcoming</h3>
 <div class="edit-form">
   <table class="table table-hover">
     <thead>
-      <th>Date</th>
+      <th>Property</th>
       <th>Total</th>
       <th>Status</th>
     </thead>
     <tbody>
-      <% @reservations.each do |reservation| %>
+      <% @reservations.reserved.each do |reservation| %>
       <tr class="reservation reservation_<%= reservation.id %>">
-        <td class="date"><%= link_to reservation.updated_at, reservation_path(reservation) %></td>
-        <td class="total">$<%= reservation.total %></td>
+        <td class="date"><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+        <td class="total"><%= number_to_currency(reservation.total) %></td>
+        <td class="status"><%= reservation.status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+<br>
+<h3>Completed</h3>
+<div class="edit-form">
+  <table class="table table-hover">
+    <thead>
+      <th>Property</th>
+      <th>Total</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <% @reservations.completed.each do |reservation| %>
+      <tr class="reservation reservation_<%= reservation.id %>">
+        <td class="date"><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+        <td class="total"><%= number_to_currency(reservation.total) %></td>
         <td class="status"><%= reservation.status %></td>
       </tr>
       <% end %>

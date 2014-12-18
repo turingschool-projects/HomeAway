@@ -1,12 +1,11 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = current_user.reservations.past_reservations
+    @reservations = current_user.reservations
   end
 
   def show
     @reservation = current_user.reservations.where(id: params[:id]).take
     if @reservation
-      @reservation.update_quantities
       render :show
     else
       flash[:error] = "You may only view your own reservations"

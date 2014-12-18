@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20141217233959) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "property_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   create_table "users", force: true do |t|
