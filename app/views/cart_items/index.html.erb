@@ -15,7 +15,7 @@
       <% @cart.each do |property| %>
       <tr class="cart_property cart_property_<%= property.id %>">
         <td class="title"><%= property.title %></td>
-        <td class="price">$<%= property.price %></td>
+        <td class="daily_rate">$<%= property.daily_rate %></td>
         <td class="quantity">
           <%= button_to cart_property_path(property), method: :put, class: "btn btn-xs decrease float_left", name: "decrease" do %>
             <span class="glyphicon glyphicon-minus"></span>
