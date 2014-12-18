@@ -7,16 +7,16 @@
 <div class="edit-form">
   <table class="table table-hover">
     <thead>
-      <th>Property</th>
-      <th>Total</th>
-      <th>Status</th>
+      <th><h4>Property</h4></th>
+      <th><h4>Total</h4></th>
+      <th><h4>Status</h4></th>
     </thead>
     <tbody>
-      <% @reservations.reserved.each do |reservation| %>
+      <% @reservations.upcoming.each do |reservation| %>
       <tr class="reservation reservation_<%= reservation.id %>">
-        <td class="date"><%= link_to reservation.property.title, reservation_path(reservation) %></td>
-        <td class="total"><%= number_to_currency(reservation.total) %></td>
-        <td class="status"><%= reservation.status %></td>
+        <td class="date"><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
+        <td class="total"><h5><%= number_to_currency(reservation.total) %></h5></td>
+        <td class="status"><h5><%= reservation.status %></h5></td>
       </tr>
       <% end %>
     </tbody>

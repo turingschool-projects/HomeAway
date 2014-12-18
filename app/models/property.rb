@@ -26,4 +26,8 @@ class Property < ActiveRecord::Base
   def other_photos
     photos.where(primary: false)
   end
+
+  def location
+    address.city
+  end
 end

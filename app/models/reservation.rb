@@ -7,7 +7,7 @@ class Reservation < ActiveRecord::Base
 
   # We still need to do this, probably, but right now it doesn't work
   # before_save :calculate_total
-  scope :upcoming, -> { where(status: :reserved)}
+  scope :upcoming, -> { where(status: [:pending, :reserved]) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
