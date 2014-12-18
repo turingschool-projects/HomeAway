@@ -9,5 +9,9 @@
     to
     <h4><%= @cart.end_date %></h4>
   <%= button_to "Don't go to #{@cart.property.title}", cart_path, method: :delete %>
-  <%= link_to "Book Reservation", new_reservation_path, class: "btn btn-default" %>
+  <% if current_user %>
+    <%= link_to "Book Reservation", new_reservation_path, class: "btn btn-default" %>
+  <% else %>
+    <%= render partial: 'partials/log_in' %>
+  <% end %>
 <% end %>
