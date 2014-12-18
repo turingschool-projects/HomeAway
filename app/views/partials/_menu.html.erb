@@ -14,6 +14,7 @@
               <p class="shadow"><%= property.description %></p>
               <p id="price" class="shadow"> Price:$<%= property.price %></p>
 
+              <%= link_to "View Property Details", property_path(property) %>
             </div>
           </div>
         <%end%>
