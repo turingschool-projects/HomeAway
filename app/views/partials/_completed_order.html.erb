@@ -9,7 +9,7 @@
     <% reservation.properties.uniq.each do |property| %>
     <tr class="cart_property cart_property_<%= property.id %>">
       <td class="title"><%= link_to property.title, property_path(property) %></a></td>
-      <td class="price">$<%= property.price %></td>
+      <td class="daily_rate">$<%= property.daily_rate %></td>
       <td class="quantity"><%= property.quantity %></td>
       <td class="subtotal">$<%= reservation.subtotal(property) %></td>
     </tr>

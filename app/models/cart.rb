@@ -41,6 +41,15 @@ class Cart
     @property = Property.find_by(id: to_h["property_id"])
   end
 
+  def total
+    @property.price * duration / 100.0
+  end
+
+  def duration
+    Date.parse(@data["end_date"]) - Date.parse(@data["start_date"])
+  end
+
+
   def save_reservation_for(user)
     raise "no user" unless user
     Reservation.create( status: "pending",

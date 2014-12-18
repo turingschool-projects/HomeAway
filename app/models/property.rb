@@ -30,4 +30,8 @@ class Property < ActiveRecord::Base
   def location
     address.city
   end
+
+  def daily_rate
+    price / 100.0
+  end
 end
