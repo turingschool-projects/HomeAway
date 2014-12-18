@@ -4,12 +4,11 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
       <i class="fa fa-bars"></i>
     </button>
-    <a class="navbar-brand page-scroll" href="#page-top">
+    <a class="navbar-brand page-scroll" href="<%= root_path %>">
       <span class="light">Travel</span>Home
     </a>
   </div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
     <ul class="nav navbar-nav">
       <li class="hidden">
@@ -19,15 +18,17 @@
       <a class="page-scroll" href="#about">About</a>
       </li>
       <li>
-      <a class="page-scroll" href="#download">Services</a>
+      <a href="<%= properties_path %>">Properties</a>
       </li>
       <li>
-      <a class="page-scroll" href="#contact">Contact</a>
+      <% if current_user %>
+        <%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %>
+      <% else %>
+        <%= render partial: 'partials/log_in' %>
+      <% end %>
       </li>
     </ul>
   </div>
-  <!-- /.navbar-collapse -->
 </div>
-<!-- /.container -->
 </nav>
 
