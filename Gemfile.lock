@@ -197,6 +197,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.2)
       json (~> 1.4)
+    rmagick (2.13.4)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -293,6 +294,7 @@ DEPENDENCIES
   rack-livereload
   rails (= 4.1.7)
   rails_12factor
+  rmagick
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
