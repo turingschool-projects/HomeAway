@@ -7,11 +7,13 @@
 <h5>Desired reservation dates</h5>
 <p>From: <%= @cart.start_date %></p>
 <p>To: <%= @cart.end_date %></p>
-<%= button_to "Remove From My Trip", cart_path, method: :delete, class: "btn btn-default" %>
 <% if current_user %>
+  <h5>Please review your trip details and click below to continue your reservation</h5>
   <%= button_to "Request Reservation", reservations_path, method: :post, class: "btn btn-default"  %>
   <% else %>
-  <%= render partial: 'partials/log_in' %>
+    <h5>To continue your reservation you will need to log in to your account or sign up for a new account</h5>
+    <%= render partial: "partials/log_in" %>
+    <%= render partial: "partials/sign_up" %>
   <% end %>
 <% end %>
-
+<%= button_to "Cancel My Trip", cart_path, method: :delete, class: "btn btn-default" %>
