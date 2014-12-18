@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = current_user.reservations.past_reservations
+    @reservations = current_user.reservations
   end
 
   def show
