@@ -10,11 +10,8 @@ class ApplicationController < ActionController::Base
   after_action  :save_cart
 
   def current_user
-    @current_user ||= if session[:user_id]
-      user = User.where(id: session[:user_id]).first
-      session[:user_id] = nil unless user
-      user
-    end
+    @current_user ||= User.find_by(id: session[:user_id])
+    session[:user_id] = nil unless @current_user
   end
 
   def load_cart

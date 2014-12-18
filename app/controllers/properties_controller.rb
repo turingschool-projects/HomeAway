@@ -4,7 +4,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties      = Property.all
+    @properties = Property.all
     @categories = Category.all
   end
 end
