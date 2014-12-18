@@ -22,7 +22,7 @@
               <hr>
               <p class="shadow"><%= property.description %></p>
               <hr>
-              <p id="daily_rate" class="shadow"> Price:$<%= property.daily_rate %></p>
+              <p id="daily_rate" class="shadow"> Price:$<%= number_to_currency(property.daily_rate) %></p>
 
               <%= link_to "View Property Details", property_path(property) %>
             </div>
