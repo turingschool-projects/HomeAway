@@ -7,6 +7,7 @@ class Seed
     generate_properties
     generate_reservations
     generate_addresses
+    generate_property_images
   end
 
   def generate_users
@@ -156,9 +157,25 @@ class Seed
 
   end
 
+  def generate_property_images
+    image_path = Rails.root.join("app", "assets", "images")
+    Photo.create!(image: File.open(image_path.join("ext_house_1.jpg")), property_id: 1, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_house_1.jpg")), property_id: 1)
+    Photo.create!(image: File.open(image_path.join("int_house_2.jpg")), property_id: 1)
 
-#  image_path = Rails.root.join("app", "assets", "images")
-#  deviled_quail_eggs.image = File.open(image_path.join("deviled-quail-eggs.png"))
+    Photo.create!(image: File.open(image_path.join("ext_house_1.jpg")), property_id: 2, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_house_3.jpg")), property_id: 2)
+
+    Photo.create!(image: File.open(image_path.join("ext_apt_1.jpg")), property_id: 3, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_apt_1.jpg")), property_id: 3)
+    Photo.create!(image: File.open(image_path.join("int_apt_2.jpg")), property_id: 3)
+    Photo.create!(image: File.open(image_path.join("int_apt_3.jpg")), property_id: 3)
+
+    Photo.create!(image: File.open(image_path.join("ext_room_1.jpg")), property_id: 4, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_room_1.jpg")), property_id: 4)
+
+    Photo.create!(image: File.open(image_path.join("ext_cabin_1.jpg")), property_id: 5, primary: true)
+  end
 end
 
 Seed.new

@@ -10,17 +10,10 @@ class Property < ActiveRecord::Base
   belongs_to :address
   has_many :reservations
 
-  has_attached_file :image,
-  styles: {
-    thumb: '100x100>',
-    medium: '235x135!>',
-    },
-  default_url: 'gourmet_hamburger_with_bacon.jpg'
-
-  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-
   scope :active, -> { where(retired: false) }
   scope :retired, -> { where(retired: true) }
+
+  has_many :photos
 
   def bathroom
     bathroom_private == true ? "Private" : "Shared"
