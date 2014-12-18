@@ -38,8 +38,6 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button "My Cool Home"
       fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
-
-      save_and_open_page
       click_link_or_button "Request reservation"
 
       visit cart_path
@@ -53,7 +51,9 @@ describe "can add things to the trip", type: :feature do
 
       visit cart_path
       expect(page).to have_content "My Cool Home"
-      click_link_or_button "Remove From My Trip"
+      click_link_or_button "Cancel My Trip"
+
+      visit cart_path
       expect(page).to_not have_content "My Cool Home"
     end
 
