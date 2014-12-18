@@ -14,7 +14,9 @@
   <%= button_to "Request Reservation", reservations_path, method: :post, class: "btn btn-default"  %>
   <% else %>
     <h5>To continue your reservation you will need to log in to your account or sign up for a new account</h5>
-    <%= render partial: "partials/log_in" %>
+    <a href="#" data-toggle="modal" data-target="#myModalLogIn" class="btn btn-default">
+      Log In
+    </a>
     <%= render partial: "partials/sign_up" %>
   <% end %>
 <% end %>
