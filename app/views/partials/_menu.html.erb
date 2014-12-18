@@ -1,9 +1,16 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Browse All Properties</h1>
 <div class="container menu-properties-block col-md-9">
   <% @categories.each do |category| %>
     <div class="category-block row">
 
       <div class= "category-title">
-        <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
+        <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name.pluralize %></h2>
       </div>
 
         <% category.properties.active.each do |property| %>
@@ -11,7 +18,10 @@
             <%= link_to (image_tag property.primary.image.url(:medium)), property_path(property) %>
             <div class="caption">
               <h3 class="shadow"><%= property.title %></h3>
+              <h4>Location:<%= property.location %></h4>
+              <hr>
               <p class="shadow"><%= property.description %></p>
+              <hr>
               <p id="price" class="shadow"> Price:$<%= property.price %></p>
 
               <%= link_to "View Property Details", property_path(property) %>
