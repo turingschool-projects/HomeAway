@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
     session[:user_id] = nil unless @current_user
+    @current_user
   end
 
   def load_cart
