@@ -1,0 +1,15 @@
+<div class="thumbnail col-sm-6 col-md-4">
+  <%= image_tag property.primary.image.url(:hero) %>
+  <% property.other_photos.each do |photo| %>
+    <span><%= image_tag photo.image.url(:thumb) %></span>
+  <% end %>
+  <div class="caption">
+    <h3><%= property.title %></h3>
+    <p><%= property.description %></p>
+    <p id="price"> Price: <%= number_to_currency(property.price) %></p>
+    <p>Category: <%= property.category.name %></p>
+    <p>Maximum Occupancy: <%= property.occupancy %></p>
+    <p>Location: <%= property.location %></p>
+    <p>Bathroom: <%= property.bathroom %></p>
+  </div>
+</div>
