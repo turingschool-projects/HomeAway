@@ -26,7 +26,7 @@
         <%= form_tag  "/properties/#{@property.id}/add_to_cart", method: :post do %>
           <%= date_field_tag "property[start_date]" %>
           <%= date_field_tag "property[end_date]" %>
-          <%= submit_tag "Request reservation mofo", class: "btn btn-default add-to-cart" %>
+          <%= submit_tag "Request reservation", class: "btn btn-default add-to-cart" %>
         <% end %>
       </p>
     <% end %>
