@@ -9,6 +9,6 @@ class CartController < ApplicationController
 
   def destroy
     @cart.clear
-    redirect_to cart_path
+    redirect_to properties_path
   end
 end
