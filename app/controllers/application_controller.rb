@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include ActionView::Helpers::TextHelper
 
   before_action :load_cart
+  before_action :create_user_for_sign_up
   after_action  :save_cart
 
   def current_user
@@ -31,5 +32,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def create_user_for_sign_up
+    @user = User.new
+  end
 
 end
