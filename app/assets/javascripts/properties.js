@@ -1,3 +1,3 @@
 $(document).ready(function() {
-  $('#reservation').daterangepicker({ format: 'MM/DD/YYYY' });
+  $('#reservation').daterangepicker({ format: 'DD/MM/YYYY' });
 });
