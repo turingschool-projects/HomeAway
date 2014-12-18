@@ -1,20 +1,20 @@
 <a href="#" data-toggle="modal" data-target="#myModal">
-    Sign Up
-  </a>
+  Sign Up
+</a>
 
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="myModalLabel">Sign up for an account</h3>
-        </div>
-        <div class="modal-body">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Sign up for an account</h3>
+      </div>
+      <div class="modal-body">
 
-          <div class="edit-form better-edit-display">
-            <%= form_for new_user_path do |f| %>
-                       <div class="new-user-form">
+        <div class="edit-form better-edit-display">
+          <%= form_for @user, url: users_path do |f| %>
+            <div class="new-user-form">
               <div class="form-group">
                 <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
               </div>
@@ -36,8 +36,8 @@
               </div>
             </div>
           <% end %>
-          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
