@@ -1,9 +1,48 @@
 <div class="thumbnail col-sm-6 col-md-4">
   <%= image_tag property.primary.image.url(:hero) %>
-  <% property.other_photos.each do |photo| %>
-    <span><%= image_tag photo.image.url(:thumb) %></span>
-  <% end %>
-  <div class="caption">
+
+<a href="#" data-toggle="modal" data-target="#PhotoViewer" class="btn btn-default">
+  View Additonal Images
+</a>
+
+
+<div class="modal fade" id="PhotoViewer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <br>
+      </div>
+      <div class="modal-body">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <%= image_tag property.primary.image.url(:medium) %>
+            </div>
+            <% property.other_photos.each do |photo| %>
+            <div class="item">
+              <%= image_tag photo.image.url(:medium) %>
+            </div>
+            <% end %>
+
+          <h1>
+            <a class="pull-left" href="#carousel-example-generic" role="button" data-slide="prev">
+              <i class="fa fa-angle-double-left"></i>
+            <a href="#carousel-example-generic" role="button" data-slide="next" class="pull-right">
+              <i class="fa fa-angle-double-right"></i>
+            </a>
+          </h1>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="caption">
     <h3><%= property.title %></h3>
     <p><%= property.description %></p>
     <p id="price"> Price: <%= number_to_currency(property.price) %></p>
