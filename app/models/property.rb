@@ -18,4 +18,12 @@ class Property < ActiveRecord::Base
   def bathroom
     bathroom_private == true ? "Private" : "Shared"
   end
+
+  def primary
+    photos.where(primary: true).take
+  end
+
+  def other_photos
+    photos.where(primary: false)
+  end
 end

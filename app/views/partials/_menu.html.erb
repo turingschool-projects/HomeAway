@@ -8,12 +8,11 @@
 
         <% category.properties.active.each do |property| %>
           <div class="thumbnail col-sm-6 col-md-4">
-            <%= link_to (image_tag property.image.url(:medium)), property_path(property) %>
+            <%= link_to (image_tag property.primary.image.url(:medium)), property_path(property) %>
             <div class="caption">
               <h3 class="shadow"><%= property.title %></h3>
               <p class="shadow"><%= property.description %></p>
               <p id="price" class="shadow"> Price:$<%= property.price %></p>
-              <p><%= link_to "Add to Cart", cart_properties_path(property: property), method: :post, class: "btn btn-default add-to-cart", role: "button" %></p>
 
             </div>
           </div>
