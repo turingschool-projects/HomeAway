@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218185020) do
+ActiveRecord::Schema.define(version: 20141218223212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20141218185020) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.string   "country"
+    t.string   "country",    default: "USA"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,21 +51,16 @@ ActiveRecord::Schema.define(version: 20141218185020) do
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.boolean  "retired",            default: false
+    t.boolean  "retired",          default: false
     t.integer  "occupancy"
     t.integer  "address_id"
-    t.boolean  "bathroom_private",   default: true
+    t.boolean  "bathroom_private", default: true
     t.integer  "user_id"
     t.integer  "category_id"
   end
 
   add_index "properties", ["address_id"], name: "index_properties_on_address_id", using: :btree
   add_index "properties", ["category_id"], name: "index_properties_on_category_id", using: :btree
-  add_index "properties", ["title"], name: "index_properties_on_title", unique: true, using: :btree
   add_index "properties", ["user_id"], name: "index_properties_on_user_id", using: :btree
 
   create_table "reservations", force: true do |t|
