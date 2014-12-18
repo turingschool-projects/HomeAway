@@ -7,8 +7,7 @@ class Cart
 
   def add_property(property_params)
     @data["property_id"] = property_params[:property_id]
-    @data["start_date"]  = property_params[:start_date]
-    @data["end_date"]    = property_params[:end_date]
+    @data["start_date"], @data["end_date"] = property_params[:reservation].split(" - ")
     clean
   end
 
