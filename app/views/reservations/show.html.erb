@@ -2,9 +2,11 @@
   <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
 </div>
 
+<% unless current_user.address.nil? %>
 <iframe
     width="450"
     height="250"
     frameborder="0" style="border:0"
     src=<%= "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&origin=#{current_user.address.escape_street}+#{current_user.address.escape_city}&destination=#{@reservation.property.address.escape_street}+#{@reservation.property.address.escape_city}" %>>
   </iframe>
+<% end %>
