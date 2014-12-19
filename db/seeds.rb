@@ -139,7 +139,10 @@ class Seed
                       city: Faker::Address.city,
                       state: Faker::Address.state,
                       zip: Faker::Address.postcode,
-                      country: Faker::Address.country)
+                      country: Faker::Address.country,
+                      latitude: Faker::Address.latitude,
+                      longitude: Faker::Address.longitude
+                     )
       property.address_id = Address.last.id
       property.save!
     end
@@ -149,7 +152,10 @@ class Seed
                       city: Faker::Address.city,
                       state: Faker::Address.state,
                       zip: Faker::Address.postcode,
-                      country: Faker::Address.country)
+                      country: Faker::Address.country,
+                      latitude: Faker::Address.latitude,
+                      longitude: Faker::Address.longitude
+                     )
       user.address_id = Address.last.id
       user.save!
     end

@@ -95,6 +95,7 @@ GEM
     formatador (0.2.5)
     formtastic (3.1.2)
       actionpack (>= 3.2.13)
+    geocoder (1.2.6)
     guard (2.8.2)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -275,6 +276,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   formtastic
+  geocoder
   guard
   guard-bundler
   guard-livereload
