@@ -4,9 +4,9 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
 
   validates :user, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
 
-  # We still need to do this, probably, but right now it doesn't work
-  # before_save :calculate_total
   scope :upcoming, -> { where(status: [:pending, :reserved]) }
 
   aasm column: :status do
@@ -18,7 +18,7 @@ class Reservation < ActiveRecord::Base
 
     # events give us bang methods, like place! for changing reservation status
     event :confirm do
-      transitions from: :pending, to: :reserved, guard: :no_retired_properties?
+      transitions from: :pending, to: :reserved
     end
 
     event :cancel do
@@ -40,11 +40,5 @@ class Reservation < ActiveRecord::Base
 
   def duration
     end_date - start_date
-  end
-
-  def no_retired_properties?
-    return true if reservation_properties.retired.empty?
-    reservation_properties.retired.delete_all
-    false
   end
 end

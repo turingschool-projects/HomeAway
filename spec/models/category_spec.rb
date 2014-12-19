@@ -19,6 +19,12 @@ describe Category do
                       price: 44500,
                       description: "guard",
                       category: category,
+                      address: Address.create(
+                        line_1: "123 Some St.",
+                        line_2: "Apt. 6",
+                        city: "Denver",
+                        state: "CO",
+                        zip: "80203"),
                       occupancy: 12)
       expect(category.properties).to eq([property])
     end
