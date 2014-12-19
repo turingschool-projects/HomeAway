@@ -1,55 +1,58 @@
 <div class="thumbnail col-sm-6 col-md-4">
-  <%= image_tag property.primary.image.url(:hero) %>
+  <% if property.primary %>
+    <%= image_tag property.primary.image.url(:hero) %>
+  <% end %>
+  <a href="#" data-toggle="modal" data-target="#PhotoViewer" class="btn btn-defaul-btn-sm">
+    View Additonal Images
+  </a>
 
-<a href="#" data-toggle="modal" data-target="#PhotoViewer" class="btn btn-defaul-btn-sm">
-  View Additonal Images
-</a>
 
+  <div class="modal fade" id="PhotoViewer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Property Images</h3>
+          <br>
+        </div>
+        <div class="modal-body">
 
-<div class="modal fade" id="PhotoViewer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Property Images</h3>
-        <br>
-      </div>
-      <div class="modal-body">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <% if property.primary %>
+                <%= image_tag property.primary.image.url(:gallery) %>
+              <% end %>
+              </div>
+              <% property.other_photos.each do |photo| %>
+                <div class="item">
+                  <%= image_tag photo.image.url(:gallery) %>
+                </div>
+              <% end %>
 
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <%= image_tag property.primary.image.url(:gallery) %>
+              <h1>
+                <a class="pull-left" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <i class="fa fa-angle-double-left"></i>
+                  <a href="#carousel-example-generic" role="button" data-slide="next" class="pull-right">
+                    <i class="fa fa-angle-double-right"></i>
+                  </a>
+                </h1>
+              </div>
             </div>
-            <% property.other_photos.each do |photo| %>
-            <div class="item">
-              <%= image_tag photo.image.url(:gallery) %>
-            </div>
-            <% end %>
 
-          <h1>
-            <a class="pull-left" href="#carousel-example-generic" role="button" data-slide="prev">
-              <i class="fa fa-angle-double-left"></i>
-            <a href="#carousel-example-generic" role="button" data-slide="next" class="pull-right">
-              <i class="fa fa-angle-double-right"></i>
-            </a>
-          </h1>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
-</div>
 
 
     <div class="caption">
-    <h3><%= property.title %></h3>
-    <p><%= property.description %></p>
-    <p id="price">Daily Rate: <%= number_to_currency(property.price) %></p>
-    <p>Category: <%= property.category.name %></p>
-    <p>Maximum Occupancy: <%= property.occupancy %></p>
-    <p>Location: <%= property.location %></p>
-    <p>Bathroom: <%= property.bathroom %></p>
+      <h3><%= property.title %></h3>
+      <p><%= property.description %></p>
+      <p id="price">Daily Rate: <%= number_to_currency(property.price) %></p>
+      <p>Category: <%= property.category.name %></p>
+      <p>Maximum Occupancy: <%= property.occupancy %></p>
+      <p>Location: <%= property.location %></p>
+      <p>Bathroom: <%= property.bathroom %></p>
+    </div>
   </div>
-</div>

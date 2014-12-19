@@ -37,8 +37,7 @@ describe "can add things to the trip", type: :feature do
 
       visit properties_path
       click_link_or_button "My Cool Home"
-      fill_in "property[start_date]", with: "2014-12-26"
-      fill_in "property[end_date]", with: "2014-12-31"
+      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
       click_link_or_button "Request reservation"
 
       visit cart_path
@@ -47,20 +46,20 @@ describe "can add things to the trip", type: :feature do
 
     it "can remove things from the trip" do
       click_link_or_button "My Cool Home"
-      fill_in "property[start_date]", with: "2014-12-26"
-      fill_in "property[end_date]", with: "2014-12-31"
+      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
       click_link_or_button "Request reservation"
 
       visit cart_path
       expect(page).to have_content "My Cool Home"
-      click_link_or_button "Remove From My Trip"
+      click_link_or_button "Cancel My Trip"
+
+      visit cart_path
       expect(page).to_not have_content "My Cool Home"
     end
 
     it "can't checkout without logging in" do
       click_link_or_button "My Cool Home"
-      fill_in "property[start_date]", with: "2014-12-26"
-      fill_in "property[end_date]", with: "2014-12-31"
+      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
       click_link_or_button "Request reservation"
 
       visit cart_path
@@ -82,8 +81,7 @@ describe "can add things to the trip", type: :feature do
 
       visit properties_path
       click_link_or_button "My Cool Home"
-      fill_in "property[start_date]", with: "2014-12-26"
-      fill_in "property[end_date]", with: "2014-12-31"
+      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
       click_link_or_button "Request reservation"
 
       visit cart_path
