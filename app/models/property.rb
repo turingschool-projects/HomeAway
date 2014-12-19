@@ -4,7 +4,7 @@ class Property < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 500 }
   validates :price, numericality: {greater_than: 0}
   validates :category_id, presence: true
-  validates :address_id, presence: true
+#  validates :address_id, presence: true
 
   belongs_to :user
   belongs_to :category

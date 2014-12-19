@@ -44,18 +44,11 @@ RSpec.describe Address, :type => :model do
       expect(address.country).to eq("USA")
     end
 
-    it "returns a full street address string with line 1, city, state and zip" do
+    it "returns an escaped city and address for google maps" do
       address = Address.create!(attributes)
-      expect(address.full_street_address).to eq("123 Some St. Denver CO 80203")
-    end
-
-    xit "geocodes lat and longitude when saving a record" do
-      address = Address.create!(line_1: "1500 Sugar Bowl Dr",
-                                city: "New Orleans",
-                                state: "LA",
-                                zip: "70112",)
-      expect(address.latitude).to eq(29.9519198)
-      expect(address.longitude).to eq(-90.080563)
+      address.city = "New York"
+      expect(address.escape_city).to eq("New+York")
+      expect(address.escape_street).to eq("123+Some+St.")
     end
   end
 end

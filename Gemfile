@@ -23,7 +23,6 @@ gem 'dimensions-rails'
 gem 'formtastic'
 gem 'jquery-turbolinks'
 gem 'faker'
-gem 'geocoder'
 
 group :development, :test do
   gem 'better_errors'

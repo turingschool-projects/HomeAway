@@ -4,14 +4,11 @@ class Address < ActiveRecord::Base
   validates :state, presence: true
   validates :zip, presence: true
 
-  #geocoded_by :full_street_address
-  #after_validation :geocode, if: :full_street_address_changed?
-
-  def full_street_address
-    "#{line_1} #{city} #{state} #{zip}"
+  def escape_street
+    line_1.split(" ").join("+")
   end
 
-  def full_street_address_changed?
-    :line_1_changed? || :city_changed? || :state_changed? || :zip_changed?
+  def escape_city
+    city.split(" ").join("+")
   end
 end
