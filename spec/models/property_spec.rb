@@ -29,6 +29,11 @@ RSpec.describe Reservation, :type => :model do
       expect(property).to_not be_valid
     end
 
+    it "must have an address" do
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, user: user, category: category)
+      expect(property).to_not be_valid
+    end
+
     it "must have a price that is greater than 0" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", category: category, address: address)
       expect(property).to_not be_valid
