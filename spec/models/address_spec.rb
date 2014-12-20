@@ -43,5 +43,12 @@ RSpec.describe Address, :type => :model do
       address = Address.create!(attributes)
       expect(address.country).to eq("USA")
     end
+
+    it "returns an escaped city and address for google maps" do
+      address = Address.create!(attributes)
+      address.city = "New York"
+      expect(address.escape_city).to eq("New+York")
+      expect(address.escape_street).to eq("123+Some+St.")
+    end
   end
 end
