@@ -2,14 +2,14 @@ require 'rails_helper'
 require 'capybara/rails'
 require 'capybara/rspec'
 
-xdescribe 'the application', type: :feature do
+describe 'the application', type: :feature do
   context 'when logged out' do
     before(:each) do
       visit root_path
     end
 
     it 'has a login button' do
-      expect(page).to have_button('Login!')
+      expect(page).to have_link('Log In')
     end
 
     it 'can visit a login page' do
@@ -25,10 +25,6 @@ xdescribe 'the application', type: :feature do
 
     it 'does not have a logout link' do
       expect(page).not_to have_link('Logout')
-    end
-
-    it 'has a cart button' do
-      expect(page).to have_link('Cart')
     end
 
     it 'does not have a profile link' do
@@ -51,7 +47,7 @@ xdescribe 'the application', type: :feature do
       visit root_path
       fill_in "email_address", with: user.email_address
       fill_in "password", with: user.password
-      click_button "Login!"
+      click_button "Login"
     end
 
     it 'has a logout link' do
@@ -68,13 +64,13 @@ xdescribe 'the application', type: :feature do
       expect(page).to have_content("Unauthorized")
     end
 
-    it 'it can view its profile' do
+    xit 'it can view its profile' do
       expect(page).to have_link('Profile')
       click_link "Profile"
       expect(page).to have_content("Viki")
     end
 
-    it 'can edit its profile' do
+    xit 'can edit its profile' do
       click_link "Profile"
       expect(page).to have_link('Edit')
       click_link "Edit"
@@ -88,7 +84,7 @@ xdescribe 'the application', type: :feature do
       expect(page).to have_content("joey99")
     end
 
-    it 'edits profile invalid params redirect to edit form' do
+    xit 'edits profile invalid params redirect to edit form' do
       click_link "Profile"
       click_link "Edit"
       fill_in "user[display_name]", with: "this display name is going to be way too long so it will not pass the validations and redirect"
@@ -112,7 +108,7 @@ xdescribe 'the application', type: :feature do
       visit root_path
       fill_in "email_address", with: user.email_address
       fill_in "password", with: "p@55w0rd"
-      click_button "Login!"
+      click_button "Login"
       expect(page).to have_content("Invalid Login")
     end
   end
