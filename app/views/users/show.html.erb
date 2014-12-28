@@ -3,8 +3,6 @@
   <p>Email Address: <%= @user.email_address %></p>
   <p>Display Name (optional): <%= @user.display_name %></p>
   <% if @user == current_user %>
-    <%= link_to edit_user_path(current_user), class: "btn btn-default edit_button" do %>
-    <span class="glyphicon glyphicon-edit">Edit</span>
-    <% end %>
+    <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-default edit_button"%>
   <% end %>
 </div>
