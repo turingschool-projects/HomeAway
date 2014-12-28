@@ -36,10 +36,12 @@
     </div>
   </div>
 
-  <div class="host">
-    <%= f.label "I'd like to become a host" %><br>
-    <%= f.check_box :host %>
-  </div>
+  <% unless @user.host? %>
+    <div class="host">
+      <%= f.label "I'd like to become a host" %><br>
+      <%= f.check_box :host %>
+    </div>
+  <% end %>
 
   <div class="address">
     <h5>Address</h5>
@@ -74,6 +76,5 @@
   <div class="actions">
     <%= f.submit "Update User" %>
   </div>
-<% end %>
-
+  <% end %>
 </div>
