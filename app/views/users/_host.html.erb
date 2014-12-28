@@ -2,11 +2,24 @@
   <h4><%= @user.name %></h4>
   <p><%= @user.email_address %></p>
   <p>Username: <%= @user.display_name %></p>
+  <h4>Introduction:</h4>
+  <p><%= @user.description %></p>
+  <p>Custom URL: <%= @user.host_slug %></p>
   <p>Address:</p>
   <%= @user.address.line_1 %><br>
   <%= @user.address.line_2 %><br>
   <%= @user.address.city %>, <%= @user.address.state %> <%= @user.address.zip %><br>
   <%= @user.address.country %><br>
+</div>
+<div>
+  <p>Accepted Payment Types: </p>
+  <ul>
+    <% @user.accepted_payments.each do |payment| %>
+      <li><%= payment %></li>
+    <% end %>
+  </ul>
+</div>
+<div>
   <% if @user == current_user %>
   <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-default edit_button"%>
   <% end %>
