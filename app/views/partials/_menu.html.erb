@@ -1,8 +1,7 @@
-<h1>Browse All Properties</h1>
 <div class="container menu-properties-block col-md-9">
   <% @categories.each do |category| %>
     <div class="category-block row">
-      <div class= "category-title">
+      <div class="category-title">
         <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name.pluralize %></h2>
       </div>
       <% category.properties.active.each do |property| %>
