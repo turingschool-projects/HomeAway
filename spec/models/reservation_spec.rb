@@ -41,6 +41,35 @@ RSpec.describe Reservation, :type => :model do
     expect(reservation).to be_valid
   end
 
+  it "must have a start date greater than or equal to current date" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation = Reservation.create(property: property, user: user, start_date: Date.yesterday, end_date: end_date)
+    expect(reservation).to_not be_valid
+
+    reservation = Reservation.create(property: property, user: user, start_date: Date.current, end_date: end_date)
+    expect(reservation).to be_valid
+  end
+
+  it "must have an end date greater than the start date" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation = Reservation.create(property: property, user: user, start_date: end_date, end_date: start_date)
+    expect(reservation).to_not be_valid
+
+    reservation = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
+    expect(reservation).to be_valid
+  end
+
+  it "must have dates that are not already booked" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation1 = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
+    reservation2 = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
+    expect(reservation1).to be_vaild
+    expect(reservation2).to_not be_valid
+
+    reservation3 = Reservation.create(property: property, user: user, start_date: start_date.advance(days: 2), end_date: end_date.advance(days: 10))
+    expect(reservation3).to_not be_valid
+  end
+
   describe "statuses" do
     it "should have a default state of pending" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)

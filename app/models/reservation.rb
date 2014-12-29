@@ -41,4 +41,5 @@ class Reservation < ActiveRecord::Base
   def duration
     end_date - start_date
   end
+
 end
