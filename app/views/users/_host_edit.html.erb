@@ -1,0 +1,89 @@
+<div class>
+
+  <h1>Editing User Info</h1>
+  <%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email_address %><br>
+    <%= f.text_field :email_address %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :display_name %><br>
+    <%= f.text_field :display_name %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <label>About Me</label><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <label>Custom URL (ie: http://mighty-escarpment-8434.herokuapp.com/hosts/MyCustomURL)</label><br>
+    <%= f.text_field :host_slug %>
+  </div>
+  <div class="field">
+    <label>Accepted Payment Types:</label><br>
+    <%= f.check_box :accepts_cc %>
+    <label>Credit Card</label><br>
+    <%= f.check_box :accepts_check %>
+    <label>Check</label><br>
+    <%= f.check_box :accepts_cash %>
+    <label>Cash</label><br>
+  </div>
+
+  <div class="address">
+    <h5>Address</h5>
+    <%= f.fields_for :address, @user.address do |address_field| %>
+    <div class="field">
+      <%= address_field.label "Line 1" %><br>
+      <%= address_field.text_field :line_1 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Line 2" %><br>
+      <%= address_field.text_field :line_2 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "City" %><br>
+      <%= address_field.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_field.label "State" %><br>
+      <%= address_field.text_field :state %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Zip" %><br>
+      <%= address_field.text_field :zip %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Country" %><br>
+      <%= address_field.text_field :country %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update User" %>
+  </div>
+  <% end %>
+</div>
