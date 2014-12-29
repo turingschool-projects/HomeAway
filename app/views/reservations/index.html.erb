@@ -15,14 +15,14 @@
       </thead>
       <tbody>
       <% @reservations.upcoming.each do |reservation| %>
-        <tr class="reservation reservation_<%= reservation.id %>">
-        <td ><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-        <td ><h5><%= reservation.property.location %></h5></td>
-        <td ><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
-        <td ><h5><%= number_to_currency(reservation.total) %></h5></td>
-        <td><h5><%= reservation.status %></h5></td>
-      </tr>
-    <% end %>
+        <tr class="upcoming reservation reservation_<%= reservation.id %>">
+          <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
+          <td><h5><%= reservation.property.location %></h5></td>
+          <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+          <td><h5><%= number_to_currency(reservation.total) %></h5></td>
+          <td><h5><%= reservation.status %></h5></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
   </div>
@@ -38,14 +38,14 @@
       </thead>
       <tbody>
       <% @reservations.completed.each do |reservation| %>
-        <tr class="reservation reservation_<%= reservation.id %>">
-        <td class="date"><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-        <td ><h5><%= reservation.property.location %></h5></td>
-        <td ><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
-        <td class="total"><h5><%= number_to_currency(reservation.total) %></h5></td>
-        <td class="status"><h5><%= reservation.status %></h5></td>
-      </tr>
-    <% end %>
+        <tr class="completed reservation reservation_<%= reservation.id %>">
+          <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
+          <td><h5><%= reservation.property.location %></h5></td>
+          <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+          <td><h5><%= number_to_currency(reservation.total) %></h5></td>
+          <td><h5><%= reservation.status %></h5></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
   </div>

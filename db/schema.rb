@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218223212) do
+ActiveRecord::Schema.define(version: 20141228225645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 20141218223212) do
     t.boolean  "host"
     t.integer  "address_id"
     t.string   "name"
+    t.text     "description"
+    t.boolean  "accepts_cc"
+    t.boolean  "accepts_cash"
+    t.boolean  "accepts_check"
+    t.string   "host_slug"
   end
 
   add_index "users", ["address_id"], name: "index_users_on_address_id", using: :btree

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   belongs_to :address
+  accepts_nested_attributes_for :address
   has_many :reservations
   has_many :properties
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -10,11 +11,19 @@ class User < ActiveRecord::Base
 
   scope :hosts, -> { where(host: true) }
 
-  before_save :generate_url
+  before_save :generate_host_slug
 
-  def generate_url
-    if host && url.nil?
-      self.url = display_name.parameterize
+  def generate_host_slug
+    if host && host_slug.nil?
+      self.host_slug = display_name.parameterize
     end
+  end
+
+  def accepted_payments
+    payments = []
+    payments << "Credit Card" if accepts_cc?
+    payments << "Cash" if accepts_cash?
+    payments << "Check" if accepts_check?
+    payments
   end
 end
