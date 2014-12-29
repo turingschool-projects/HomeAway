@@ -18,27 +18,55 @@ RSpec.describe Reservation, :type => :model do
 
   it "belongs to a property" do
     property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-    reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+    reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
     expect(reservation.property).to eq(property)
   end
 
   it "must belong to a user" do
     property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-    reservation = Reservation.create(property: property, start_date: start_date, end_date: end_date)
+    reservation = Reservation.new(property: property, start_date: start_date, end_date: end_date)
     expect(reservation).to_not be_valid
-    reservation = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
+    reservation = Reservation.new(property: property, user: user, start_date: start_date, end_date: end_date)
     expect(reservation).to be_valid
     expect(reservation.user).to eq user
   end
 
   it "must have a start and end date" do
     property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-    reservation = Reservation.create(property: property, user: user)
+    reservation = Reservation.new(property: property, user: user)
     expect(reservation).to_not be_valid
 
-    reservation = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
+    reservation = Reservation.new(property: property, user: user, start_date: start_date, end_date: end_date)
 
     expect(reservation).to be_valid
+  end
+
+  it "must have a start date greater than or equal to current date" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation = Reservation.new(property: property, user: user, start_date: Date.yesterday, end_date: end_date)
+    expect(reservation).to_not be_valid
+
+    reservation = Reservation.new(property: property, user: user, start_date: Date.current, end_date: end_date)
+    expect(reservation).to be_valid
+  end
+
+  it "must have an end date greater than the start date" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation = Reservation.new(property: property, user: user, start_date: end_date, end_date: start_date)
+    expect(reservation).to_not be_valid
+
+    reservation = Reservation.new(property: property, user: user, start_date: start_date, end_date: end_date)
+    expect(reservation).to be_valid
+  end
+
+  it "must have dates that are not already booked" do
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    reservation = Reservation.new(property: property, user: user, start_date: start_date, end_date: end_date)
+    expect(reservation).to be_valid
+    reservation.save
+
+    reservation2 = Reservation.new(property: property, user: user, start_date: start_date.advance(days: 2), end_date: end_date.advance(days: 10))
+    expect(reservation2).to_not be_valid
   end
 
   describe "statuses" do
@@ -50,21 +78,21 @@ RSpec.describe Reservation, :type => :model do
 
     it "should change status to reserved when confirmed" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+      reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       reservation.confirm!
       expect(reservation.status).to eq("reserved")
     end
 
     it "changes to cancelled when cancelled" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+      reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       reservation.cancel!
       expect(reservation.status).to eq("cancelled")
     end
 
     it "can change from reserved to cancelled" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+      reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       reservation.confirm!
       expect(reservation.status).to eq("reserved")
       reservation.cancel!
@@ -73,7 +101,7 @@ RSpec.describe Reservation, :type => :model do
 
     it "can change from reserved to completed" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+      reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       reservation.confirm!
       expect(reservation.status).to eq("reserved")
       reservation.complete!
@@ -82,7 +110,7 @@ RSpec.describe Reservation, :type => :model do
 
     it "cannot skip states or go backwards" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+      reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       expect { reservation.complete! }.to raise_error
       reservation.confirm!
       expect { reservation.confirm! }.to raise_error
@@ -93,7 +121,7 @@ RSpec.describe Reservation, :type => :model do
 
   it "can identify an editable reservation" do
     property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-    reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
+    reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
     expect(reservation.editable?).to eq(true)
     reservation.cancel!
     expect(reservation.editable?).to eq(false)

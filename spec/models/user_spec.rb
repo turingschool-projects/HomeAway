@@ -100,7 +100,7 @@ RSpec.describe User, :type => :model do
                                         end_date: date.advance(days: 4),
                                         user: user)
       reservation2 = Reservation.create( property_id: 1,
-                                        start_date: date,
+                                        start_date: date.advance(days: 5),
                                         end_date: date.advance(days: 11),
                                         user: user)
 
