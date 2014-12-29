@@ -61,13 +61,12 @@ RSpec.describe Reservation, :type => :model do
 
   it "must have dates that are not already booked" do
     property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-    reservation1 = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
-    reservation2 = Reservation.create(property: property, user: user, start_date: start_date, end_date: end_date)
-    expect(reservation1).to be_vaild
-    expect(reservation2).to_not be_valid
+    reservation = Reservation.new(property: property, user: user, start_date: start_date, end_date: end_date)
+    expect(reservation).to be_valid
+    reservation.save
 
-    reservation3 = Reservation.create(property: property, user: user, start_date: start_date.advance(days: 2), end_date: end_date.advance(days: 10))
-    expect(reservation3).to_not be_valid
+    reservation2 = Reservation.new(property: property, user: user, start_date: start_date.advance(days: 2), end_date: end_date.advance(days: 10))
+    expect(reservation2).to_not be_valid
   end
 
   describe "statuses" do
