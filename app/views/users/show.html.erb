@@ -1,8 +1,5 @@
-<div class="edit-form better-edit-display">
-  <h3><%= @user.name %></h3>
-  <p>Email Address: <%= @user.email_address %></p>
-  <p>Display Name (optional): <%= @user.display_name %></p>
-  <% if @user == current_user %>
-    <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-default edit_button"%>
-  <% end %>
-</div>
+<% if @user.host? %>
+  <%= render partial: "host" %>
+<% else %>
+  <%= render partial: "traveler" %>
+<% end %>
