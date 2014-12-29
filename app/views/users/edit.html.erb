@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <div class="login-info">
+  <div class="basic-info">
     <div class="field">
       <%= f.label :email_address %><br>
       <%= f.text_field :email_address %>
@@ -35,6 +35,17 @@
       <%= f.password_field :password_confirmation %>
     </div>
   </div>
+
+  <% if @user.host? %>
+    <div class="field">
+      <label>About Me</label><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <label>Custom URL (ie: http://mighty-escarpment-8434.herokuapp.com/hosts/MyCustomURL)</label><br>
+      <%= f.text_field :host_slug %>
+    </div>
+  <% end %>
 
   <% unless @user.host? %>
     <div class="host">

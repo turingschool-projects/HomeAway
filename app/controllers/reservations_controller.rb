@@ -14,7 +14,13 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = current_user.reservations
+    if current_user
+      @reservations = current_user.reservations
+      render :index
+    else
+      flash[:error] = "You must be logged in to view your reservations."
+      redirect_to root_path
+    end
   end
 
   def show
