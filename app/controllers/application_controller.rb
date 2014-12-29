@@ -7,12 +7,15 @@ class ApplicationController < ActionController::Base
 
   before_action :load_cart
   before_action :create_user_for_sign_up
+  before_action :clean_session
   after_action  :save_cart
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
-    session[:user_id] = nil unless @current_user
-    @current_user
+  end
+
+  def clean_session
+    session[:user_id] = nil unless current_user
   end
 
   def load_cart
@@ -34,4 +37,7 @@ class ApplicationController < ActionController::Base
     @user = User.new
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

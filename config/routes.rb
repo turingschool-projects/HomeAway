@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/hosts/:slug', to: 'hosts#show'
+
   get '/my_trip', to: 'cart#show', as: :cart
   delete '/my_trip', to: 'cart#destroy'
   post '/properties/:id/add_to_cart', to: 'cart#update'
