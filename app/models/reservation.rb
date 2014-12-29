@@ -68,7 +68,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def dates_already_booked
-    booked_dates = Reservation.all.where(property_id: property_id).map(&:date_range)
+    booked_dates = Reservation.all.where(property_id: property_id).where.not(id: id).map(&:date_range)
     booked_dates.any? { |booked_date| date_range.overlaps?(booked_date) }
   end
 end
