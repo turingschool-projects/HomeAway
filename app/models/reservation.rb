@@ -11,6 +11,7 @@ class Reservation < ActiveRecord::Base
            :dates_are_not_already_booked
 
   scope :upcoming, -> { where(status: [:pending, :reserved]) }
+  scope :guests_for, ->(user_id) { joins(:property).where(properties: { user_id: user_id }).includes(:user) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
