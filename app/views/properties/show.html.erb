@@ -1,3 +1,4 @@
+<%= render partial: 'partials/property_header', locals: {property: @property} %>
 <div class="container">
   <%= render partial: 'partials/property_detail' %>
   <p>Booked Dates: </p>
@@ -6,10 +7,5 @@
       <li><%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></li>
     <% end %>
   </ul>
-  <% if !@property.retired? %>
-    <p>
-
-    </p>
-  <% end %>
 </div>
 <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&q=#{@property.address.escape_street}+#{@property.address.escape_city}" %>></iframe>
