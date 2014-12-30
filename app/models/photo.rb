@@ -3,7 +3,7 @@ class Photo < ActiveRecord::Base
     styles: {
     hero: '1280x768',
     thumb: '100x100>',
-    medium: '235x135',
+    medium: '500x350!',
     gallery: '800x500',
   }
 

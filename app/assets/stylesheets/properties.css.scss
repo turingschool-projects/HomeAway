@@ -1,0 +1,62 @@
+.property-menu {
+  display: table;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: #fff;
+  background: image-url("vw_thin.jpeg") no-repeat bottom center scroll;
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.intro .intro-body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.functional-header {
+  width: 100%;
+  height: auto;
+}
+
+.menu {
+  margin-bottom: 50px;
+}
+
+.listing {
+  margin-top: 30px;
+  padding: 10px;
+  border: 1px solid #C5CFC6;
+}
+
+.listing-image {
+  height: 100%;
+  width: 100%;
+}
+
+.listing-title {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.listing-price {
+  font-size: 18px;
+  color: #474843;
+}
+
+.listing-link {
+  font-size: 10px;
+}
+
+.listing-location {
+  font-size: 12px;
+  color: #474843;
+}
+
+.filter-head {
+  font-weight: 700;
+  color: #D88A8A;
+}

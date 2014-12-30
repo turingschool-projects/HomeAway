@@ -23,7 +23,7 @@ describe "user browsing listings", type: :feature do
 
     it "shows listings on the listing page" do
       expect(page).to have_content "My Cool Home"
-      expect(page).to have_content "cool description"
+      expect(page).to have_content "6.66"
     end
 
     it "does not show listings on the listing page when retired" do
