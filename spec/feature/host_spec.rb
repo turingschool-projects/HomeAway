@@ -37,26 +37,23 @@ context 'authenticated host', type: :feature do
     expect(page).to have_content("Burger Shack")
   end
 
-    xit 'can modify existing properties’ name, description, price, and photo' do
-    burgers = Category.create!(name: "Burgers")
-    burger = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
-    visit edit_admin_property_path(burger)
+  it 'can modify existing properties’ details' do
+    house = Category.create!(name: "House")
+    property = Property.create!(title: "Burger Shack", description: "Good burger", price: 5000, occupancy: 7, category: house)
+    visit edit_property_path(property)
 
-    fill_in "property_title", with: "Better Burger"
-    fill_in "property_description", with: "Really good burger"
-    fill_in "property_price", with: 10.0
+    fill_in "property_title", with: "Taco Shack"
+    fill_in "property_description", with: "Really good taco"
+    fill_in "property_price", with: 25
 
     click_button "Update Property"
-    expect(current_path).to eq(admin_properties_path)
+    expect(current_path).to eq(user_path)
 
-    expect(page).to have_content("Better Burger")
-    expect(page).not_to have_content("Best Burger")
+    expect(page).to have_content("Taco Shack")
+    expect(page).not_to have_content("Burger Shack")
 
-    expect(page).to have_content("Really good burger")
-    expect(page).not_to have_content("Good burger")
-
-    expect(page).to have_content(10.0)
-    expect(page).not_to have_content(9.0)
+    expect(page).to have_content("Really good taco")
+    expect(page).not_to have_content("Burger Shack")
   end
 
     xit 'can retire an property from being sold' do
