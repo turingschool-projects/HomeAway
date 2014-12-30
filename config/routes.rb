@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :reservations
 
-  resources :properties, only: [:index, :show, :new]
+  resources :properties, only: [:index, :show, :new, :create]
 
   get 'code', to: redirect('https://github.com/dalexj/da_pivot')
   root 'pages#home'

@@ -18,6 +18,7 @@ context 'authenticated host', type: :feature do
 
   it 'can create property listings' do
     visit new_property_path
+    save_and_open_page
     fill_in "Title", with: "Burger Shack"
     fill_in "Description", with: "Juicy and yummy shack"
     fill_in "Daily Rate", with: 500

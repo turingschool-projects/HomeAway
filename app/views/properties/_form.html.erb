@@ -1,0 +1,82 @@
+<%= form_for(@property) do |f| %>
+  <% hidden_field_tag(:user_id, current_user.id) %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :occupancy %><br>
+    <%= f.text_field :occupancy %>
+  </div>
+  <div class="field">
+    <%= f.label "Private Bathroom?" %><br>
+    <%= f.check_box :bathroom_private %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select(:category_id, options_for_select(@categories)) %>
+  </div>
+  <% unless @property.new_record? %>
+    <div class="field">
+      <%= f.check_box(:retired) %>
+      <%= f.label :retired %>
+    </div>
+  <% end %>
+
+  <div class="address">
+    <h5>Address</h5>
+    <%= f.fields_for :address_attributes, @property.address do |address_field| %>
+    <div class="field">
+      <%= address_field.label "Line 1" %><br>
+      <%= address_field.text_field :line_1 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Line 2" %><br>
+      <%= address_field.text_field :line_2 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "City" %><br>
+      <%= address_field.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_field.label "State" %><br>
+      <%= address_field.text_field :state %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Zip" %><br>
+      <%= address_field.text_field :zip %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Country" %><br>
+      <%= address_field.text_field :country %>
+    </div>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :image, "Attach an Image" %><br>
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default nav-link" %>
+  </div>
+<% end %>
