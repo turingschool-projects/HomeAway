@@ -9,6 +9,7 @@
       <th><h4>Dates</h4></th>
       <th><h4>Total Cost</h4></th>
       <th><h4>Status</h4></th>
+      <th><h4>Update</h4></th>
     </thead>
     <tbody>
     <% @reservations.upcoming.each do |reservation| %>
@@ -19,6 +20,9 @@
         <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
         <td><h5><%= number_to_currency(reservation.total) %></h5></td>
         <td><h5><%= reservation.status %></h5></td>
+        <td><% reservation.state_buttons.each do |button| %>
+          <%= button_to(button, reservation_path(reservation), method: :put, name: button) %>
+        <% end %></td>
       </tr>
     <% end %>
     </tbody>

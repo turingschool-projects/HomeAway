@@ -11,12 +11,14 @@ class Reservation < ActiveRecord::Base
            :dates_are_not_already_booked
 
   scope :upcoming, -> { where(status: [:pending, :reserved]) }
+  scope :denied_or_cancelled, -> { where(status: [:denied, :cancelled]) }
   scope :guests_for, ->(user_id) { joins(:property).where(properties: { user_id: user_id }).includes(:user) }
 
   aasm column: :status do
     # each state has a predicate method we can use to check status, like .in_cart?
     state :pending, initial: true
     state :reserved
+    state :denied
     state :cancelled
     state :completed
 
@@ -25,13 +27,26 @@ class Reservation < ActiveRecord::Base
       transitions from: :pending, to: :reserved
     end
 
-    event :cancel do
-      transitions from: [:pending, :reserved], to: :cancelled
+    event :cancel, guard: :not_past? do
+      transitions from: :pending, to: :cancelled
+    end
+
+    event :deny do
+      transitions from: :pending, to: :denied
     end
 
     event :complete do
-      transitions from: :reserved, to: :completed
+      transitions from: :reserved, to: :completed, guard: :past?
     end
+  end
+
+  def state_buttons
+    buttons = []
+    buttons << "confirm" if may_confirm?
+    buttons << "deny" if may_deny?
+    buttons << "cancel" if may_cancel?
+    buttons << "complete" if may_complete?
+    buttons
   end
 
   def editable?
@@ -48,6 +63,14 @@ class Reservation < ActiveRecord::Base
 
   def date_range
     start_date..end_date
+  end
+
+  def not_past?
+    start_date.present? && start_date >= Date.current
+  end
+
+  def past?
+    start_date.present? && start_date < Date.current
   end
 
   def start_date_cannot_be_in_the_past
