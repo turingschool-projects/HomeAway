@@ -1,6 +1,8 @@
 <%= render partial: 'partials/property_header', locals: {property: @property} %>
 <div class="container">
   <%= render partial: 'partials/property_detail' %>
+  <h3>Details: </h3>
+  <p><%= @property.description %></p>
   <p>Booked Dates: </p>
   <ul>
     <% @property.reservations.each do |reservation| %>
