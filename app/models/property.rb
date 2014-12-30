@@ -13,6 +13,7 @@ class Property < ActiveRecord::Base
 
   scope :active, -> { where(retired: false) }
   scope :retired, -> { where(retired: true) }
+  scope :for_user, ->(user_id) { where(user_id: user_id) }
 
   has_many :photos
 

@@ -5,6 +5,5 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = Property.all
-    @categories = Category.all
   end
 end
