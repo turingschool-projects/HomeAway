@@ -11,7 +11,7 @@ class Seed
   end
 
   def generate_users
-    User.create!({
+    @horace_user = User.create!({
       display_name: "Horace",
       name: "Horace Williams",
       email_address: "demo+horace@jumpstartlab.com",
@@ -21,7 +21,7 @@ class Seed
       host: true
     })
 
-    User.create!({
+    @jorge_user = User.create!({
       display_name: "Jorge",
       name: "Jorge Tellez",
       email_address: "demo+jorge@jumpstartlab.com",
@@ -31,7 +31,7 @@ class Seed
       host: true
     })
 
-    User.create!({
+    @traveler_user = User.create!({
       display_name: "Traveler",
       name: "Jim Jones",
       email_address: "travel@example.com",
@@ -41,7 +41,7 @@ class Seed
       host: false
     })
 
-    User.create!({
+    @hostess_user = User.create!({
       display_name: "Hostess",
       name: "Hostess Hosterson",
       email_address: "host@example.com",
@@ -72,38 +72,43 @@ class Seed
                     price: 5500,
                     description: Faker::Lorem.sentence(2),
                     category_id: 1,
-                    occupancy: 4)
+                    occupancy: 4,
+                    user: @horace_user)
 
     Property.create!(title: "Run's House",
                     price: 15000,
                     description: Faker::Lorem.sentence(3),
                     category_id: 1,
-                    occupancy: 9)
+                    occupancy: 9,
+                    user: @jorge_user)
 
      Property.create!(title: "Paul's Boutique",
                     price: 1000,
                     description: Faker::Lorem.sentence(3),
                     category_id: 2,
-                    occupancy: 2)
+                    occupancy: 2,
+                    user: @horace_user)
 
       Property.create!(title: "The Room",
                     price: 500,
                     description: Faker::Lorem.sentence(1),
                     category_id: 3,
-                    occupancy: 1)
+                    occupancy: 1,
+                    user: @horace_user)
 
       Property.create!(title: "Log Cabin",
                     price: 44500,
                     description: Faker::Lorem.sentence(1),
                     category_id: 4,
-                    occupancy: 12)
+                    occupancy: 12,
+                    user: @horace_user)
 
     puts "Properties generated"
   end
 
   def generate_reservations
 
-    date = Date.current
+    date = Date.current.advance(days: 100)
 
     Reservation.create!(status: "pending",
                         user_id: 3,
