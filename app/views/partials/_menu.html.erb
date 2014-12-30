@@ -1,7 +1,17 @@
-<div class="container menu-properties-block col-md-9">
-  <% @properties.each do |property| %>
-    <%= content_tag :div, class: "category-block row", id: "category-#{property.category.name}" do %>
-      <%= render partial: property %>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-2">
+      menu area
+    </div>
+    <div class="col-md-10">
+    <% @properties.each do |property| %>
+      <%= content_tag :div, class: "category-block", id: "category-#{property.category.name}" do %>
+        <div class="col-md-6">
+          <%= render partial: property %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  </div>
 </div>
