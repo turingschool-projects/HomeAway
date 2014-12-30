@@ -1,14 +1,13 @@
-<div class="container">
-
+<div class="container menu">
   <div class="row">
     <div class="col-md-2">
-      menu area
+      <%= render partial: 'partials/filter_menu' %>
     </div>
     <div class="col-md-10">
     <% @properties.each do |property| %>
       <%= content_tag :div, class: "category-block", id: "category-#{property.category.name}" do %>
         <div class="col-md-6">
-          <%= render partial: property %>
+          <%= render partial: 'partials/listing', locals: {property: property} %>
         </div>
       <% end %>
     <% end %>
