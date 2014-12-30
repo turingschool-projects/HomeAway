@@ -21,6 +21,18 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
   end
 
+  def update
+    @property.update(property_params)
+    if @property.save
+      redirect_to properties_path
+    else
+      render :edit
+    end
+  end
+
+  def edit
+  end
+
   def index
     @properties = Property.active
   end

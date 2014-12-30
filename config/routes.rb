@@ -13,13 +13,12 @@ Rails.application.routes.draw do
 
   resources :reservations
 
-  resources :properties, only: [:index, :show, :new, :create]
+  resources :properties
 
   get 'code', to: redirect('https://github.com/dalexj/da_pivot')
   root 'pages#home'
 
   namespace :admin do
-    resources :properties
     resources :users, only: [:index, :show]
 
     resources :reservations do
