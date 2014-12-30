@@ -22,7 +22,7 @@ describe 'the unauthenticated user', type: :feature do
     property = Property.last
     visit properties_path
     expect(page).to have_content(property.title)
-    expect(page).to have_content(property.description)
+    expect(page).to have_content("6.66")
   end
 
   it "can view a single property" do
