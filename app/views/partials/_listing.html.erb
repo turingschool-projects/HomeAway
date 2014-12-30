@@ -2,6 +2,7 @@
   <%= link_to (image_tag property.primary ? property.primary.image.url(:medium) : "https://placekitten.com/g/235/135", class: "listing-image" ), property_path(property) %>
   <div class="row">
     <div class="col-md-8 listing-title">
+      <i class="fa fa-home"></i>
       <%= link_to property.title, property_path(property) %>
     </div>
     <div class="col-md-2 listing-price">
