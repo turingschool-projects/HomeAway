@@ -33,8 +33,8 @@ describe "user browsing listings", type: :feature do
 
     it "has more info on the specific property's page" do
       click_link_or_button "My Cool Home"
-      expect(page).to have_content "Price: $6.66"
-      expect(page).to have_content "Maximum Occupancy: 4"
+      expect(page).to have_content "$6.66"
+      expect(page).to have_content "4"
     end
   end
 end
