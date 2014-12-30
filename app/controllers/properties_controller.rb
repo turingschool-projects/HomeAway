@@ -4,6 +4,6 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.all
+    @properties = Property.active
   end
 end
