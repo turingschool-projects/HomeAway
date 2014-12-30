@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :reservations
+  get '/my_guests', to: 'reservations#my_guests'
 
   resources :properties, only: [:index, :show]
 

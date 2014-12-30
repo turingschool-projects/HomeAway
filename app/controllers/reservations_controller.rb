@@ -3,6 +3,15 @@ class ReservationsController < ApplicationController
     redirect_to login_path unless current_user
   end
 
+  def my_guests
+    if current_user && current_user.host?
+      @reservations = Reservation.guests_for current_user.id
+    else
+      flash[:error] = "You must be a host to see your guests"
+      redirect_to :back
+    end
+  end
+
   def create
     if current_user
       @cart.save_reservation_for current_user
