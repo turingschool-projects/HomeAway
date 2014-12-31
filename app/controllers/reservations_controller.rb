@@ -10,6 +10,8 @@ class ReservationsController < ApplicationController
       flash[:error] = "You must be a host to see your guests"
       redirect_to :back
     end
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 
   def create
