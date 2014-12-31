@@ -30,6 +30,10 @@
               <div class="form-group">
                 <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "modal-form form-control" %>
               </div>
+              <div class="form-group">
+                <%= f.check_box :host, class: "modal-form" %>
+                <%= f.label "I'd like to become a host" %>
+              </div>
               <div class="actions">
                 <%= f.submit "Create User", class: "btn btn-default" %>
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
