@@ -18,15 +18,15 @@
       <li class="hidden">
       <a href="#page-top"></a>
       </li>
-      <% if current_page? root_path %>
-        <li><a class="page-scroll" href="#about">About</a></li>
-      <% end %>
       <li>
       <a href="<%= properties_path %>">Properties</a>
       </li>
       <% if current_user %>
         <li><%= link_to "My Trips", reservations_path %></li>
         <li><%= link_to "My Profile", user_path(current_user) %></li>
+        <% if current_user.host? %>
+          <li><%= link_to "My Guests", my_guests_path %></li>
+        <% end %>
         <li><%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %></li>
       <% else %>
         <li><%= render partial: 'partials/log_in' %></li>
