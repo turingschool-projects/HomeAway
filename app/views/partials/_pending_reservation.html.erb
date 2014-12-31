@@ -10,7 +10,7 @@
   <h5>Total: <%= number_to_currency(reservation.total) %></h5>
 
   <% unless reservation.cancelled? %>
-    <%= button_to admin_reservation_path(reservation), method: :delete, name: :remove, name: "remove", value: "#{reservation.property.id}", class: "btn btn-default" do %>
+    <%= button_to reservation_path(reservation), method: :put, value: "#{reservation.property.id}", class: "btn btn-default", name: "cancel" do %>
       <span>Cancel Reservation</span>
     <% end %>
   <% end %>
