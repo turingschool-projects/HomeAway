@@ -6,7 +6,7 @@
       <p><%= @user.email_address %></p>
     </div>
     <h4>Username: <%= @user.display_name %></h4>
-    <h4>Custom URL: <%= @user.host_slug %></h4>
+    <h4>Custom URL: <%= link_to "#{@user.host_slug}", "/hosts/#{@user.host_slug}"  %></h4>
     <h4>About Me:</h4>
     <p><%= @user.description %></p>
     <h4>Address:</h4>
@@ -27,14 +27,30 @@
 
   <div class="col-lg-9">
     <h1>My Properties</h1>
-    <ul>
-      <% @user.properties.each do |property| %>
-        <li>
-        <%= property.title %>
-        <%= property.location %>
-        <%= link_to "Edit", property_path(property) %>
-        </li>
-      <% end %>
-    </ul>
+    <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Property name</td>
+          <td>Category</td>
+          <td>Daily rate</td>
+          <td>Location</td>
+          <td>Status</td>
+          <td></td>
+        </tr>
+    <% @user.properties.each do |property| %>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= property.title %></td>
+        <td><%= property.category.name %></td>
+        <td>$<%= property.price/100 %></td>
+        <td><%= property.location %></td>
+        <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
+        <td><%= link_to "Edit", edit_property_path(property) %></td>
+      </tr>
+      </tbody>
+    <% end %>
+  </table>
   </div>
 </div>

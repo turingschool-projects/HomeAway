@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Reservation, :type => :model do
+RSpec.describe Property, :type => :model do
   let(:category) do
     Category.create!(name: "Room")
   end
@@ -104,7 +104,7 @@ RSpec.describe Reservation, :type => :model do
     it "can have many photos" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
 
-      photo1 = Photo.create!(image: File.open("app/assets/images/ext_house_1.jpg"), property: property, primary: true)
+      photo1 = Photo.create!(image: File.open("app/assets/images/ext_house_1.jpeg"), property: property, primary: true)
       photo2 = Photo.create!(image: File.open("app/assets/images/int_house_1.jpg"), property: property)
 
       expect(property.photos).to include(photo1)
@@ -114,7 +114,7 @@ RSpec.describe Reservation, :type => :model do
     it "can identify its primary and other photos" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
 
-      photo1 = Photo.create!(image: File.open("app/assets/images/ext_house_1.jpg"), property: property, primary: true)
+      photo1 = Photo.create!(image: File.open("app/assets/images/ext_house_1.jpeg"), property: property, primary: true)
       photo2 = Photo.create!(image: File.open("app/assets/images/int_house_1.jpg"), property: property)
 
       expect(property.primary).to eq photo1
