@@ -14,7 +14,7 @@ class Property < ActiveRecord::Base
   has_many :reservations
 
   has_many :photos
-  accepts_nested_attributes_for :photos
+  accepts_nested_attributes_for :photos, reject_if: lambda {|attributes| attributes['image'].blank?}
 
   scope :active, -> { where(retired: false) }
   scope :retired, -> { where(retired: true) }
