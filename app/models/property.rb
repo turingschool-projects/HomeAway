@@ -9,6 +9,7 @@ class Property < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   belongs_to :address
+  accepts_nested_attributes_for :address
   has_many :reservations
 
   scope :active, -> { where(retired: false) }

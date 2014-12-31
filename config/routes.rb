@@ -14,13 +14,12 @@ Rails.application.routes.draw do
   resources :reservations
   get '/my_guests', to: 'reservations#my_guests'
 
-  resources :properties, only: [:index, :show]
+  resources :properties
 
   get 'code', to: redirect('https://github.com/dalexj/da_pivot')
   root 'pages#home'
 
   namespace :admin do
-    resources :properties
     resources :users, only: [:index, :show]
 
     resources :reservations do

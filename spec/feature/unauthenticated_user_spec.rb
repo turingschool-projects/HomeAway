@@ -46,10 +46,4 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to have_content(property.location)
     expect(page).to have_content("Booked Dates")
   end
-
-  it 'cannot access admin views' do
-    visit admin_properties_path
-    expect(page.current_path).to eq(root_path)
-    expect(page).to have_content('Unauthorized')
-  end
 end
