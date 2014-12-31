@@ -63,6 +63,15 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def pay
+    Payments.process_payment(@cart, current_user, params[:stripeToken])
+    create
+    flash[:notice] = "Payment of $#{@cart.total} accepted"
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+  end
+
   private
 
   def reservation_update_params

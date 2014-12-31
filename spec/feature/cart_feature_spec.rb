@@ -89,7 +89,7 @@ describe "can add things to the trip", type: :feature do
       fill_in "password", with: "password"
       click_link_or_button "Login"
       expect(page).to have_content "My Cool Home"
-      click_link_or_button "Request Reservation"
+      click_link_or_button "Pay"
 
       visit reservations_path
       expect(page).to have_content "My Cool Home"
