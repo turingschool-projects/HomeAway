@@ -68,7 +68,13 @@
         <td>$<%= property.price/100 %></td>
         <td><%= property.location %></td>
         <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
-        <td><%= link_to "Edit", edit_property_path(property) %></td>
+        <td><%= link_to "Edit", edit_property_path(property) %><br>
+          <% if property.retired? %>
+            <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %>
+          <% else %>
+            <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %>
+          <% end %>
+        </td>
       </tr>
       </tbody>
     <% end %>
