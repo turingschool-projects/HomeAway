@@ -69,4 +69,12 @@ class Cart
     booked_dates = Reservation.all.where(property_id: property).map(&:date_range)
     booked_dates.any? { |booked_date| date_range.overlaps?(booked_date) }
   end
+
+  def pretty_start_date
+    Date.parse(start_date).strftime("%B %d, %Y")
+  end
+
+  def pretty_end_date
+    Date.parse(end_date).strftime("%B %d, %Y")
+  end
 end

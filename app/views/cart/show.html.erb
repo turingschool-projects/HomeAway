@@ -5,8 +5,8 @@
   <% else %>
     <%= render partial: "partials/property", locals: {property: @cart.property } %>
     <h5>Desired reservation dates</h5>
-    <p>From: <%= @cart.start_date %></p>
-    <p>To: <%= @cart.end_date %></p>
+    <p>From: <%= @cart.pretty_start_date %></p>
+    <p>To: <%= @cart.pretty_end_date %></p>
     <h5>Total Cost</h5>
     <p>Total: <%= number_to_currency(@cart.total) %></p>
     <% if current_user %>
