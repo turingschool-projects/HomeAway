@@ -1,3 +1,15 @@
+<div class="functional-header">
+<header class="profile-menu">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="profile-header brand-box">
+          <h1 class="profile-header brand-heading">My <span>Profile</span><h1>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
 <% if @user.host? %>
   <%= render partial: "host" %>
 <% else %>

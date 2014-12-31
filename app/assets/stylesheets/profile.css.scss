@@ -1,0 +1,33 @@
+.profile-menu {
+  display: table;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: #fff;
+  background: image-url("my-profile.jpeg") no-repeat bottom center scroll;
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.profile-header {
+  padding-top: 60px;
+  margin-right: 150px;
+  color: #F8EDD1;
+}
+
+.profile-primary {
+  background-color: #C5CFC6;
+    }
+
+.profile-block {
+  margin-top: 30px;
+  padding: 10px;
+  border: 1px solid #C5CFC6;
+  height: 225px;
+  word-wrap: break-word;
+  overflow: scroll;
+}
+
