@@ -14,7 +14,7 @@ class PropertiesController < ApplicationController
     @property.user = current_user
 
     if @property.save
-      redirect_to properties_path
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class PropertiesController < ApplicationController
   def update
     @property.update(property_params)
     if @property.save
-      redirect_to properties_path
+      redirect_to user_path(current_user)
     else
       render :edit
     end
