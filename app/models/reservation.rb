@@ -44,7 +44,6 @@ class Reservation < ActiveRecord::Base
     buttons = []
     buttons << "confirm" if may_confirm?
     buttons << "deny" if may_deny?
-    buttons << "cancel" if may_cancel?
     buttons << "complete" if may_complete?
     buttons
   end
