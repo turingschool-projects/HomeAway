@@ -70,6 +70,12 @@ RSpec.describe Reservation, :type => :model do
   end
 
   describe "statuses" do
+    it "can generate an array of status names for buttons" do
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+      reservation = Reservation.create!(user: user, property: property, start_date: start_date, end_date: end_date)
+
+      expect(reservation.state_buttons).to eq(["confirm", "deny", "cancel"])
+    end
     it "should have a default state of pending" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
       reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
@@ -90,21 +96,22 @@ RSpec.describe Reservation, :type => :model do
       expect(reservation.status).to eq("cancelled")
     end
 
-    it "can change from reserved to cancelled" do
+    it "can change from pending to cancelled" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
       reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
-      reservation.confirm!
-      expect(reservation.status).to eq("reserved")
       reservation.cancel!
       expect(reservation.status).to eq("cancelled")
     end
 
-    it "can change from reserved to completed" do
+    it "can change from reserved to completed when dates are in past" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
       reservation = Reservation.new(user: user, property: property, start_date: start_date, end_date: end_date)
       reservation.confirm!
       expect(reservation.status).to eq("reserved")
-      reservation.complete!
+      expect { reservation.complete! }.to raise_error
+      reservation.update_attribute(:start_date, start_date.advance(days: -10))
+      reservation.update_attribute(:end_date, end_date.advance(days: -10))
+      reservation.complete
       expect(reservation.status).to eq("completed")
     end
 
@@ -114,7 +121,9 @@ RSpec.describe Reservation, :type => :model do
       expect { reservation.complete! }.to raise_error
       reservation.confirm!
       expect { reservation.confirm! }.to raise_error
-      reservation.complete!
+      reservation.update_attribute(:start_date, start_date.advance(days: -10))
+      reservation.update_attribute(:end_date, end_date.advance(days: -10))
+      reservation.complete
       expect(reservation.status).to eq("completed")
     end
   end

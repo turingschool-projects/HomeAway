@@ -15,14 +15,14 @@ class Reservation < ActiveRecord::Base
   scope :guests_for, ->(user_id) { joins(:property).where(properties: { user_id: user_id }).includes(:user) }
 
   aasm column: :status do
-    # each state has a predicate method we can use to check status, like .in_cart?
+    # each state has a predicate method we can use to check status, like .pending?
     state :pending, initial: true
     state :reserved
     state :denied
     state :cancelled
     state :completed
 
-    # events give us bang methods, like place! for changing reservation status
+    # events give us bang methods, like confirm! for changing reservation status
     event :confirm do
       transitions from: :pending, to: :reserved
     end
@@ -66,11 +66,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def not_past?
-    start_date.present? && start_date >= Date.current
+    start_date.present? && start_date >= Date.current && end_date >= Date.current
   end
 
   def past?
-    start_date.present? && start_date < Date.current
+    start_date.present? && end_date < Date.current
   end
 
   def start_date_cannot_be_in_the_past
