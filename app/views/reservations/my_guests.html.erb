@@ -9,6 +9,7 @@
       <th><h4>Dates</h4></th>
       <th><h4>Total Cost</h4></th>
       <th><h4>Status</h4></th>
+      <th><h4>Update</h4></th>
     </thead>
     <tbody>
     <% @reservations.upcoming.each do |reservation| %>
@@ -19,6 +20,9 @@
         <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
         <td><h5><%= number_to_currency(reservation.total) %></h5></td>
         <td><h5><%= reservation.status %></h5></td>
+        <td><% reservation.state_buttons.each do |button| %>
+          <%= button_to(button, reservation_path(reservation), method: :put, name: button) %>
+        <% end %></td>
       </tr>
     <% end %>
     </tbody>
@@ -46,6 +50,31 @@
         <td><h5><%= reservation.status %></h5></td>
       </tr>
     <% end %>
+    </tbody>
+  </table>
+</div>
+<h3>Cancelled or Denied</h3>
+<div class="edit-form">
+  <table class="table table-hover">
+    <thead>
+      <th><h4>Property</h4></th>
+      <th><h4>Location</h4></th>
+      <th><h4>Who wanted this shit</h4></th>
+      <th><h4>Dates</h4></th>
+      <th><h4>Total</h4></th>
+      <th><h4>Status</h4></th>
+    </thead>
+    <tbody>
+      <% @reservations.denied_or_cancelled.each do |reservation| %>
+      <tr class="completed reservation reservation_<%= reservation.id %>">
+        <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
+        <td><h5><%= reservation.property.location %></h5></td>
+        <td><h5><%= reservation.user.name %></h5></td>
+        <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+        <td><h5><%= number_to_currency(reservation.total) %></h5></td>
+        <td><h5><%= reservation.status %></h5></td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

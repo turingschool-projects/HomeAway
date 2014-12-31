@@ -33,8 +33,8 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = current_user && current_user.reservations.where(id: params[:id]).take
-    if @reservation
+    @reservation = Reservation.find(params[:id])
+    if [@reservation.user_id, @reservation.property.user_id].include? current_user.id
       render :show
     else
       flash[:error] = "You may only view your own reservations"
@@ -43,16 +43,15 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    @reservation = @cart.reservation
   end
 
   def update
-    @reservation = @cart.reservation
-    if @reservation.update(reservation_update_params)
-      @reservation.place! if @reservation.in_cart?
-      redirect_to @reservation
+    @reservation = Reservation.find(params[:id])
+    if @reservation.property.user == current_user
+      increment_state(@reservation)
+      redirect_to "/my_guests"
     else
-      redirect_to edit_reservation_path
+      redirect_to "/my_guests"
       flash[:errors] = @reservation.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
     end
   end
@@ -61,5 +60,18 @@ class ReservationsController < ApplicationController
 
   def reservation_update_params
     params.require(:reservation).permit(:address)
+  end
+
+  def increment_state(reservation)
+    case
+    when params[:confirm]
+      reservation.confirm!
+    when params[:deny]
+      reservation.deny!
+    when params[:cancel]
+      reservation.cancel!
+    when params[:complete]
+      reservation.complete!
+    end
   end
 end
