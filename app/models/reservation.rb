@@ -25,6 +25,9 @@ class Reservation < ActiveRecord::Base
     # events give us bang methods, like confirm! for changing reservation status
     event :confirm do
       transitions from: :pending, to: :reserved
+      after do
+        UserMailer.confirmation_email(self).deliver
+      end
     end
 
     event :cancel, guard: :not_past? do
@@ -93,5 +96,13 @@ class Reservation < ActiveRecord::Base
   def dates_already_booked
     booked_dates = Reservation.all.where(property_id: property_id).where.not(id: id).map(&:date_range)
     booked_dates.any? { |booked_date| date_range.overlaps?(booked_date) }
+  end
+
+  def pretty_start_date
+    start_date.strftime("%B %d, %Y")
+  end
+
+  def pretty_end_date
+    end_date.strftime("%B %d, %Y")
   end
 end
