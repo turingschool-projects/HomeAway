@@ -5,10 +5,10 @@ class Address < ActiveRecord::Base
   validates :zip, presence: true
 
   def escape_street
-    line_1.gsub(" ", "+")
+    line_1.gsub(/ +/, "+")
   end
 
   def escape_city
-    city.gsub(" ", "+")
+    city.gsub(/ +/, "+")
   end
 end
