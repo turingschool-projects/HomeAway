@@ -5,7 +5,7 @@
   <h5>Location: <%= reservation.property.location %></h5>
   <h5>Category: <%= reservation.property.category.name %></h5>
   <h5>Description: <%= reservation.property.description %></h5>
-  <h5>From <%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></h5>
+  <h5>From <%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date %></h5>
   <h5>Length of Stay: <%= reservation.duration.floor %> days</h5>
   <h5>Total: <%= number_to_currency(reservation.total) %></h5>
 

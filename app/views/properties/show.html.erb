@@ -6,7 +6,7 @@
   <p>Booked Dates: </p>
   <ul>
     <% @property.reservations.each do |reservation| %>
-      <li><%= reservation.start_date.strftime("%B %d, %Y") %> to <%= reservation.end_date.strftime("%B %d, %Y") %></li>
+      <li><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date %></li>
     <% end %>
   </ul>
 </div>

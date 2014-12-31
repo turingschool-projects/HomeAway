@@ -17,7 +17,7 @@
         <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
         <td><h5><%= reservation.property.location %></h5></td>
         <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+        <td><h5><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </h5></td>
         <td><h5><%= number_to_currency(reservation.total) %></h5></td>
         <td><h5><%= reservation.status %></h5></td>
         <td><% reservation.state_buttons.each do |button| %>
@@ -45,7 +45,7 @@
         <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
         <td><h5><%= reservation.property.location %></h5></td>
         <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+        <td><h5><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </h5></td>
         <td><h5><%= number_to_currency(reservation.total) %></h5></td>
         <td><h5><%= reservation.status %></h5></td>
       </tr>
@@ -70,7 +70,7 @@
         <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
         <td><h5><%= reservation.property.location %></h5></td>
         <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.start_date.strftime("%B %d, %Y")  %> to <%= reservation.end_date.strftime("%B %d, %Y")  %> </h5></td>
+        <td><h5><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </h5></td>
         <td><h5><%= number_to_currency(reservation.total) %></h5></td>
         <td><h5><%= reservation.status %></h5></td>
       </tr>
