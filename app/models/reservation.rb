@@ -39,6 +39,9 @@ class Reservation < ActiveRecord::Base
 
     event :deny do
       transitions from: :pending, to: :denied
+      after do
+        UserMailer.denial_email(self).deliver
+      end
     end
 
     event :complete do
