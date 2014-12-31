@@ -74,7 +74,7 @@ RSpec.describe Reservation, :type => :model do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
       reservation = Reservation.create!(user: user, property: property, start_date: start_date, end_date: end_date)
 
-      expect(reservation.state_buttons).to eq(["confirm", "deny", "cancel"])
+      expect(reservation.state_buttons).to eq(["confirm", "deny"])
     end
     it "should have a default state of pending" do
       property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
