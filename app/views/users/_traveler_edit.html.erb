@@ -43,7 +43,7 @@
 
   <div class="address">
     <h5>Address</h5>
-    <%= f.fields_for :address, @user.address do |address_field| %>
+    <%= f.fields_for :address_attributes, @user.address do |address_field| %>
     <div class="field">
       <%= address_field.label "Line 1" %><br>
       <%= address_field.text_field :line_1 %>
