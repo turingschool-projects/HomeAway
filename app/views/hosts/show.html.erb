@@ -3,8 +3,8 @@
     <%= render partial: "partials/menu" %>
   <% else %>
     <% if is_the_host? %>
-      <h3><%= link_to "Hey breh you need some properties", new_property_path %></h3>
+      <h3><%= link_to "Add Property", new_property_path %></h3>
     <% end %>
-    <h3>NO PROPERTIES SUCKER CHECK BACK LATER</h3>
+    <h3>Sorry, this host doesn't have any available propertites right now.</h3>
   <% end %>
 </div>
