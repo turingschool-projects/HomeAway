@@ -57,6 +57,9 @@ class ReservationsController < ApplicationController
     if @reservation.property.user == current_user
       increment_state(@reservation)
       redirect_to "/my_guests"
+    elsif @reservation.user == current_user &&
+      @reservation.cancel! if params[:cancel]
+      redirect_to :back
     else
       redirect_to "/my_guests"
       flash[:errors] = @reservation.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
