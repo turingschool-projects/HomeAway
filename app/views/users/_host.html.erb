@@ -1,26 +1,40 @@
-<div>
-  <h4><%= @user.name %></h4>
-  <p><%= @user.email_address %></p>
-  <p>Username: <%= @user.display_name %></p>
-  <h4>Introduction:</h4>
-  <p><%= @user.description %></p>
-  <p>Custom URL: <%= @user.host_slug %></p>
-  <p>Address:</p>
-  <%= @user.address.line_1 %><br>
-  <%= @user.address.line_2 %><br>
-  <%= @user.address.city %>, <%= @user.address.state %> <%= @user.address.zip %><br>
-  <%= @user.address.country %><br>
-</div>
-<div>
-  <p>Accepted Payment Types: </p>
-  <ul>
-    <% @user.accepted_payments.each do |payment| %>
-      <li><%= payment %></li>
+<div class="container">
+  <div class="col-lg-3">
+    <div class="text-center">
+      <%= image_tag "https://placekitten.com/g/1280/768", class: "img-circle avatar" %>
+      <h4><%= @user.name %></h4>
+      <p><%= @user.email_address %></p>
+    </div>
+    <h4>Username: <%= @user.display_name %></h4>
+    <h4>Custom URL: <%= @user.host_slug %></h4>
+    <h4>About Me:</h4>
+    <p><%= @user.description %></p>
+    <h4>Address:</h4>
+    <%= @user.address.line_1 %><br>
+    <%= @user.address.line_2 %><br>
+    <%= @user.address.city %>, <%= @user.address.state %> <%= @user.address.zip %><br>
+    <%= @user.address.country %><br>
+    <h4>Accepted Payment Types: </h4>
+    <ul>
+      <% @user.accepted_payments.each do |payment| %>
+        <li><%= payment %></li>
+      <% end %>
+    </ul>
+    <% if @user == current_user %>
+      <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-default edit_button"%>
     <% end %>
-  </ul>
-</div>
-<div>
-  <% if @user == current_user %>
-  <%= link_to "Edit", edit_user_path(current_user), class: "btn btn-default edit_button"%>
-  <% end %>
+  </div>
+
+  <div class="col-lg-9">
+    <h1>My Properties</h1>
+    <ul>
+      <% @user.properties.each do |property| %>
+        <li>
+        <%= property.title %>
+        <%= property.location %>
+        <%= link_to "Edit", property_path(property) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
