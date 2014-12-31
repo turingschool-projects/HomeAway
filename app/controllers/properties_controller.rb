@@ -7,6 +7,7 @@ class PropertiesController < ApplicationController
   def new
     @property = Property.new
     @property.user = current_user
+    3.times { @property.photos.build }
   end
 
   def create
@@ -34,6 +35,7 @@ class PropertiesController < ApplicationController
   end
 
   def edit
+    3.times { @property.photos.build }
   end
 
   def index
@@ -50,7 +52,7 @@ class PropertiesController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], photo_attributes: [:image])
+    params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], photos_attributes: [:id, :image])
   end
 
   def require_owner
