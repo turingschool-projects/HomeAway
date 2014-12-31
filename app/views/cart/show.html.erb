@@ -11,7 +11,7 @@
     <p>Total: <%= number_to_currency(@cart.total) %></p>
     <% if current_user %>
       <h5>Please review your trip details and click below to continue your reservation</h5>
-      <% if @host.accepts_cc.present? %>
+      <% if @host && @host.accepts_cc %>
         <%= form_tag({controller: "reservations", action: "pay"}, method: "post") do %>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
