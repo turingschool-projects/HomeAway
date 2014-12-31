@@ -48,7 +48,6 @@ class Cart
     Date.parse(@data["end_date"]) - Date.parse(@data["start_date"])
   end
 
-
   def save_reservation_for(user)
     raise "no user" unless user
     Reservation.create( status: "pending",
@@ -56,5 +55,18 @@ class Cart
                         property: property,
                         start_date: Date.parse(start_date),
                         end_date: Date.parse(end_date))
+  end
+
+  def valid_dates?(dates, property)
+    if dates.present? && property.present?
+      start_date, end_date = dates.split(" - ").map{ |date| Date.parse(date) }
+      start_date >= Date.current && end_date > start_date && !dates_booked(start_date, end_date, property)
+    end
+  end
+
+  def dates_booked(start_date, end_date, property)
+    date_range = start_date..end_date
+    booked_dates = Reservation.all.where(property_id: property).map(&:date_range)
+    booked_dates.any? { |booked_date| date_range.overlaps?(booked_date) }
   end
 end
