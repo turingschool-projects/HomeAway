@@ -17,6 +17,7 @@ class ReservationsController < ApplicationController
   def create
     if current_user
       if @cart.save_reservation_for current_user
+        UserMailer.reservation_request(current_user.reservations.last).deliver
         redirect_to reservation_path(current_user.reservations.last)
       else
         flash[:error] = "Could not checkout reservation. Try again."
