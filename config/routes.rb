@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users
 
   resources :reservations
+  post '/reservations/pay', to: 'reservations#pay'
+
   get '/my_guests', to: 'reservations#my_guests'
 
   resources :properties

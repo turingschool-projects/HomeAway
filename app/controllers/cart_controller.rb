@@ -1,5 +1,6 @@
 class CartController < ApplicationController
   def show
+    @host = @cart.property.user
   end
 
   def update

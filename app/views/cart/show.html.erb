@@ -11,7 +11,16 @@
     <p>Total: <%= number_to_currency(@cart.total) %></p>
     <% if current_user %>
       <h5>Please review your trip details and click below to continue your reservation</h5>
-      <%= button_to "Request Reservation", reservations_path, method: :post, class: "btn btn-default"  %>
+      <% if @host && @host.accepts_cc %>
+        <%= form_tag({controller: "reservations", action: "pay"}, method: "post", class: "payments") do %>
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="TravelHome"
+            data-amount="<%= @cart.total_cents %>"></script>
+        <% end %>
+      <% else %>
+        <%= button_to "Pay with Cash", reservations_path, method: :post, class: "btn btn-default"  %>
+      <% end %>
     <% else %>
       <h5>To continue your reservation you will need to log in to your account or sign up for a new account</h5>
       <a href="#" data-toggle="modal" data-target="#myModalLogIn" class="btn btn-default">
