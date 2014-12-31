@@ -58,12 +58,6 @@ describe 'the application', type: :feature do
       expect(page).not_to have_link("Login!")
     end
 
-    it 'can log out' do
-      click_link "Logout"
-      visit admin_properties_path
-      expect(page).to have_content("Unauthorized")
-    end
-
     xit 'it can view its profile' do
       expect(page).to have_link('Profile')
       click_link "Profile"

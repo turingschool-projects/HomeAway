@@ -1,6 +1,9 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:edit, :update]
   before_action :set_categories, only: [:new, :create, :edit, :update]
+
+  before_action :require_host,  only: [:new]
+  before_action :require_owner, only: [:edit]
   def new
     @property = Property.new
     @property.user = current_user
@@ -34,7 +37,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.active
+    @properties = Property.active.includes(:category, :photos)
   end
 
   private
@@ -48,5 +51,19 @@ class PropertiesController < ApplicationController
 
   def property_params
     params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], photo_attributes: [:image])
+  end
+
+  def require_owner
+    unless current_user && @property.user_id == current_user.id
+      flash[:notice] = "Unauthorized"
+      redirect_to properties_path
+    end
+  end
+
+  def require_host
+    unless current_user && current_user.host?
+      flash[:notice] = "Unauthorized"
+      redirect_to properties_path
+    end
   end
 end

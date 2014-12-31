@@ -17,43 +17,41 @@ context 'authenticated host', type: :feature do
   end
 
   it 'can create property listings' do
+    house = Category.create!(name: "House")
     visit new_property_path
-    save_and_open_page
-    fill_in "Title", with: "Burger Shack"
-    fill_in "Description", with: "Juicy and yummy shack"
-    fill_in "Daily Rate", with: 500
-    fill_in "Occupancy", with: 7
-    select "House", :from => "Category"
+    fill_in "property[title]", with: "Burger Shack"
+    fill_in "property[description]", with: "Juicy and yummy shack"
+    fill_in "property[price]", with: 500
+    fill_in "property[occupancy]", with: 7
+    select "House", from: "property[category_id]"
     # find("#property_category_ids_#{burgers.id}").set(true)
-    fill_in "Address 1", with: "123 Main St."
-    fill_in "City", with: "Crapsville"
-    fill_in "State", with: "CO"
-    fill_in "Zip code", with: 80203
+    fill_in "property[address_attributes][line_1]", with: "123 Main St."
+    fill_in "property[address_attributes][city]", with: "Crapsville"
+    fill_in "property[address_attributes][state]", with: "CO"
+    fill_in "property[address_attributes][zip]", with: 80203
     click_button "Create Property"
 
-    expect(current_path).to eq(user_path(host))
-    expect(Property.last.categories).to eq([house])
+    visit properties_path
+
+    expect(Property.last.category).to eq(house)
     expect(Property.last.occupancy).to eq(7)
-    expect(Property.last.address.id).to eq(1)
     expect(page).to have_content("Burger Shack")
   end
 
   it 'can modify existing properties’ details' do
     house = Category.create!(name: "House")
-    property = Property.create!(title: "Burger Shack", description: "Good burger", price: 5000, occupancy: 7, category: house)
+    address = Address.create!(line_1: "123 Some St.", line_2: "Apt. 6", city: "Denver", state: "CO", zip: "80203")
+    property = Property.create!(title: "Burger Shack", description: "Good burger", price: 5000, occupancy: 7, category: house, address: address, user: User.last)
     visit edit_property_path(property)
 
-    fill_in "property_title", with: "Taco Shack"
-    fill_in "property_description", with: "Really good taco"
-    fill_in "property_price", with: 25
+    fill_in "property[title]", with: "Taco Shack"
+    fill_in "property[description]", with: "Really good taco"
+    fill_in "property[price]", with: 25
 
     click_button "Update Property"
-    expect(current_path).to eq(user_path)
+    expect(current_path).to eq(properties_path)
 
     expect(page).to have_content("Taco Shack")
-    expect(page).not_to have_content("Burger Shack")
-
-    expect(page).to have_content("Really good taco")
     expect(page).not_to have_content("Burger Shack")
   end
 
