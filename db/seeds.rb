@@ -166,11 +166,11 @@ class Seed
 
   def generate_property_images
     image_path = Rails.root.join("app", "assets", "images")
-    Photo.create!(image: File.open(image_path.join("ext_house_1.jpg")), property_id: 1, primary: true)
+    Photo.create!(image: File.open(image_path.join("ext_house_1.jpeg")), property_id: 1, primary: true)
     Photo.create!(image: File.open(image_path.join("int_house_1.jpg")), property_id: 1)
     Photo.create!(image: File.open(image_path.join("int_house_2.jpg")), property_id: 1)
 
-    Photo.create!(image: File.open(image_path.join("ext_house_1.jpg")), property_id: 2, primary: true)
+    Photo.create!(image: File.open(image_path.join("ext_house_2.jpg")), property_id: 2, primary: true)
     Photo.create!(image: File.open(image_path.join("int_house_3.jpg")), property_id: 2)
 
     Photo.create!(image: File.open(image_path.join("ext_apt_1.jpg")), property_id: 3, primary: true)
