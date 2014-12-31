@@ -334,9 +334,9 @@ footer p {
 }
 
 ::selection {
-  text-shadow: none;
-  background: #fcfcfc;
-  background: rgba(255,255,255,.2);
+  // text-shadow: none;
+  // background: #fcfcfc;
+  // background: rgba(255,255,255,.2);
 }
 
 img::selection {
@@ -363,5 +363,3 @@ body {
 .navbar-custom-all .nav li a{
   color: #474843;
 }
-
-
