@@ -1,23 +1,10 @@
 class PhotosController < ApplicationController
   before_action :set_property
+  before_action :set_photo, only: [:edit, :update, :destroy]
   before_action :require_host
 
   def index
     @photos = @property.photos
-  end
-
-  def edit
-    @photo = @property.photos.find(params[:id])
-  end
-
-  def update
-    @photo = @property.photos.find(params[:id])
-    @photo.update(photo_params)
-    if @photo.save
-      redirect_to property_photos_path(@property)
-    else
-      render :edit
-    end
   end
 
   def new
@@ -33,10 +20,31 @@ class PhotosController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @photo.update(photo_params)
+    if @photo.save
+      redirect_to property_photos_path(@property)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @photo.destroy
+    redirect_to property_photos_path(@property)
+  end
+
   private
 
   def set_property
     @property = Property.find(params[:property_id])
+  end
+
+  def set_photo
+    @photo = @property.photos.find(params[:id])
   end
 
   def photo_params

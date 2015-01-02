@@ -135,4 +135,23 @@ context "authenticated host", type: :feature do
       expect(page).to have_css("img[src$='ext_balloon_1.jpg']")
     end
   end
+
+  it "can delete an image from the photos page" do
+    property = Property.last
+    find_link("My Profile").click
+    within ".property_#{property.id}" do
+      find_link("Manage photos").click
+    end
+    find_link("Add Photo").click
+    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    find_link("Add Photo").click
+    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    find_button("Create Photo").click
+
+    find_link("Remove Photo").click
+    expect(page).to_not have_css("img[src$='ext_balloon_1.jpg']")
+  end
 end
