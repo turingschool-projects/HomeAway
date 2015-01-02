@@ -13,7 +13,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :image %>
     <% unless f.object.new_record? %>
       <%= image_tag f.object.image.url(:medium) %>
     <% end %><br>

@@ -1,0 +1,20 @@
+<h1>Photos for <%= @property.title %></h1>
+<% if @property.photos.empty? %>
+  <p>
+    You don't have any photos yet! In our experience, travelers are more interested in staying at a place that has some good photos up.
+  </p>
+  <p>
+    Why don't you add some now? :)
+  </p>
+<% else %>
+  <h2>Main Photo:</h2>
+  <div class="primary">
+    <%= link_to image_tag(@property.primary.image.url(:medium)), edit_property_photo_path(@property, @property.primary) %>
+  </div>
+  <h2>Other Photos:</h2>
+  <% @property.other_photos.each do |photo| %>
+  <%= link_to image_tag(photo.image.url(:medium)), edit_property_photo_path(@property, photo) %>
+  <%= link_to "Make Primary", property_photo_path(@property, photo, photo: {primary: true}), method: "put", class: "btn btn-default" %><br>
+  <% end %>
+<% end %>
+<%= link_to "Add Photo", new_property_photo_path(@property), class: "btn btn-default" %>

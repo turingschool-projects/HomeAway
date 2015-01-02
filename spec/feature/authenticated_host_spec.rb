@@ -101,11 +101,38 @@ context "authenticated host", type: :feature do
     property = Property.last
     find_link("My Profile").click
     within ".property_#{property.id}" do
-      find_link("Add photo").click
+      find_link("Manage photos").click
     end
+    find_link("Add Photo").click
     page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
     find_button("Create Photo").click
     expect(property.photos.count).to eq 1
     expect(property.photos.first.image_file_name).to eq("ext_apt_1.jpg")
+  end
+
+  it "can set and change primary photo" do
+    property = Property.last
+    find_link("My Profile").click
+    within ".property_#{property.id}" do
+      find_link("Manage photos").click
+    end
+    find_link("Add Photo").click
+    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    find_link("Add Photo").click
+    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    find_button("Create Photo").click
+
+    within(".primary") do
+      expect(page).to have_css("img[src$='ext_apt_1.jpg']")
+    end
+
+    find_link("Make Primary").click
+
+    within(".primary") do
+      expect(page).to have_css("img[src$='ext_balloon_1.jpg']")
+    end
   end
 end

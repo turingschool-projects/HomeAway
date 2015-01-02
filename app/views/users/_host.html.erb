@@ -74,7 +74,7 @@
               <% else %>
                 <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
               <% end %>
-              <%= link_to "Add photo", new_property_photo_path(property) %>
+              <%= link_to "Manage photos", property_photos_path(property) %>
             </td>
           </tr>
         <% end %>
