@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   get '/my_guests', to: 'reservations#my_guests'
 
-  resources :properties
+  resources :properties do
+    resources :photos
+  end
 
   get 'code', to: redirect('https://github.com/dalexj/da_pivot')
   root 'pages#home'

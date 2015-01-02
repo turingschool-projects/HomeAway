@@ -1,0 +1,29 @@
+<%= form_for [@property, @photo] do |f| %>
+  <% hidden_field_tag(:property_id, @property.id) %>
+  <% if @photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+
+      <ul>
+        <% @photo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :image %>
+    <% unless f.object.new_record? %>
+      <%= image_tag f.object.image.url(:medium) %>
+    <% end %><br>
+    <%= f.file_field :image %>
+    <%= f.check_box :primary %>
+    <%= f.label :make_primary %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn btn-default nav-link" %>
+  </div>
+
+<% end %>

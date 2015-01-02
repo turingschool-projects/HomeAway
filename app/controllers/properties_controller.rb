@@ -54,7 +54,7 @@ class PropertiesController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], photos_attributes: [:id, :image, :primary])
+    params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, :photo, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
   end
 
   def require_owner
