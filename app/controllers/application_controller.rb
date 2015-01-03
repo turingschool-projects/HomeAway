@@ -36,8 +36,4 @@ class ApplicationController < ActionController::Base
   def create_user_for_sign_up
     @user = User.new
   end
-
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
-  end
 end
