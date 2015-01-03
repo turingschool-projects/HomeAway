@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 context "authenticated host", type: :feature do
+  let(:file_path) do
+    Rails.root.join('spec', 'fixtures', 'images')
+  end
   before(:each) do
     address = Address.create!(line_1: "213 Some St",
     city: "Denver",
@@ -104,7 +107,7 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     find_button("Create Photo").click
     expect(property.photos.count).to eq 1
     expect(property.photos.first.image_file_name).to eq("ext_apt_1.jpg")
@@ -117,12 +120,12 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
     find_button("Create Photo").click
 
     within(".primary") do
@@ -143,15 +146,39 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
     find_button("Create Photo").click
 
     find_link("Remove Photo").click
     expect(page).to_not have_css("img[src$='ext_balloon_1.jpg']")
+  end
+
+  it "sees an error message if the photo doesn't save" do
+    property = Property.last
+    find_link("My Profile").click
+    within ".property_#{property.id}" do
+      find_link("Manage photos").click
+    end
+    find_link("Add Photo").click
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    expect(current_path).to eq property_photos_path(property)
+    expect(page).to have_content "prohibited this photo"
+
+    page.attach_file("photo_image",  file_path.join("ext_apt_1.jpg"))
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    expect(current_path).to eq property_photos_path(property)
+    visit edit_property_photo_path(property, Photo.last)
+    page.attach_file("photo_image", file_path.join("blank.txt"))
+    find_button("Update Photo").click
+    expect(page).to have_content "prohibited this photo"
   end
 end

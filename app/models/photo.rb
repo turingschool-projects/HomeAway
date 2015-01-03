@@ -8,8 +8,9 @@ class Photo < ActiveRecord::Base
   }
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  validates :image, presence: true
 
-  validates :property_id, presence: true
+  validates :property, presence: true
 
   belongs_to :property
 

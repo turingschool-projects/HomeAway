@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to property_photos_path(@property), notice: "Photo was successfully created"
     else
-      render :new, notice: "Something went wrong"
+      render :new
     end
   end
 
@@ -26,7 +26,7 @@ class PhotosController < ApplicationController
   def update
     @photo.update(photo_params)
     if @photo.save
-      redirect_to property_photos_path(@property)
+      redirect_to property_photos_path(@property), notice: "Photo was successfully updated"
     else
       render :edit
     end
