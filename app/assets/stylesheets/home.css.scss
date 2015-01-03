@@ -363,3 +363,18 @@ body {
 .navbar-custom-all .nav li a{
   color: #474843;
 }
+
+.alert-container {
+  margin-top: 100px;
+  position: absolute;
+  height: 0;
+  width: 100%;
+}
+
+.alert.alert-info.alert-dismissible.fade.in {
+  background-color: rgba(71, 72, 67, .7);
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+

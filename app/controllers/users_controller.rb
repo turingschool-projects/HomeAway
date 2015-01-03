@@ -12,7 +12,8 @@ class UsersController < ApplicationController
       UserMailer.welcome_email(@user).deliver
       redirect_to :back
     else
-      render :new
+      flash[:errors] = "Invalid Sign-up. #{@user.errors.full_messages}"
+      redirect_to :back
     end
   end
 
