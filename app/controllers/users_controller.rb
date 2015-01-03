@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       UserMailer.welcome_email(@user).deliver
       redirect_to :back
     else
-      render :new
+      redirect_to :back
     end
   end
 

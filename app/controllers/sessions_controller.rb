@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       redirect_to :back
       #user.admin? ? redirect_to(admin_properties_path) : redirect_to(root_path)
     else
-      flash[:errors] = "Invalid Login"
+      flash[:errors] = "Invalid Login. Please try again."
       redirect_to :back
     end
   end
