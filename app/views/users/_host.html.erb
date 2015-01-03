@@ -18,7 +18,7 @@
       <div class="profile-block">
         <h4>User Info</h4>
         <h5>Email Address:</h5> <%= @user.email_address %></h5>
-        <h5>Custom URL:</h5><span><%= link_to "travelhome.com/hosts/#{@user.host_slug}", "/hosts/#{@user.host_slug}"  %></span>
+        <h5>Custom URL:</h5><span><%= link_to host_path(@user.slug, only_path: false), host_path(@user.slug, only_path: false) %></span>
         <h5>About Me:</h5><span><%= @user.description %></span>
       </div>
     </div>

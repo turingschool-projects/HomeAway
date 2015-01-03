@@ -4,6 +4,7 @@ class PropertiesController < ApplicationController
 
   before_action :require_host,  only: [:new, :create]
   before_action :require_owner, only: [:edit, :update]
+  
   def new
     @property = Property.new
     @property.user = current_user
