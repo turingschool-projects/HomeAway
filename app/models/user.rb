@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   def accepted_payments
     payments = []
     payments << "Credit Card" if accepts_cc?
-    payments << "Cash" if accepts_cash?
     payments << "Check" if accepts_check?
+    payments << "Cash" if accepts_cash? || (!accepts_cc && !accepts_check)
     payments
   end
 end
