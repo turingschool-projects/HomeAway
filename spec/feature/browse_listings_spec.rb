@@ -9,12 +9,12 @@ describe "user browsing listings", type: :feature do
                       state: "CO",
                       zip: "80203"
       Property.create! title: "My Cool Home", description: "cool description",
-                      occupancy: 4, price: 666,
+                      occupancy: 4, price: 6.66,
                       bathroom_private: false,
                       category: Category.last,
                       address: Address.last
       Property.create! title: "A Retired Home", description: "retired description",
-                      occupancy: 4, price: 666,
+                      occupancy: 4, price: 6.66,
                       bathroom_private: false, retired: true,
                       category: Category.last,
                       address: Address.last

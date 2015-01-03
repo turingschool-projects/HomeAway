@@ -15,22 +15,22 @@ RSpec.describe Property, :type => :model do
 
   describe "property attributes" do
     it "must have a title" do
-      property = Property.create(description: "Super Cozy", price: 5000, category: category, address: address)
+      property = Property.create(description: "Super Cozy", price: 50.00, category: category, address: address)
       expect(property).to_not be_valid
     end
 
     it "must have a description" do
-      property = Property.create(title: "Bob's Place", price: 5000, category: category, address: address)
+      property = Property.create(title: "Bob's Place", price: 50.00, category: category, address: address)
       expect(property).to_not be_valid
     end
 
     it "must have a description less than 500 characters" do
-      property = Property.create(title: "Bob's Place", description: "Super long description #{'.'*500}", price: 5000, category: category, address: address)
+      property = Property.create(title: "Bob's Place", description: "Super long description #{'.'*500}", price: 50.00, category: category, address: address)
       expect(property).to_not be_valid
     end
 
    xit "must have an address" do
-      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, user: user, category: category)
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, user: user, category: category)
       expect(property).to_not be_valid
     end
 
@@ -43,34 +43,34 @@ RSpec.describe Property, :type => :model do
     end
 
     it "must have a category" do
-      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address)
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address)
       expect(property).to_not be_valid
     end
 
     it "can be active or retired" do
-      active_property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
-      retired_property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category, retired: true)
+      active_property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user, category: category)
+      retired_property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user, category: category, retired: true)
 
       expect(Property.active).to include(active_property)
       expect(Property.retired).to include(retired_property)
     end
 
     it "has a private or shared bathroom" do
-      shared_bathroom = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category, bathroom_private: false)
-      private_bathroom = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+      shared_bathroom = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user, category: category, bathroom_private: false)
+      private_bathroom = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user, category: category)
 
       expect(shared_bathroom.bathroom).to eq "Shared"
       expect(private_bathroom.bathroom).to eq "Private"
     end
 
     it "has a location" do
-      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user)
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user)
       expect(property.location).to eq "Denver"
     end
 
     it "has a daily rate" do
-      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user)
-      expect(property.daily_rate).to eq 5.0
+      property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user)
+      expect(property.daily_rate).to eq 5.to_money
     end
   end
 

@@ -41,11 +41,7 @@ class Cart
   end
 
   def total
-    total_cents / 100.0
-  end
-
-  def total_cents
-   (@property.price * duration).to_i
+   @property.price * duration
   end
 
   def duration

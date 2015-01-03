@@ -62,7 +62,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def total
-    property.price * duration / 100.0
+    property.price * duration
   end
 
   def duration

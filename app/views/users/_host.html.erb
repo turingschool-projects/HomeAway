@@ -65,7 +65,7 @@
           <tr class="property_<%= property.id %>">
             <td><%= link_to "#{property.title}", property_path(property) %></td>
             <td><%= property.category.name %></td>
-            <td>$<%= property.price/100 %></td>
+            <td>$<%= property.price %></td>
             <td><%= property.location %></td>
             <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
             <td><%= link_to "Edit", edit_property_path(property) %> |

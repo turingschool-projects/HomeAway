@@ -12,7 +12,7 @@ describe "booked trips", type: :feature do
                     state: "CO",
                     zip: "80203"
     Property.create! title: "My Cool Home", description: "cool description",
-                     occupancy: 4, price: 666,
+                     occupancy: 4, price: 6.66,
                      bathroom_private: false,
                      category: Category.last,
                      address: Address.last

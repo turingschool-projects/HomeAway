@@ -4,6 +4,8 @@ class Property < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 500 }
   validates :price, numericality: {greater_than: 0}
   validates :category_id, presence: true
+  monetize :price_cents
+  alias_method :daily_rate, :price
 #  validates :address_id, presence: true
 
   belongs_to :user
@@ -35,9 +37,5 @@ class Property < ActiveRecord::Base
 
   def location
     address.city
-  end
-
-  def daily_rate
-    price / 100.0
   end
 end
