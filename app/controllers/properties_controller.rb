@@ -2,8 +2,9 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: [:edit, :update]
   before_action :set_categories, only: [:new, :create, :edit, :update]
 
-  before_action :require_host,  only: [:new]
-  before_action :require_owner, only: [:edit]
+  before_action :require_host,  only: [:new, :create]
+  before_action :require_owner, only: [:edit, :update]
+  
   def new
     @property = Property.new
     @property.user = current_user

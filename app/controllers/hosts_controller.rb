@@ -1,7 +1,8 @@
 class HostsController < ApplicationController
   helper_method :is_the_host?
+
   def show
-    user = User.hosts.find_by(host_slug: params[:slug]) || not_found
+    user = User.hosts.find(params[:id])
     @properties = Property.active.for_user(user.id)
     @is_the_host = user == current_user
   end

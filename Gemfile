@@ -25,6 +25,7 @@ gem 'formtastic'
 gem 'jquery-turbolinks'
 gem 'faker'
 gem 'stripe'
+gem 'money-rails'
 
 group :development, :test do
   gem 'better_errors'

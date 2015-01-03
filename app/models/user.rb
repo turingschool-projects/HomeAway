@@ -11,19 +11,15 @@ class User < ActiveRecord::Base
 
   scope :hosts, -> { where(host: true) }
 
-  before_save :generate_host_slug
-
-  def generate_host_slug
-    if host && host_slug.nil?
-      self.host_slug = display_name.parameterize
-    end
+  def slug
+    host_slug.present? ? "#{id}-#{host_slug}" : id
   end
 
   def accepted_payments
     payments = []
     payments << "Credit Card" if accepts_cc?
-    payments << "Cash" if accepts_cash?
     payments << "Check" if accepts_check?
+    payments << "Cash" if accepts_cash? || (!accepts_cc && !accepts_check)
     payments
   end
 end

@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  rescue_from ActionController::InvalidAuthenticityToken do
+    redirect_to root_path
+  end
+
   def new
     @session = session
   end

@@ -137,10 +137,10 @@ RSpec.describe Reservation, :type => :model do
   end
 
   it "can calculate a total" do
-    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 500, address: address, user: user, category: category)
+    property = Property.create(title: "Bob's Place", description: "Super Cozy", price: 5.00, address: address, user: user, category: category)
     reservation = Reservation.create(user: user, property: property, start_date: start_date, end_date: end_date)
 
-    expect(reservation.total).to eq 25.0
+    expect(reservation.total).to eq 25.to_money
   end
 
   it "can count duration of a stay" do
