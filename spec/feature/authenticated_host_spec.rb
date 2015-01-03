@@ -92,7 +92,7 @@ context "authenticated host", type: :feature do
     end
 
     find_button("Create Property").click
-    expect(current_path).to eq user_path(User.last)
+    expect(current_path).to eq property_photos_path(Property.last)
     expect(page).to have_content("sweet pad")
     expect(User.last.properties.count).to eq 3
   end
