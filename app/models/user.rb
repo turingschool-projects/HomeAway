@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :email_address, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true
   validates :display_name, length: {minimum: 2, maximum: 32}, allow_blank: true
+  validates :host_slug, uniqueness: true
 
   scope :hosts, -> { where(host: true) }
 
@@ -16,6 +17,8 @@ class User < ActiveRecord::Base
   def generate_host_slug
     if host && host_slug.nil?
       self.host_slug = display_name.parameterize
+    elsif host && host_slug
+      self.host_slug = host_slug.parameterize
     end
   end
 
