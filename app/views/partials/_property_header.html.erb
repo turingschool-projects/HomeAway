@@ -2,6 +2,9 @@
   <a href="#" data-toggle="modal" data-target="#PhotoViewer">
     <div class="property-img-main" style="background-image: url(<%= property.primary.image.url(:hero) %>)"></div>
   </a>
+<% else %>
+  <a href="#" data-toggle="modal" data-target="#PhotoViewer">
+  <div class="property-img-main" style="background-image: url(https://placekitten.com/g/1280/768)"></div></a>
 <% end %>
 <div class="modal fade" id="PhotoViewer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

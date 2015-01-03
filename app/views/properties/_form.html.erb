@@ -72,19 +72,7 @@
     </div>
     <% end %>
   </div>
-  <div class="photos">
-    <%= f.label :image %><br>
-    <%= f.fields_for :photos, @property.photos do |photos_form| %>
-      <div class="field">
-        <% unless photos_form.object.new_record? %>
-          <%= image_tag photos_form.object.image.url(:thumb) %>
-        <% end %><br>
-        <%= photos_form.file_field :image %>
-        <%= photos_form.check_box :primary %>
-        <%= photos_form.label :make_primary %>
-      </div>
-    <% end %>
-  </div>
+
   <div class="actions">
     <%= f.submit class: "btn btn-default nav-link" %>
   </div>

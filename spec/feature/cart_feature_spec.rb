@@ -1,8 +1,14 @@
 require "rails_helper"
 
 describe "can add things to the trip", type: :feature do
+  let(:start_date) { 1.year.from_now }
+  let(:end_date) { 1.year.from_now.advance(days: 5)}
   context "when logged out" do
     before(:each) do
+      user = User.create!(name: "Sam I Am",
+                          email_address: "samiam@example.com",
+                          password: "password",
+                          password_confirmation: "password")
       address = Address.create!(line_1: "fake as hell",
                       city: "fake as hell",
                       state: "fake as hell",
@@ -14,19 +20,22 @@ describe "can add things to the trip", type: :feature do
                       description: "cool description",
                       category: category,
                       occupancy: 2,
-                      address: address)
+                      address: address,
+                      user: user)
       Property.create(title: "Another Home",
                       price: 500,
                       description: "lame description",
                       category: category,
                       occupancy: 1,
-                      address: address)
+                      address: address,
+                      user: user)
       Property.create(title: "A Retired Home",
                       price: 44500,
                       description: "retired description",
                       category: category,
                       occupancy: 12,
-                      address: address)
+                      address: address,
+                      user: user)
       visit properties_path
     end
 
@@ -37,19 +46,17 @@ describe "can add things to the trip", type: :feature do
 
       visit properties_path
       click_link_or_button "My Cool Home"
-      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
+      fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
       click_link_or_button "Request reservation"
 
-      visit cart_path
       expect(page).to have_content "My Cool Home"
     end
 
     it "can remove things from the trip" do
       click_link_or_button "My Cool Home"
-      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
+      fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
       click_link_or_button "Request reservation"
 
-      visit cart_path
       expect(page).to have_content "My Cool Home"
       click_link_or_button "Cancel My Trip"
 
@@ -59,7 +66,7 @@ describe "can add things to the trip", type: :feature do
 
     it "can't checkout without logging in" do
       click_link_or_button "My Cool Home"
-      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
+      fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
       click_link_or_button "Request reservation"
 
       visit cart_path
@@ -81,7 +88,7 @@ describe "can add things to the trip", type: :feature do
 
       visit properties_path
       click_link_or_button "My Cool Home"
-      fill_in "property[reservation]", with: "31/12/2014 - 26/12/2015"
+      fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
       click_link_or_button "Request reservation"
 
       visit cart_path
