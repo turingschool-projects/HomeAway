@@ -5,8 +5,8 @@ FactoryGirl.define do
     category
 
 
-    sequence(:title) { |n| "Title #{n}" }
-    sequence(:description) { |n| "Description #{n}" }
+    sequence(:title) { |n| "Property Title #{n}" }
+    sequence(:description) { |n| "Property Description #{n}" }
     price { (rand * 100) }
     retired false
     occupancy { (rand * 10).to_i }
