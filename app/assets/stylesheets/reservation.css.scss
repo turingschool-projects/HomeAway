@@ -21,6 +21,11 @@
   color: #D88A8A;
 }
 
+.label-notice {
+  color: #D88A8A;
+  font-weight: bold;
+}
+
 .text {
   font-size: 12px;
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -36,6 +41,17 @@
   word-wrap: break-word;
   overflow: scroll;
 }
+
+.cart-block {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #C5CFC6;
+  height: 260px;
+  word-wrap: break-word;
+  overflow: scroll;
+}
+
 
 .btn-xs {
   margin-bottom: 4px;
