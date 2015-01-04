@@ -54,14 +54,34 @@ describe "traveler permissions", type: :feature do
     expect(page).to have_content(reservation1.total)
     expect(page).to have_content(reservation1.status)
 
-    visit reservation_path(reservation2.id)
+    visit reservation_path(reservation2)
     expect(page).to have_content("You may only view your own reservations")
     expect(current_path).to eq(root_path)
+  end
+
+  it "can cancel a pending reservation" do
+    login(user)
+    reservation = create(:reservation, user: user)
+    visit reservation_path(reservation)
+    expect(page).to have_button("Cancel")
+    find_button("Cancel").click
+    expect(page).to have_content(reservation.property.title)
+    expect(page).to have_content("cancelled")
+
+    visit reservation_path(reservation1)
+    expect(page).to_not have_button("Cancel")
   end
 
   it "cannot add properties" do
     login(user)
     visit new_property_path
     expect(page).to have_content("Unauthorized")
+  end
+
+  it "cannot access the my_guests page" do
+    login(user)
+    visit "/my_guests"
+    expect(page).to have_content("You must be a host to see your guests")
+    expect(current_path).to eq(root_path)
   end
 end
