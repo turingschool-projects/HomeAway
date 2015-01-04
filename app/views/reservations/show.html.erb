@@ -1,5 +1,22 @@
-<div class="edit-form">
-  <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
+<div class="functional-header">
+<header class="reservation-menu">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="profile-header brand-box">
+          <h1 class="reservation-header brand-heading">My <span>Trips</span><h1>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="container">
+    <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Directions</h3>
+    </div>
+  </div>
 </div>
 
 <% unless current_user.address.nil? %>

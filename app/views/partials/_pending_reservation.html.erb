@@ -1,19 +1,44 @@
-<div class="container">
-  <h1>Your <%= link_to reservation.property.title, property_path(reservation.property) %> Reservation</h1>
-  <h2></h2>
-  <h3>Status: <%= reservation.status %></h3>
-  <h5>Location: <%= reservation.property.location %></h5>
-  <h5>Category: <%= reservation.property.category.name %></h5>
-  <h5>Description: <%= reservation.property.description %></h5>
-  <h5>From <%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date %></h5>
-  <h5>Length of Stay: <%= reservation.duration.floor %> days</h5>
-  <h5>Total: <%= number_to_currency(reservation.total) %></h5>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Your <%= link_to reservation.property.title, property_path(reservation.property) %> Reservation</h2>
+  </div>
+  <div class="col-md-4">
+    <h3>Status: <span class="label-status"><%= reservation.status %></span></h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="reservation-block">
+      <h4>Reservation Details</h4>
+      <h5>Length of Stay: <span class="text"><%= reservation.duration.floor %> days</span></h5>
+      <h5>From: <span class="text"><%= reservation.pretty_start_date %></span></h5>
+      <h5>To: <span class="text"><%= reservation.pretty_end_date %></span></h5>
+      <h5>Total Cost: <span class="text"><%= number_to_currency(reservation.total) %></span></h5>
+      <h5>Reserved on: <span class="text"><%= reservation.created_at.strftime("%B %d, %Y at %l:%M %P") %></span></h5>
+      <hr>
+      <% if reservation.may_cancel? %>
+        <%= button_to reservation_path(reservation), method: :put, value: "#{reservation.property.id}", class: "btn btn-default", name: "cancel" do %>
+        <span>Cancel Reservation</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
-  <% if reservation.may_cancel? %>
-    <%= button_to reservation_path(reservation), method: :put, value: "#{reservation.property.id}", class: "btn btn-default", name: "cancel" do %>
-      <span>Cancel Reservation</span>
-    <% end %>
-  <% end %>
-  <h5>Reserved on <%= reservation.created_at.strftime("%B %d, %Y at %l:%M %P") %></h5>
-  <h5>Last updated on <%= reservation.updated_at.strftime("%B %d, %Y at %l:%M %P") %></h5>
+  <div class="col-md-7">
+    <div class="reservation-block">
+      <h4>Property Details</h4>
+      <h5>Location: <span class="text"><%= reservation.property.location %></span></h5>
+      <h5>Category: <span class="text"><%= reservation.property.category.name %></span></h5>
+      <h5>Description: <span class="text"><%= reservation.property.description %></span></h5>
+      <div class="row">
+        <% reservation.property.photos.each do |photo| %>
+          <div class="col-md-3">
+            <%= image_tag photo.image.url(:thumb) %>
+          </div>
+        <% end %>
+      </div>
+      <hr>
+      <%= link_to "View full property detail", property_path(reservation.property) %>
+   </div>
+  </div>
 </div>

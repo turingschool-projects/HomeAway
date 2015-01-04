@@ -1,0 +1,39 @@
+.reservation-menu {
+  display: table;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: #fff;
+  background: image-url("res-header.jpeg") no-repeat bottom center scroll;
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.reservation-header {
+  margin-right: 150px;
+  color: #474843;
+}
+
+.label-status {
+  color: #D88A8A;
+}
+
+.text {
+  font-size: 12px;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-transform: none;
+}
+
+.reservation-block {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #C5CFC6;
+  height: 260px;
+  word-wrap: break-word;
+  overflow: scroll;
+}
+
