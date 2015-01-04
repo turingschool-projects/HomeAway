@@ -1,4 +1,7 @@
 require 'faker'
+require 'factory_girl'
+FactoryGirl.definition_file_paths = [Rails.root.join('spec', 'factories')]
+FactoryGirl.find_definitions
 
 class Seed
   def initialize
@@ -11,95 +14,72 @@ class Seed
   end
 
   def generate_users
-    @horace_user = User.create!({
+    @horace_user = FactoryGirl.create(:host,
       display_name: "Horace",
       name: "Horace Williams",
       email_address: "demo+horace@jumpstartlab.com",
-      password: "password",
-      password_confirmation: "password",
-      admin: true,
-      host: true
-    })
+      admin: true)
 
-    @jorge_user = User.create!({
+    @jorge_user = FactoryGirl.create(:host,
       display_name: "Jorge",
       name: "Jorge Tellez",
       email_address: "demo+jorge@jumpstartlab.com",
-      password: "password",
-      password_confirmation: "password",
-      admin: true,
-      host: true
-    })
+      admin: true)
 
-    @traveler_user = User.create!({
+    @traveler_user = FactoryGirl.create(:user,
       display_name: "Traveler",
       name: "Jim Jones",
-      email_address: "travel@example.com",
-      password: "password",
-      password_confirmation: "password",
-      admin: false,
-      host: false
-    })
+      email_address: "travel@example.com")
 
-    @hostess_user = User.create!({
+    @hostess_user = FactoryGirl.create(:host,
       display_name: "Hostess",
       name: "Hostess Hosterson",
-      email_address: "host@example.com",
-      password: "password",
-      password_confirmation: "password",
-      admin: false,
-      host: true
-    })
+      email_address: "host@example.com")
 
     puts "Users generated"
   end
 
   def generate_categories
-    Category.create!(name: "House")
-    Category.create!(name: "Apartment")
-    Category.create!(name: "Room")
-    Category.create!(name: "Cabin")
-    Category.create!(name: "Boat")
-    Category.create!(name: "Balloon")
-    Category.create!(name: "Shack")
+    @house     = FactoryGirl.create(:category, name: "House")
+    @apartment = FactoryGirl.create(:category, name: "Apartment")
+    @room      = FactoryGirl.create(:category, name: "Room")
+    @cabin     = FactoryGirl.create(:category, name: "Cabin")
+    @boat      = FactoryGirl.create(:category, name: "Boat")
+    @balloon   = FactoryGirl.create(:category, name: "Balloon")
+    @shack     = FactoryGirl.create(:category, name: "Shack")
 
     puts "Categories generated"
   end
 
 
   def generate_properties
-    Property.create!(title: "Hill House",
-                    price: 5500,
+    @hill_house = FactoryGirl.create(:property, title: "Hill House",
                     description: Faker::Lorem.sentence(2),
-                    category_id: 1,
+                    category: @house,
                     occupancy: 4,
                     user: @horace_user)
 
-    Property.create!(title: "Run's House",
-                    price: 15000,
+    @runs_house = FactoryGirl.create(:property, title: "Run's House",
                     description: Faker::Lorem.sentence(3),
-                    category_id: 1,
+                    category: @house,
                     occupancy: 9,
                     user: @jorge_user)
 
-     Property.create!(title: "Paul's Boutique",
-                    price: 1000,
+     @pauls_boutique = FactoryGirl.create(:property, title: "Paul's Boutique",
                     description: Faker::Lorem.sentence(3),
-                    category_id: 2,
+                    category: @apartment,
                     occupancy: 2,
                     user: @horace_user)
 
-      Property.create!(title: "The Room",
-                    price: 500,
+      @the_room = FactoryGirl.create(:property, title: "The Room",
                     description: Faker::Lorem.sentence(1),
-                    category_id: 3,
+                    category: @room,
                     occupancy: 1,
                     user: @horace_user)
 
-      Property.create!(title: "Log Cabin",
-                    price: 44500,
+      @log_cabin = FactoryGirl.create(:property, title: "Log Cabin",
                     description: Faker::Lorem.sentence(1),
-                    category_id: 4,
+                    category: @cabin,
                     occupancy: 12,
                     user: @horace_user)
 
@@ -110,28 +90,27 @@ class Seed
 
     date = Date.current.advance(days: 100)
 
-    Reservation.create!(status: "pending",
-                        user_id: 3,
-                        property_id: 1,
-                        start_date: date,
-                        end_date: date.advance(days: 4))
+    FactoryGirl.create(:reservation, user: @traveler_user,
+                         property: @hill_house,
+                         start_date: date,
+                         end_date: date.advance(days: 4))
 
 
-    Reservation.create!(status: "completed",
-                        user_id: 3,
-                        property_id: 3,
+    FactoryGirl.create(:reservation, status: "completed",
+                         user: @traveler_user,
+                         property: @pauls_boutique,
                         start_date: date.advance(days:-30),
                         end_date: date.advance(days:-25))
 
-    Reservation.create!(status: "cancelled",
-                        user_id: 2,
-                        property_id: 4,
+    FactoryGirl.create(:reservation, status: "cancelled",
+                        user: @jorge_user,
+                        property: @the_room,
                         start_date: date.advance(days: -5),
                         end_date: date)
 
-    Reservation.create!(status: "reserved",
-                        user_id: 3,
-                        property_id: 2,
+    FactoryGirl.create(:reservation, status: "reserved",
+                        user: @traveler_user,
+                        property: @runs_house,
                         start_date: date.advance(days: 10),
                         end_date: date.advance(days: 20))
 
@@ -146,7 +125,7 @@ class Seed
                       zip: Faker::Address.postcode,
                       country: Faker::Address.country
                      )
-      property.address_id = Address.last.id
+      property.address = Address.last
       property.save!
     end
 
@@ -157,7 +136,7 @@ class Seed
                       zip: Faker::Address.postcode,
                       country: Faker::Address.country
                      )
-      user.address_id = Address.last.id
+      user.address = Address.last
       user.save!
     end
   puts "Addresses generated"
@@ -166,22 +145,22 @@ class Seed
 
   def generate_property_images
     image_path = Rails.root.join("app", "assets", "images")
-    Photo.create!(image: File.open(image_path.join("ext_house_1.jpeg")), property_id: 1, primary: true)
-    Photo.create!(image: File.open(image_path.join("int_house_1.jpg")), property_id: 1)
-    Photo.create!(image: File.open(image_path.join("int_house_2.jpg")), property_id: 1)
+    Photo.create!(image: File.open(image_path.join("ext_house_1.jpeg")), property: @hill_house, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_house_1.jpg")), property: @hill_house)
+    Photo.create!(image: File.open(image_path.join("int_house_2.jpg")), property: @hill_house)
 
-    Photo.create!(image: File.open(image_path.join("ext_house_2.jpg")), property_id: 2, primary: true)
-    Photo.create!(image: File.open(image_path.join("int_house_3.jpg")), property_id: 2)
+    Photo.create!(image: File.open(image_path.join("ext_house_2.jpg")), property: @runs_house, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_house_3.jpg")), property: @runs_house)
 
-    Photo.create!(image: File.open(image_path.join("ext_apt_1.jpg")), property_id: 3, primary: true)
-    Photo.create!(image: File.open(image_path.join("int_apt_1.jpg")), property_id: 3)
-    Photo.create!(image: File.open(image_path.join("int_apt_2.jpg")), property_id: 3)
-    Photo.create!(image: File.open(image_path.join("int_apt_3.jpg")), property_id: 3)
+    Photo.create!(image: File.open(image_path.join("ext_apt_1.jpg")), property: @pauls_boutique, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_apt_1.jpg")), property: @pauls_boutique)
+    Photo.create!(image: File.open(image_path.join("int_apt_2.jpg")), property: @pauls_boutique)
+    Photo.create!(image: File.open(image_path.join("int_apt_3.jpg")), property: @pauls_boutique)
 
-    Photo.create!(image: File.open(image_path.join("ext_room_1.jpg")), property_id: 4, primary: true)
-    Photo.create!(image: File.open(image_path.join("int_room_1.jpg")), property_id: 4)
+    Photo.create!(image: File.open(image_path.join("ext_room_1.jpg")), property: @the_room, primary: true)
+    Photo.create!(image: File.open(image_path.join("int_room_1.jpg")), property: @the_room)
 
-    Photo.create!(image: File.open(image_path.join("ext_cabin_1.jpg")), property_id: 5, primary: true)
+    Photo.create!(image: File.open(image_path.join("ext_cabin_1.jpg")), property: @log_cabin, primary: true)
   end
 end
 

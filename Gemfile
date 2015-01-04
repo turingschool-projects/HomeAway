@@ -26,6 +26,7 @@ gem 'jquery-turbolinks'
 gem 'faker', require: false
 gem 'stripe'
 gem 'money-rails'
+gem 'factory_girl_rails', require: false
 
 group :development, :test do
   gem 'better_errors'
@@ -47,5 +48,4 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
-  gem 'factory_girl_rails'
 end
