@@ -26,6 +26,7 @@ gem 'jquery-turbolinks'
 gem 'faker', require: false
 gem 'stripe'
 gem 'money-rails'
+gem 'factory_girl_rails', require: false
 
 group :development, :test do
   gem 'better_errors'
