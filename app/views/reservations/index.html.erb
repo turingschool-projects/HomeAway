@@ -12,7 +12,7 @@
 
 <div class="container">
   <div class="row">
-    <% if current_user.reservations.empty? %>
+    <% if current_user.reservations.upcoming.empty? && current_user.reservations.completed.empty? %>
     <div class="col-md-12">
       <h2>You do not have any trips reserved<h2>
         <p><%= link_to "Browse available properties", properties_path %></p>
