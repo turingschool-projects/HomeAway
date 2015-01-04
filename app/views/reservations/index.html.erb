@@ -1,52 +1,67 @@
-<h1>Your Reservations</h1>
-<% if current_user.reservations.empty? %>
-  <h2>You do not have any trips reserved<h2>
-    <p><%= link_to "Browse available properties", properties_path %></p>
-<% else %>
-  <h3>Upcoming</h3>
-  <div class="edit-form">
-    <table class="table table-hover">
-      <thead>
-        <th><h4>Property</h4></th>
-        <th><h4>Location</h4></th>
-        <th><h4>Dates</h4></th>
-        <th><h4>Total Cost</h4></th>
-        <th><h4>Status</h4></th>
-      </thead>
+<div class="functional-header">
+<header class="reservation-menu">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="profile-header brand-box">
+          <h1 class="reservation-header brand-heading">My <span>trips</span><h1>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% if current_user.reservations.empty? %>
+    <div class="col-md-12">
+      <h2>You do not have any trips reserved<h2>
+        <p><%= link_to "Browse available properties", properties_path %></p>
+    </div>
+    <% else %>
+      <div class="col-md-12">
+      <h3>Upcoming Trips</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Dates</th>
+          <th>Total Cost</th>
+          <th>Status</th>
+        </thead>
       <tbody>
-      <% @reservations.upcoming.each do |reservation| %>
+        <% @reservations.upcoming.each do |reservation| %>
         <tr class="upcoming reservation reservation_<%= reservation.id %>">
-          <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-          <td><h5><%= reservation.property.location %></h5></td>
-          <td><h5><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </h5></td>
-          <td><h5><%= number_to_currency(reservation.total) %></h5></td>
-          <td><h5><%= reservation.status %></h5></td>
+          <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+          <td><%= reservation.property.location %></td>
+          <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
+          <td><%= number_to_currency(reservation.total) %></td>
+          <td><%= reservation.status %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
-  <h3>Completed</h3>
-  <div class="edit-form">
-    <table class="table table-hover">
-      <thead>
-        <th><h4>Property</h4></th>
-        <th><h4>Location</h4></th>
-        <th><h4>Dates</h4></th>
-        <th><h4>Total</h4></th>
-        <th><h4>Status</h4></th>
-      </thead>
-      <tbody>
-      <% @reservations.completed.each do |reservation| %>
-        <tr class="completed reservation reservation_<%= reservation.id %>">
-          <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-          <td><h5><%= reservation.property.location %></h5></td>
-          <td><h5><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </h5></td>
-          <td><h5><%= number_to_currency(reservation.total) %></h5></td>
-          <td><h5><%= reservation.status %></h5></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <div class="col-md-12">
+  <h3>Completed Trips</h3>
+  <table class="table table-striped">
+    <thead>
+      <th>Property</th>
+      <th>Location</th>
+      <th>Dates</th>
+      <th>Total Cost</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+    <% @reservations.completed.each do |reservation| %>
+      <tr class="completed reservation reservation_<%= reservation.id %>">
+        <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+        <td><%= reservation.property.location %></td>
+        <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
+        <td><%= number_to_currency(reservation.total) %></td>
+        <td><%= reservation.status %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
   </div>
 <% end %>

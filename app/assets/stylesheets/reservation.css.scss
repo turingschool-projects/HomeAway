@@ -1,0 +1,20 @@
+.reservation-menu {
+  display: table;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: #fff;
+  background: image-url("res-header.jpeg") no-repeat bottom center scroll;
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.reservation-header {
+  margin-right: 150px;
+  color: #474843;
+}
+
+
