@@ -43,7 +43,7 @@ describe 'the application', type: :feature do
                     email_address: "viki@example.com",
                     password: "password",
                     password_confirmation: "password" }
-      user = User.create(user_data)
+      user = create(:user,user_data)
       visit root_path
       fill_in "email_address", with: user.email_address
       fill_in "password", with: user.password
@@ -52,6 +52,11 @@ describe 'the application', type: :feature do
 
     it 'has a logout link' do
       expect(page).to have_link('Logout')
+    end
+
+    it 'can logout' do
+      find_link('Logout').click
+      expect(page).to_not have_link('Logout')
     end
 
     it 'does not have a login link' do
@@ -96,7 +101,7 @@ describe 'the application', type: :feature do
         password_confirmation: "password" }
     }
     let(:user) {
-      User.create(valid_credentials)
+      create(:user,valid_credentials)
     }
     it 'cannot log in without a valid password' do
       visit root_path

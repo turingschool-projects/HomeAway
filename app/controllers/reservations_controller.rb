@@ -1,17 +1,11 @@
 class ReservationsController < ApplicationController
-  def new
-    redirect_to login_path unless current_user
-  end
-
   def my_guests
     if current_user && current_user.host?
       @reservations = Reservation.guests_for current_user.id
     else
       flash[:error] = "You must be a host to see your guests"
-      redirect_to :back
+      redirect_to root_path
     end
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
   end
 
   def create
@@ -76,10 +70,6 @@ class ReservationsController < ApplicationController
   end
 
   private
-
-  def reservation_update_params
-    params.require(:reservation).permit(:address)
-  end
 
   def increment_state(reservation)
     case

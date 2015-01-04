@@ -1,10 +1,10 @@
 require 'rails_helper'
 context 'authenticated host', type: :feature do
   before(:each) do
-    address = Address.create!(line_1: "123 some St",
-                              city: "Denver",
-                              state: "CO",
-                              zip: "80203")
+    address = create(:address, line_1: "123 some St",
+                               city: "Denver",
+                               state: "CO",
+                               zip: "80203")
     host_data = {  name: "Viki",
                    email_address: "viki@example.com",
                    password: "password",
@@ -14,15 +14,15 @@ context 'authenticated host', type: :feature do
                    address: address,
                    host: true }
 
-    host = User.create!(host_data)
+    @host = create(:user,host_data)
     visit root_path
-    fill_in "email_address", with: host.email_address
-    fill_in "password", with: host.password
+    fill_in "email_address", with: @host.email_address
+    fill_in "password", with: @host.password
     click_button "Login"
   end
 
   it 'can create property listings' do
-    house = Category.create!(name: "House")
+    house = create(:category,name: "House")
     visit new_property_path
     fill_in "property[title]", with: "Burger Shack"
     fill_in "property[description]", with: "Juicy and yummy shack"
@@ -44,9 +44,7 @@ context 'authenticated host', type: :feature do
   end
 
   it 'can modify existing properties’ details' do
-    house = Category.create!(name: "House")
-    address = Address.create!(line_1: "123 Some St.", line_2: "Apt. 6", city: "Denver", state: "CO", zip: "80203")
-    property = Property.create!(title: "Burger Shack", description: "Good burger", price: 5000, occupancy: 7, category: house, address: address, user: User.last)
+    property = create(:property, user: @host)
     visit edit_property_path(property)
 
     fill_in "property[title]", with: "Taco Shack"
@@ -54,16 +52,14 @@ context 'authenticated host', type: :feature do
     fill_in "property[price]", with: 25
 
     click_button "Update Property"
-    expect(current_path).to eq(user_path(User.last))
+    expect(current_path).to eq(user_path(@host))
 
     expect(page).to have_content("Taco Shack")
     expect(page).not_to have_content("Burger Shack")
   end
 
     it 'can retire an property from being sold' do
-      house = Category.create!(name: "House")
-      address = Address.create!(line_1: "123 Some St.", line_2: "Apt. 6", city: "Denver", state: "CO", zip: "80203")
-      property = Property.create!(title: "Burger Shack", description: "Good burger", price: 5000, occupancy: 7, category: house, address: address, user: User.last)
+      property = create(:property, user: @host)
       visit edit_property_path(property)
       check("Retired")
       find_button("Update Property").click

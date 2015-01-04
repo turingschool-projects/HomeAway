@@ -7,7 +7,7 @@ xcontext 'authenticated admin', type: :feature do
                    password: "password",
                    password_confirmation: "password",
                    admin: true }
-    admin = User.create!(admin_data)
+    admin = create(:user,admin_data)
     visit root_path
     fill_in "email_address", with: admin.email_address
     fill_in "password", with: admin.password
@@ -15,7 +15,7 @@ xcontext 'authenticated admin', type: :feature do
   end
 
   it 'can create property listings' do
-    burgers = Category.create!(name: "Burgers")
+    burgers = create(:category,name: "burgers")
     visit new_admin_property_path
     fill_in "Title", with: "Yummiest Burger"
     fill_in "Description", with: "Juicy and yummy burger"
@@ -39,8 +39,8 @@ xcontext 'authenticated admin', type: :feature do
   end
 
   it 'can modify existing properties’ name, description, price, and photo' do
-    burgers = Category.create!(name: "Burgers")
-    burger = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
+    burgers = create(:category,name: "burgers")
+    burger = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
     visit edit_admin_property_path(burger)
 
     fill_in "property_title", with: "Better Burger"
@@ -61,7 +61,7 @@ xcontext 'authenticated admin', type: :feature do
   end
 
   it 'cannot update property listings to have invalid attributes' do
-    burgers = Category.create!(name: "Burgers")
+    burgers = create(:category,name: "burgers")
     property = Property.create!(title: "Yummiest Burger",
                         description: "Juicy and yummy burger",
                         price: 5.0,
@@ -96,9 +96,9 @@ xcontext 'authenticated admin', type: :feature do
   end
 
   it 'can assign properties to categories or remove them from categories' do
-    burgers = Category.create!(name: "Burgers")
-    local_game = Category.create!(name: "Local Game")
-    property = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
+    burgers = create(:category,name: "burgers")
+    local_game = create(:category,name: "local game")
+    property = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
 
     visit edit_admin_property_path(property)
     expect(find("#property_category_ids_#{burgers.id}")).to be_checked
@@ -113,8 +113,8 @@ xcontext 'authenticated admin', type: :feature do
   end
 
   it 'can retire an property from being sold' do
-    burgers = Category.create!(name: "Burgers")
-    property = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
+    burgers = create(:category,name: "burgers")
+    property = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
 
     visit edit_admin_property_path(property)
     check("Retired")
@@ -132,7 +132,7 @@ xcontext 'authenticated non-admin', type: :feature do
                    password: "password",
                    password_confirmation: "password",
                    admin: false }
-    admin = User.create!(admin_data)
+    admin = create(:user,admin_data)
     visit root_path
     fill_in "email_address", with: admin.email_address
     fill_in "password", with: admin.password
@@ -146,8 +146,8 @@ xcontext 'authenticated non-admin', type: :feature do
   end
 
   it 'cannot edit existing properties' do
-    burgers = Category.create!(name: "Burgers")
-    burger = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
+    burgers = create(:category,name: "burgers")
+    burger = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
     visit edit_admin_property_path(burger)
     expect(current_path).to eq(root_path)
 
@@ -161,8 +161,8 @@ xcontext 'authenticated non-admin', type: :feature do
   end
 
   it 'cannot retire an property from being sold' do
-    burgers = Category.create!(name: "Burgers")
-    property = Property.create!(title: "Best Burger", description: "Good burger", price: 9.0, categories: [burgers])
+    burgers = create(:category,name: "burgers")
+    property = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
 
     visit properties_path
     expect(page).not_to have_content("Retire")

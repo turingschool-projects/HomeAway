@@ -1,4 +1,7 @@
 class Address < ActiveRecord::Base
+  has_one :user
+  has_one :property
+
   validates :line_1, presence: true
   validates :city, presence: true
   validates :state, presence: true

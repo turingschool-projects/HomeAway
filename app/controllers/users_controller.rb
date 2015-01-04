@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_current_user, except: [:new, :create]
-
-  def new
-    @user = User.new
-  end
+  before_action :require_current_user, except: [:create]
 
   def create
     @user = User.new(user_params)

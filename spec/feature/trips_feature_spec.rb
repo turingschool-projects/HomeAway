@@ -1,56 +1,47 @@
 require "rails_helper"
 
 describe "booked trips", type: :feature do
-  before(:each) do
-    User.create! name: "Viki Harrod",
-                 email_address: "viki@example.com",
-                 password: "password",
-                 password_confirmation: "password"
-    Category.create! name: "Awesome Place"
-    Address.create! line_1: "213 Some St",
-                    city: "Denver",
-                    state: "CO",
-                    zip: "80203"
-    Property.create! title: "My Cool Home", description: "cool description",
-                     occupancy: 4, price: 6.66,
-                     bathroom_private: false,
-                     category: Category.last,
-                     address: Address.last
-    Reservation.create! user: User.last,
-                        property: Property.last,
-                        start_date: Date.current.advance(days: 20),
-                        end_date: Date.current.advance(days: 25)
-  end
+  let!(:user) { create(:user) }
+  let!(:property) { create(:property) }
+  let!(:reservation) { create(:reservation, user: user, property: property)}
+
   it "can view a page with reservation details" do
     visit root_path
-    find_link("Log In").click
-    fill_in "email_address", with: "viki@example.com"
-    fill_in "password", with: "password"
-    find_button("Login").click
-    visit reservation_path(Reservation.last)
-    expect(page).to have_content("My Cool Home")
-    expect(page).to have_content("5 days")
-    expect(page).to have_content("$33.30")
+    login(user)
+    visit reservation_path(reservation)
+    expect(page).to have_content(reservation.property.title)
+    expect(page).to have_content(reservation.duration.floor)
+    expect(page).to have_content(reservation.total)
   end
 
   it "can view a page with upcoming and past reservations" do
     visit root_path
-    find_link("Log In").click
-    fill_in "email_address", with: "viki@example.com"
-    fill_in "password", with: "password"
-    find_button("Login").click
+    login(user)
     visit reservations_path
 
     expect(page).to have_content("Upcoming")
     expect(page).to have_css(".upcoming")
     within(".upcoming") do
-      expect(page).to have_content("My Cool Home")
-      expect(page).to have_content("$33.30")
-      expect(page).to have_content("Denver")
-      expect(page).to have_content("pending")
+      expect(page).to have_content(reservation.property.title)
+      expect(page).to have_content(reservation.total)
+      expect(page).to have_content(reservation.property.location)
+      expect(page).to have_content(reservation.status)
     end
 
     expect(page).to have_content("Completed")
     expect(page).to_not have_css(".completed")
+  end
+
+  it "can view retired properties from previous reservations but not add them to cart" do
+    login(user)
+    property = create(:property)
+    reservation = create(:reservation,user: user, status: "completed", property: property)
+    property.retired = true
+    property.save!
+    expect(property.retired?).to eq true
+    visit reservations_path
+    find(:xpath, "//a[@href='/reservations/#{reservation.id}']").click
+    find_link(property.title).click
+    expect(page).to_not have_button("Request reservation")
   end
 end

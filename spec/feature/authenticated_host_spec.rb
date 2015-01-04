@@ -1,56 +1,26 @@
 require 'rails_helper'
 
 context "authenticated host", type: :feature do
-  before(:each) do
-    address = Address.create!(line_1: "213 Some St",
-    city: "Denver",
-    state: "CO",
-    zip: "80203")
-    traveler = User.create!(name: "traveler jim",
-    email_address: "traveler@example.com",
-    password: "password",
-    password_confirmation: "password")
-    host = User.create!(name: "Boy George",
-    email_address: "cultureclubforever@eighties.com",
-    password: "password",
-    password_confirmation: "password",
-    host_slug: "boy_george_4evah",
-    address: address,
-    host: true)
-    category = Category.create!(name: "Awesome Place")
-    property1 = Property.create!(title: "My Cool Home",
-    description: "cool description",
-    occupancy: 4, price: 666,
-    bathroom_private: false,
-    category: category,
-    address: address,
-    user: host)
-    property2 = Property.create!(title: "A Retired Home",
-    description: "retired description",
-    occupancy: 4, price: 666,
-    bathroom_private: false, retired: true,
-    category: category,
-    address: address,
-    user: host)
-    reservation1 = Reservation.create!(start_date: Date.current.advance(days: 1),
-    end_date: Date.current.advance(days: 4), property: property1,
-    user: traveler)
-
-    visit root_path
-    fill_in "email_address", with: host.email_address
-    fill_in "password", with: host.password
-    find_button("Login").click
+  let(:file_path) do
+    Rails.root.join('spec', 'fixtures', 'images')
   end
 
+  let!(:traveler) { create(:user) }
+  let!(:host) { create(:host) }
+  let!(:property) { create(:property, user: host) }
+  let!(:retired_property) { create(:property, user: host, retired: true) }
+  let!(:reservation) { create(:reservation, property: property, user: traveler) }
+
   it "can see my_guests page containing all incoming reservations" do
+    login(host)
     visit my_guests_path
     expect(page).to have_content("pending")
-    expect(page).to have_content("My Cool Home")
-    expect(page).to have_content("traveler jim")
+    expect(page).to have_content(reservation.property.title)
+    expect(page).to have_content(reservation.user.name)
   end
 
   it "can confirm reservations on my_guests" do
-    reservation = Reservation.last
+    login(host)
     visit my_guests_path
     within(".reservation_#{reservation.id}") do
       expect(page).to have_content("pending")
@@ -62,7 +32,7 @@ context "authenticated host", type: :feature do
   end
 
   it "can deny reservations on my_guests" do
-    reservation = Reservation.last
+    login(host)
     visit my_guests_path
 
     within(".reservation_#{reservation.id}") do
@@ -74,8 +44,23 @@ context "authenticated host", type: :feature do
     end
   end
 
+  it "can complete past reservations on my_guests" do
+    login(host)
+    new_property = create(:property, user: host)
+    past_reservation = create(:reservation, property: new_property, status: "reserved")
+    past_reservation.start_date = Date.current.advance(days: -20)
+    past_reservation.end_date = Date.current.advance(days: -15)
+    past_reservation.save(validate: false)
+    visit my_guests_path
+    within(".reservation_#{past_reservation.id}") do
+      expect(page).to have_content("reserved")
+      find_button("complete").click
+    end
+  end
+
   it "can add a property" do
-    expect(User.last.properties.count).to eq 2
+    login(host)
+    expect(host.properties.count).to eq 2
     find_link("My Profile").click
     find_link("Add a new property").click
 
@@ -92,37 +77,58 @@ context "authenticated host", type: :feature do
     end
 
     find_button("Create Property").click
-    expect(current_path).to eq user_path(User.last)
+    expect(current_path).to eq property_photos_path(Property.last)
     expect(page).to have_content("sweet pad")
-    expect(User.last.properties.count).to eq 3
+    expect(host.properties.count).to eq 3
+  end
+
+  it "sees an error message if a property doesn't save" do
+    login(host)
+    find_link("My Profile").click
+    find_link("Add a new property").click
+    find_button("Create Property").click
+    expect(page).to have_content("errors prohibited this property from being saved")
+
+    visit edit_property_path(property)
+    fill_in "Title", with: ""
+    find_button("Update Property").click
+    expect(page).to have_content("error prohibited this property from being saved")
+  end
+
+  it "can edit own properties but not other hosts' properties" do
+    other_host = create(:host)
+    other_property = create(:property, user: other_host)
+    login(host)
+    visit edit_property_path(other_property)
+    expect(page).to have_content("Unauthorized")
   end
 
   it "can add photos to a property" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     find_button("Create Photo").click
     expect(property.photos.count).to eq 1
     expect(property.photos.first.image_file_name).to eq("ext_apt_1.jpg")
   end
 
   it "can set and change primary photo" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
     find_button("Create Photo").click
 
     within(".primary") do
@@ -137,21 +143,55 @@ context "authenticated host", type: :feature do
   end
 
   it "can delete an image from the photos page" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_apt_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", "/#{Rails.root}/spec/fixtures/images/ext_balloon_1.jpg")
+    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
     find_button("Create Photo").click
 
     find_link("Remove Photo").click
     expect(page).to_not have_css("img[src$='ext_balloon_1.jpg']")
+  end
+
+  it "sees an error message if the photo doesn't save" do
+    login(host)
+    find_link("My Profile").click
+    within ".property_#{property.id}" do
+      find_link("Manage photos").click
+    end
+    find_link("Add Photo").click
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    expect(current_path).to eq property_photos_path(property)
+    expect(page).to have_content "prohibited this photo"
+
+    page.attach_file("photo_image",  file_path.join("ext_apt_1.jpg"))
+    check("photo_primary")
+    find_button("Create Photo").click
+
+    expect(current_path).to eq property_photos_path(property)
+    visit edit_property_photo_path(property, Photo.last)
+    page.attach_file("photo_image", file_path.join("blank.txt"))
+    find_button("Update Photo").click
+    expect(page).to have_content "prohibited this photo"
+  end
+
+  it "can manage own property photos but not other hosts' property photos" do
+    other_host_property = create(:property)
+    login(host)
+    visit property_photos_path(property)
+    expect(page).to have_content(property.title)
+
+    visit property_photos_path(other_host_property)
+    expect(page).to have_content("You may only manage your own property photos")
   end
 end

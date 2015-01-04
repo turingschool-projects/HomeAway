@@ -9,7 +9,7 @@
   <h5>Length of Stay: <%= reservation.duration.floor %> days</h5>
   <h5>Total: <%= number_to_currency(reservation.total) %></h5>
 
-  <% unless reservation.cancelled? %>
+  <% if reservation.may_cancel? %>
     <%= button_to reservation_path(reservation), method: :put, value: "#{reservation.property.id}", class: "btn btn-default", name: "cancel" do %>
       <span>Cancel Reservation</span>
     <% end %>

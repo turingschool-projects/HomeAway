@@ -4,7 +4,7 @@ class PropertiesController < ApplicationController
 
   before_action :require_host,  only: [:new, :create]
   before_action :require_owner, only: [:edit, :update]
-  
+
   def new
     @property = Property.new
     @property.user = current_user
@@ -16,7 +16,7 @@ class PropertiesController < ApplicationController
     @property.user = current_user
 
     if @property.save
-      redirect_to user_path(current_user)
+      redirect_to property_photos_path(@property)
     else
       render :new
     end

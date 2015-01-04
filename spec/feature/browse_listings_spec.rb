@@ -2,39 +2,44 @@ require "rails_helper"
 
 describe "user browsing listings", type: :feature do
   context "when logged out" do
-    before(:each) do
-      Category.create! name: "Awesome Place"
-      Address.create! line_1: "213 Some St",
-                      city: "Denver",
-                      state: "CO",
-                      zip: "80203"
-      Property.create! title: "My Cool Home", description: "cool description",
-                      occupancy: 4, price: 6.66,
-                      bathroom_private: false,
-                      category: Category.last,
-                      address: Address.last
-      Property.create! title: "A Retired Home", description: "retired description",
-                      occupancy: 4, price: 6.66,
-                      bathroom_private: false, retired: true,
-                      category: Category.last,
-                      address: Address.last
+    let!(:property) { create(:property) }
+    let!(:retired_property) { create(:property, retired: true) }
+
+    it "browses all properties" do
       visit properties_path
+      expect(page).to have_content(property.title)
+      expect(page).to have_content(property.price)
+    end
+
+    it "can view a single property" do
+      visit property_path(property)
+      expect(page).to have_content(property.title)
+      expect(page).to have_content(property.description)
+    end
+
+    xit 'browses properties by category' do
+      # unskip when implemented
+      visit properties_path
+      expect(page).to have_link("stuff", :href => "#category-id-#{property.categories.first.id}")
+      expect(page).to have_css("span", "category-id-#{property.categories.first.id}")
     end
 
     it "shows listings on the listing page" do
-      expect(page).to have_content "My Cool Home"
-      expect(page).to have_content "6.66"
+      visit properties_path
+      expect(page).to have_content property.title
+      expect(page).to have_content property.price
     end
 
     it "does not show listings on the listing page when retired" do
-      expect(page).to_not have_content "A Retired Home"
-      expect(page).to_not have_content "retired description"
+      visit properties_path
+      expect(page).to_not have_content retired_property.title
     end
 
     it "has more info on the specific property's page" do
-      click_link_or_button "My Cool Home"
-      expect(page).to have_content "$6.66"
-      expect(page).to have_content "4"
+      visit properties_path
+      click_link_or_button property.title
+      expect(page).to have_content property.price
+      expect(page).to have_content property.occupancy
     end
   end
 end

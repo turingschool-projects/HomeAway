@@ -6,7 +6,7 @@ class Property < ActiveRecord::Base
   validates :category_id, presence: true
   monetize :price_cents
   alias_method :daily_rate, :price
-#  validates :address_id, presence: true
+  validates :address, presence: true
 
   belongs_to :user
   belongs_to :category
@@ -16,6 +16,8 @@ class Property < ActiveRecord::Base
   has_many :reservations
 
   has_many :photos
+  has_many :other_photos, -> { where(primary: false) }, class: Photo
+  
   accepts_nested_attributes_for :photos, reject_if: lambda {|attributes| attributes['image'].blank?}
 
   scope :active, -> { where(retired: false) }
@@ -29,10 +31,6 @@ class Property < ActiveRecord::Base
 
   def primary
     photos.where(primary: true).take || photos.first
-  end
-
-  def other_photos
-    photos.where(primary: false)
   end
 
   def location
