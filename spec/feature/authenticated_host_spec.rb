@@ -149,4 +149,14 @@ context "authenticated host", type: :feature do
     find_button("Update Photo").click
     expect(page).to have_content "prohibited this photo"
   end
+
+  it "can manage own property photos but not other hosts' property photos" do
+    other_host_property = create(:property)
+    login(host)
+    visit property_photos_path(property)
+    expect(page).to have_content(property.title)
+
+    visit property_photos_path(other_host_property)
+    expect(page).to have_content("You may only manage your own property photos")
+  end
 end
