@@ -1,26 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Property, :type => :model do
-  let(:category) do
-    create(:category,name: "room")
-  end
-
-  let(:user) do
-    create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
-  end
-
-  let(:address) do
-    create(:address,line_1: "123 s st", city: "denver", state: "co", zip: "80203")
-  end
-
   describe "property attributes" do
     it "must have a title" do
-      property = build(:property, title: "")
+      property = build(:property, title: nil)
       expect(property).to_not be_valid
     end
 
     it "must have a description" do
-      property = build(:property, description: "")
+      property = build(:property, description: nil)
       expect(property).to_not be_valid
     end
 
@@ -102,7 +90,7 @@ RSpec.describe Property, :type => :model do
     end
 
     it "can have many photos" do
-      property = create(:property,title: "bob's place", description: "super cozy", price: 500, address: address, user: user, category: category)
+      property = create(:property)
 
       photo1 = create(:photo,image: File.open("app/assets/images/ext_house_1.jpeg"), property: property, primary: true)
       photo2 = create(:photo,image: File.open("app/assets/images/int_house_1.jpg"), property: property)
