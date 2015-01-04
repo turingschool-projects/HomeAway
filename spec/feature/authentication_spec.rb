@@ -54,6 +54,11 @@ describe 'the application', type: :feature do
       expect(page).to have_link('Logout')
     end
 
+    it 'can logout' do
+      find_link('Logout').click
+      expect(page).to_not have_link('Logout')
+    end
+
     it 'does not have a login link' do
       expect(page).not_to have_link("Login!")
     end

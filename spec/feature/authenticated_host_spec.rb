@@ -68,6 +68,27 @@ context "authenticated host", type: :feature do
     expect(host.properties.count).to eq 3
   end
 
+  it "sees an error message if a property doesn't save" do
+    login(host)
+    find_link("My Profile").click
+    find_link("Add a new property").click
+    find_button("Create Property").click
+    expect(page).to have_content("errors prohibited this property from being saved")
+
+    visit edit_property_path(property)
+    fill_in "Title", with: ""
+    find_button("Update Property").click
+    expect(page).to have_content("error prohibited this property from being saved")
+  end
+
+  it "can edit own properties but not other hosts' properties" do
+    other_host = create(:host)
+    other_property = create(:property, user: other_host)
+    login(host)
+    visit edit_property_path(other_property)
+    expect(page).to have_content("Unauthorized")
+  end
+
   it "can add photos to a property" do
     login(host)
     find_link("My Profile").click

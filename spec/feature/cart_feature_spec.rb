@@ -36,6 +36,14 @@ describe "can add things to the trip", type: :feature do
       expect(page).to_not have_content property1.title
     end
 
+    it "can't make a reservation with invalid dates" do
+      visit properties_path
+      click_link_or_button property1.title
+      fill_in "property[reservation]", with: "#{end_date} - #{start_date}"
+      click_link_or_button "Request reservation"
+      expect(page).to have_content("Invalid dates")
+    end
+
     it "can't checkout without logging in" do
       visit properties_path
       click_link_or_button property1.title

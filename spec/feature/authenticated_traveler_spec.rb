@@ -34,6 +34,14 @@ describe "traveler permissions", type: :feature do
     expect(page).to have_content("You can only view your own")
   end
 
+  it "sees error message when updating profile with invalid attributes" do
+    login(user)
+    visit edit_user_path(user)
+    fill_in "Email address", with: ""
+    find_button("Update User").click
+    expect(page).to have_content("errors prohibited this user from being saved")
+  end
+
   it "can view own reservations but not other users' reservations" do
     login(user)
     user2 = create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
@@ -49,5 +57,11 @@ describe "traveler permissions", type: :feature do
     visit reservation_path(reservation2.id)
     expect(page).to have_content("You may only view your own reservations")
     expect(current_path).to eq(root_path)
+  end
+
+  it "cannot add properties" do
+    login(user)
+    visit new_property_path
+    expect(page).to have_content("Unauthorized")
   end
 end
