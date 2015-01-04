@@ -11,13 +11,6 @@ context "authenticated host", type: :feature do
   let!(:retired_property) { create(:property, user: host, retired: true) }
   let!(:reservation) { create(:reservation, property: property, user: traveler) }
 
-  def login(user)
-    visit root_path
-    fill_in "email_address", with: user.email_address
-    fill_in "password", with: user.password
-    find_button("Login").click
-  end
-
   it "can see my_guests page containing all incoming reservations" do
     login(host)
     visit my_guests_path

@@ -16,3 +16,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 end
+
+def login(user)
+  visit root_path
+  fill_in "email_address", with: user.email_address
+  fill_in "password", with: user.password
+  find_button("Login").click
+end
