@@ -23,7 +23,7 @@ gem 'aasm'
 gem 'dimensions-rails'
 gem 'formtastic'
 gem 'jquery-turbolinks'
-gem 'faker'
+gem 'faker', require: false
 gem 'stripe'
 gem 'money-rails'
 
@@ -32,7 +32,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 3.0'
   gem 'quiet_assets'
   gem 'capybara'
   gem 'launchy'
@@ -45,6 +44,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'factory_girl_rails'
 end
