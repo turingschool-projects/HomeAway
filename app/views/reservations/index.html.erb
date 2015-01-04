@@ -35,7 +35,7 @@
           <td><%= reservation.property.location %></td>
           <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
           <td><%= number_to_currency(reservation.total) %></td>
-          <td><%= reservation.status %></td>
+          <td><span class="label-status"><%= reservation.status %></span></td>
         </tr>
       <% end %>
       </tbody>
@@ -58,7 +58,7 @@
         <td><%= reservation.property.location %></td>
         <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
         <td><%= number_to_currency(reservation.total) %></td>
-        <td><%= reservation.status %></td>
+        <td><span class="label-status"><%= reservation.status %></span></td>
       </tr>
     <% end %>
     </tbody>
