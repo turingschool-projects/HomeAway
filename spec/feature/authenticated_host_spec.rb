@@ -44,6 +44,20 @@ context "authenticated host", type: :feature do
     end
   end
 
+  it "can complete past reservations on my_guests" do
+    login(host)
+    new_property = create(:property, user: host)
+    past_reservation = create(:reservation, property: new_property, status: "reserved")
+    past_reservation.start_date = Date.current.advance(days: -20)
+    past_reservation.end_date = Date.current.advance(days: -15)
+    past_reservation.save(validate: false)
+    visit my_guests_path
+    within(".reservation_#{past_reservation.id}") do
+      expect(page).to have_content("reserved")
+      find_button("complete").click
+    end
+  end
+
   it "can add a property" do
     login(host)
     expect(host.properties.count).to eq 2
