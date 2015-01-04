@@ -4,56 +4,30 @@ context "authenticated host", type: :feature do
   let(:file_path) do
     Rails.root.join('spec', 'fixtures', 'images')
   end
-  before(:each) do
-    address = create(:address, line_1: "213 Some St",
-    city: "Denver",
-    state: "CO",
-    zip: "80203")
-    traveler = create(:user, name: "traveler jim",
-    email_address: "traveler@example.com",
-    password: "password",
-    password_confirmation: "password")
-    host = create(:user, name: "Boy George",
-    email_address: "cultureclubforever@eighties.com",
-    password: "password",
-    password_confirmation: "password",
-    host_slug: "boy_george_4evah",
-    address: address,
-    host: true)
-    category = create(:category,name: "awesome place")
-    property1 = create(:property, title: "My Cool Home",
-    description: "cool description",
-    occupancy: 4, price: 666,
-    bathroom_private: false,
-    category: category,
-    address: address,
-    user: host)
-    property2 = create(:property, title: "A Retired Home",
-    description: "retired description",
-    occupancy: 4, price: 666,
-    bathroom_private: false, retired: true,
-    category: category,
-    address: address,
-    user: host)
-    reservation1 = create(:reservation,start_date: Date.current.advance(days: 1),
-    end_date: Date.current.advance(days: 4), property: property1,
-    user: traveler)
 
+  let!(:traveler) { create(:user) }
+  let!(:host) { create(:host) }
+  let!(:property) { create(:property, user: host) }
+  let!(:retired_property) { create(:property, user: host, retired: true) }
+  let!(:reservation) { create(:reservation, property: property, user: traveler) }
+
+  def login(user)
     visit root_path
-    fill_in "email_address", with: host.email_address
-    fill_in "password", with: host.password
+    fill_in "email_address", with: user.email_address
+    fill_in "password", with: user.password
     find_button("Login").click
   end
 
   it "can see my_guests page containing all incoming reservations" do
+    login(host)
     visit my_guests_path
     expect(page).to have_content("pending")
-    expect(page).to have_content("My Cool Home")
-    expect(page).to have_content("traveler jim")
+    expect(page).to have_content(reservation.property.title)
+    expect(page).to have_content(reservation.user.name)
   end
 
   it "can confirm reservations on my_guests" do
-    reservation = Reservation.last
+    login(host)
     visit my_guests_path
     within(".reservation_#{reservation.id}") do
       expect(page).to have_content("pending")
@@ -65,7 +39,7 @@ context "authenticated host", type: :feature do
   end
 
   it "can deny reservations on my_guests" do
-    reservation = Reservation.last
+    login(host)
     visit my_guests_path
 
     within(".reservation_#{reservation.id}") do
@@ -78,7 +52,8 @@ context "authenticated host", type: :feature do
   end
 
   it "can add a property" do
-    expect(User.last.properties.count).to eq 2
+    login(host)
+    expect(host.properties.count).to eq 2
     find_link("My Profile").click
     find_link("Add a new property").click
 
@@ -97,11 +72,11 @@ context "authenticated host", type: :feature do
     find_button("Create Property").click
     expect(current_path).to eq property_photos_path(Property.last)
     expect(page).to have_content("sweet pad")
-    expect(User.last.properties.count).to eq 3
+    expect(host.properties.count).to eq 3
   end
 
   it "can add photos to a property" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
@@ -114,7 +89,7 @@ context "authenticated host", type: :feature do
   end
 
   it "can set and change primary photo" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
@@ -140,7 +115,7 @@ context "authenticated host", type: :feature do
   end
 
   it "can delete an image from the photos page" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
@@ -159,7 +134,7 @@ context "authenticated host", type: :feature do
   end
 
   it "sees an error message if the photo doesn't save" do
-    property = Property.last
+    login(host)
     find_link("My Profile").click
     within ".property_#{property.id}" do
       find_link("Manage photos").click
