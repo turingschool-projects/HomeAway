@@ -5,37 +5,37 @@ context "authenticated host", type: :feature do
     Rails.root.join('spec', 'fixtures', 'images')
   end
   before(:each) do
-    address = Address.create!(line_1: "213 Some St",
+    address = create(:address, line_1: "213 Some St",
     city: "Denver",
     state: "CO",
     zip: "80203")
-    traveler = User.create!(name: "traveler jim",
+    traveler = create(:user, name: "traveler jim",
     email_address: "traveler@example.com",
     password: "password",
     password_confirmation: "password")
-    host = User.create!(name: "Boy George",
+    host = create(:user, name: "Boy George",
     email_address: "cultureclubforever@eighties.com",
     password: "password",
     password_confirmation: "password",
     host_slug: "boy_george_4evah",
     address: address,
     host: true)
-    category = Category.create!(name: "Awesome Place")
-    property1 = Property.create!(title: "My Cool Home",
+    category = create(:category,name: "awesome place")
+    property1 = create(:property, title: "My Cool Home",
     description: "cool description",
     occupancy: 4, price: 666,
     bathroom_private: false,
     category: category,
     address: address,
     user: host)
-    property2 = Property.create!(title: "A Retired Home",
+    property2 = create(:property, title: "A Retired Home",
     description: "retired description",
     occupancy: 4, price: 666,
     bathroom_private: false, retired: true,
     category: category,
     address: address,
     user: host)
-    reservation1 = Reservation.create!(start_date: Date.current.advance(days: 1),
+    reservation1 = create(:reservation,start_date: Date.current.advance(days: 1),
     end_date: Date.current.advance(days: 4), property: property1,
     user: traveler)
 

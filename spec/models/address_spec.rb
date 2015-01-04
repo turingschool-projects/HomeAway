@@ -13,39 +13,39 @@ RSpec.describe Address, :type => :model do
 
   describe "address attributes" do
     it "must have a street address" do
-      address = Address.create(attributes)
+      address = build(:address,attributes)
       expect(address).to be_valid
 
       attributes[:line_1] = nil
-      address = Address.create(attributes)
+      address = build(:address,attributes)
       expect(address).to_not be_valid
     end
 
     it "must have a city" do
       attributes[:city] = nil
-      address = Address.create(attributes)
+      address = build(:address,attributes)
       expect(address).to_not be_valid
     end
 
     it "must have a state" do
       attributes[:state] = nil
-      address = Address.create(attributes)
+      address = build(:address,attributes)
       expect(address).to_not be_valid
     end
 
     it "must have a zip" do
       attributes[:zip] = nil
-      address = Address.create(attributes)
+      address = build(:address,attributes)
       expect(address).to_not be_valid
     end
 
     it "defaults country to USA if not specified" do
-      address = Address.create!(attributes)
+      address = create(:address,attributes)
       expect(address.country).to eq("USA")
     end
 
     it "returns an escaped city and address for google maps" do
-      address = Address.create!(attributes)
+      address = create(:address,attributes)
       address.city = "New York"
       expect(address.escape_city).to eq("New+York")
       expect(address.escape_street).to eq("123+Some+St.")

@@ -6,7 +6,7 @@ xdescribe "the authenticated non-administrator", type: :feature do
                 password: "password",
                 password_confirmation: "password") }
 
-  let(:category) { Category.create!(name: "stuff") }
+  let(:category) { create(:category,name: "stuff") }
 
   let(:property) do
     Property.create!(title: "Greg's Homemade Chili",
@@ -101,8 +101,8 @@ xdescribe "the authenticated non-administrator", type: :feature do
     expect(page).to have_button("Login!")
   end
 
-  let(:reservation1) { Reservation.create!(user: user, status: "completed") }
-  let(:reservation2) { Reservation.create!(user: user, status: "cancelled") }
+  let(:reservation1) { create(:reservation,user: user, status: "completed") }
+  let(:reservation2) { create(:reservation,user: user, status: "cancelled") }
 
   before(:each) do
     reservation1.properties << property
@@ -139,8 +139,8 @@ xdescribe "the authenticated non-administrator", type: :feature do
   end
 
   it "can view retired properties from previous reservations but not add them to cart" do
-    reservation = Reservation.create!(user: user, status: "paid")
-    retired_property = Property.create!(title: "retired", description: "retired", price: 5, categories: [category])
+    reservation = create(:reservation,user: user, status: "paid")
+    retired_property = create(:property,title: "retired", description: "retired", price: 5, categories: [category])
     reservation.properties << retired_property
     retired_property.retired = true
 
@@ -154,7 +154,7 @@ xdescribe "the authenticated non-administrator", type: :feature do
   end
 
   it "can view own user info but not other users' info" do
-    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+    user2 = create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
 
     visit user_path(user)
     expect(page).to have_content(user.name)
@@ -168,7 +168,7 @@ xdescribe "the authenticated non-administrator", type: :feature do
   end
 
   it "can edit own user info but not other users' info" do
-    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+    user2 = create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
 
     visit edit_user_path(user)
     fill_in "Email address", with: "boy_george@example.com"
@@ -181,8 +181,8 @@ xdescribe "the authenticated non-administrator", type: :feature do
   end
 
   it "can view own reservations but not other users' reservations" do
-    user2 = User.create!(name: "Bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
-    reservation3 = Reservation.create!(user: user2)
+    user2 = create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
+    reservation3 = create(:reservation,user: user2)
     reservation3.properties << property
 
     visit reservations_path
