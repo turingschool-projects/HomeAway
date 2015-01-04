@@ -33,8 +33,8 @@ RSpec.describe Address, :type => :model do
     it "returns an escaped city and address for google maps" do
       address = create(:address)
       address.city = "New York"
-      expect(address.escape_city).to eq("New+York")
-      expect(address.escape_street).to eq("123+Some+St")
+      expect(address.escape_city).to eq(address.city.gsub(/ +/, "+"))
+      expect(address.escape_street).to eq(address.line_1.gsub(/ +/, "+"))
     end
   end
 end
