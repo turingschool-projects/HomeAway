@@ -44,6 +44,10 @@ class Cart
    @property.price * duration
   end
 
+  def total_cents
+    (@property.price * duration).to_i
+  end
+
   def duration
     Date.parse(@data["end_date"]) - Date.parse(@data["start_date"])
   end

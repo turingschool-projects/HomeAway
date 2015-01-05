@@ -6,7 +6,7 @@ class Property < ActiveRecord::Base
   validates :category_id, presence: true
   monetize :price_cents
   alias_method :daily_rate, :price
-  # validates :address, presence: true
+  validates :address, presence: true
 
   belongs_to :user
   belongs_to :category
