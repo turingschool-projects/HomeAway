@@ -17,7 +17,7 @@ describe "sign up process", type: :feature do
     fill_in "Password", with: "password"
     fill_in "Confirm Password", with: "password"
     find_button("Create User").click
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(edit_user_path(User.last))
     expect(page).to_not have_link("Log In")
     expect(page).to have_link("Logout")
   end
