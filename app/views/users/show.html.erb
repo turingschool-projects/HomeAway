@@ -10,8 +10,10 @@
   </header>
 </div>
 
-<% if @user.host? %>
+<% if @user.only_host? %>
   <%= render partial: "host" %>
+<% elsif @user.admin? %>
+  <%= render partial: "admin" %>
 <% else %>
   <%= render partial: "traveler" %>
 <% end %>

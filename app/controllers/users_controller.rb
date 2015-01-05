@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @host_requests = HostRequest.includes(:user)
     unless current_user && current_user.admin?
       unless @user == current_user
         unauthorized
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
       else
         flash[:errors] = "This user does not exist"
       end
-      redirect_to host_requests_path
+      redirect_to user_path(current_user)
     else
       unauthorized
     end

@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     payments << "Cash" if accepts_cash? || (!accepts_cc && !accepts_check)
     payments
   end
+
+  def only_host?
+    host && !admin
+  end
 end
