@@ -42,7 +42,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.active.includes(:category, :photos)
+    @properties = Property.active.includes(:category, :photos).search(params[:search])
   end
 
   private
