@@ -31,6 +31,8 @@ class Seed
       name: "Hostess Hosterson",
       email_address: "host@example.com")
 
+    FactoryGirl.create_list(:host, 7)
+
     puts "Users generated"
   end
 
@@ -82,8 +84,8 @@ class Seed
 
   def generate_reservations
     current = nil
-    date_ranges = (1..10).map do
-      current ||= Date.current.advance(days: 20)..Date.current.advance(days: 22)
+    date_ranges = (1..50).map do
+      current ||= Date.current..Date.current.advance(days: 2)
       num_days_after_start = current.last - current.first + 1
       num_days_after_end = current.last - current.first + 3
       start_date = current.first.advance(days: num_days_after_start)
