@@ -1,5 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password
+
+  has_and_belongs_to_many(:partners, join_table: :user_connections, class_name: "User",
+                          foreign_key: :host_id, association_foreign_key: :partner_id)
+  has_and_belongs_to_many(:owners, join_table: :user_connections, class_name: "User",
+                          association_foreign_key: :host_id, foreign_key: :partner_id)
+
+
   belongs_to :address
   accepts_nested_attributes_for :address
   has_many :reservations
