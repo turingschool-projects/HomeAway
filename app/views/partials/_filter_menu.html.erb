@@ -1,12 +1,11 @@
-<div class="listing">
-  <div class="row">
-   <div class="col-md-12">
-     <div class="filter-head">
-       Refine your search
-       <%= form_tag properties_path, :method => 'get', :id => "properties_search" do %>
-         <%= text_field_tag :search, params[:search], placeholder: "City" %>
-       <% end %>
-     </div>
-   </div>
- </div>
+<div class="col-md-12 listing">
+    <div class="filter-head">
+      Refine your search
+    </div>
+    <div>
+      <%= form_tag properties_path, :method => 'get', :id => "properties_search" do %>
+        <%= text_field_tag :search, params[:search], placeholder: "City", class: "form-control modal-form" %>
+      <% end %>
+    </div>
 </div>
+
