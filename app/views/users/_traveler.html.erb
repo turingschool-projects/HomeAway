@@ -24,11 +24,13 @@
     <div class="col-md-3">
       <div class="profile-block">
         <h4>Address Info</h4>
-        <%= @user.address.line_1 %><br>
-        <%= @user.address.line_2 %><br>
-        <%= @user.address.city %>, <%= @user.address.state %><br>
-        <%= @user.address.zip %><br>
-        <%= @user.address.country %><br>
+        <% if @user.address %>
+          <%= @user.address.line_1 %><br>
+          <%= @user.address.line_2 %><br>
+          <%= @user.address.city %>, <%= @user.address.state %><br>
+          <%= @user.address.zip %><br>
+          <%= @user.address.country %><br>
+        <% end %>
       </div>
     </div>
 
