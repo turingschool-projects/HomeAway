@@ -37,9 +37,14 @@ class Property < ActiveRecord::Base
     address.city
   end
 
-  def self.search(key)
-    if key
-      joins(:address).where("addresses.city ILIKE ?", "%#{key}%")
+  def price_range(money)
+      end
+
+  def self.search(city, money)
+    if city || money
+      price_low, price_high = money.split(",")
+      price_range = (price_low.to_i * 100)..(price_high.to_i * 100)
+      joins(:address).where("addresses.city ILIKE ?", "%#{city}%").where(price_cents: price_range)
     else
       active
     end

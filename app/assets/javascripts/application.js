@@ -18,5 +18,6 @@
 //= require bootstrap.min
 //= require moment.min
 //= require daterangepicker
+//= require bootstrap-slider
 
 

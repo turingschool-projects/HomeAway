@@ -4,8 +4,16 @@
     </div>
     <div>
       <%= form_tag properties_path, :method => 'get', :id => "properties_search" do %>
-        <%= text_field_tag :search, params[:search], placeholder: "City", class: "form-control modal-form" %>
+        <div class="form-group">
+          <%= text_field_tag :search, params[:search], placeholder: "City", class: "form-control modal-form" %>
+        </div>
+        <div class="form-group">
+          <input id="moneySlide" name="moneySlide" type="text" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5" data-slider-value="[0,10000]"/>
+          $<span id="lowVal">0</span> <span class="highVal">$<span id="highVal">10000</span></span>
+        </div>
+        <%= submit_tag %>
       <% end %>
     </div>
 </div>
+
 
