@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver
-      redirect_to :back
+      redirect_to edit_user_path(@user)
     else
       flash[:errors] = "Invalid Sign-up. #{@user.errors.full_messages}"
       redirect_to :back
