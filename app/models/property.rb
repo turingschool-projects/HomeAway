@@ -17,7 +17,7 @@ class Property < ActiveRecord::Base
 
   has_many :photos
   has_many :other_photos, -> { where(primary: false) }, class: Photo
-  
+
   accepts_nested_attributes_for :photos, reject_if: lambda {|attributes| attributes['image'].blank?}
 
   scope :active, -> { where(retired: false) }
@@ -35,5 +35,13 @@ class Property < ActiveRecord::Base
 
   def location
     address.city
+  end
+
+  def self.search(key)
+    if key
+      joins(:address).where("addresses.city ILIKE ?", "%#{key}%")
+    else
+      active
+    end
   end
 end

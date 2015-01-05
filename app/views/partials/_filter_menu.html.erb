@@ -3,10 +3,10 @@
    <div class="col-md-12">
      <div class="filter-head">
        Refine your search
+       <%= form_tag properties_path, :method => 'get', :id => "properties_search" do %>
+         <%= text_field_tag :search, params[:search], placeholder: "City" %>
+       <% end %>
      </div>
-     This will be a menu.<br>
-     Filter by category. <br>
-     Filter by whatevs. <br>
    </div>
  </div>
 </div>
