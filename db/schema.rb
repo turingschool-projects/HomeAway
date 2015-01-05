@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103022224) do
+ActiveRecord::Schema.define(version: 20150104202734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20150103022224) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "host_requests", force: true do |t|
+    t.integer "user_id"
+    t.string  "message"
+  end
+
+  add_index "host_requests", ["user_id"], name: "index_host_requests_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "image_file_name"

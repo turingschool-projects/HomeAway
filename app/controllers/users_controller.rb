@@ -39,6 +39,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def become_host
+    if current_user && current_user.admin?
+      user = User.find(params[:id])
+      if user
+        user.update_attributes(host: true)
+        HostRequest.where(user: user).destroy_all
+      else
+        flash[:errors] = "This user does not exist"
+      end
+      redirect_to host_requests_path
+    else
+      unauthorized
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])

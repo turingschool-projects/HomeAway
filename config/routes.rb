@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :hosts, only: :show
+  resources :host_requests, only: [:new, :create, :index, :destroy]
 
   get '/my_trip', to: 'cart#show', as: :cart
   delete '/my_trip', to: 'cart#destroy'
   post '/properties/:id/add_to_cart', to: 'cart#update'
 
   resources :users, except: [:new]
+  post '/user/:id/become_host', to: 'users#become_host'
 
   resources :reservations
   post '/reservations/pay', to: 'reservations#pay'
