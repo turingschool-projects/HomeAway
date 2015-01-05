@@ -1,80 +1,101 @@
-<h1>Your guests</h1>
-<h3>Upcoming</h3>
-<div class="edit-form">
-  <table class="table table-hover">
-    <thead>
-      <th><h4>Property</h4></th>
-      <th><h4>Location</h4></th>
-      <th><h4>Who wants this shit</h4></th>
-      <th><h4>Dates</h4></th>
-      <th><h4>Total Cost</h4></th>
-      <th><h4>Status</h4></th>
-      <th><h4>Update</h4></th>
-    </thead>
-    <tbody>
-    <% @reservations.upcoming.each do |reservation| %>
-      <tr class="upcoming reservation reservation_<%= reservation.id %>">
-        <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-        <td><h5><%= reservation.property.location %></h5></td>
-        <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </h5></td>
-        <td><h5><%= number_to_currency(reservation.total) %></h5></td>
-        <td><h5><%= reservation.status %></h5></td>
-        <td><% reservation.state_buttons.each do |button| %>
-          <%= button_to(button, reservation_path(reservation), method: :put, name: button) %>
-        <% end %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<div class="functional-header">
+<header class="profile-menu">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="profile-header brand-box">
+          <h1 class="profile-header brand-heading">My <span>Guests</span><h1>
+        </div>
+      </div>
+    </div>
+  </header>
 </div>
-<h3>Completed</h3>
-<div class="edit-form">
-  <table class="table table-hover">
-    <thead>
-      <th><h4>Property</h4></th>
-      <th><h4>Location</h4></th>
-      <th><h4>Who wants this shit</h4></th>
-      <th><h4>Dates</h4></th>
-      <th><h4>Total</h4></th>
-      <th><h4>Status</h4></th>
-    </thead>
-    <tbody>
-    <% @reservations.completed.each do |reservation| %>
-      <tr class="completed reservation reservation_<%= reservation.id %>">
-        <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-        <td><h5><%= reservation.property.location %></h5></td>
-        <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </h5></td>
-        <td><h5><%= number_to_currency(reservation.total) %></h5></td>
-        <td><h5><%= reservation.status %></h5></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-<h3>Cancelled or Denied</h3>
-<div class="edit-form">
-  <table class="table table-hover">
-    <thead>
-      <th><h4>Property</h4></th>
-      <th><h4>Location</h4></th>
-      <th><h4>Who wanted this shit</h4></th>
-      <th><h4>Dates</h4></th>
-      <th><h4>Total</h4></th>
-      <th><h4>Status</h4></th>
-    </thead>
-    <tbody>
-      <% @reservations.denied_or_cancelled.each do |reservation| %>
-      <tr class="completed reservation reservation_<%= reservation.id %>">
-        <td><h5><%= link_to reservation.property.title, reservation_path(reservation) %></h5></td>
-        <td><h5><%= reservation.property.location %></h5></td>
-        <td><h5><%= reservation.user.name %></h5></td>
-        <td><h5><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </h5></td>
-        <td><h5><%= number_to_currency(reservation.total) %></h5></td>
-        <td><h5><%= reservation.status %></h5></td>
+
+<div class="container">
+  <div class="row">
+    <% if @reservations.empty? %>
+      <div class="col-md-12">
+        <h2>No one has rented your sad, sad properties<h2>
+          </div>
+    <% else %>
+      <div class="col-md-12">
+      <h3>Upcoming</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Who wants this shit</th>
+          <th>Dates</th>
+          <th>Total Cost</th>
+          <th>Status</th>
+          <th>Update</th>
+        </thead>
+        <tbody>
+        <% @reservations.upcoming.each do |reservation| %>
+          <tr class="upcoming reservation reservation_<%= reservation.id %>">
+            <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+            <td><%= reservation.property.location %></td>
+            <td><%= reservation.user.name %></td>
+            <td><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </td>
+            <td><%= number_to_currency(reservation.total) %></td>
+            <td class="label-status"><%= reservation.status %></td>
+            <td><% reservation.state_buttons.each do |button| %>
+              <%= button_to(button, reservation_path(reservation), method: :put, name: button, class: "btn btn-default edit_button btn-xs") %>
+            <% end %></td>
+          </tr>
+        <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    <div class="col-md-12">
+    <h3>Completed</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Who wants this shit</th>
+          <th>Dates</th>
+          <th>Total</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+        <% @reservations.completed.each do |reservation| %>
+          <tr class="completed reservation reservation_<%= reservation.id %>">
+            <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+            <td><%= reservation.property.location %></td>
+            <td><%= reservation.user.name %></td>
+            <td><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </td>
+            <td><%= number_to_currency(reservation.total) %></td>
+            <td class="label-status"><%= reservation.status %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-12">
+    <h3>Cancelled or Denied</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Who wanted this shit</th>
+          <th>Dates</th>
+          <th>Total</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+        <% @reservations.denied_or_cancelled.each do |reservation| %>
+          <tr class="completed reservation reservation_<%= reservation.id %>">
+        <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+        <td><%= reservation.property.location %></td>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %></td>
+        <td><%= number_to_currency(reservation.total) %></td>
+        <td class="label-status"><%= reservation.status %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
+<% end %>
 </div>
