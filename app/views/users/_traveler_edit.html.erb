@@ -1,78 +1,91 @@
-<div class>
+<div class="functional-header">
+<header class="profile-menu">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="profile-header brand-box">
+          <h1 class="profile-header brand-heading">Edit My <span>Profile</span><h1>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
 
-  <h1>Editing User Info</h1>
-  <%= form_for @user, url: {action: :update}, role: 'form' do |f| %>
-  <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container">
+  <div class="row">
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
-  </div>
-  <% end %>
 
-  <div class="basic-info">
-    <div class="field">
-      <%= f.label :email_address %><br>
-      <%= f.text_field :email_address %>
+  <div class="col-md-6">
+    <div class="listing">
+      <h4>User Info</h4>
+      <div class="form-group">
+        <%= f.label :email_address %><br>
+        <%= f.text_field :email_address, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :display_name, "Display Name (optional)" %><br>
+        <%= f.text_field :display_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %><br>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :display_name %><br>
-      <%= f.text_field :display_name %>
-    </div>
-    <div class="field">
-      <%= f.label :password %><br>
-      <%= f.password_field :password %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation %><br>
-      <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-
-  <div class="host">
-    <%= f.label "I'd like to become a host" %><br>
-    <%= f.check_box :host %>
   </div>
 
-  <div class="address">
-    <h5>Address</h5>
-    <%= f.fields_for :address_attributes, @user.address do |address_field| %>
-    <div class="field">
-      <%= address_field.label "Line 1" %><br>
-      <%= address_field.text_field :line_1 %>
+  <div class="col-md-6">
+    <div class="listing">
+      <h4>Address Info</h4>
+      <%= f.fields_for :address, @user.address do |address_field| %>
+        <div class="form-group">
+          <%= address_field.label "Line 1" %>
+          <%= address_field.text_field :line_1, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= address_field.label "Line 2" %>
+          <%= address_field.text_field :line_2, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= address_field.label "City" %>
+          <%= address_field.text_field :city, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= address_field.label "State" %>
+          <%= address_field.text_field :state, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= address_field.label "Zip" %>
+          <%= address_field.text_field :zip, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= address_field.label "Country" %><br>
+          <%= address_field.text_field :country, class: "form-control" %>
+        </div>
+      <% end %>
     </div>
-    <div class="field">
-      <%= address_field.label "Line 2" %><br>
-      <%= address_field.text_field :line_2 %>
-    </div>
-    <div class="field">
-      <%= address_field.label "City" %><br>
-      <%= address_field.text_field :city %>
-    </div>
-    <div class="field">
-      <%= address_field.label "State" %><br>
-      <%= address_field.text_field :state %>
-    </div>
-    <div class="field">
-      <%= address_field.label "Zip" %><br>
-      <%= address_field.text_field :zip %>
-    </div>
-    <div class="field">
-      <%= address_field.label "Country" %><br>
-      <%= address_field.text_field :country %>
-    </div>
-    <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Update User" %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <%= f.submit class: "btn btn-default big-boy" %>
+    </div>
   </div>
-  <% end %>
+<% end %>
 </div>
