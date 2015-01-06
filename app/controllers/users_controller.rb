@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :require_current_user, except: [:create]
 
   def create
+    binding.pry
     @user = User.new(user_params)
+    params["user"]["host_requests"]["message']
     if @user.save
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver
@@ -57,7 +59,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
+    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], host_requests: [:message])
   end
 
   def require_current_user
