@@ -37,14 +37,15 @@ class Property < ActiveRecord::Base
     address.city
   end
 
-  def price_range(money)
-      end
-
-  def self.search(city, money)
-    if city || money
+  def self.search(city, money, categories)
+    if city || money || categories
       price_low, price_high = money.split(",")
       price_range = (price_low.to_i * 100)..(price_high.to_i * 100)
-      joins(:address).where("addresses.city ILIKE ?", "%#{city}%").where(price_cents: price_range)
+      if categories
+        joins(:address, :category).where("addresses.city ILIKE ?", "%#{city}%").where(price_cents: price_range).where(category: categories)
+      else
+        joins(:address).where("addresses.city ILIKE ?", "%#{city}%").where(price_cents: price_range)
+      end
     else
       active
     end

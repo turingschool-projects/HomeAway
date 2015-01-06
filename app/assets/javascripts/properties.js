@@ -17,4 +17,9 @@ $(document).ready(function() {
     return false;
   });
 
+  $("#properties_search select").change(function() {
+    $.get($("#properties_search").attr("action"), $("#properties_search").serialize(), null, "script");
+    return false;
+  });
+
 });
