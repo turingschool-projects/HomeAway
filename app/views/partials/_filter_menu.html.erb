@@ -11,7 +11,9 @@
           <input id="moneySlide" name="moneySlide" type="text" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[0,1000]"/>
           $<span id="lowVal">0</span> <span class="highVal">$<span id="highVal">1000</span></span>
         </div>
-        <%= submit_tag %>
+        <div class="form-group">
+          <%= select_tag :category, options_from_collection_for_select(Category.all, 'id', 'name'), multiple: true, class: "selectpicker form-control"%>
+        </div>
       <% end %>
     </div>
 </div>
