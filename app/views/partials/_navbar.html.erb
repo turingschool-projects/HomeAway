@@ -21,8 +21,13 @@
       <li>
       <a href="<%= properties_path %>">Properties</a>
       </li>
+      <% unless @cart.nil? %>
+        <li><%= link_to "Pending Trip", cart_path %></li>
+      <% end %>
       <% if current_user %>
+        <% unless current_user.reservations.empty? %>
         <li><%= link_to "My Trips", reservations_path %></li>
+        <% end %>
         <li><%= link_to "My Profile", user_path(current_user) %></li>
         <% if current_user.host? %>
           <li><%= link_to "My Guests", my_guests_path %></li>
