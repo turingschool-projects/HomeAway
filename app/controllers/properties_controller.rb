@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   before_action :set_categories, only: [:new, :create, :edit, :update]
 
   before_action :require_host,  only: [:new, :create]
-  before_action :require_owner_or_admin, only: [:edit, :update]
+  before_action :require_owner_partner_or_admin, only: [:edit, :update]
 
   def new
     @property = Property.new
@@ -58,8 +58,8 @@ class PropertiesController < ApplicationController
     params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, :photo, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
   end
 
-  def require_owner_or_admin
-    unless current_user_is_admin || current_user_is_owner(@property)
+  def require_owner_partner_or_admin
+    unless current_user_is_admin || current_user_is_owner(@property) || current_user_is_partner(@property)
       flash[:notice] = "Unauthorized"
       redirect_to properties_path
     end
@@ -67,6 +67,10 @@ class PropertiesController < ApplicationController
 
   def current_user_is_owner(property)
     current_user && property.user_id == current_user.id
+  end
+
+  def current_user_is_partner(property)
+    current_user && property.user.partner_ids.include?(current_user.id)
   end
 
   def require_host
