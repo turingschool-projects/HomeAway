@@ -84,6 +84,11 @@ RSpec.describe User, :type => :model do
       expect(user).to_not be_valid
     end
 
+    it "indicates if it is only a host and not an admin" do
+      user = build(:user, admin: false, host: true)
+      expect(user.only_host?).to be true
+    end
+
   end
 
   describe "relationships" do

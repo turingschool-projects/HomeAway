@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :properties
   has_many :host_requests
+  accepts_nested_attributes_for :host_requests
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email_address, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true
@@ -29,5 +30,9 @@ class User < ActiveRecord::Base
     payments << "Check" if accepts_check?
     payments << "Cash" if accepts_cash? || (!accepts_cc && !accepts_check)
     payments
+  end
+
+  def only_host?
+    host && !admin
   end
 end
