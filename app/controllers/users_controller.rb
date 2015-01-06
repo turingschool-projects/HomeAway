@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_current_user, except: [:create]
+  before_action :set_user, except: [:create]
 
   def create
     @user = User.new(user_params)
@@ -25,24 +25,22 @@ class UsersController < ApplicationController
 
   def edit
     return unauthorized unless current_user
-    @user = User.find(params[:id])
-    unless @user == current_user
+    unless user_is_current_user || current_user_is_admin
       unauthorized
     end
   end
 
   def show
-    @user = User.find(params[:id])
     @host_requests = HostRequest.includes(:user)
-    unless current_user && current_user.admin?
-      unless @user == current_user
+    unless current_user_is_admin
+      unless user_is_current_user
         unauthorized
       end
     end
   end
 
   def become_host
-    if current_user && current_user.admin?
+    if current_user_is_admin
       user = User.find(params[:id])
       if user
         user.update_attributes(host: true)
@@ -65,8 +63,14 @@ class UsersController < ApplicationController
     params[:user][:host] == "1"
   end
 
-  def require_current_user
-    @user = current_user
+  def set_user
+    if current_user
+      @user = User.find(params[:id])
+    end
+  end
+
+  def user_is_current_user
+    @user == current_user
   end
 
   def unauthorized
