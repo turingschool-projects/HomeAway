@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :current_user
+  helper_method :current_user, :current_user_is_host, :current_user_is_admin
+
   include ActionView::Helpers::TextHelper
 
   before_action :load_cart
@@ -12,6 +13,14 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def current_user_is_host
+    current_user && current_user.host?
+  end
+
+  def current_user_is_admin
+    current_user && current_user.admin?
   end
 
   def clean_session
@@ -27,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    unless current_user && current_user.admin?
+    unless current_user_is_admin
       flash[:notice] = "Unauthorized"
       redirect_to root_path
     end

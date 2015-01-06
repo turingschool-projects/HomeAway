@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   def my_guests
-    if current_user && current_user.host?
+    if current_user_is_host
       @reservations = Reservation.guests_for current_user.id
     else
       flash[:error] = "You must be a host to see your guests"
@@ -36,7 +36,7 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
-    if [@reservation.user_id, @reservation.property.user_id].include? current_user.id
+    if current_user_is_admin || [@reservation.user_id, @reservation.host.id].include?(current_user.id)
       render :show
     else
       flash[:error] = "You may only view your own reservations"
@@ -49,7 +49,7 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if @reservation.property.user == current_user
+    if @reservation.host == current_user
       increment_state(@reservation)
       redirect_to "/my_guests"
     elsif @reservation.user == current_user
@@ -57,7 +57,7 @@ class ReservationsController < ApplicationController
       redirect_to :back
     else
       redirect_to "/my_guests"
-      flash[:errors] = @reservation.errors.map {|attr, msg| "#{attr}: #{msg}" }.join("\n")
+      flash[:errors] = @reservation.errors.full_messages.join("<br>")
     end
   end
 

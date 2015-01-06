@@ -111,4 +111,8 @@ class Reservation < ActiveRecord::Base
   def pretty_end_date
     end_date.strftime("%B %d, %Y")
   end
+
+  def host
+    property.user
+  end
 end

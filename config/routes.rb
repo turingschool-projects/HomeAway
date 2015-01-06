@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
     resources :reservations do
       collection do
+        get :pending
         get :reserved
         get :cancelled
         get :completed

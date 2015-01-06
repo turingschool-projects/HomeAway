@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   before_action :set_categories, only: [:new, :create, :edit, :update]
 
   before_action :require_host,  only: [:new, :create]
-  before_action :require_owner, only: [:edit, :update]
+  before_action :require_owner_or_admin, only: [:edit, :update]
 
   def new
     @property = Property.new
@@ -29,7 +29,7 @@ class PropertiesController < ApplicationController
   def update
     @property.update(property_params)
     if @property.save
-      redirect_to user_path(current_user)
+      redirect_to user_path(@property.user)
     else
       render :edit
     end
@@ -58,15 +58,19 @@ class PropertiesController < ApplicationController
     params.require(:property).permit(:title, :description, :price, :retired, :occupancy, :bathroom_private, :user_id, :category_id, :photo, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
   end
 
-  def require_owner
-    unless current_user && @property.user_id == current_user.id
+  def require_owner_or_admin
+    unless current_user_is_admin || current_user_is_owner(@property)
       flash[:notice] = "Unauthorized"
       redirect_to properties_path
     end
   end
 
+  def current_user_is_owner(property)
+    current_user && property.user_id == current_user.id
+  end
+
   def require_host
-    unless current_user && current_user.host?
+    unless current_user_is_host
       flash[:notice] = "Unauthorized"
       redirect_to properties_path
     end

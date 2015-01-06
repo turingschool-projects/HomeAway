@@ -1,19 +1,15 @@
 class Admin::ReservationsController < Admin::BaseAdminController
-  before_action :set_reservation, except: [:index, :completed, :reserved, :cancelled, :paid]
+  before_action :set_reservation, except: [:index, :pending, :completed, :reserved, :cancelled]
 
   def index
-    @reservations = Reservation.past_reservations
+    @reservations = Reservation.all
   end
 
   def update
-    if params[:decrease]
-      property = Property.find(params[:decrease])
-      @reservation.decrease(property)
-    elsif params[:increase]
-      property = Property.find(params[:increase])
-      @reservation.increase(property)
+    unless increment_state(@reservation)
+      flash[:errors] = @reservation.errors.full_messages.join("<br>")
     end
-    redirect_to admin_reservation_path(@reservation)
+    redirect_to admin_reservations_path
   end
 
   def destroy
@@ -26,6 +22,11 @@ class Admin::ReservationsController < Admin::BaseAdminController
     @reservation.update_quantities
   end
 
+  def pending
+    @reservations = Reservation.pending
+    render :index
+  end
+
   def reserved
     @reservations = Reservation.reserved
     render :index
@@ -36,29 +37,27 @@ class Admin::ReservationsController < Admin::BaseAdminController
     render :index
   end
 
-  def paid
-    @reservations = Reservation.paid
-    render :index
-  end
-
   def completed
     @reservations = Reservation.completed
     render :index
-  end
-
-  def complete
-    @reservation.complete!
-    redirect_to admin_reservations_path
-  end
-
-  def cancel
-    @reservation.cancel!
-    redirect_to admin_reservations_path
   end
 
   private
 
   def set_reservation
     @reservation = Reservation.find(params[:id])
+  end
+
+  def increment_state(reservation)
+    case
+    when params[:confirm]
+      reservation.confirm!
+    when params[:deny]
+      reservation.deny!
+    when params[:cancel]
+      reservation.cancel!
+    when params[:complete]
+      reservation.complete!
+    end
   end
 end

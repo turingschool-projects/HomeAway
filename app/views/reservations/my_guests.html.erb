@@ -38,9 +38,20 @@
             <td><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </td>
             <td><%= number_to_currency(reservation.total) %></td>
             <td class="label-status"><%= reservation.status %></td>
-            <td><% reservation.state_buttons.each do |button| %>
-              <%= button_to(button, reservation_path(reservation), method: :put, name: button, class: "btn btn-default edit_button btn-xs") %>
-            <% end %></td>
+            <td>
+              <% unless reservation.state_buttons.empty? %>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    Actions <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><% reservation.state_buttons.each do |button| %>
+                      <%= button_to(button, reservation_path(reservation), method: :put, name: button, class: "btn") %>
+                      <% end %></li>
+                  </ul>
+                </div>
+              <% end %>
+            </td>
           </tr>
         <% end %>
           </tbody>
