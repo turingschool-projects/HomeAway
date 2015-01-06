@@ -1,0 +1,13 @@
+<div class="row col-md-12" style="margin-top: 20px;">
+  <%= link_to "Add a partner", new_partner_path, class: "btn btn-default" %>
+  <% if current_user.partners.any? %>
+    <h3>Your current partners</h3>
+    <% current_user.partners.each do |partner| %>
+      <div class="listing">
+        <%= partner.name %><br>
+        <%= partner.email_address %>
+        <%= link_to "Ditch this partner", partner_path(partner.id), method: :delete, class: "btn btn-default" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
