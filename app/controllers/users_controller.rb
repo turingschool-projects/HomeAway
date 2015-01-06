@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @host_requests = HostRequest.includes(:user)
     unless current_user && current_user.admin?
       unless @user == current_user
         unauthorized
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
       else
         flash[:errors] = "This user does not exist"
       end
-      redirect_to host_requests_path
+      redirect_to user_path(current_user)
     else
       unauthorized
     end
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
+    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], host_requests: [:message])
   end
 
   def require_current_user

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :hosts, only: :show
-  resources :host_requests, only: [:new, :create, :index, :destroy]
+  resources :host_requests, only: [:new, :create, :destroy]
 
   get '/my_trip', to: 'cart#show', as: :cart
   delete '/my_trip', to: 'cart#destroy'

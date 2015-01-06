@@ -1,5 +1,6 @@
-<% @host_requests.each do |host_request| %>
-  <div style="border:1px solid black;margin:5px;padding:5px">
+
+<% host_requests.each do |host_request| %>
+  <div class="listing">
     User: <%= host_request.user.name %><br>
     User's email: <%= host_request.user.email_address %><br>
     Message: <%= host_request.message %><br>
@@ -7,3 +8,4 @@
     <%= link_to "Deny request", host_request_path(host_request), method: :delete, class: "btn btn-default" %>
   </div>
 <% end %>
+

@@ -13,25 +13,17 @@ class HostRequestsController < ApplicationController
     @host_request = HostRequest.new(host_request_params)
     if @host_request.save
       flash[:notice] = "Request for host sign up sent!"
-      redirect_to user_path(current_user) # where should this go
+      redirect_to user_path(current_user)
     else
       flash[:errors] = "Invalid Sign-up. #{@host_request.errors.full_messages}"
       redirect_to :back
     end
   end
 
-  def index
-    if current_user && current_user.admin?
-      @host_requests = HostRequest.includes(:user)
-    else
-      unauthorized
-    end
-  end
-
   def destroy
     require_admin
     HostRequest.find(params[:id]).try(:delete)
-    redirect_to host_requests_path
+    redirect_to user_path(current_user)
   end
 
   private
