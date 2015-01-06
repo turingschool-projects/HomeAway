@@ -21,4 +21,3 @@
 //= require bootstrap-slider
 //= require bootstrap-select.min
 
-
