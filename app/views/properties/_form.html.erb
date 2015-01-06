@@ -1,4 +1,3 @@
-<div class="row">
 <%= form_for(@property) do |f| %>
   <% hidden_field_tag(:user_id, current_user.id) %>
   <% if @property.errors.any? %>
@@ -13,76 +12,68 @@
     </div>
   <% end %>
 
-  <div class="col-md-6">
-    <div class="listing">
-    <h4>Property Info</h4>
-      <div class="form-group">
-        <%= f.label :title, "Property title" %>
-        <%= f.text_field :title, class: "form-control"%>
-      </div>
-      <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_field :description, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :price %>
-        <%= f.text_field :price, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :occupancy, "Maximum Occupancy" %>
-        <%= f.text_field :occupancy, class: "form-control" %>
-      </div>
-        <%= f.label "Private Bathroom?" %>
-        <%= f.check_box :bathroom_private  %>
-        <hr>
-      <div class="form-group">
-          <%= f.label :category %>
-          <%= f.select(:category_id, options_for_select(@categories)) %>
-      </div>
-      <% unless @property.new_record? %>
-        <hr>
-        <%= f.check_box(:retired) %>
-        <%= f.label :retired %>
-      <% end %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :occupancy %><br>
+    <%= f.text_field :occupancy %>
+  </div>
+  <div class="field">
+    <%= f.label "Private Bathroom?" %><br>
+    <%= f.check_box :bathroom_private %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select(:category_id, options_for_select(@categories)) %>
+  </div>
+  <% unless @property.new_record? %>
+    <div class="field">
+      <%= f.check_box(:retired) %>
+      <%= f.label :retired %>
     </div>
+  <% end %>
+
+  <div class="address">
+    <h5>Address</h5>
+    <%= f.fields_for :address_attributes, @property.address do |address_field| %>
+    <div class="field">
+      <%= address_field.label "Line 1" %><br>
+      <%= address_field.text_field :line_1 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Line 2" %><br>
+      <%= address_field.text_field :line_2 %>
+    </div>
+    <div class="field">
+      <%= address_field.label "City" %><br>
+      <%= address_field.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_field.label "State" %><br>
+      <%= address_field.text_field :state %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Zip" %><br>
+      <%= address_field.text_field :zip %>
+    </div>
+    <div class="field">
+      <%= address_field.label "Country" %><br>
+      <%= address_field.text_field :country %>
+    </div>
+    <% end %>
   </div>
 
-  <div class="col-md-6">
-    <div class="listing">
-    <h4>Address Info</h4>
-      <%= f.fields_for :address_attributes, @property.address do |address_field| %>
-      <div class="form-group">
-        <%= address_field.label "Line 1" %><br>
-        <%= address_field.text_field :line_1, class: "form-control"%>
-      </div>
-      <div class="form-group">
-        <%= address_field.label "Line 2" %><br>
-        <%= address_field.text_field :line_2, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= address_field.label "City" %><br>
-        <%= address_field.text_field :city, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= address_field.label "State" %><br>
-        <%= address_field.text_field :state, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= address_field.label "Zip" %><br>
-        <%= address_field.text_field :zip, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= address_field.label "Country" %><br>
-        <%= address_field.text_field :country, class: "form-control" %>
-      </div>
-      <% end %>
-    </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default nav-link" %>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <%= f.submit class: "btn btn-default big-boy" %>
-  </div>
-</div>
 <% end %>
