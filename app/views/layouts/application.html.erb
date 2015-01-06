@@ -6,10 +6,28 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= favicon_link_tag 'favi.ico' %>
     <%= csrf_meta_tags %>
+    <% if @host_request_amount %>
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/clippy.js/1.0/clippy.min.css">
+    <% end %>
   </head>
   <body>
     <%= render 'layouts/notices' %>
     <%= render partial: 'partials/navbar' %>
     <%= yield %>
   </body>
+  <% if @host_request_amount %>
+    <!-- // <script src="jquery.1.7.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/clippy.js/1.0/clippy.min.js"></script>
+    <script type="text/javascript">
+    clippy.load('Clippy', function(agent) {
+        agent.show();
+        agent.moveTo(600, 100);
+        speakIn(agent, 15000);
+    });
+    function speakIn(agent, seconds) {
+      agent.speak('<%= "There are #{@host_request_amount} pending requests for travelers to become hosts." %>');
+      setTimeout(function(){speakIn(agent, seconds)}, seconds);
+    }
+    </script>
+  <% end %>
 </html>

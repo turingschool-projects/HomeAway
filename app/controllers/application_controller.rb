@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :load_cart
   before_action :create_user_for_sign_up
   before_action :clean_session
+  before_action :count_host_requests
   after_action  :save_cart
 
   def current_user
@@ -44,5 +45,11 @@ class ApplicationController < ActionController::Base
 
   def create_user_for_sign_up
     @user = User.new
+  end
+
+  def count_host_requests
+    if current_user_is_admin
+      @host_request_amount = HostRequest.count
+    end
   end
 end
