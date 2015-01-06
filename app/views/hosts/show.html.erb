@@ -10,6 +10,15 @@
   </header>
 </div>
 
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h5>About staying with <%= @user.display_name %></h5>
+    <p>
+      <%= @user.description %>
+    </p>
+
+  </div>
+</div>
 
 <div class="container">
   <% if @properties.any? %>
