@@ -35,10 +35,8 @@
                  <%= f.label "I'd like to become a host" %>
                </div>
                <div class="hidden" id="host-message">
-                 <%= f.fields_for :host_requests do |host_form| %>
-                   <%= host_form.label "Tell us about yourself" %><br>
-                 <%= host_form.text_area :message, size: "70x5", class: "modal-form form-control" %><br>
-                <% end %>
+                 <%= label_tag :message, "Tell us about yourself" %><br>
+                 <%= text_area_tag :message, nil, size: "70x5", class: "modal-form form-control" %><br>
                </div>
               <div class="actions">
                 <%= f.submit "Create User", class: "btn btn-default" %>

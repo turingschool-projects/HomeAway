@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      HostRequest.create(user_id: @user.id, message: params[:message]) if host_request?
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver
       redirect_to edit_user_path(@user)
@@ -57,7 +58,11 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country], host_requests: [:message])
+    params.require(:user).permit(:email_address, :name, :display_name, :password, :password_confirmation, :description, :host_slug, :accepts_cc, :accepts_cash, :accepts_check, address_attributes: [:id, :line_1, :line_2, :city, :state, :zip, :country])
+  end
+
+  def host_request?
+    params[:user][:host] == "1"
   end
 
   def require_current_user
