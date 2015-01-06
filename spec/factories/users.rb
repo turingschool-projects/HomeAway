@@ -24,7 +24,7 @@ FactoryGirl.define do
       accepts_cash false
       accepts_check false
       sequence(:description) { |n| "All about staying with #{name} #{n}" }
-      sequence(:host_slug) { |n| "#{name.downcase.parameterize} #{n}" }
+      sequence(:host_slug) { |n| "#{name.downcase.parameterize}-#{n}" }
     end
   end
 end
