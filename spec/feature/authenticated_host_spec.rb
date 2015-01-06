@@ -192,6 +192,6 @@ context "authenticated host", type: :feature do
     expect(page).to have_content(property.title)
 
     visit property_photos_path(other_host_property)
-    expect(page).to have_content("You may only manage your own property photos")
+    expect(page).to have_content("You must be admin to manage other users' property photos")
   end
 end
