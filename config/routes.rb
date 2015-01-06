@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get '/my_guests', to: 'reservations#my_guests'
 
+  get '/partner_guests', to: 'reservations#partner_guests'
+
   resources :properties do
     resources :photos
   end

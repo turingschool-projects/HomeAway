@@ -8,6 +8,12 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def partner_guests
+    if current_user_is_partner
+      @reservations = current_user.owner_ids.flat_map {|id| Reservation.guests_for(id)}
+    end
+  end
+
   def create
     if current_user
       if @cart.save_reservation_for current_user
@@ -52,6 +58,9 @@ class ReservationsController < ApplicationController
     if @reservation.host == current_user
       increment_state(@reservation)
       redirect_to "/my_guests"
+    elsif @reservation.host.partners.include? current_user
+      increment_state(@reservation)
+      redirect_to "/partner_guests"
     elsif @reservation.user == current_user
       @reservation.cancel! if params[:cancel]
       redirect_to :back
@@ -83,5 +92,9 @@ class ReservationsController < ApplicationController
     when params[:complete]
       reservation.complete!
     end
+  end
+
+  def current_user_is_partner
+    !current_user.owners.empty?
   end
 end
