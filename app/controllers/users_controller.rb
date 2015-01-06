@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user.build_address
+    @user.build_address if  @user.address.nil?
     return unauthorized unless current_user
     unless user_is_current_user || current_user_is_admin
       unauthorized
