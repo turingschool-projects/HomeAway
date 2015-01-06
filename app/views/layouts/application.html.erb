@@ -6,7 +6,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= favicon_link_tag 'favi.ico' %>
     <%= csrf_meta_tags %>
-    <% if @host_request_amount %>
+    <% unless @host_request_amount.zero? %>
       <link rel="stylesheet" href="//cdn.jsdelivr.net/clippy.js/1.0/clippy.min.css">
     <% end %>
   </head>
@@ -15,7 +15,7 @@
     <%= render partial: 'partials/navbar' %>
     <%= yield %>
   </body>
-  <% if @host_request_amount %>
+  <% unless @host_request_amount.zero? %>
     <%= render partial: "partials/clippy" %>
   <% end %>
 </html>
