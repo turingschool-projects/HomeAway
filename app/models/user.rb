@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     payments
   end
 
+  def retire_listings
+    properties.each {|property| property.update_attribute :retired, true }
+  end
+
   def only_host?
     host && !admin
   end
