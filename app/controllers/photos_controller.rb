@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :set_property
   before_action :set_photo, only: [:edit, :update, :destroy]
-  before_action :require_host
+  before_action :require_host_or_admin
 
   def index
     @photos = @property.photos
@@ -51,9 +51,13 @@ class PhotosController < ApplicationController
     params.require(:photo).permit(:image, :primary)
   end
 
-  def require_host
-    unless current_user == @property.user
-      redirect_to user_path(current_user), notice: "You may only manage your own property photos."
+  def require_host_or_admin
+    unless current_user_is_owner || current_user_is_admin
+      redirect_to user_path(current_user), notice: "You must be admin to manage other users' property photos."
     end
+  end
+
+  def current_user_is_owner
+    current_user == @property.user
   end
 end
