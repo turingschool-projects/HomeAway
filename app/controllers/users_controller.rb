@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       HostRequest.create(user_id: @user.id, message: params[:message]) if host_request?
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver
-      redirect_to edit_user_path(@user)
+      redirect_to :back
     else
       flash[:errors] = "Invalid Sign-up. #{@user.errors.full_messages}"
       redirect_to :back
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user.build_address if  @user.address.nil?
     return unauthorized unless current_user
     unless user_is_current_user || current_user_is_admin
       unauthorized
