@@ -21,7 +21,7 @@
 
 <div class="container">
   <% if @properties.any? %>
-    <%= render partial: "partials/menu" %>
+    <%= render partial: "partials/listings" %>
   <% else %>
     <% if is_the_host_or_partner? %>
       <h3><%= link_to "Add Property", new_property_path %></h3>
