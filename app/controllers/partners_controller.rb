@@ -1,6 +1,4 @@
 class PartnersController < ApplicationController
-  def new
-  end
 
   def create
     partner = User.find_by(email_address: params[:user][:email_address])
