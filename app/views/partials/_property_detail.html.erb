@@ -40,7 +40,7 @@
           </div>
           <%= submit_tag "Request reservation", class: "btn btn-default form-control" %>
         <% end %>
-        <% if current_user == @property.user %>
+        <% if current_user == @property.user || @property.user.partners.include?(current_user) %>
            <br><%= link_to "Manage Photos", property_photos_path(@property), class: "btn btn-default form-control" %>
           <br><%= link_to "Add Photo", new_property_photo_path(@property), class: "btn btn-default form-control" %>
         <% end %>
