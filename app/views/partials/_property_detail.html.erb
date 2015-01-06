@@ -17,7 +17,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3 text-muted text-center"><%= @property.user ? @property.user.name : "Cat"%></div>
+        <div class="col-md-3 text-muted text-center">
+          <%= @property.user ? @property.user.name : "Cat"%><br>
+          <%= link_to "See my other properties", host_path(@property.user.slug, only_path: false) %>
+        </div>
         <div class="col-md-9">
           <div class="row row-condensed text-muted text-center">
             <div class="col-sm-3"><%= @property.category.name %></div>
