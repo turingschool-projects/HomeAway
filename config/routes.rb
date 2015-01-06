@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :hosts, only: :show
   resources :host_requests, only: [:new, :create, :destroy]
 
-  resources :partners, only: [:new, :create, :destroy]
+  resources :partners, only: [:create, :destroy]
 
   get '/my_trip', to: 'cart#show', as: :cart
   delete '/my_trip', to: 'cart#destroy'

@@ -1,5 +1,8 @@
 <div class="row col-md-12" style="margin-top: 20px;">
-  <%= link_to "Add a partner", new_partner_path, class: "btn btn-default" %>
+<a href="#" class="btn btn-default" data-toggle="modal" data-target="#partnerModal">
+  Add a partner
+</a>
+<%= render partial: "partners/new" %>
   <% if current_user.partners.any? %>
     <h3>Your current partners</h3>
     <% current_user.partners.each do |partner| %>
