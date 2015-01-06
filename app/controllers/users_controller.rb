@@ -2,9 +2,7 @@ class UsersController < ApplicationController
   before_action :require_current_user, except: [:create]
 
   def create
-    binding.pry
     @user = User.new(user_params)
-    params["user"]["host_requests"]["message']
     if @user.save
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver
