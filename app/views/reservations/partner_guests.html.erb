@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <% if @reservations.empty? %>
-    <div class="col-md-12">
-      <h2>No one has rented your partners' sad, sad properties<h2>
+      <div class="col-md-12">
+        <h2>No one has rented your partners' sad, sad properties<h2>
       </div>
-      <% else %>
+    <% else %>
       <div class="col-md-12">
         <table class="table table-striped">
           <thead>
@@ -19,31 +19,35 @@
           </thead>
           <tbody>
             <% @reservations.each do |reservation| %>
-            <tr class="upcoming reservation reservation_<%= reservation.id %>">
-              <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
-              <td><%= reservation.property.user.name %></td>
-              <td><%= reservation.property.location %></td>
-              <td><%= reservation.user.name %></td>
-              <td><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </td>
-              <td><%= number_to_currency(reservation.total) %></td>
-              <td class="label-status"><%= reservation.status %></td>
-              <td>
-                <% unless reservation.state_buttons.empty? %>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Actions <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><% reservation.state_buttons.each do |button| %>
-                      <%= button_to(button, reservation_path(reservation), method: :put, name: button, class: "btn") %>
-                      <% end %></li>
-                    </ul>
-                  </div>
+              <tr class="upcoming reservation reservation_<%= reservation.id %>">
+                <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+                <td><%= reservation.property.user.name %></td>
+                <td><%= reservation.property.location %></td>
+                <td><%= reservation.user.name %></td>
+                <td><%= reservation.pretty_start_date  %> to <%= reservation.pretty_end_date  %> </td>
+                <td><%= number_to_currency(reservation.total) %></td>
+                <td class="label-status"><%= reservation.status %></td>
+                <td>
+                  <% unless reservation.state_buttons.empty? %>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Actions <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <% reservation.state_buttons.each do |button| %>
+                            <%= button_to(button, reservation_path(reservation), method: :put, name: button, class: "btn") %>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </div>
                   <% end %>
                 </td>
               </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <% end %>
-        </div>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
