@@ -6,6 +6,7 @@
       <div class="listing">
         <%= partner.name %><br>
         <%= partner.email_address %>
+        <%= link_to "Ditch this partner", partner_path(partner.id), method: :delete, class: "btn btn-default" %>
       </div>
     <% end %>
   <% end %>
