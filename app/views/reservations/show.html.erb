@@ -3,7 +3,12 @@
     <div class="row">
       <div class="col-md-8">
         <div class="profile-header brand-box">
-          <h1 class="reservation-header brand-heading">My <span>Trips</span><h1>
+          <h1 class="reservation-header brand-heading">
+          <% if !current_user_is_admin %>
+            My <span>Trips</span>
+          <% else %>
+            <%= @reservation.user.name %>'s <span>Trips</span>
+          <% end %><h1>
         </div>
       </div>
     </div>
