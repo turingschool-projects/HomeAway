@@ -66,7 +66,7 @@ class PropertiesController < ApplicationController
   end
 
   def current_user_is_owner(property)
-    current_user && property.user_id == current_user.i
+    current_user && property.user_id == current_user.id
   end
 
   def require_host
