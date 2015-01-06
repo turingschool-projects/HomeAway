@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     post 'users/:id/retire', to: 'users#retire', as: :retire_user
 
-    resources :reservations do
+    resources :reservations, only: [:index, :update] do
       collection do
         get :pending
         get :reserved

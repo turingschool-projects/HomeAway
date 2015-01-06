@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many(:owners, join_table: :user_connections, class_name: "User",
                           association_foreign_key: :host_id, foreign_key: :partner_id)
 
-
   belongs_to :address
   accepts_nested_attributes_for :address
   has_many :reservations
@@ -37,5 +36,12 @@ class User < ActiveRecord::Base
 
   def only_host?
     host && !admin
+  end
+
+  def destroy
+    transaction do
+      raise "Hey, this user has properties, you shouldn't delete them!" unless properties.empty?
+      super
+    end
   end
 end
