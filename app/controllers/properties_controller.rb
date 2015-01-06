@@ -29,7 +29,11 @@ class PropertiesController < ApplicationController
   def update
     @property.update(property_params)
     if @property.save
-      redirect_to user_path(@property.user)
+      if current_user_is_owner(@property) || current_user_is_admin
+        redirect_to user_path(@property.user)
+      else
+        redirect_to user_path(current_user)
+      end
     else
       render :edit
     end
