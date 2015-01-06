@@ -49,7 +49,7 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if @reservation.property.user == current_user
+    if @reservation.host == current_user
       increment_state(@reservation)
       redirect_to "/my_guests"
     elsif @reservation.user == current_user
