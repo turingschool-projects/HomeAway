@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   namespace :admin do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :edit, :update]
     post 'users/:id/retire', to: 'users#retire', as: :retire_user
 
     resources :reservations, only: [:index, :update] do
