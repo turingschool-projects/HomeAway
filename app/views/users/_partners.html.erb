@@ -1,16 +1,28 @@
 <div class="row col-md-12" style="margin-top: 20px;">
-  <%= render partial: "partners/new" %>
-  <h3>Your current partners</h3>
+  <% if current_user.partners.any? %>
+    <h3>Your current partners</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Partner name</th>
+          <th>Partner email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% current_user.partners.each do |partner| %>
+          <tr>
+            <td><%= partner.name %></td>
+            <td><%= partner.email_address %></td>
+            <td><%= link_to "Ditch this partner", partner_path(partner.id), method: :delete %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
   <a href="#" class="btn btn-default" data-toggle="modal" data-target="#partnerModal">
     Add a partner
   </a>
-  <% if current_user.partners.any? %>
-    <% current_user.partners.each do |partner| %>
-      <div class="listing">
-        <%= partner.name %><br>
-        <%= partner.email_address %>
-        <%= link_to "Remove Partner", partner_path(partner.id), method: :delete, class: "btn btn-default" %>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render partial: "partners/new" %>
+
 </div>
