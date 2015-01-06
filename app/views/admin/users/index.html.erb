@@ -5,6 +5,7 @@
       <th>Name</th>
       <th>Created At</th>
       <th>Admin?</th>
+      <th>Host?</th>
     </thead>
 
     <tbody>
@@ -13,6 +14,8 @@
             <td class="name"><%= link_to user.name, user_path(user) %></td>
             <td class="date"><%= user.created_at %></td>
             <td class="admin?"><%= user.admin? %></td>
+            <td class="host?"><%= user.host? %></td>
+            <td><%= link_to "Retire", admin_retire_user_path(user), method: :post %></td>
         </tr>
       <% end %>
     </tbody>

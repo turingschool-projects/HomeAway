@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     payments << "Cash" if accepts_cash? || (!accepts_cc && !accepts_check)
     payments
   end
+
+  def retire_listings
+    properties.each {|property| property.update_attribute :retired, true }
+  end
 end
