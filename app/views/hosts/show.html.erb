@@ -23,7 +23,7 @@
   <% if @properties.any? %>
     <%= render partial: "partials/menu" %>
   <% else %>
-    <% if is_the_host? %>
+    <% if is_the_host_or_partner? %>
       <h3><%= link_to "Add Property", new_property_path %></h3>
     <% end %>
     <h3>Sorry, this host doesn't have any available propertites right now.</h3>
