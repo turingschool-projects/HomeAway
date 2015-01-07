@@ -106,44 +106,32 @@ context 'authenticated admin', type: :feature do
   end
 end
 
-xcontext 'authenticated non-admin', type: :feature do
-  before(:each) do
-    admin_data = { name: "Viki",
-                   email_address: "viki@example.com",
-                   password: "password",
-                   password_confirmation: "password",
-                   admin: false }
-    admin = create(:user,admin_data)
-    visit root_path
-    fill_in "email_address", with: admin.email_address
-    fill_in "password", with: admin.password
-    click_button "Login!"
-  end
-
+context 'unauthenticated user', type: :feature do
   it 'cannot create property listings' do
-    visit new_admin_property_path
-    expect(current_path).to eq(root_path)
+    visit new_property_path
+    new_property_path
+    expect(current_path).to_not eq(new_property_path)
     expect(page).to have_content("Unauthorized")
   end
 
   it 'cannot edit existing properties' do
     burgers = create(:category,name: "burgers")
-    burger = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
-    visit edit_admin_property_path(burger)
-    expect(current_path).to eq(root_path)
+    burger = create(:property,title: "best burger", description: "good burger", price: 9.0, category: burgers)
+    visit edit_property_path(burger)
+    expect(current_path).to_not eq(edit_property_path(burger))
 
     expect(page).to have_content("Unauthorized")
   end
 
   it 'cannot create categories' do
     visit new_admin_category_path
-    expect(current_path).to eq(root_path)
+    expect(current_path).to_not eq(new_admin_category_path)
     expect(page).to have_content("Unauthorized")
   end
 
   it 'cannot retire an property from being sold' do
     burgers = create(:category,name: "burgers")
-    property = create(:property,title: "best burger", description: "good burger", price: 9.0, categories: [burgers])
+    property = create(:property,title: "best burger", description: "good burger", price: 9.0, category: burgers)
 
     visit properties_path
     expect(page).not_to have_content("Retire")
