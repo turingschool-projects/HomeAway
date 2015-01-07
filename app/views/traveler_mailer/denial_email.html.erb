@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv='Content-Type'/>
+</head>
+<body>
+  <h1>Dear <%= @reservation.user.name %>,</h1>
+  <p>
+    We regret to inform you that the reservation you requested for <%= @reservation.property.title %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %> has been denied. You will not be charged for this reservation. Sorry about that!
+  </p>
+  <p>
+    Best Regards,
+  </p>
+  <p>
+    --TravelHome
+  </p>
+</body>
+</html>

@@ -26,21 +26,21 @@ class Reservation < ActiveRecord::Base
     event :confirm do
       transitions from: :pending, to: :reserved
       after do
-        UserMailer.confirmation_email(self).deliver
+        TravelerMailer.request_received(self).deliver
       end
     end
 
     event :cancel, guard: :not_past? do
       transitions from: :pending, to: :cancelled
       after do
-        UserMailer.cancellation_email(self).deliver
+        HostMailer.cancellation_email(self).deliver
       end
     end
 
     event :deny do
       transitions from: :pending, to: :denied
       after do
-        UserMailer.denial_email(self).deliver
+        TravelerMailer.denial_email(self).deliver
       end
     end
 

@@ -1,0 +1,9 @@
+Dear <%= @reservation.host.name %>,
+
+The previously requested reservation by <%= @reservation.user.name %> for <%= @reservation.property.title %> has been cancelled. We hope all is well.
+
+To review and manage your reservation requests, visit http://travel-home.herokuapp.com<%= my_guests_path %>.
+
+Best Regards,
+
+--TravelHome
