@@ -1,0 +1,19 @@
+<div class="col-md-3">
+  <div class="profile-block">
+    <% if @user.address.nil? %>
+      Please edit your profile and add address information
+      <% if @user == current_user %>
+        <%= link_to "Edit My Profile", edit_user_path(current_user), class: "btn btn-default edit_button"%>
+      <% end %>
+    <% else %>
+      <h4>Address Info</h4>
+      <%= @user.address.line_1 %><br>
+      <% unless @user.address.line_2.nil? %>
+        <%= @user.address.line_2 %><br>
+      <% end %>
+      <%= @user.address.city %>, <%= @user.address.state %><br>
+      <%= @user.address.zip %><br>
+      <%= @user.address.country %><br>
+    <% end %>
+  </div>
+</div>

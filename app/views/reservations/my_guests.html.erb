@@ -21,6 +21,15 @@
       <h3>Upcoming</h3>
       <table class="table table-striped">
         <thead>
+          <tr>
+            <th>Property</th>
+            <th>Location</th>
+            <th>Who wants this shit</th>
+            <th>Dates</th>
+            <th>Total Cost</th>
+            <th>Status</th>
+            <th>Update</th>
+          </tr>
           <th>Property</th>
           <th>Location</th>
           <th>Who wants this shit</th>
@@ -62,12 +71,14 @@
     <h3>Completed</h3>
       <table class="table table-striped">
         <thead>
-          <th>Property</th>
-          <th>Location</th>
-          <th>Who wants this shit</th>
-          <th>Dates</th>
-          <th>Total</th>
-          <th>Status</th>
+          <tr>
+            <th>Property</th>
+            <th>Location</th>
+            <th>Who wants this shit</th>
+            <th>Dates</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
         <% @reservations.completed.each do |reservation| %>
@@ -88,12 +99,14 @@
     <h3>Cancelled or Denied</h3>
       <table class="table table-striped">
         <thead>
-          <th>Property</th>
-          <th>Location</th>
-          <th>Who wanted this shit</th>
-          <th>Dates</th>
-          <th>Total</th>
-          <th>Status</th>
+          <tr>
+            <th>Property</th>
+            <th>Location</th>
+            <th>Who wanted this shit</th>
+            <th>Dates</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
         <% @reservations.denied_or_cancelled.each do |reservation| %>

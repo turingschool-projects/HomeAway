@@ -22,11 +22,13 @@
       <h3>Upcoming Trips</h3>
       <table class="table table-striped">
         <thead>
-          <th>Property</th>
-          <th>Location</th>
-          <th>Dates</th>
-          <th>Total Cost</th>
-          <th>Status</th>
+          <tr>
+            <th>Property</th>
+            <th>Location</th>
+            <th>Dates</th>
+            <th>Total Cost</th>
+            <th>Status</th>
+          </tr>
         </thead>
       <tbody>
         <% @reservations.upcoming.each do |reservation| %>
@@ -45,11 +47,13 @@
   <h3>Completed Trips</h3>
   <table class="table table-striped">
     <thead>
-      <th>Property</th>
-      <th>Location</th>
-      <th>Dates</th>
-      <th>Total Cost</th>
-      <th>Status</th>
+      <tr>
+        <th>Property</th>
+        <th>Location</th>
+        <th>Dates</th>
+        <th>Total Cost</th>
+        <th>Status</th>
+      </tr>
     </thead>
     <tbody>
     <% @reservations.completed.each do |reservation| %>
