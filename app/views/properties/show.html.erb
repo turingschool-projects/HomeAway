@@ -1,13 +1,7 @@
 <%= render partial: 'partials/property_header', locals: {property: @property} %>
-<div class="container">
+<div class="container page-container-responsive">
   <%= render partial: 'partials/property_detail' %>
-  <h3>Details: </h3>
+  <h3>Details</h3>
   <p><%= @property.description %></p>
-  <p>Booked Dates: </p>
-  <ul>
-    <% @property.reservations.each do |reservation| %>
-      <li><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date %></li>
-    <% end %>
-  </ul>
+  <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&q=#{@property.address.escape_street}+#{@property.address.escape_city}" %>></iframe>
 </div>
-<iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&q=#{@property.address.escape_street}+#{@property.address.escape_city}" %>></iframe>
