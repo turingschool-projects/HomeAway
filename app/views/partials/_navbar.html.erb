@@ -21,7 +21,7 @@
       <li>
       <a href="<%= properties_path %>">Properties</a>
       </li>
-      <% unless @cart.nil? %>
+      <% unless @cart.nil? || @cart.property.nil?  %>
         <li><%= link_to "Pending Trip", cart_path %></li>
       <% end %>
       <% if current_user %>
