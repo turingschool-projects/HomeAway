@@ -17,7 +17,7 @@
     <div class="col-md-3">
       <div class="profile-block">
         <h4>User Info</h4>
-        <h5>Email Address:</h5> <%= @user.email_address %></h5>
+        <h5>Email Address:</h5><span><%= @user.email_address %></span>
         <h5>Custom URL:</h5><span><%= link_to host_path(@user.slug, only_path: false), host_path(@user.slug, only_path: false) %></span>
         <h5>About Me:</h5><span><%= @user.description %></span>
       </div>
@@ -31,70 +31,30 @@
         <h5>You currently accept:</h5>
         <% @user.accepted_payments.each do |payment| %>
           <%= payment %><br>
-      <% end %>
-    </div>
-  </div>
-
-  <%= render partial: "users/partners" %>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>My Properties</h2>
-      <hr>
-      <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Property name</th>
-          <th>Category</th>
-          <th>Daily rate</th>
-          <th>Location</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.properties.each do |property| %>
-          <tr class="property_<%= property.id %>">
-            <td><%= link_to "#{property.title}", property_path(property) %></td>
-            <td><%= property.category.name %></td>
-            <td>$<%= property.price %></td>
-            <td><%= property.location %></td>
-            <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
-            <td><%= link_to "Edit", edit_property_path(property) %> |
-              <% if property.retired? %>
-                <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
-              <% else %>
-                <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
-              <% end %>
-              <%= link_to "Manage photos", property_photos_path(property) %>
-            </td>
-          </tr>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+      </div>
+    </div>
 
-  <% unless @user.owners.empty? %>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Other Properties I Manage</h2>
-      <hr>
-      <table class="table table-striped">
+    <%= render partial: "users/partners" %>
 
-        <thead>
-          <tr>
-            <th>Property name</th>
-            <th>Category</th>
-            <th>Daily rate</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @user.owners.each do |partner| %>
-            <% partner.properties.each do |property| %>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>My Properties</h2>
+        <hr>
+        <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Property name</th>
+              <th>Category</th>
+              <th>Daily rate</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user.properties.each do |property| %>
               <tr class="property_<%= property.id %>">
                 <td><%= link_to "#{property.title}", property_path(property) %></td>
                 <td><%= property.category.name %></td>
@@ -103,17 +63,21 @@
                 <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
                 <td><%= link_to "Edit", edit_property_path(property) %> |
                   <% if property.retired? %>
-                  <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
+                    <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
                   <% else %>
-                  <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
+                    <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
                   <% end %>
                   <%= link_to "Manage photos", property_photos_path(property) %>
                 </td>
               </tr>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
+      <% unless @user.owners.empty? %>
+        <%= render partial: 'partials/managed_properties' %>
+      <% end %>
     </div>
-    <% end %>
+  </div>
 </div>
