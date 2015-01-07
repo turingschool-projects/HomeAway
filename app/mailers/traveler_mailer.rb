@@ -8,10 +8,9 @@ class TravelerMailer < ActionMailer::Base
   end
 
   def confirmation_email(reservation)
+    @reservation = reservation
     mail(to: reservation.user.email_address,
-    subject: 'Reservation Approved!') do |format|
-      format.text { render text: "Dear #{reservation.user.name},\n\nYour host, #{reservation.host.name}, has approved your reservation at #{reservation.property.title} for the dates of #{reservation.pretty_start_date} to #{reservation.pretty_end_date}. Enjoy your stay!\n\nBest Regards,\n\n--TravelHome" }
-    end
+    subject: 'Reservation Approved!')
   end
 
   def denial_email(reservation)

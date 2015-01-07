@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv='Content-Type'/>
+</head>
+<body>
+  <h1>Dear <%= @reservation.user.name %>,</h1>
+  <p>
+    Your host, <%= @reservation.host.name %>, has approved your reservation at <%= @reservation.property.title %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %>. Enjoy your stay!
+  </p>
+  <p>
+    View your reservations details at http://travel-home.herokuapp.com<%= reservation_path(@reservation) %>
+  </p>
+  <p>
+    Best Regards,
+  </p>
+  <p>
+    --TravelHome
+  </p>
+</body>
+</html>
