@@ -7,16 +7,16 @@
       </div>
       <div class="modal-body">
         <div class="edit-form better-edit-display">
-          <%= form_tag partners_path do %>
           <div class="form-group">
-            <%= label_tag "user[email_address]", "Indicate the user you would like to designate as a partner" %>
-            <%= text_field_tag "user[email_address]", "Email Address", class: "modal-form form-control"  %>
+            <%= form_tag partners_path do %>
+              <%= label_tag "user[email_address]", "Indicate the user you would like to designate as a partner" %>
+              <%= text_field_tag "user[email_address]", nil, placeholder: "Email Address", class: "modal-form form-control"  %>
+            <div class="actions">
+              <%= submit_tag "Partner Up", class: "btn btn-default" %>
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+            <% end %>
           </div>
-          <div class="actions">
-            <%= submit_tag "Partner Up", class: "btn btn-default" %>
-          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-          </div>
-          <% end %>
         </div>
       </div>
     </div>
