@@ -1,6 +1,11 @@
 <div class="row">
   <div class="longer-profile-block">
-    <h2>Other Properties I Manage</h2> <%= link_to "Manage these properties' reservations", partner_guests_path %>
+    <h2>Other Properties I Manage</h2>
+    <% if current_user.partner_reservations > 0 %>
+      <%= link_to "Manage reservation requests (#{current_user.partner_reservations})", partner_guests_path %>
+    <% else %>
+      <%= link_to "Manage reservation requests", partner_guests_path %>
+    <% end %>
     <hr>
     <table class="table table-striped">
 
