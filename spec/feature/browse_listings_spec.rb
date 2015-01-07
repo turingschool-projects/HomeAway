@@ -17,13 +17,6 @@ describe "user browsing listings", type: :feature do
       expect(page).to have_content(property.description)
     end
 
-    xit 'browses properties by category' do
-      # unskip when implemented
-      visit properties_path
-      expect(page).to have_link("stuff", :href => "#category-id-#{property.categories.first.id}")
-      expect(page).to have_css("span", "category-id-#{property.categories.first.id}")
-    end
-
     it "shows listings on the listing page" do
       visit properties_path
       expect(page).to have_content property.title

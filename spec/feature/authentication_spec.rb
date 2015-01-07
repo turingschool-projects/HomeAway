@@ -63,32 +63,28 @@ describe 'the application', type: :feature do
       expect(page).not_to have_link("Login!")
     end
 
-    xit 'it can view its profile' do
+    it 'it can view its profile' do
       expect(page).to have_link('Profile')
       click_link "Profile"
       expect(page).to have_content("Viki")
     end
 
-    xit 'can edit its profile' do
+    it 'can edit its profile' do
       click_link "Profile"
       expect(page).to have_link('Edit')
       click_link "Edit"
-      expect(page).to have_content("Editing User Info")
       fill_in "user[email_address]", with: "joe@gmail.com"
-      fill_in "user[name]", with: "joe"
-      fill_in "user[display_name]", with: "joey99"
+      fill_in "user[name]", with: "sams boyfriend"
       click_link_or_button "Update User"
       expect(page).to have_content("joe@gmail.com")
-      expect(page).to have_content("joe")
-      expect(page).to have_content("joey99")
+      expect(page).to have_content("sams boyfriend")
     end
 
-    xit 'edits profile invalid params redirect to edit form' do
+    it 'edits profile invalid params redirect to edit form' do
       click_link "Profile"
       click_link "Edit"
       fill_in "user[display_name]", with: "this display name is going to be way too long so it will not pass the validations and redirect"
       click_link_or_button "Update User"
-      expect(page).to have_content("Editing User Info")
     end
 
   end
