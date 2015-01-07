@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe TravelerMailer, :type => :mailer do
-  it "can send confirmation of reservation request receipt" do
-    traveler    = create(:user)
-    host        = create(:host)
-    property    = create(:property)
-    reservation = create(:reservation, user: traveler, property: property)
+  let(:traveler) { create(:user) }
+  let(:host) { create(:host) }
+  let(:property) { create(:property, user: host) }
+  let(:reservation) { create(:reservation, user: traveler, property: property) }
 
+  it "can send confirmation of reservation request receipt" do
     TravelerMailer.request_received(reservation).deliver
     result = ActionMailer::Base.deliveries.last
 
@@ -22,11 +22,6 @@ RSpec.describe TravelerMailer, :type => :mailer do
   end
 
   it "can send confirmation of reservation approval" do
-    traveler    = create(:user)
-    host        = create(:host)
-    property    = create(:property)
-    reservation = create(:reservation, user: traveler, property: property)
-
     TravelerMailer.confirmation_email(reservation).deliver
     result = ActionMailer::Base.deliveries.last
 
@@ -42,11 +37,6 @@ RSpec.describe TravelerMailer, :type => :mailer do
   end
 
   it "can send denial of reservation request email" do
-    traveler    = create(:user)
-    host        = create(:host)
-    property    = create(:property)
-    reservation = create(:reservation, user: traveler, property: property)
-
     TravelerMailer.denial_email(reservation).deliver
     result = ActionMailer::Base.deliveries.last
 
