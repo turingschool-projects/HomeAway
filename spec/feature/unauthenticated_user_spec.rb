@@ -21,6 +21,5 @@ describe 'the unauthenticated user', type: :feature do
     expect(page).to have_content(property.title)
     expect(page).to have_content(property.description)
     expect(page).to have_content(property.location)
-    expect(page).to have_content("Booked Dates")
   end
 end
