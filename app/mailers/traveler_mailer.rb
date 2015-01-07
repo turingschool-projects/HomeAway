@@ -2,10 +2,9 @@ class TravelerMailer < ActionMailer::Base
   default from: "no-reply@travel-home.herokuapp.com"
 
   def request_received(reservation)
+    @reservation = reservation
     mail(to: reservation.user.email_address,
-    subject: 'Reservation Request Received') do |format|
-      format.text { render text: "Dear #{reservation.user.name},\n\nWe have received your request for a reservation at #{reservation.property.title} for the dates of #{reservation.pretty_start_date} to #{reservation.pretty_end_date}. The owner of the property has been notified of your request and will get back to you soon.\n\nReservation total: $#{reservation.total}\n\nNightly rate: $#{reservation.property.price}\n\nOther reservation details: http://travel-home.herokuapp.com#{reservation_path(reservation)}\n\nBest Regards,\n\n--TravelHome"}
-    end
+    subject: 'Reservation Request Received')
   end
 
   def confirmation_email(reservation)

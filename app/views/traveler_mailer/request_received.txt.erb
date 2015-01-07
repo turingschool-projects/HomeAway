@@ -1,0 +1,13 @@
+Dear <%= @reservation.user.name %>,
+
+We have received your request for a reservation at <%= @reservation.property.title %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %>. The owner of the property has been notified of your request and will get back to you soon.
+
+Reservation total: $<%= @reservation.total %>
+
+Nightly rate: $<%= @reservation.property.price %>
+
+Other reservation details: http://travel-home.herokuapp.com<%= reservation_path(@reservation) %>
+
+Best Regards,
+
+--TravelHome
