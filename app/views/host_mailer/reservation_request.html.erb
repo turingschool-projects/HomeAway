@@ -6,7 +6,7 @@
 <body>
   <h1>Dear <%= @reservation.host.name %>,</h1>
   <p>
-    Your property, <%= @reservation.property.title %> has been requested for a reservation by <%= @reservation.user.name %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %>. To review and manage your reservation requests, visit <a href="http://travel-home.herokuapp.com<%= my_guests_path %>"></a>.
+    Your property, <%= @reservation.property.title %> has been requested for a reservation by <%= @reservation.user.name %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %>. To review and manage your reservation requests, visit http://travel-home.herokuapp.com<%= my_guests_path %>.
   </p>
   <p>
     Best Regards,
