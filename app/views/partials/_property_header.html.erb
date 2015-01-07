@@ -1,6 +1,9 @@
 <% if property.primary %>
   <a href="#" data-toggle="modal" data-target="#PhotoViewer">
-    <div class="property-img-main" style="background-image: url(<%= property.primary.image.url(:hero) %>)"></div>
+    <div class="property-img-main" style="background-image: url(<%= property.primary.image.url(:hero) %>)">
+      <i id="img-left" class="fa fa-angle-left"></i>
+      <i id="img-right" class="fa fa-angle-right"></i>
+    </div>
   </a>
 <% else %>
   <a href="#" data-toggle="modal" data-target="#PhotoViewer">
