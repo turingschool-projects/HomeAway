@@ -4,6 +4,8 @@ $(document).ready(function() {
     opens: 'left'
   });
 
+  $('.selectpicker').selectpicker();
+
   $("#moneySlide").slider({});
   $("#moneySlide").on("slide", function(slideEvt) {
     $("#lowVal").text(slideEvt.value[0]);
