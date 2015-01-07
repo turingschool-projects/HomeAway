@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe HostMailer, :type => :mailer do
-  let(:traveler) { create(:user) }
-  let(:host) { create(:host) }
+  let(:traveler) { create(:user, name: "Test Name") }
+  let(:host) { create(:host, name: "Test Name") }
   let(:property) { create(:property, user: host) }
   let(:reservation) { create(:reservation, user: traveler, property: property) }
 

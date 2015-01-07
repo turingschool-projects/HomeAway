@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, :type => :mailer do
-  let(:user) { create(:user) }
-  
+  let(:user) { create(:user, name: "Test Name") }
+
   it "can send a welcome email" do
     UserMailer.welcome_email(user).deliver
     result = ActionMailer::Base.deliveries.last
