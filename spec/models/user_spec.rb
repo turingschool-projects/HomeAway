@@ -96,14 +96,15 @@ RSpec.describe User, :type => :model do
 
     it "can have many reservations" do
       date = Date.today.advance(days: 10)
-      reservation = Reservation.create( property_id: 1,
-                                        start_date: date,
-                                        end_date: date.advance(days: 4),
-                                        user: user)
-      reservation2 = Reservation.create( property_id: 1,
-                                        start_date: date.advance(days: 5),
-                                        end_date: date.advance(days: 11),
-                                        user: user)
+      reservation = create(:reservation,
+                            start_date: date,
+                            end_date: date.advance(days: 4),
+                            user: user)
+      reservation2 = create(:reservation,
+                            property_id: 1,
+                            start_date: date.advance(days: 5),
+                            end_date: date.advance(days: 11),
+                            user: user)
 
       expect(user.reservations).to include(reservation)
       expect(user.reservations).to include(reservation2)

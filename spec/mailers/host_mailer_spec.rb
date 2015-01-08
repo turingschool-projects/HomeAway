@@ -7,7 +7,8 @@ RSpec.describe HostMailer, :type => :mailer do
   let(:reservation) { create(:reservation, user: traveler, property: property) }
 
   it "can notify a host that a guest would like to reserve a property" do
-    HostMailer.reservation_request(reservation).deliver
+    data = reservation.email_data
+    HostMailer.reservation_request(data).deliver
     result = ActionMailer::Base.deliveries.last
 
     expect(result).not_to be_nil

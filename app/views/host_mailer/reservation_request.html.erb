@@ -4,9 +4,9 @@
   <meta content="text/html; charset=UTF-8" http-equiv='Content-Type'/>
 </head>
 <body>
-  <h1>Dear <%= @reservation.host.name %>,</h1>
+  <h1>Dear <%= @host_name %>,</h1>
   <p>
-    Your property, <%= @reservation.property.title %> has been requested for a reservation by <%= @reservation.user.name %> for the dates of <%= @reservation.pretty_start_date %> to <%= @reservation.pretty_end_date %>. To review and manage your reservation requests, visit http://travel-home.herokuapp.com<%= my_guests_path %>.
+    Your property, <%= @property_name %> has been requested for a reservation by <%= @traveler_name %> for the dates of <%= @start_date %> to <%= @end_date %>. To review and manage your reservation requests, visit http://travel-home.herokuapp.com<%= my_guests_path %>.
   </p>
   <p>
     Best Regards,

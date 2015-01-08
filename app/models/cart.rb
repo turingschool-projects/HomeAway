@@ -54,11 +54,13 @@ class Cart
 
   def save_reservation_for(user)
     raise "no user" unless user
-    Reservation.create( status: "pending",
-                        user: user,
-                        property: property,
-                        start_date: Date.parse(start_date),
-                        end_date: Date.parse(end_date))
+    reservation = Reservation.create( status: "pending",
+                                      user: user,
+                                      property: property,
+                                      start_date: Date.parse(start_date),
+                                      end_date: Date.parse(end_date))
+    reservation.email_data
+    HostReservationRequestEmailJob.new.async.perform(reservation.email_data)
   end
 
   def valid_dates?(dates, property)

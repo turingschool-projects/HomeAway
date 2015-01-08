@@ -115,4 +115,14 @@ class Reservation < ActiveRecord::Base
   def host
     property.user
   end
+
+  def email_data
+    { "host_email_address" => "#{host.email_address}",
+      "host_name" => "#{host.name}",
+      "property_name" => "#{property.title}",
+      "traveler_name" => "#{user.name}",
+      "start_date" => "#{pretty_start_date}",
+      "end_date" => "#{pretty_end_date}"
+    }
+  end
 end
