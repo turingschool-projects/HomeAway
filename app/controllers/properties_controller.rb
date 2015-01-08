@@ -24,6 +24,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    @dates = @property.booked_dates
   end
 
   def update

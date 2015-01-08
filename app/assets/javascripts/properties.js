@@ -1,7 +1,8 @@
 $(document).ready(function() {
   $('#reservation').daterangepicker({
     format: 'DD/MM/YYYY',
-    opens: 'left'
+    opens: 'left',
+    applyClass: 'btn btn-default'
   });
 
   $('.selectpicker').selectpicker();
