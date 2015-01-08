@@ -13,6 +13,6 @@ class HostsController < ApplicationController
   end
 
   def is_the_host_or_partner?
-    @host_or_partner ||= current_user && @user == current_user || @user.partner_ids.include?(current_user.id)
+    @host_or_partner ||= current_user && (@user == current_user || @user.partners.include?(current_user))
   end
 end
