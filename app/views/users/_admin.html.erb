@@ -1,90 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <div class="profile-primary profile-block">
-        <div class="text-center">
-          <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
-          <h4><%= @user.name %></h4>
-          <hr>
-          <%= link_to "Edit My Profile", edit_user_path(@user), class: "btn btn-default edit_button"%>
+    <div class="col-md-12">
+      <div class="longer-profile-block col-md-12">
+        <h2>Admin</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <%= link_to "All Reservations", admin_reservations_path, class: "btn btn-default" %>
+            <%= link_to "All Users", admin_users_path, class: "btn btn-default" %>
+          </div>
         </div>
+
+        <% unless @host_requests.empty? %>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Host Requests</h3>
+            <%= render partial: "partials/host_requests", locals: {host_requests: @host_requests} %>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
-
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>User Info</h4>
-        <h5>Email Address:</h5> <%= @user.email_address %></h5>
-      <h5>Custom URL:</h5><span><%= link_to host_path(@user.slug, only_path: false), host_path(@user.slug, only_path: false) %></span>
-      <h5>About Me:</h5><span><%= @user.description %></span>
-    </div>
   </div>
-
-  <%= render partial: 'address' %>
-
-  <div class="col-md-3">
-    <div class="profile-block">
-      <h4>Payment Info</h4>
-      <h5>You currently accept:</h5>
-      <% @user.accepted_payments.each do |payment| %>
-        <%= payment %><br>
-      <% end %>
-    </div>
-  </div>
-
-  <% unless @host_requests.empty? %>
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Host Requests</h2>
-        <%= render partial: "partials/host_requests", locals: {host_requests: @host_requests} %>
-      </div>
-    </div>
-  <% end %>
-
-  <%= render partial: "users/partners" %>
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>Admin Links</h4>
-        <h5><%= link_to "All Reservations", admin_reservations_path %></h5>
-        <h5><%= link_to "All Users", admin_users_path %></h5>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <h2>My Properties</h2>
-      <hr>
-      <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Property name</th>
-            <th>Category</th>
-            <th>Daily rate</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @user.properties.each do |property| %>
-            <tr class="property_<%= property.id %>">
-              <td><%= link_to "#{property.title}", property_path(property) %></td>
-              <td><%= property.category.name %></td>
-              <td>$<%= property.price %></td>
-              <td><%= property.location %></td>
-              <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
-              <td><%= link_to "Edit", edit_property_path(property) %> |
-                <% if property.retired? %>
-                  <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
-                <% else %>
-                  <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
-                <% end %>
-                <%= link_to "Manage photos", property_photos_path(property) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+</div>
