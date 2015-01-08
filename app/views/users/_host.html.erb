@@ -35,49 +35,19 @@
       </div>
     </div>
 
+    <% if @user.admin? %>
+      <%= render partial: "admin" %>
+    <% end %>
+
     <%= render partial: "users/partners" %>
 
-    <div class="row">
-      <div class="col-md-12">
-        <h2>My Properties</h2>
-        <hr>
-        <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Property name</th>
-              <th>Category</th>
-              <th>Daily rate</th>
-              <th>Location</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @user.properties.each do |property| %>
-              <tr class="property_<%= property.id %>">
-                <td><%= link_to "#{property.title}", property_path(property) %></td>
-                <td><%= property.category.name %></td>
-                <td>$<%= property.price %></td>
-                <td><%= property.location %></td>
-                <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
-                <td><%= link_to "Edit", edit_property_path(property) %> |
-                  <% if property.retired? %>
-                    <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
-                  <% else %>
-                    <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
-                  <% end %>
-                  <%= link_to "Manage photos", property_photos_path(property) %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+    <%= render partial: "my_properties" %>
 
-      <% unless @user.owners.empty? %>
-        <%= render partial: 'partials/managed_properties' %>
-      <% end %>
+    <% unless @user.owners.empty? %>
+    <div class="container">
+      <%= render partial: 'partials/managed_properties' %>
     </div>
+    <% end %>
+
   </div>
 </div>

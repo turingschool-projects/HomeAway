@@ -60,6 +60,7 @@ class Cart
                                       start_date: Date.parse(start_date),
                                       end_date: Date.parse(end_date))
     if reservation.save
+      clear
       reservation.email_data
       HostReservationRequestEmailJob.new.async.perform(reservation.email_data)
       TravelerRequestReceivedEmailJob.new.async.perform(reservation.email_data)
