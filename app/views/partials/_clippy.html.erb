@@ -6,7 +6,7 @@ clippy.load('Clippy', function(agent) {
     speakIn(agent, 15000);
 });
 function speakIn(agent, seconds) {
-    agent.speak('<%= "There are #{@host_request_amount} pending requests for travelers to become hosts." %>');
+    agent.speak('<%= "There are #{@host_request_amount} pending requests for travelers to become hosts. Visit your profile page to approve or deny." %>');
     setTimeout(function(){speakIn(agent, seconds)}, seconds);
 }
 </script>
