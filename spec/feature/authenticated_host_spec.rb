@@ -194,4 +194,17 @@ context "authenticated host", type: :feature do
     visit property_photos_path(other_host_property)
     expect(page).to have_content("You must be admin to manage other users' property photos")
   end
+
+  it "receives an email when a guest cancels a reservation" do
+    reservation.cancel!
+    expect(reservation.status).to eq "cancelled"
+    result = ActionMailer::Base.deliveries.last
+    expect(result).not_to be_nil
+    expect(result.to).to include host.email_address
+    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.subject).to eq "Reservation Cancellation"
+    expect(result.body).to include host.name
+    expect(result.body).to include traveler.name
+    expect(result.body).to include property.title
+  end
 end

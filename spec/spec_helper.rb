@@ -4,6 +4,7 @@ SimpleCov.start do
 end
 require 'factory_girl_rails'
 require 'faker'
+require 'sucker_punch/testing/inline'
 
 RSpec.configure do |config|
 

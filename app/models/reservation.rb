@@ -26,21 +26,21 @@ class Reservation < ActiveRecord::Base
     event :confirm do
       transitions from: :pending, to: :reserved
       after do
-        TravelerMailer.request_received(self).deliver
+        TravelerConfirmationEmailJob.new.async.perform(email_data)
       end
     end
 
     event :cancel, guard: :not_past? do
       transitions from: :pending, to: :cancelled
       after do
-        HostMailer.cancellation_email(self).deliver
+        HostCancellationEmailJob.new.async.perform(email_data)
       end
     end
 
     event :deny do
       transitions from: :pending, to: :denied
       after do
-        TravelerMailer.denial_email(self).deliver
+        TravelerDenialEmailJob.new.async.perform(email_data)
       end
     end
 
@@ -114,5 +114,19 @@ class Reservation < ActiveRecord::Base
 
   def host
     property.user
+  end
+
+  def email_data
+    { "host_email_address" => "#{host.email_address}",
+      "traveler_email_address" => "#{user.email_address}",
+      "host_name" => "#{host.name}",
+      "property_name" => "#{property.title}",
+      "traveler_name" => "#{user.name}",
+      "start_date" => "#{pretty_start_date}",
+      "end_date" => "#{pretty_end_date}",
+      "total" => "$#{total}",
+      "price" => "$#{property.price}",
+      "id" => "#{id}"
+    }
   end
 end

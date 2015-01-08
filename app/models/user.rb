@@ -45,6 +45,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def email_data
+    {
+      "user_name" => "#{name}",
+      "email_address" => "#{email_address}",
+      "id" => "#{id}"
+    }
+  end
+
   def partner_reservations
     if owners.empty?
       0

@@ -55,7 +55,7 @@ describe "can add things to the trip", type: :feature do
       expect(page).to have_content "Log in"
     end
 
-    it "continutes checkout after logging in" do
+    it "continues checkout after logging in" do
       visit reservations_path
       expect(page).to_not have_content property1.title
 
