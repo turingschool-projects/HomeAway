@@ -33,7 +33,7 @@ class Reservation < ActiveRecord::Base
     event :cancel, guard: :not_past? do
       transitions from: :pending, to: :cancelled
       after do
-        HostCancellationEmailJob.new.async.perform(self)
+        HostCancellationEmailJob.new.async.perform(email_data)
       end
     end
 

@@ -14,9 +14,14 @@ class HostMailer < ActionMailer::Base
     subject: 'Someone Wants to Stay At Your Place!')
   end
 
-  def cancellation_email(reservation)
-    @reservation = reservation
-    mail(to: reservation.host.email_address,
+  def cancellation_email(email_data)
+    email_address = email_data["host_email_address"]
+
+    @host_name = email_data["host_name"]
+    @traveler_name = email_data["traveler_name"]
+    @property_name = email_data["property_name"]
+
+    mail(to: email_address,
     subject: 'Reservation Cancellation')
   end
 end

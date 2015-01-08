@@ -23,7 +23,8 @@ RSpec.describe HostMailer, :type => :mailer do
   end
 
   it "can notify a host that a guest has cancelled a pending reservation" do
-    HostMailer.cancellation_email(reservation).deliver
+    data = reservation.email_data
+    HostMailer.cancellation_email(data).deliver
     result = ActionMailer::Base.deliveries.last
 
     expect(result).not_to be_nil
