@@ -26,7 +26,7 @@ class Reservation < ActiveRecord::Base
     event :confirm do
       transitions from: :pending, to: :reserved
       after do
-        TravelerMailer.request_received(email_data).deliver
+        TravelerConfirmationEmailJob.new.async.perform(email_data)
       end
     end
 

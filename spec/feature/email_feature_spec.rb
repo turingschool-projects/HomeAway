@@ -28,7 +28,6 @@ describe "email feature", type: :feature do
     end
 
     it "receives an email when a guest requests a reservation" do
-
       login(traveler)
       visit properties_path
       click_link_or_button property1.title
@@ -90,6 +89,18 @@ describe "email feature", type: :feature do
       visit "/my_guests"
       find_button("confirm").click
       expect(reservation.reload.status).to eq "reserved"
+
+      result = ActionMailer::Base.deliveries.last
+
+      expect(result).not_to be_nil
+      expect(result.to).to include traveler.email_address
+      expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+      expect(result.subject).to eq "Reservation Approved!"
+      expect(result.body).to include traveler.name
+      expect(result.body).to include property1.title
+      expect(result.body).to include reservation.host.name
+      expect(result.body).to include reservation.pretty_start_date
+      expect(result.body).to include reservation.pretty_end_date
     end
   end
 end
