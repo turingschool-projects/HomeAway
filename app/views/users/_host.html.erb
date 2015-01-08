@@ -6,7 +6,7 @@
           <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
           <h4><%= @user.name %></h4>
           <hr>
-          <%= link_to "Edit My Profile", edit_user_path(current_user), class: "btn btn-default edit_button"%>
+          <%= link_to "Edit My Profile", edit_user_path(@user), class: "btn btn-default edit_button"%>
         </div>
       </div>
     </div>
