@@ -59,9 +59,14 @@ class Cart
                                       property: property,
                                       start_date: Date.parse(start_date),
                                       end_date: Date.parse(end_date))
-    reservation.email_data
-    HostReservationRequestEmailJob.new.async.perform(reservation.email_data)
-    TravelerRequestReceivedEmailJob.new.async.perform(reservation.email_data)
+    if reservation.save
+      reservation.email_data
+      HostReservationRequestEmailJob.new.async.perform(reservation.email_data)
+      TravelerRequestReceivedEmailJob.new.async.perform(reservation.email_data)
+      true
+    else
+      false
+    end
   end
 
   def valid_dates?(dates, property)
