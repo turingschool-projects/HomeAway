@@ -7,7 +7,8 @@ RSpec.describe TravelerMailer, :type => :mailer do
   let(:reservation) { create(:reservation, user: traveler, property: property) }
 
   it "can send confirmation of reservation request receipt" do
-    TravelerMailer.request_received(reservation).deliver
+    data = reservation.email_data
+    TravelerMailer.request_received(data).deliver
     result = ActionMailer::Base.deliveries.last
 
     expect(result).not_to be_nil

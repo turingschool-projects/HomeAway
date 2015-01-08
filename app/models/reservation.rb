@@ -26,7 +26,7 @@ class Reservation < ActiveRecord::Base
     event :confirm do
       transitions from: :pending, to: :reserved
       after do
-        TravelerMailer.request_received(self).deliver
+        TravelerMailer.request_received(email_data).deliver
       end
     end
 
@@ -118,11 +118,15 @@ class Reservation < ActiveRecord::Base
 
   def email_data
     { "host_email_address" => "#{host.email_address}",
+      "traveler_email_address" => "#{user.email_address}",
       "host_name" => "#{host.name}",
       "property_name" => "#{property.title}",
       "traveler_name" => "#{user.name}",
       "start_date" => "#{pretty_start_date}",
-      "end_date" => "#{pretty_end_date}"
+      "end_date" => "#{pretty_end_date}",
+      "total" => "$#{total}",
+      "price" => "$#{property.price}",
+      "id" => "#{id}"
     }
   end
 end
