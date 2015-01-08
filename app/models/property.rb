@@ -37,6 +37,10 @@ class Property < ActiveRecord::Base
     address.city
   end
 
+  def booked_dates
+    reservations.flat_map { |reservation| (reservation.start_date..reservation.end_date).map{ |date| date.strftime("%d-%m-%Y")} }
+  end
+
   def self.search(city, money, categories)
     (city || money || categories) ? category_search(city, money, categories) : active
   end

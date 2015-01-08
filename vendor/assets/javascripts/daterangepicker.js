@@ -142,6 +142,7 @@
             this.timePicker12Hour = true;
             this.singleDatePicker = false;
             this.ranges = {};
+            this.disabledDates = options.disabledDates;
 
             this.opens = 'right';
             if (this.element.hasClass('pull-right'))
@@ -304,11 +305,11 @@
             //if no start/end dates set, check if an input element contains initial values
             if (typeof options.startDate === 'undefined' && typeof options.endDate === 'undefined') {
                 if ($(this.element).is('input[type=text]')) {
-                    var val = $(this.element).val(), 
+                    var val = $(this.element).val(),
                         split = val.split(this.separator);
-                    
+
                     start = end = null;
-                    
+
                     if (split.length == 2) {
                         start = moment(split[0], this.format);
                         end = moment(split[1], this.format);
@@ -785,17 +786,19 @@
 
             var startDate, endDate;
             if (cal.hasClass('left')) {
-                startDate = this.leftCalendar.calendar[row][col];
-                endDate = this.endDate;
-                if (typeof this.dateLimit === 'object') {
-                    var maxDate = moment(startDate).add(this.dateLimit).startOf('day');
-                    if (endDate.isAfter(maxDate)) {
-                        endDate = maxDate;
-                    }
-                }
+              startDate = this.leftCalendar.calendar[row][col];
+              endDate = this.endDate;
+              //maxDate = the first date after startDate that has class 'off disabled'
+              //this.dateLimit = true;
+              //var maxDate = moment(cal.find('.active').parent().siblings().find('.off.disabled').first())
+              //console.log(maxDate);
+              //if (endDate.isAfter(maxDate)) {
+              //    endDate = maxDate;
+              //  }
             } else {
                 startDate = this.startDate;
                 endDate = this.rightCalendar.calendar[row][col];
+                //minDate = the first date before endDate that has class of 'off disabled'
                 if (typeof this.dateLimit === 'object') {
                     var minDate = moment(endDate).subtract(this.dateLimit).startOf('day');
                     if (startDate.isBefore(minDate)) {
@@ -1071,7 +1074,7 @@
                     var cname = 'available ';
                     cname += (calendar[row][col].month() == calendar[1][1].month()) ? '' : 'off';
 
-                    if ((minDate && calendar[row][col].isBefore(minDate, 'day')) || (maxDate && calendar[row][col].isAfter(maxDate, 'day'))) {
+                    if ((minDate && calendar[row][col].isBefore(minDate, 'day')) || (maxDate && calendar[row][col].isAfter(maxDate, 'day')) || (disabledDates.indexOf(calendar[row][col].format('DD-MM-YYYY')) > -1) ) {
                         cname = ' off disabled ';
                     } else if (calendar[row][col].format('YYYY-MM-DD') == selected.format('YYYY-MM-DD')) {
                         cname += ' active ';
