@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       HostRequest.create(user_id: @user.id, message: params[:message]) if host_request?
       session[:user_id] = @user.id
-      UserMailer.welcome_email(@user).deliver
+      UserWelcomeEmailJob.new.async.perform(@user.email_data)
       redirect_to :back
     else
       flash[:errors] = "Invalid Sign-up. #{@user.errors.full_messages}"

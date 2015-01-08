@@ -70,4 +70,17 @@ describe "email feature", type: :feature do
       expect(reservation.reload.status).to eq "denied"
     end
   end
+
+  context "new user" do
+    it "receives a welcome email on sign-up" do
+      visit root_path
+      fill_in "Full Name", with: "Viki"
+      fill_in "Email Address", with: "viki@example.com"
+      fill_in "Password", with: "password"
+      fill_in "Confirm Password", with: "password"
+      expect(UserMailer).to receive(:welcome_email).and_return(double("mailer", :deliver => nil))
+      find_button("Create User").click
+      expect(User.last.email_address).to eq "viki@example.com"
+    end
+  end
 end

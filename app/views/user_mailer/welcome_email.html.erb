@@ -4,12 +4,12 @@
   <meta content="text/html; charset=UTF-8" http-equiv='Content-Type'/>
 </head>
 <body>
-  <h1>Dear <%= @user.name %>,</h1>
+  <h1>Dear <%= @user_name %>,</h1>
   <p>
-    Welcome to TravelHome! Please visit http://travel-home.herokuapp.com<%= edit_user_path(@user) %> and add your address to complete the sign-up process.
+    Welcome to TravelHome! Please visit http://travel-home.herokuapp.com/users/edit/<%= @id %> and add your address to complete the sign-up process.
   </p>
   <p>
-    Once you're done, feel free to browse our locations at <a href="http://travel-home.herokuapp.com<%= properties_path %>"></a> to find your next dream vacation destination. Happy Travels!
+    Once you're done, feel free to browse our locations at http://travel-home.herokuapp.com/properties to find your next dream vacation destination. Happy Travels!
   </p>
   <p>
     Best Regards,

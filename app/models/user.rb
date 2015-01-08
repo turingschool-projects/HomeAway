@@ -44,4 +44,12 @@ class User < ActiveRecord::Base
       super
     end
   end
+
+  def email_data
+    {
+      "user_name" => "#{name}",
+      "email_address" => "#{email_address}",
+      "id" => "#{id}"
+    }
+  end
 end
