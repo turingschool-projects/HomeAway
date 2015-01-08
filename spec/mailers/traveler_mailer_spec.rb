@@ -39,7 +39,8 @@ RSpec.describe TravelerMailer, :type => :mailer do
   end
 
   it "can send denial of reservation request email" do
-    TravelerMailer.denial_email(reservation).deliver
+    data = reservation.email_data
+    TravelerMailer.denial_email(data).deliver
     result = ActionMailer::Base.deliveries.last
 
     expect(result).not_to be_nil

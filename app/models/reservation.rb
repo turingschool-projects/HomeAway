@@ -40,7 +40,7 @@ class Reservation < ActiveRecord::Base
     event :deny do
       transitions from: :pending, to: :denied
       after do
-        TravelerMailer.denial_email(self).deliver
+        TravelerDenialEmailJob.new.async.perform(email_data)
       end
     end
 
