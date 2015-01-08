@@ -111,5 +111,13 @@ RSpec.describe User, :type => :model do
       expect(user.reservations.count).to eq(2)
     end
 
+    it "cannot be deleted while having properties" do
+      user.properties << create(:property)
+      expect{user.destroy}.to raise_error
+    end
+
+    it "can be deleted while having no properties" do
+      expect{user.destroy}.to_not raise_error
+    end
   end
 end

@@ -52,4 +52,12 @@ class User < ActiveRecord::Base
       "id" => "#{id}"
     }
   end
+
+  def partner_reservations
+    if owners.empty?
+      0
+    else
+      owners.reduce(0) { |sum, owner| sum + owner.reservations.pending.count }
+    end
+  end
 end
