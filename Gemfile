@@ -26,6 +26,8 @@ gem 'stripe'
 gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
+gem "skylight"
+
 
 group :development, :test do
   gem 'better_errors'

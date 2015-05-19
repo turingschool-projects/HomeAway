@@ -19,6 +19,7 @@ Be sure you run `$ brew install imagemagick`
 
 * Mandrill -- required for transactional emails -- needs `MANDRILL_USERNAME` and `MANDRILL_APIKEY` ENV vars
 * Amazon S3 -- used for file uploads -- needs `S3_BUCKET_NAME`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY` ENV vars
+* Skylight IO -- used for production performance monitoring -- Configure this by setting a `SKYLIGHT_AUTHENTICATION` environment variable
 
 You'll also need to make sure Paperclip is configured in production to use
 the appropriate region for the S3 Bucket you provided. This setting is found
