@@ -9,7 +9,7 @@ RSpec.describe UserMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include user.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
-    expect(result.subject).to eq "Welcome to TravelHome!"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
+    expect(result.subject).to eq "Welcome to HomeAway!"
   end
 end

@@ -7,7 +7,6 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
@@ -22,12 +21,13 @@ gem 'heroku-deflater', group: :production
 gem 'aasm'
 gem 'dimensions-rails'
 gem 'formtastic'
-gem 'jquery-turbolinks'
 gem 'faker', require: false
 gem 'stripe'
 gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
+gem "skylight"
+
 
 group :development, :test do
   gem 'better_errors'
@@ -41,8 +41,6 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-bundler', require: false
   gem 'guard-rails', require: false
-  gem 'guard-livereload', require: false
-  gem 'rack-livereload'
 end
 
 group :test do

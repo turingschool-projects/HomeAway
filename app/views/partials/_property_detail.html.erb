@@ -38,7 +38,7 @@
           <div class="input-group datepicker">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="property[reservation]" id="reservation" class="form-control"/>
           </div>
-          <%= submit_tag "Request reservation", class: "btn btn-default form-control" %>
+          <%= submit_tag "Request Reservation", class: "btn btn-default form-control", id: "request-reservation" %>
         <% end %>
         <% if current_user == @property.user || @property.user.partners.include?(current_user) %>
            <br><%= link_to "Manage Photos", property_photos_path(@property), class: "btn btn-default form-control" %>

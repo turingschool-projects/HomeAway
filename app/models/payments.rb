@@ -8,7 +8,7 @@ class Payments
     Stripe::Charge.create(
       customer: customer.id,
       amount: cart.total_cents,
-      description: 'TravelHome Reservation',
+      description: 'HomeAway Reservation',
       currency: 'usd'
     )
   end

@@ -1,5 +1,5 @@
 class TravelerMailer < ActionMailer::Base
-  default from: "no-reply@travel-home.herokuapp.com"
+  default from: "no-reply@home-away.herokuapp.com"
 
   def request_received(email_data)
     email_address = email_data["traveler_email_address"]

@@ -28,11 +28,11 @@
         <% unless current_user.reservations.empty? %>
         <li><%= link_to "My Trips", reservations_path %></li>
         <% end %>
-        <li><%= link_to "My Profile", user_path(current_user) %></li>
+        <li><%= link_to "My Profile", user_path(current_user), id: "nav-profile-link" %></li>
         <% if current_user.host? %>
           <li><%= link_to "My Guests", my_guests_path %></li>
         <% end %>
-        <li><%= link_to "Logout", logout_path, id: 'logout', method: 'delete' %></li>
+        <li><%= link_to "Logout", logout_path, id: 'logout' %></li>
       <% else %>
         <li><%= render partial: 'partials/log_in' %></li>
         <li><%= render partial: 'partials/sign_up' %></li>

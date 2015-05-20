@@ -46,7 +46,7 @@
             <%= form_tag({controller: "reservations", action: "pay"}, method: "post", class: "payments") do %>
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="TravelHome"
+              data-description="HomeAway"
               data-amount="<%= @cart.total_cents %>"></script>
             <% end %>
           <% else %>
