@@ -18,7 +18,7 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
 
       expect(page).to have_content property1.title
     end
@@ -27,7 +27,7 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
 
       expect(page).to have_content property1.title
       click_link_or_button "Cancel My Trip"
@@ -40,7 +40,7 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{end_date} - #{start_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
       expect(page).to have_content("Invalid dates")
     end
 
@@ -48,7 +48,7 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
 
       visit cart_path
       expect(page).to_not have_link "Request Reservation"
@@ -62,7 +62,7 @@ describe "can add things to the trip", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
 
       login(traveler)
       visit cart_path

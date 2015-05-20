@@ -26,7 +26,7 @@ describe "email feature", type: :feature do
       visit properties_path
       click_link_or_button property2.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
       expect(page).to have_content property2.title
 
       expect(HostMailer).to receive(:reservation_request).and_return(double("mailer", :deliver => nil))
@@ -43,7 +43,7 @@ describe "email feature", type: :feature do
       visit properties_path
       click_link_or_button property1.title
       fill_in "property[reservation]", with: "#{start_date} - #{end_date}"
-      click_link_or_button "Request reservation"
+      click_link_or_button "Request Reservation"
       expect(page).to have_content property1.title
       expect(property1.reload.user).to eq host
 
