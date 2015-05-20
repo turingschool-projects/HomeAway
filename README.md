@@ -34,6 +34,10 @@ S3 access, don't forget to set up an "Access Policy" for that user, giving them
 This application is already deployed to [heroku](https://home-away.herokuapp.com/) and configured with [Skylight.io](https://www.skylight.io/app/applications/sCCS6fz7N9o-/1432128600/6h/endpoints) for performance monitoring.
 You will be added to the appropriate projects when you join the team.
 
+### Testing
+
+This project uses RSpec for its test suite. Run the tests with `rake`, `rake spec`, or `rspec`.
+
 **Contributor Log:**:
 * [Alex](https://github.com/dalexj)
 * [Viki](https://github.com/VikiAnn)
