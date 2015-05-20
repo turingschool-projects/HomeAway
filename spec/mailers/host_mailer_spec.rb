@@ -13,7 +13,7 @@ RSpec.describe HostMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include host.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
     expect(result.subject).to eq "Someone Wants to Stay At Your Place!"
     expect(result.body).to include host.name
     expect(result.body).to include traveler.name
@@ -29,7 +29,7 @@ RSpec.describe HostMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include host.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
     expect(result.subject).to eq "Reservation Cancellation"
     expect(result.body).to include host.name
     expect(result.body).to include traveler.name

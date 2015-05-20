@@ -13,7 +13,7 @@ RSpec.describe TravelerMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include traveler.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
     expect(result.subject).to eq "Reservation Request Received"
     expect(result.body).to include traveler.name
     expect(result.body).to include property.title
@@ -29,7 +29,7 @@ RSpec.describe TravelerMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include traveler.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
     expect(result.subject).to eq "Reservation Approved!"
     expect(result.body).to include traveler.name
     expect(result.body).to include property.title
@@ -45,7 +45,7 @@ RSpec.describe TravelerMailer, :type => :mailer do
 
     expect(result).not_to be_nil
     expect(result.to).to include traveler.email_address
-    expect(result.from).to include "no-reply@travel-home.herokuapp.com"
+    expect(result.from).to include "no-reply@home-away.herokuapp.com"
     expect(result.subject).to eq "Reservation Declined"
     expect(result.body).to include traveler.name
     expect(result.body).to include property.title

@@ -1,5 +1,5 @@
 class HostMailer < ActionMailer::Base
-  default from: "no-reply@travel-home.herokuapp.com"
+  default from: "no-reply@home-away.herokuapp.com"
 
   def reservation_request(email_data)
     email_address = email_data["host_email_address"]
