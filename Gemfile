@@ -27,7 +27,6 @@ gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
 gem "skylight"
-gem "newrelic_rpm"
 
 
 group :development, :test do
