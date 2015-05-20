@@ -29,6 +29,11 @@ Finally, if you created a dedicated AWS "IAM" user account for this application'
 S3 access, don't forget to set up an "Access Policy" for that user, giving them
 "Full Access" to AWS S3 resources. More info on this step can be found [here](http://rexstjohn.com/how-to-solve-access-denied-with-heroku-paperclip-s3-ror/).
 
+### Heroku and Skylight.io
+
+This application is already deployed to [heroku](https://home-away.herokuapp.com/) and configured with [Skylight.io](https://www.skylight.io/app/applications/sCCS6fz7N9o-/1432128600/6h/endpoints) for performance monitoring.
+You will be added to the appropriate projects when you join the team.
+
 **Contributor Log:**:
 * [Alex](https://github.com/dalexj)
 * [Viki](https://github.com/VikiAnn)
