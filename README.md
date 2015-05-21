@@ -5,6 +5,8 @@ rentals around the world.
 
 [Visit Us Online](https://home-away.herokuapp.com/)
 
+[Skylight Monitoring](https://www.skylight.io/app/applications/sCCS6fz7N9o)
+
 ### Project Dependencies
 
 * Mandrill -- required for transactional emails -- needs `MANDRILL_USERNAME` and `MANDRILL_APIKEY` ENV vars
