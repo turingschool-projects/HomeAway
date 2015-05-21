@@ -1,6 +1,9 @@
 ### Home Away
 
-A twice-pivoted site for finding short-term vacation rentals.
+HomeAway provides a peer-to-peer marketplace for finding short-term
+rentals around the world.
+
+[Visit Us Online](https://home-away.herokuapp.com/)
 
 ### Project Dependencies
 
