@@ -133,7 +133,6 @@ class Seed
   end
 
   def generate_property_images
-    # image_path = "app/assets/images/"
     filenames = [ "ext_house_1.jpeg",
                   "ext_house_2.jpg",
                   "int_house_1.jpg",

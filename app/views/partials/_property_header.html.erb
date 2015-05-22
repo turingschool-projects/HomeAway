@@ -1,6 +1,6 @@
 <% if property.primary %>
   <a href="#" data-toggle="modal" data-target="#PhotoViewer">
-    <div class="property-img-main" style="background-image: url(<%= property.primary.image.url(:hero) %>)">
+    <div class="property-img-main" style="background-image: url(<%= property.primary.image_file_name %>)">
       <i id="img-left" class="fa fa-angle-left"></i>
       <i id="img-right" class="fa fa-angle-right"></i>
     </div>
@@ -23,12 +23,12 @@
           <div class="carousel-inner" role="listbox">
             <div class="item active">
               <% if property.primary %>
-                <%= image_tag property.primary.image.url(:gallery) %>
+                <%= image_tag property.primary.image_file_name %>
               <% end %>
             </div>
             <% property.other_photos.each do |photo| %>
               <div class="item">
-                <%= image_tag photo.image.url(:gallery) %>
+                <%= image_tag photo.image_file_name %>
               </div>
             <% end %>
 
