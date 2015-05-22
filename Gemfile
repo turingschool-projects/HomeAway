@@ -27,6 +27,7 @@ gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
 gem "skylight"
+gem 'will_paginate'
 
 
 group :development, :test do

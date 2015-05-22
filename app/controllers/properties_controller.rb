@@ -47,7 +47,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.active.includes(:category, :photos).search(params[:search], params[:moneySlide], params[:category])
+    @properties = Property.active.includes(:category, :photos).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
   end
 
   private
