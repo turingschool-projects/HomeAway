@@ -149,7 +149,7 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
+    fill_in("photo_image", with: "ext_apt_1.jpg")
     check("photo_primary")
     find_button("Create Photo").click
 
