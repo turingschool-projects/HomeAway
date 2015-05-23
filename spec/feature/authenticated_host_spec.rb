@@ -180,7 +180,7 @@ context "authenticated host", type: :feature do
 
     expect(current_path).to eq property_photos_path(property)
     visit edit_property_photo_path(property, Photo.last)
-    fill_in("photo[image_file_name]", with: nil)
+    fill_in("photo[image_file_name]", with: '' )
     find_button("Update Photo").click
     expect(page).to have_content "Image file name can't be blank"
   end
