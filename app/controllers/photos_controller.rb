@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to property_photos_path(@property), notice: "Photo was successfully created"
     else
-      redirect_to :back
+      render :new
     end
   end
 

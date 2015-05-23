@@ -12,9 +12,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
-# gem 'paperclip'
-# gem 'rmagick'
-# gem 'aws-sdk'
 gem 'passenger'
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
