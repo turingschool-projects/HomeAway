@@ -47,7 +47,6 @@ describe "traveler permissions", type: :feature do
     user2 = create(:user,name: "bob", email_address: "bob@example.com", password: "password", password_confirmation: "password")
     reservation2 = create(:reservation, user: user2, status: "cancelled", property: property, start_date: Date.current.advance(days: 35), end_date: Date.current.advance(days: 40))
 
-
     visit reservations_path
     expect(page).to have_content(reservation1.status)
     visit reservation_path(reservation1.id)
@@ -83,5 +82,17 @@ describe "traveler permissions", type: :feature do
     visit "/my_guests"
     expect(page).to have_content("You must be a host to see your guests")
     expect(current_path).to eq(root_path)
+  end
+
+  it "can add and remove properties from a wish list" do
+    login(user)
+    visit properties_path
+    click_link_or_button property.title
+    click_link_or_button "Add to Wishlist"
+    visit favorites_path
+
+    expect(page).to have_content(property.title)
+    click_link_or_button "Remove"
+    expect(page).not_to have_content(property.title)    
   end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post '/login',    to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
+  resources :favorites
   resources :hosts, only: :show
   resources :host_requests, only: [:new, :create, :destroy]
 
