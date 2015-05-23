@@ -14,9 +14,9 @@
 
   <div class="field">
     <% unless f.object.new_record? %>
-      <%= image_tag f.object.image.url(:medium) %>
+      <%= image_url f.object.image_file_name %>
     <% end %><br>
-    <%= f.file_field :image %>
+    <%= f.text_field :image_file_name %>
     <%= f.check_box :primary %>
     <%= f.label :make_primary %>
   </div>

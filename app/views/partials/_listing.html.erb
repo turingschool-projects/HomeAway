@@ -1,5 +1,5 @@
 <div class="listing">
-  <%= link_to (image_tag property.primary ? property.primary.image.url(:medium) : "https://placekitten.com/g/235/135", class: "listing-image" ), property_path(property) %>
+  <%= link_to (image_tag property.primary ? property.primary.image_file_name : "https://placekitten.com/g/235/135", class: "listing-image" ), property_path(property) %>
   <div class="row">
     <div class="col-md-12 listing-title">
       <i class="fa fa-home"></i>

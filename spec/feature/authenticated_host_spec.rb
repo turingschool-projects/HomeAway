@@ -110,7 +110,7 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_apt_1.jpg")
     find_button("Create Photo").click
     expect(property.photos.count).to eq 1
     expect(property.photos.first.image_file_name).to eq("ext_apt_1.jpg")
@@ -123,12 +123,12 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_apt_1.jpg")
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_balloon_1.jpg")
     find_button("Create Photo").click
 
     within(".primary") do
@@ -149,12 +149,12 @@ context "authenticated host", type: :feature do
       find_link("Manage photos").click
     end
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_apt_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_apt_1.jpg")
     check("photo_primary")
     find_button("Create Photo").click
 
     find_link("Add Photo").click
-    page.attach_file("photo_image", file_path.join("ext_balloon_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_balloon_1.jpg")
     find_button("Create Photo").click
 
     find_link("Remove Photo").click
@@ -174,15 +174,15 @@ context "authenticated host", type: :feature do
     expect(current_path).to eq property_photos_path(property)
     expect(page).to have_content "prohibited this photo"
 
-    page.attach_file("photo_image",  file_path.join("ext_apt_1.jpg"))
+    fill_in("photo[image_file_name]", with: "ext_apt_1.jpg")
     check("photo_primary")
     find_button("Create Photo").click
 
     expect(current_path).to eq property_photos_path(property)
     visit edit_property_photo_path(property, Photo.last)
-    page.attach_file("photo_image", file_path.join("blank.txt"))
+    fill_in("photo[image_file_name]", with: '' )
     find_button("Update Photo").click
-    expect(page).to have_content "prohibited this photo"
+    expect(page).to have_content "Image file name can't be blank"
   end
 
   it "can manage own property photos but not other hosts' property photos" do
