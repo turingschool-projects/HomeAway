@@ -10,4 +10,5 @@ class Photo < ActiveRecord::Base
   def clear_primary
     self.property.photos.update_all({primary: false})
   end
+
 end
