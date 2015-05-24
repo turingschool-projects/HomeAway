@@ -14,7 +14,7 @@ class Property < ActiveRecord::Base
   accepts_nested_attributes_for :address
 
   has_many :reservations
-
+  has_many :favorites
   has_many :photos
   has_many :other_photos, -> { where(primary: false) }, class: Photo
 

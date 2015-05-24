@@ -84,7 +84,7 @@ describe "traveler permissions", type: :feature do
     expect(current_path).to eq(root_path)
   end
 
-  xit "can add and remove properties from a wish list" do
+  it "can add and remove properties from a wish list" do
     login(user)
     visit properties_path
     click_link_or_button property.title

@@ -25,11 +25,18 @@ $(document).ready(function() {
     return false;
   });
 
-  $("#wishlist").on("click", function(){
-    $.ajax({
-      method: "POST",
-      url: "/wishlist",
-      data: { wishlist: { }}
+  function addToWishList(selector){
+    $(selector).on("click", function(){
+      debugger; 
+      
+      $.ajax({
+        method: "POST",
+        url: "/wishlist",
+        data: { wishlist: { }}
+      });
     });
-  });
+  };
+
+  addToWishList("#wishlist");
+
 });
