@@ -41,6 +41,10 @@ class Property < ActiveRecord::Base
     reservations.flat_map { |reservation| (reservation.start_date..reservation.end_date).map{ |date| date.strftime("%d-%m-%Y")} }
   end
 
+  def hero_image
+    primary.image_file_name
+  end
+
   def self.search(city, money, categories)
     (city || money || categories) ? category_search(city, money, categories) : active
   end
@@ -59,4 +63,5 @@ class Property < ActiveRecord::Base
     joins(:address).where("addresses.city ILIKE ?", "%#{city}%")
                    .where(price_cents: price_range(money))
   end
+
 end
