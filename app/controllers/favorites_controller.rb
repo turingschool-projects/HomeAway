@@ -1,12 +1,17 @@
 class FavoritesController < ApplicationController
 	def index
 		@favorites = Property.find(Favorite.where(user_id: current_user.id).pluck(:property_id))
-	end
+	end	
 
 	def create
+		property_id = params[:wishlist][:property_id].to_i
 		user_id = current_user.id
-		Favorite.create(user_id: user_id, property_id: )
+		Favorite.create(user_id: user_id, property_id: property_id)
 		redirect_to :back
-		flash[:alert] = "This awesome property has been added to your wishlist."
+	end
+
+	def destroy
+		binding.pry
+		Favorite.destroy(params[:wishlist][:property_id].to_i)
 	end
 end

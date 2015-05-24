@@ -13,7 +13,7 @@
             <div class="col-sm-2"><i class="fa fa-users details-img"></i></div>
             <div class="col-sm-2"><i class="fa fa-cutlery details-img"></i></div>
             <div class="col-sm-2"><i class="fa fa-usd details-img"></i></div>
-            <div class="col-sm-2" id="wishlist"><i class="fa fa-heart details-img"></i></div>
+            <div class="col-sm-2" id="wishlist" data-id="<%= @property.id %>"><i class="fa fa-heart details-img"></i></div>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
             <div class="col-sm-2"><%= @property.occupancy %></div>
             <div class="col-sm-2"><%= @property.bathroom %></div>
             <div class="col-sm-2"><%= number_to_currency(@property.daily_rate) %></div>
-            <div class="col-sm-2" id="wishlist"><%= link_to "Add to Wishlist", new_favorite_path %></div>
+            <div class="col-sm-2" id="wishlist-text" data-id="<%= @property.id %>">Add to Wishlist</div>
           </div>
         </div>
       </div>
