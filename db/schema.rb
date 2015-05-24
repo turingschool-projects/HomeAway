@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20150523220058) do
     t.datetime "updated_at"
   end
 
+  create_table "favorites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "host_requests", force: true do |t|
     t.integer "user_id"
     t.string  "message"
