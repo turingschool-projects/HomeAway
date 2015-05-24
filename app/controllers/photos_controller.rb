@@ -48,7 +48,7 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:image, :primary)
+    params.require(:photo).permit(:image_file_name, :primary)
   end
 
   def require_host_or_admin_or_partner

@@ -92,8 +92,8 @@ RSpec.describe Property, :type => :model do
     it "can have many photos" do
       property = create(:property)
 
-      photo1 = create(:photo,image: File.open("app/assets/images/ext_house_1.jpeg"), property: property, primary: true)
-      photo2 = create(:photo,image: File.open("app/assets/images/int_house_1.jpg"), property: property)
+      photo1 = create(:photo,image_file_name: "app/assets/images/ext_house_1.jpeg", property: property, primary: true)
+      photo2 = create(:photo,image_file_name: "app/assets/images/int_house_1.jpg", property: property)
 
       expect(property.photos).to include(photo1)
       expect(property.photos).to include(photo2)
@@ -102,8 +102,8 @@ RSpec.describe Property, :type => :model do
     it "can identify its primary and other photos" do
       property = create(:property)
 
-      photo1 = create(:photo,image: File.open("app/assets/images/ext_house_1.jpeg"), property: property, primary: true)
-      photo2 = create(:photo,image: File.open("app/assets/images/int_house_1.jpg"), property: property)
+      photo1 = create(:photo,image_file_name: "app/assets/images/ext_house_1.jpeg", property: property, primary: true)
+      photo2 = create(:photo,image_file_name: "app/assets/images/int_house_1.jpg", property: property)
 
       expect(property.primary).to eq photo1
       expect(property.other_photos).to include photo2
