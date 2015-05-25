@@ -36,8 +36,8 @@ S3 access, don't forget to set up an "Access Policy" for that user, giving them
 
 ### Load testing dataset
 
-First [download the file][1] from dropox and place it in db/ directory.
-Below is the command to load the pg dump file. (makesure to include the "")
+First [download the file][1] the `pg_dump` file and place it in db/ directory.
+Use the following command to load the pg_dump file (include the quotes).
 ```
 rake "db:pg_load[home_away_development.sql]"
 ```
