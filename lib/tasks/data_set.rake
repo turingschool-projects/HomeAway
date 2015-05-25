@@ -5,14 +5,17 @@ require 'faker'
 
 namespace :db do
   desc "Load db from pg_dump file"
-  task :pg_load, [:pg_file] => :environment do |t, args|
+  task :pg_load, [:pg_file] => :environment do |t, arg|
     db_name = ActiveRecord::Base.connection.current_database
-    puts "Restting the current state of #{db_name}"
+    puts "Resetting the current state of #{db_name}"
     system("rake db:drop")
     system("rake db:create")
     puts "Loading database #{arg[:pg_file]}..."
-    system("psql -d #{db_name} -f test.sql")
+    system("psql -d #{db_name} -f db/#{arg[:pg_file]}")
+    puts "All set. 500,000 properties have been added to you database."
   end
+
+  # rake "db:pg_load[home_away_development.sql]"
 
   desc "Create a pg_dump file from your dev db in the current rails directory"
   task :pg_dump do
