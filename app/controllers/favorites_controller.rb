@@ -6,12 +6,13 @@ class FavoritesController < ApplicationController
 	def create
 		property_id = params[:wishlist][:property_id].to_i
 		user_id = current_user.id
+
 		Favorite.create(user_id: user_id, property_id: property_id)
 		redirect_to :back
 	end
 
 	def destroy
-		binding.pry
-		Favorite.destroy(params[:wishlist][:property_id].to_i)
+		Favorite.destroy(params[:id])
+		redirect_to :back
 	end
 end

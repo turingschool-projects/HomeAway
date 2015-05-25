@@ -25,36 +25,53 @@ $(document).ready(function() {
     return false;
   });
 
-  function addToWishList(selector){
-    $(selector).on("click", function(){
-      var property_id = $(this).attr("data-id");            
-
-      $.ajax({
-        method: "POST",
-        url: "/favorites",
-        data: { wishlist: { property_id: property_id }}
-      });
-
-      $("#wishlist").css("color", "#cc0000").removeClass("#wishlist").addClass("#on-wishlist");
-      $("#wishlist-text").text("Remove from Wishlist").css("color", "#cc0000");
-    });
+  function attachAddToWishListHandler(selector){
+    $(selector).on("click", addToWishList);
   };
 
-  function removeFromWishList(selector){
-    $(selector).on("click", function(){
-      var property_id = $(this).attr("data-id");
-
-      $.ajax({
-        method: "DELETE",
-        url: "/favorites/" + property_id 
-      });
-
-      $("#wishlist").css("color", "#777").removeClass("#on-wishlist").addClass("#wishlist");
-      $("#wishlist-text").text("Add to Wishlist").css("color", "#777");
-    });
+  function detachAddToWishListHandler(selector){
+    $(selector).off("click", addToWishList);
   };
 
-  addToWishList("#wishlist");
-  removeFromWishList("#on-wishlist");
+  function attachRemoveFromWishListHandler(selector){
+    $(selector).on("click", removeFromWishList);
+  };
 
+  function detachRemoveFromWishListHandler(selector){
+    $(selector).off("click", removeFromWishList);
+  };
+
+  function addToWishList(){
+    var property_id = $(this).attr("data-id");            
+
+    $.ajax({
+      method: "POST",
+      url: "/favorites",
+      data: { wishlist: { property_id: property_id }}
+    });
+
+    $(this).removeClass("wishlist").addClass("on-wishlist");
+    $(".wishlist-text").text("Remove from Wishlist");
+
+    detachAddToWishListHandler(".wishlist");
+    attachRemoveFromWishListHandler(".on-wishlist");
+  };
+
+  function removeFromWishList(){
+    var property_id = $(this).attr("data-id");
+
+    $.ajax({
+      method: "DELETE",
+      url: "/favorites/" + property_id 
+    });
+
+    $(this).removeClass("on-wishlist").addClass("wishlist");
+    $(".wishlist-text").text("Add to Wishlist")
+    
+    detachRemoveFromWishListHandler(".on-wishlist");
+    attachAddToWishListHandler(".wishlist");
+  };
+
+  attachAddToWishListHandler(".wishlist");
+  attachRemoveFromWishListHandler(".on-wishlist");
 });
