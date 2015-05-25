@@ -18,11 +18,12 @@ namespace :db do
   desc "Create a pg_dump file from your dev db in the current rails directory"
   task :pg_dump do
     db_name = ActiveRecord::Base.connection.current_database
-    system("pg_dump --no-owner #{db_name} > #{db_name}.sql")
+    system("pg_dump --no-owner --no-acl #{db_name} > #{db_name}.sql")
   end
 
   desc "Insert 800 users, 500,000 proporties, 7 categories"
   task :insert_mass_data do
+    start_time = Time.now
     system("rake db:schema:load")
     system("rake db:seed")
     User.populate(800) do |user|
@@ -67,6 +68,10 @@ namespace :db do
         reservation.end_date    = date_ranges[@r].last
       end
     end
+    end_time = Time.now
+    puts
+    puts ((end_time - start_time) / 60).round(2)
+    puts
   end
 
   def statuses
