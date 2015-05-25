@@ -25,6 +25,7 @@ gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
 gem "skylight"
 gem 'will_paginate'
+gem 'populator'
 
 
 group :development, :test do
