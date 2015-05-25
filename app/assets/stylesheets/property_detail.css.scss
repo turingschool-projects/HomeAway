@@ -12,6 +12,10 @@
   color: rgba(255,255,255,0.7);
 }
 
+.primary img{
+  max-width:600px;
+}
+
 #map {
   width: 100%;
   height: 250px;
@@ -58,4 +62,8 @@
   width: 100%;
   height: 400px;
   margin-bottom: 20px;
+}
+
+#wishlist a{
+   color: #777;;
 }
