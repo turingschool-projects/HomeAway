@@ -34,6 +34,15 @@ Finally, if you created a dedicated AWS "IAM" user account for this application'
 S3 access, don't forget to set up an "Access Policy" for that user, giving them
 "Full Access" to AWS S3 resources. More info on this step can be found [here](http://rexstjohn.com/how-to-solve-access-denied-with-heroku-paperclip-s3-ror/).
 
+### Load testing dataset
+
+First (download the file)[1] from dropox and place it in db/ directory.
+Below is the command to load the pg dump file. (makesure to include the "")
+```
+rake "db:pg_load[home_away_development.sql]"
+```
+[1]: https://dl.dropboxusercontent.com/u/61788784/home_away_development.sql?dl=1
+
 ### Heroku and Skylight.io
 
 This application is already deployed to [heroku](https://home-away.herokuapp.com/) and configured with [Skylight.io](https://www.skylight.io/app/applications/sCCS6fz7N9o-/1432128600/6h/endpoints) for performance monitoring.

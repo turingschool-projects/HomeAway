@@ -15,8 +15,6 @@ namespace :db do
     puts "All set. 500,000 properties have been added to you database."
   end
 
-  # rake "db:pg_load[home_away_development.sql]"
-
   desc "Create a pg_dump file from your dev db in the current rails directory"
   task :pg_dump do
     db_name = ActiveRecord::Base.connection.current_database

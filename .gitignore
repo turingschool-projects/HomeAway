@@ -20,3 +20,6 @@
 
 # Ignore SimpleCov coverage directory.
 coverage
+
+# Ignore the home_away_development.sql pg_dump file
+/db/home_away_development.sql
