@@ -1,17 +1,20 @@
-$(document).ready(function() {
-$('#window-bottom').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
-  if (isInView) {
-    alert("hello")
-    // if (visiblePartY == 'top') {
-    //   // top part of element is visible
-    // } else if (visiblePartY == 'bottom') {
-    //   // bottom part of element is visible
-    // } else {
-    //   // whole part of element is visible
-    // }
-  // } else {
-    // // element has gone out of viewport
-  // }
-}
-});
+$(function() {
+  if ($('#infinite-scrolling').size() > 0) {
+    $(window).on('scroll', function() {
+      var more_posts_url;
+      more_posts_url = $('.pagination a[rel=next]').attr('href');
+      if (more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+        $('.pagination').html("");
+        $.ajax({
+          url: more_posts_url,
+          success: function(data) {
+            return $("#properties").append(data);
+          }
+        });
+      }
+      if (!more_posts_url) {
+        return $('.pagination').html("");
+      }
+    });
+  }
 });

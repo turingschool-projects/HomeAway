@@ -48,13 +48,13 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = Property.active.includes(:category, :photos).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
-    respond_to do |format|
-      format.html
-      format.js
+    if request.xhr?
+      render partial: "partials/listings"
     end
   end
 
   private
+
   def set_property
     @property = Property.find(params[:id])
   end

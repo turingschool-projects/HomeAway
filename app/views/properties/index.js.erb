@@ -1,12 +1,4 @@
-$("#properties").html("<%= escape_javascript(render partial:("partials/listings")) %>");
-
-$('#properties').append('<%= j render @posts %>');
-<% if @properties.next_page %>
-    $('.pagination').replaceWith('<%= j will_paginate @properties %>');
-<% else %>
-    $(window).off('scroll');
-  $('.pagination').remove();
-<% end %>
+<%# $("#properties").html("<%= escape_javascript(render partial:("partials/listings")) %1>"); %>
 
 
 
