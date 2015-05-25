@@ -29,6 +29,7 @@
         <li><%= link_to "My Trips", reservations_path %></li>
         <% end %>
         <li><%= link_to "My Profile", user_path(current_user), id: "nav-profile-link" %></li>
+        <li><%= link_to "My Wishlist", favorites_path, id: "nav-profile-link" %></li>
         <% if current_user.host? %>
           <li><%= link_to "My Guests", my_guests_path %></li>
         <% end %>
