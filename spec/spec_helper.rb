@@ -5,6 +5,9 @@ end
 require 'factory_girl_rails'
 require 'faker'
 require 'sucker_punch/testing/inline'
+require 'capybara-webkit'
+
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
 

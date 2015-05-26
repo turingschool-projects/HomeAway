@@ -85,7 +85,7 @@ describe "traveler permissions", type: :feature do
   end
 end
 
-describe "traveler permissions", type: :feature, remote: true do
+describe "traveler permissions", type: :feature, js: true do
   let!(:user) { create(:user) }
   let!(:property) { create(:property) }
 
@@ -96,8 +96,8 @@ describe "traveler permissions", type: :feature, remote: true do
     
     visit properties_path
     click_link_or_button property.title
-    save_and_open_page
     find(".wishlist").click
+    expect(page).to have_content("Remove from Wishlist")
     visit wishlist_path
 
     expect(page).to have_content(property.title)
