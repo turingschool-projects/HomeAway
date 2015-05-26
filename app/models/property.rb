@@ -45,6 +45,8 @@ class Property < ActiveRecord::Base
     primary.image_file_name
   end
 
+  self.per_page = 6
+
   def self.search(city, money, categories)
     (city || money || categories) ? category_search(city, money, categories) : active
   end

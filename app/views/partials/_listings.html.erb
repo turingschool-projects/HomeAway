@@ -1,3 +1,4 @@
+<div id="property-list">
 <% @properties.each do |property| %>
   <%= content_tag :div, class: "category-block", id: "category-#{property.category.name}" do %>
     <div class="col-md-6">
@@ -5,6 +6,9 @@
     </div>
   <% end %>
 <% end %>
-<div class="text-center">
+</div>
+
+<div id="infinite-scrolling">
   <%= will_paginate @properties %>
 </div>
+

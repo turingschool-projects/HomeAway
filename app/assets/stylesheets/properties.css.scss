@@ -53,6 +53,19 @@ span.highVal {
   border: 1px solid #C5CFC6;
 }
 
+.pic-container{
+  overflow:hidden;
+  width:100%;
+  max-height:250px;
+  @media (max-width:1200px){
+    max-height:200px;
+  }
+  @media (max-width:1092px){
+    max-height:500px;
+  }
+}
+
+
 .listing-image {
   height: 100%;
   width: 100%;
