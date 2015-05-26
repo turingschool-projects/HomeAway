@@ -89,7 +89,7 @@ describe "traveler permissions", type: :feature do
     visit properties_path
     click_link_or_button property.title
     click_link_or_button "Add to Wishlist"
-    visit favorites_path
+    visit wishlist_path
 
     expect(page).to have_content(property.title)
     click_link_or_button "Remove"
