@@ -37,7 +37,7 @@
       <div class="row">
         <% reservation.property.photos.each do |photo| %>
           <div class="col-md-3">
-            <%= image_tag photo.image.url(:thumb) %>
+            <%= image_tag(photo.image_file_name, class:"img-thumb") %>
           </div>
         <% end %>
       </div>
