@@ -6,11 +6,11 @@ require 'faker'
 namespace :db do
   desc "Load db from pg_dump file"
   task :pg_load do
-    db_name = ActiveRecord::Base.connection.current_database
-    puts "Loading the schema #{db_name}"
+    # db_name = ActiveRecord::Base.connection.current_database
+    puts "Loading the schema for home_away_development"
     system("rake db:schema:load")
-    puts "Loading database from #{db_name}..."
-    system("pg_restore -d #{db_name} -j 8 --verbose db/#{db_name}")
+    puts "Loading database from home_away_development..."
+    system("pg_restore -d home_away_development -j 8 --verbose db/home_away_development")
     puts "All set. 500,000 properties have been added to you database."
   end
 
