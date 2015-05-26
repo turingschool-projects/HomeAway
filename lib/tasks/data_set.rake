@@ -5,20 +5,19 @@ require 'faker'
 
 namespace :db do
   desc "Load db from pg_dump file"
-  task :pg_load, [:pg_file] => :environment do |t, arg|
+  task :pg_load do
     db_name = ActiveRecord::Base.connection.current_database
-    puts "Resetting the current state of #{db_name}"
-    system("rake db:drop")
-    system("rake db:create")
-    puts "Loading database #{arg[:pg_file]}..."
-    system("psql -d #{db_name} -f db/#{arg[:pg_file]}")
+    puts "Loading the schema #{db_name}"
+    system("rake db:schema:load")
+    puts "Loading database from #{db_name}..."
+    system("pg_restore -d #{db_name} -j 8 --verbose db/#{db_name}")
     puts "All set. 500,000 properties have been added to you database."
   end
 
   desc "Create a pg_dump file from your dev db in the current rails directory"
   task :pg_dump do
     db_name = ActiveRecord::Base.connection.current_database
-    system("pg_dump --no-owner --no-acl #{db_name} > #{db_name}.sql")
+    system("pg_dump --no-owner --no-acl -Fd #{db_name} -f #{db_name}")
   end
 
   desc "Insert 800 users, 500,000 proporties, 7 categories"
