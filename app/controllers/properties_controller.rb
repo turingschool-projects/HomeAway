@@ -25,7 +25,7 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params[:id])
     @dates = @property.booked_dates
-    @fave = current_user.favorites.exists?(@property) if current_user
+    @fave = current_user.favorites.pluck(:property_id).include?(@property.id) if current_user
   end
 
   def update
