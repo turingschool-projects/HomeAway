@@ -35,6 +35,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'quiet_assets'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'launchy'
   gem 'guard', require: false
   gem 'guard-rspec', require: false

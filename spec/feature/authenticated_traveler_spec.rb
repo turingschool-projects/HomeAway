@@ -83,16 +83,26 @@ describe "traveler permissions", type: :feature do
     expect(page).to have_content("You must be a host to see your guests")
     expect(current_path).to eq(root_path)
   end
+end
+
+describe "traveler permissions", type: :feature, remote: true do
+  let!(:user) { create(:user) }
+  let!(:property) { create(:property) }
 
   it "can add and remove properties from a wish list" do
     login(user)
+    visit wishlist_path
+    expect(page).to have_content("You don't have anything on your wishlist.")
+    
     visit properties_path
     click_link_or_button property.title
-    click_link_or_button "Add to Wishlist"
+    save_and_open_page
+    find(".wishlist").click
     visit wishlist_path
 
     expect(page).to have_content(property.title)
-    click_link_or_button "Remove"
+    click_link_or_button property.title
+    find(".on-wishlist").click
     expect(page).not_to have_content(property.title)    
   end
 end
