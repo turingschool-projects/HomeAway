@@ -1,3 +1,15 @@
-<% @favorites.each do |fave|  %>
-	<%= fave.title %>
-<% end %>
+<div class="functional-header">
+  <header class="property-menu">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="properties-header brand-box">
+          <h1 class="properties-header brand-heading">Travel <span>at the speed of</span> Now<h1>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<h1>Your Wishlist</h1>
+
+<%= render partial: "partials/menu" %>

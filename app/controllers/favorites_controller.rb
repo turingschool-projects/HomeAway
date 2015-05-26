@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
 	def index
-		@favorites = Property.find(Favorite.where(user_id: current_user.id).pluck(:property_id))
+		@properties = Property.find(Favorite.where(user_id: current_user.id).pluck(:property_id))
 	end	
 
 	def create
