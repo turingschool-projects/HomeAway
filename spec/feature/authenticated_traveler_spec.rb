@@ -86,34 +86,29 @@ describe "traveler permissions", type: :feature do
 end
 
 describe "traveler permissions", type: :feature, js: true do
-  let(:property) { create(:property) }
+  let!(:user) { create(:user) }
+  let!(:property) { create(:property) }
 
   it "can add and remove properties from a wish list" do
-    user = User.create(email_address: "hey@example.com", 
-                             password: "password",
-                             password_confirmation: "password",
-                             name: "me") }
     visit login_path
-    # puts page.body
-    # puts current_path
-    # puts page.status_code
-    # page.find("#log-in").click
     fill_in("email_address", with: user.email_address)
     fill_in("password", with: user.password)
     find_button("Login").click
 
     visit wishlist_path
-    expect(page).to have_content("You don't have anything on your wishlist.")
+    expect(page).to have_content("YOU DON'T HAVE ANYTHING ON YOUR WISHLIST")
     
     visit properties_path
     click_link_or_button property.title
     find(".wishlist").click
     expect(page).to have_content("Remove from Wishlist")
+    
     visit wishlist_path
-
-    expect(page).to have_content(property.title)
+    expect(page).to have_content(property.title.upcase)
+    
     click_link_or_button property.title
     find(".on-wishlist").click
+    visit wishlist_path
     expect(page).not_to have_content(property.title)    
   end
 end
