@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :address
   has_many :reservations
   has_many :properties
+  has_many :favorites
   has_many :host_requests
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email_address, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }

@@ -1,0 +1,5 @@
+<% if @fave %>
+	<div class="col-sm-2 on-wishlist" data-id="<%= @property.id %>"><i class="fa fa-heart details-img"></i></div>
+<% else %>
+	<div class="col-sm-2 wishlist" data-id="<%= @property.id %>"><i class="fa fa-heart details-img"></i></div>
+<% end %>
