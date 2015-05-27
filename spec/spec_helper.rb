@@ -5,9 +5,10 @@ end
 require 'factory_girl_rails'
 require 'faker'
 require 'sucker_punch/testing/inline'
-require 'capybara-webkit'
+require 'capybara/poltergeist'
+require 'database_cleaner'
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
 
@@ -19,6 +20,19 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+  end
+
+  config.before :each do
+    if Capybara.current_driver == :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
+    end
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
   end
 end
 

@@ -23,10 +23,9 @@ gem 'stripe'
 gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
-gem "skylight"
+gem 'skylight'
 gem 'will_paginate'
 gem 'populator'
-
 
 group :development, :test do
   gem 'better_errors'
@@ -36,6 +35,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'guard', require: false
   gem 'guard-rspec', require: false
@@ -47,4 +47,5 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
