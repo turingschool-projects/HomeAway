@@ -26,6 +26,7 @@ gem 'sucker_punch', '~> 1.0'
 gem 'skylight'
 gem 'will_paginate'
 gem 'populator'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'better_errors'
