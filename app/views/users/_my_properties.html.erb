@@ -6,44 +6,44 @@
         <hr>
         <%= link_to "Add a new property", new_property_path, class: "btn btn-default"%>
         <% if @user.properties.empty? %>
-        <p>
-          You don't have any properties yet! Get started by adding a property today.
-        </p>
+          <p>
+            You don't have any properties yet! Get started by adding a property today.
+          </p>
         <% else %>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Property name</th>
-              <th>Category</th>
-              <th>Daily rate</th>
-              <th>Location</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @user.properties.each do |property| %>
-            <tr class="property_<%= property.id %>">
-              <td><%= link_to "#{property.title}", property_path(property) %></td>
-              <td><%= property.category.name %></td>
-              <td>$<%= property.price %></td>
-              <td><%= property.location %></td>
-              <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
-              <td><%= link_to "Edit", edit_property_path(property) %> |
-                <% if property.retired? %>
-                <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
-                <% else %>
-                <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
-                <% end %>
-                <%= link_to "Manage photos", property_photos_path(property) %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Property name</th>
+                <th>Category</th>
+                <th>Daily rate</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="properties-table">
+              <% @user_properties.each do |property| %>
+                <tr class="property_<%= property.id %>">
+                  <td><%= link_to "#{property.title}", property_path(property) %></td>
+                  <td><%= property.category.name %></td>
+                  <td>$<%= property.price %></td>
+                  <td><%= property.location %></td>
+                  <td><% if property.retired? %>Retired<% else %>Active<% end %></td>
+                  <td><%= link_to "Edit", edit_property_path(property) %> |
+                    <% if property.retired? %>
+                      <%= link_to "Activate", property_path(property, property: {retired: false}), method: "put" %> |
+                    <% else %>
+                      <%= link_to "Retire", property_path(property, property: {retired: true}), method: "put" %> |
+                    <% end %>
+                    <%= link_to "Manage photos", property_photos_path(property) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
       </div>
     </div>
   </div>
-
 </div>
+<%= will_paginate @user_properties %>

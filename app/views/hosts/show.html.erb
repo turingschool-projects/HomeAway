@@ -21,7 +21,9 @@
 
 <div class="container">
   <% if @properties.any? %>
-    <%= render partial: "partials/listings" %>
+    <div id="host-listings">
+      <%= render partial: "partials/listings" %>
+    </div>
   <% else %>
     <% if is_the_host_or_partner? %>
       <h3><%= link_to "Add Property", new_property_path %></h3>
@@ -29,3 +31,4 @@
     <h3>Sorry, this host doesn't have any available propertites right now.</h3>
   <% end %>
 </div>
+

@@ -4,7 +4,7 @@ class HostsController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.host?
-      @properties = Property.active.for_user(@user.id)
+      @properties = Property.active.for_user(@user.id).paginate(:page => params[:page], :per_page => 6)
       is_the_host_or_partner?
     else
       flash[:notice] = "User is no longer a host."
