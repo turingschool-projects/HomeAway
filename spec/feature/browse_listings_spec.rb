@@ -5,13 +5,13 @@ describe "user browsing listings", type: :feature do
     let!(:property) { create(:property) }
     let!(:retired_property) { create(:property, retired: true) }
 
-    it "browses all properties" do
+    it "browses all properties", js: true do
       6.times { create(:property) }
       visit properties_path
-      expect(page).to have_content(Property.first.title)
-      expect(page).not_to have_content(Property.last.title)
+      expect(page).to have_content(Property.first.title.upcase)
+      expect(page).not_to have_content(Property.last.title.upcase)
       page.execute_script('window.scrollTo(0,100000)')
-      expect(page).to have_content(Property.last.title)
+      expect(page).to have_content(Property.last.title.upcase)
     end
 
     it "browses all properties" do
