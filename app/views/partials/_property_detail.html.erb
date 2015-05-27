@@ -1,3 +1,4 @@
+
 <div class="page-container-responsive">
   <div class="row">
     <div class="col-lg-8">
@@ -13,7 +14,9 @@
             <div class="col-sm-2"><i class="fa fa-users details-img"></i></div>
             <div class="col-sm-2"><i class="fa fa-cutlery details-img"></i></div>
             <div class="col-sm-2"><i class="fa fa-usd details-img"></i></div>
-            <div class="col-sm-2" id="wishlist"><i class="fa fa-heart details-img"></i></div>
+            <% if current_user %>
+              <%= render partial: "partials/wishlist_icon" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -28,7 +31,9 @@
             <div class="col-sm-2"><%= @property.occupancy %></div>
             <div class="col-sm-2"><%= @property.bathroom %></div>
             <div class="col-sm-2"><%= number_to_currency(@property.daily_rate) %></div>
-            <div class="col-sm-2" id="wishlist"><%= link_to "Add to Wishlist", new_favorite_path %></div>
+            <% if current_user %>
+              <%= render partial: "partials/wishlist_text" %>
+            <% end %>
           </div>
         </div>
       </div>

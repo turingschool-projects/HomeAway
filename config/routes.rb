@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login',    to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/wishlist', to: 'favorites#index'
 
-  resources :favorites, except: [:edit, :update]
+  resources :favorites, only: [:create, :destroy]
   resources :hosts, only: :show
   resources :host_requests, only: [:new, :create, :destroy]
 

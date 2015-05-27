@@ -5,6 +5,10 @@ end
 require 'factory_girl_rails'
 require 'faker'
 require 'sucker_punch/testing/inline'
+require 'capybara/poltergeist'
+require 'database_cleaner'
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
 
