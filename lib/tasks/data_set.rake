@@ -16,8 +16,8 @@ namespace :db do
 
   desc "Create a pg_dump file from your dev db in the current rails directory"
   task :pg_dump do
-    db_name = ActiveRecord::Base.connection.current_database
-    system("pg_dump --no-owner --no-acl -Fd #{db_name} -f #{db_name}")
+    # db_name = ActiveRecord::Base.connection.current_database
+    system("pg_dump --no-owner --no-acl -Fd home_away_development -f db/home_away_development")
   end
 
   desc "Insert 800 users, 500,000 proporties, 7 categories"
@@ -25,10 +25,20 @@ namespace :db do
     start_time = Time.now
     system("rake db:schema:load")
     system("rake db:seed")
-    User.populate(800) do |user|
-      user.name = Faker::Name.name,
+
+    User.populate(170000) do |user|
+      user.name          = Faker::Name.name,
       user.display_name  = Faker::Internet.user_name(user.name),
       user.email_address = Faker::Internet.email(user.name)
+      user.password      = "password"
+    end
+
+    User.populate(30000) do |user|
+      user.name          = Faker::Name.name,
+      user.display_name  = Faker::Internet.user_name(user.name),
+      user.email_address = Faker::Internet.email(user.name)
+      user.password      = "password"
+      user.host          = true
     end
 
     categories.each do |category|
@@ -51,6 +61,7 @@ namespace :db do
         Photo.populate(3) do |photo|
           photo.property_id = property.id
           photo.image_file_name = images.pop
+fixture_file_upload('spec/samples/laptop1.jpg', 'image/jpg')
         end
       end
     end
@@ -58,7 +69,7 @@ namespace :db do
     categories.each do |category|
       @category_properties = Property.joins(:category).where(categories: {name: category} )
       @r = 0
-      Reservation.populate(100) do |reservation|
+      Reservation.populate(10000) do |reservation|
         @r += 1
         reservation.property_id = @category_properties.sample.id
         reservation.user_id     = User.limit(1).order("RANDOM()").take.id
@@ -78,7 +89,21 @@ namespace :db do
   end
 
   def categories
-    ["House", "Apartment", "Room", "Cabin", "Boat"]
+    ["Hut",
+     "Cave",
+     "Room",
+     "Boat",
+     "Yurt",
+     "Tent",
+     "House",
+     "Cabin",
+     "Igloo",
+     "Teepee",
+     "Mansion",
+     "Bungalow",
+     "Dog House",
+     "Apartment",
+     "Nursing Home"]
   end
 
   def property_titles

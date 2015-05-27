@@ -34,14 +34,30 @@ Finally, if you created a dedicated AWS "IAM" user account for this application'
 S3 access, don't forget to set up an "Access Policy" for that user, giving them
 "Full Access" to AWS S3 resources. More info on this step can be found [here](http://rexstjohn.com/how-to-solve-access-denied-with-heroku-paperclip-s3-ror/).
 
-### Load testing dataset
+### Load-testing dataset
 
-First [download the file][1] the `pg_dump` file and place it in db/ directory.
-Use the following command to load the pg_dump file (include the quotes).
+Use the following command to create, load and
+push the current state of the database user the following.
+
+Seed the database with the larg dataset:
 ```
-rake "db:pg_load[home_away_development.sql]"
+  rake db:insert_mass_data
 ```
-[1]: https://dl.dropboxusercontent.com/u/61788784/home_away_development.sql?dl=1
+
+Create the dump file:
+```
+  rake db:pg_dump
+```
+
+Load the dump file:
+```
+  rake db:pg_load
+```
+
+Push the current data set to Heroku:
+```
+  heroku pg:push home_away_development DATABASE --app home-away
+```
 
 ### Heroku and Skylight.io
 

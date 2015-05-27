@@ -30,8 +30,6 @@ class Seed
       name: "Hostess Hosterson",
       email_address: "host@example.com")
 
-    FactoryGirl.create_list(:host, 2)
-
     puts "Users generated"
   end
 
