@@ -8,12 +8,7 @@ $(function() {
         $.ajax({
           url: more_posts_url,
           success: function(data) {
-            if($("#host-listings")){
-              return $("#host-listings").append(data);
-            }
-            else{
-              return $("#properties").append(data);
-            }
+            return $(".properties").append(data);
           }
         });
       }

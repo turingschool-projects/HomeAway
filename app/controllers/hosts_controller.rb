@@ -6,6 +6,9 @@ class HostsController < ApplicationController
     if @user.host?
       @properties = Property.active.for_user(@user.id).paginate(:page => params[:page], :per_page => 6)
       is_the_host_or_partner?
+      if request.xhr?
+        render partial: "partials/listings"
+      end
     else
       flash[:notice] = "User is no longer a host."
       redirect_to root_path

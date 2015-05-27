@@ -6,6 +6,15 @@ describe "user browsing listings", type: :feature do
     let!(:retired_property) { create(:property, retired: true) }
 
     it "browses all properties" do
+      6.times { create(:property) }
+      visit properties_path
+      expect(page).to have_content(Property.first.title)
+      expect(page).not_to have_content(Property.last.title)
+      page.execute_script('window.scrollTo(0,100000)')
+      expect(page).to have_content(Property.last.title)
+    end
+
+    it "browses all properties" do
       visit properties_path
       expect(page).to have_content(property.title)
       expect(page).to have_content(property.price)
