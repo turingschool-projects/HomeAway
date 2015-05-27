@@ -83,16 +83,32 @@ describe "traveler permissions", type: :feature do
     expect(page).to have_content("You must be a host to see your guests")
     expect(current_path).to eq(root_path)
   end
+end
 
-  xit "can add and remove properties from a wish list" do
-    login(user)
+describe "traveler permissions", type: :feature, js: true do
+  let!(:user) { create(:user) }
+  let!(:property) { create(:property) }
+
+  it "can add and remove properties from a wish list" do
+    visit login_path
+    fill_in("email_address", with: user.email_address)
+    fill_in("password", with: user.password)
+    find_button("Login").click
+
+    visit wishlist_path
+    expect(page).to have_content("YOU DON'T HAVE ANYTHING ON YOUR WISHLIST")
+    
     visit properties_path
     click_link_or_button property.title
-    click_link_or_button "Add to Wishlist"
-    visit favorites_path
-
-    expect(page).to have_content(property.title)
-    click_link_or_button "Remove"
+    find(".wishlist").click
+    expect(page).to have_content("Remove from Wishlist")
+    
+    visit wishlist_path
+    expect(page).to have_content(property.title.upcase)
+    
+    click_link_or_button property.title
+    find(".on-wishlist").click
+    visit wishlist_path
     expect(page).not_to have_content(property.title)    
   end
 end
