@@ -2,9 +2,9 @@ require 'rails_helper'
 context 'authenticated host', type: :feature do
   before(:each) do
     address = create(:address, line_1: "123 some St",
-                               city: "Denver",
-                               state: "CO",
-                               zip: "80203")
+                     city: "Denver",
+                     state: "CO",
+                     zip: "80203")
     host_data = {  name: "Viki",
                    email_address: "viki@example.com",
                    password: "password",
@@ -58,13 +58,13 @@ context 'authenticated host', type: :feature do
     expect(page).not_to have_content("Burger Shack")
   end
 
-    it 'can retire an property from being sold' do
-      property = create(:property, user: @host)
-      visit edit_property_path(property)
-      check("Retired")
-      find_button("Update Property").click
-      expect(property.reload.retired?).to eq(true)
-      visit properties_path
-      expect(page).to_not have_content(property.title)
+  it 'can retire an property from being sold' do
+    property = create(:property, user: @host)
+    visit edit_property_path(property)
+    check("Retired")
+    find_button("Update Property").click
+    expect(property.reload.retired?).to eq(true)
+    visit properties_path
+    expect(page).to_not have_content(property.title)
   end
 end
