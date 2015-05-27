@@ -4,7 +4,9 @@ class HostsController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.host?
-      @properties = Property.active.for_user(@user.id)
+      @properties = Rails.cache.fetch("all_hosts_properties") do
+        Property.active.for_user(@user.id)
+      end
       is_the_host_or_partner?
     else
       flash[:notice] = "User is no longer a host."
