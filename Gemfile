@@ -23,11 +23,10 @@ gem 'stripe'
 gem 'money-rails'
 gem 'factory_girl_rails', require: false
 gem 'sucker_punch', '~> 1.0'
-#gem 'skylight'
+gem 'skylight'
 gem 'will_paginate'
 gem 'populator'
 gem 'redis-rails'
-gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'better_errors'
