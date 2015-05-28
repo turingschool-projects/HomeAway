@@ -8,7 +8,7 @@ $(function() {
         $.ajax({
           url: more_posts_url,
           success: function(data) {
-            return $("#properties").append(data);
+            return $(".properties").append(data);
           }
         });
       }

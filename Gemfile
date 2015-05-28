@@ -27,6 +27,7 @@ gem 'skylight'
 gem 'will_paginate'
 gem 'populator'
 gem 'redis-rails'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'better_errors'

@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 
   def show
     @host_requests = HostRequest.includes(:user)
+    @user_properties = @user.properties.paginate(:page => params[:page], :per_page => 30)
     unless current_user_is_admin
       unless user_is_current_user
         unauthorized

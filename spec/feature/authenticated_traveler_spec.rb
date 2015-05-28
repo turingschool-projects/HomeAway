@@ -97,18 +97,18 @@ describe "traveler permissions", type: :feature, js: true do
 
     visit wishlist_path
     expect(page).to have_content("YOU DON'T HAVE ANYTHING ON YOUR WISHLIST")
-    
+
     visit properties_path
     click_link_or_button property.title
     find(".wishlist").click
     expect(page).to have_content("Remove from Wishlist")
-    
+
     visit wishlist_path
     expect(page).to have_content(property.title.upcase)
-    
+
     click_link_or_button property.title
     find(".on-wishlist").click
     visit wishlist_path
-    expect(page).not_to have_content(property.title)    
+    expect(page).not_to have_content(property.title)
   end
 end
