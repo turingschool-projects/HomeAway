@@ -1,12 +1,14 @@
-<h1>HI</h1>
-<% if @cart.empty? %>
-  <h3>Don't you want to go somewhere?</h3>
-<% else %>
-    It appears you want to go to
-    <h4><%= @cart.property.title %></h4>
-    from
-    <h4><%= @cart.start_date %></h4>
-    to
-    <h4><%= @cart.end_date %></h4>
-  <%= button_to "Checkout", reservations_path, method: :post %>
+<% cache @cart do  %>
+	<h1>HI</h1>
+	<% if @cart.empty? %>
+	  <h3>Don't you want to go somewhere?</h3>
+	<% else %>
+	    It appears you want to go to
+	    <h4><%= @cart.property.title %></h4>
+	    from
+	    <h4><%= @cart.start_date %></h4>
+	    to
+	    <h4><%= @cart.end_date %></h4>
+	  <%= button_to "Checkout", reservations_path, method: :post %>
+	<% end %>
 <% end %>

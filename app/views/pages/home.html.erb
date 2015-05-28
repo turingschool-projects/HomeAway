@@ -1,21 +1,27 @@
-<%= render partial: 'partials/header' %>
-<section id="about" class="container content-section text-center">
-<div class="row">
-  <h1>How does this work?</h1>
-  <div class="col-md-4">
-    <div class="btn-circle-info"><i class="fa fa-search animated"></i></div>
-    <h3>Discover</h3>
-    <p>Search through listings across the world! From full homes to a couch on a riverboat, tailor your travels with unique places to stay.</p>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-circle-info"><i class="fa fa-check animated"></i></div>
-    <h3>Reserve</h3>
-    <p>Pick the dates that work with your trip and reserve your stay.</p>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-circle-info"><i class="fa fa-plane animated"></i></div>
-    <h3>Travel</h3>
-    <p>Start your adventure! Begin the journey with the comfort of knowing you're on your way to a new home.</p>
-  </div>
-</div>
-</section>
+<% cache 'home-page' do %>
+  <% cache 'home-page-header' do %>
+    <%= render partial: 'partials/header' %>
+  <% end %>
+  <% cache 'home-page-content' do %>
+    <section id="about" class="container content-section text-center">
+    <div class="row">
+      <h1>How does this work?</h1>
+      <div class="col-md-4">
+        <div class="btn-circle-info"><i class="fa fa-search animated"></i></div>
+        <h3>Discover</h3>
+        <p>Search through listings across the world! From full homes to a couch on a riverboat, tailor your travels with unique places to stay.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-circle-info"><i class="fa fa-check animated"></i></div>
+        <h3>Reserve</h3>
+        <p>Pick the dates that work with your trip and reserve your stay.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-circle-info"><i class="fa fa-plane animated"></i></div>
+        <h3>Travel</h3>
+        <p>Start your adventure! Begin the journey with the comfort of knowing you're on your way to a new home.</p>
+      </div>
+    </div>
+    </section>
+  <% end %>
+<% end %>

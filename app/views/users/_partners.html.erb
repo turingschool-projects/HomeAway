@@ -1,39 +1,43 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-12 longer-profile-block">
-        <% if current_user.partners.any? %>
-        <h3>Your current partners</h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Partner name</th>
-              <th>Partner email</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% current_user.partners.each do |partner| %>
-            <tr>
-              <td><%= partner.name %></td>
-              <td><%= partner.email_address %></td>
-              <td><%= link_to "Ditch this partner", partner_path(partner.id), method: :delete %></td>
-            </tr>
-          </tbody>
-        </table>
-        <% end %>
-        <% else %>
-          <p>
-            Need to add a partner to help manage your properties?
-          </p>
-        <% end %>
-        <div class="col-md-3">
-          <a href="#" class="btn btn-default" data-toggle="modal" data-target="#partnerModal">
-            Add partner
-          </a>
-          <%= render partial: "partners/new" %>
+<% cache 'partners-partial' do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12 longer-profile-block">
+          <% if current_user.partners.any? %>
+          <h3>Your current partners</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Partner name</th>
+                <th>Partner email</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% current_user.partners.each do |partner| %>
+              <% cache partner do %>
+              <tr>
+                <td><%= partner.name %></td>
+                <td><%= partner.email_address %></td>
+                <td><%= link_to "Ditch this partner", partner_path(partner.id), method: :delete %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <% end %>
+          <% else %>
+            <p>
+              Need to add a partner to help manage your properties?
+            </p>
+          <% end %>
+          <div class="col-md-3">
+            <a href="#" class="btn btn-default" data-toggle="modal" data-target="#partnerModal">
+              Add partner
+            </a>
+            <%= render partial: "partners/new" %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
