@@ -16,7 +16,6 @@
   <% if current_user.favorites.empty? %>
   	<h4 class="text-center">You don't have anything on your wishlist.<br> <%= link_to "Browse our properties and you'll find something to love.", properties_path %></h4>
   <% end %>
-<% end %>
 
 <% cache 'favorites-partial' do %>
   <%= render partial: "partials/menu" %>
