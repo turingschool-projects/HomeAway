@@ -1,4 +1,6 @@
 class Photo < ActiveRecord::Base
+	include InvalidatesCache
+	
   belongs_to :property
 
   validates :image_file_name, presence: true, allow_blank: false

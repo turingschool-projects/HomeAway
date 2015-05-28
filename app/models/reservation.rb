@@ -1,5 +1,7 @@
 class Reservation < ActiveRecord::Base
   include AASM
+  include InvalidatesCache
+  
   belongs_to :property
   belongs_to :user
 
