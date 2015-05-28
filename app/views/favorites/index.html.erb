@@ -1,18 +1,23 @@
-<div class="functional-header">
-  <header class="property-menu">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="properties-header brand-box">
-          <h1 class="properties-header brand-heading">Travel <span>at the speed of</span> Now<h1>
+<% cache 'favorites-wishlist' do %>
+   <div class="functional-header">
+    <header class="property-menu">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="properties-header brand-box">
+            <h1 class="properties-header brand-heading">Travel <span>at the speed of</span> Now<h1>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-</div>
-
-<h1 class="text-center">Your Wishlist</h1>
-<% if current_user.favorites.empty? %>
-	<h4 class="text-center">You don't have anything on your wishlist.<br> <%= link_to "Browse our properties and you'll find something to love.", properties_path %></h4>
+    </header>
+  </div>
 <% end %>
 
-<%= render partial: "partials/menu" %>
+<h1 class="text-center">Your Wishlist</h1>
+  <% if current_user.favorites.empty? %>
+  	<h4 class="text-center">You don't have anything on your wishlist.<br> <%= link_to "Browse our properties and you'll find something to love.", properties_path %></h4>
+  <% end %>
+<% end %>
+
+<% cache 'favorites-partial' do %>
+  <%= render partial: "partials/menu" %>
+<% end %>
