@@ -22,16 +22,17 @@
     </div>
   <% end %>
 
-  <% cache @properties do %>
-    <div class="container">
-      <% if @properties.any? %>
+<% cache @properties do %>
+  <div class="container">
+    <% if @properties.any? %>
+      <div class="properties">
         <%= render partial: "partials/listings" %>
-      <% else %>
-        <% if is_the_host_or_partner? %>
-          <h3><%= link_to "Add Property", new_property_path %></h3>
-        <% end %>
-        <h3>Sorry, this host doesn't have any available propertites right now.</h3>
+      </div>
+    <% else %>
+      <% if is_the_host_or_partner? %>
+        <h3><%= link_to "Add Property", new_property_path %></h3>
       <% end %>
-    </div>
-  <% end %>
+      <h3>Sorry, this host doesn't have any available propertites right now.</h3>
+    <% end %>
+  </div>
 <% end %>

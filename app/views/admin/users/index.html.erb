@@ -1,17 +1,14 @@
 <% cache 'admin-users-page' do %>
   <div class="edit-form">
     <table class="table table-hover">
-
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Admin?</th>
-          <th>Host?</th>
-          <th>Edit User Info</th>
-        </tr>
-      </thead>
-
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Admin?</th>
+        <th>Host?</th>
+        <th>Edit User Info</th>
+      </tr>
+    </thead>
       <tbody>
         <% cache @users do %>
           <% @users.each do |user| %>
@@ -24,7 +21,7 @@
                   <td class="edit"><%= link_to "Edit #{user.name}'s profile", edit_user_path(user) %></td>
                   <td>
                     <% if user.host? %>
-                      <%= link_to "Retire", admin_retire_user_path(user), method: :post %>
+                      <%= link_to "Retire", admin_retire_user_path(user), class: "retire-user-btn", method: :post %>
                     <% end %></td>
               </tr>
             <% end %>
