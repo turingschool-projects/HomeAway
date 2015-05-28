@@ -1,4 +1,6 @@
 class Payments
+  include InvalidatesCache
+  
   def self.process_payment(cart, user, stripeToken)
     customer = Stripe::Customer.create(
       email: user.email_address,
