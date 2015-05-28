@@ -135,6 +135,7 @@ GEM
       railties (>= 3.0)
     multi_json (1.10.1)
     netrc (0.10.2)
+    newrelic_rpm (3.12.0.288)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     passenger (4.0.53)
@@ -289,6 +290,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   money-rails
+  newrelic_rpm
   passenger
   pg
   poltergeist
