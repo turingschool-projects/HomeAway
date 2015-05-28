@@ -1,17 +1,19 @@
-<div class="functional-header">
-  <header class="profile-menu">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="profile-header brand-box">
-          <h1 class="profile-header brand-heading">My <span>Profile</span></h1>
+<% cache 'user-show-page' do %>
+  <div class="functional-header">
+    <header class="profile-menu">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="profile-header brand-box">
+            <h1 class="profile-header brand-heading">My <span>Profile</span></h1>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-</div>
+    </header>
+  </div>
 
-<% if current_user.host? || current_user.admin? %>
-  <%= render partial: "host" %>
-<% else %>
-  <%= render partial: "traveler" %>
+  <% if current_user.host? || current_user.admin? %>
+    <%= render partial: "host" %>
+  <% else %>
+    <%= render partial: "traveler" %>
+  <% end %>
 <% end %>
