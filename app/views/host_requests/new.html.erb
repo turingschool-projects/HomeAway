@@ -1,8 +1,10 @@
-<%= form_for @host_request do |f| %>
-  <div>
-    Tell us why you'd like to become a host
-  </div>
-  <%= f.text_area :message %>
+<% cache 'host-request-form' do %>
+	<%= form_for @host_request do |f| %>
+	  <div>
+	    Tell us why you'd like to become a host
+	  </div>
+	  <%= f.text_area :message %>
 
-  <%= f.submit "Send Request" %>
+	  <%= f.submit "Send Request" %>
+	<% end %>
 <% end %>

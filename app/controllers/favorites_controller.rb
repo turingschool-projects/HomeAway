@@ -1,6 +1,8 @@
 class FavoritesController < ApplicationController
 	def index
-		@properties = Property.where(id: Favorite.where(user_id: current_user.id).pluck(:property_id)).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
+		@properties = Rails.cache.fetch("all_favorites") do
+			Property.where(id: Favorite.where(user_id: current_user.id).pluck(:property_id)).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
+		end
 	end	
 
 	def create

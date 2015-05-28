@@ -1,10 +1,13 @@
-class HostsController < ApplicationController
+class HostsController < ApplicationController  
   helper_method :is_the_host_or_partner?
 
   def show
     @user = User.find(params[:id])
     if @user.host?
-      @properties = Property.active.for_user(@user.id).paginate(:page => params[:page], :per_page => 6)
+      @properties = Rails.cache.fetch("all_hosts_properties") do
+        Property.active.for_user(@user.id).paginate(:page => params[:page], :per_page => 6)
+      end
+
       is_the_host_or_partner?
       if request.xhr?
         render partial: "partials/listings"

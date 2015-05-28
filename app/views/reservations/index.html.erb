@@ -1,71 +1,77 @@
-<div class="functional-header">
-<header class="reservation-menu">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="profile-header brand-box">
-          <h1 class="reservation-header brand-heading">My <span>trips</span><h1>
+<% cache 'all-reservations' do %>
+  <div class="functional-header">
+  <header class="reservation-menu">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="profile-header brand-box">
+            <h1 class="reservation-header brand-heading">My <span>trips</span><h1>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-</div>
+    </header>
+  </div>
 
-<div class="container">
-  <div class="row">
-    <% if current_user.reservations.upcoming.empty? && current_user.reservations.completed.empty? %>
-    <div class="col-md-12">
-      <h2>You do not have any trips reserved<h2>
-        <p><%= link_to "Browse available properties", properties_path %></p>
-    </div>
-    <% else %>
+  <div class="container">
+    <div class="row">
+      <% if current_user.reservations.upcoming.empty? && current_user.reservations.completed.empty? %>
       <div class="col-md-12">
-      <h3>Upcoming Trips</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Location</th>
-            <th>Dates</th>
-            <th>Total Cost</th>
-            <th>Status</th>
+        <h2>You do not have any trips reserved<h2>
+          <p><%= link_to "Browse available properties", properties_path %></p>
+      </div>
+      <% else %>
+        <div class="col-md-12">
+        <h3>Upcoming Trips</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Location</th>
+              <th>Dates</th>
+              <th>Total Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+        <tbody>
+        <% cache @reservations do %>
+          <% @reservations.upcoming.each do |reservation| %>
+          <tr class="upcoming reservation reservation_<%= reservation.id %>">
+            <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+            <td><%= reservation.property.location %></td>
+            <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
+            <td><%= number_to_currency(reservation.total) %></td>
+            <td><span class="label-status"><%= reservation.status %></span></td>
           </tr>
-        </thead>
-      <tbody>
-        <% @reservations.upcoming.each do |reservation| %>
-        <tr class="upcoming reservation reservation_<%= reservation.id %>">
-          <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
-          <td><%= reservation.property.location %></td>
-          <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
-          <td><%= number_to_currency(reservation.total) %></td>
-          <td><span class="label-status"><%= reservation.status %></span></td>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12">
+    <h3>Completed Trips</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Location</th>
+          <th>Dates</th>
+          <th>Total Cost</th>
+          <th>Status</th>
         </tr>
+      </thead>
+      <tbody>
+      <% @reservations.completed.each do |reservation| %>
+        <% cache reservation do %>
+          <tr class="completed reservation reservation_<%= reservation.id %>">
+            <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
+            <td><%= reservation.property.location %></td>
+            <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
+            <td><%= number_to_currency(reservation.total) %></td>
+            <td><span class="label-status"><%= reservation.status %></span></td>
+          </tr>
+        <% end %>
+      <% end %>
       <% end %>
       </tbody>
     </table>
-  </div>
-  <div class="col-md-12">
-  <h3>Completed Trips</h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Property</th>
-        <th>Location</th>
-        <th>Dates</th>
-        <th>Total Cost</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @reservations.completed.each do |reservation| %>
-      <tr class="completed reservation reservation_<%= reservation.id %>">
-        <td><%= link_to reservation.property.title, reservation_path(reservation) %></td>
-        <td><%= reservation.property.location %></td>
-        <td><%= reservation.pretty_start_date %> to <%= reservation.pretty_end_date  %> </td>
-        <td><%= number_to_currency(reservation.total) %></td>
-        <td><span class="label-status"><%= reservation.status %></span></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  </div>
+    </div>
+  <% end %>
 <% end %>

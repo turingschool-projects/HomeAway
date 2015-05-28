@@ -1,22 +1,24 @@
-<h1>Photos for <%= @property.title %></h1>
-<% if @property.photos.empty? %>
-  <p>
-    You don't have any photos yet! In our experience, travelers are more interested in staying at a place that has some good photos up.
-  </p>
-  <p>
-    Why don't you add some now? :)
-  </p>
-<% else %>
-  <h2>Main Photo:</h2>
-  <div class="primary">
-    <%= link_to image_tag(@property.primary.image_file_name), edit_property_photo_path(@property, @property.primary) %>
-  </div>
-  <h2>Other Photos:</h2>
-  <% @property.other_photos.each do |photo| %>
-  <%= link_to image_tag(photo.image_file_name), edit_property_photo_path(@property, photo) %>
-  <%= link_to "Make Primary", property_photo_path(@property, photo, photo: {primary: true}), method: :put, class: "btn btn-default" %>
-  <%= link_to "Remove Photo", property_photo_path(@property, photo), method: :delete, class: "btn btn-default", data: { confirm: "Are you sure you want to delete this photo?" } %><br>
+<% cache @property do %>
+  <h1>Photos for <%= @property.title %></h1>
+  <% if @property.photos.empty? %>
+    <p>
+      You don't have any photos yet! In our experience, travelers are more interested in staying at a place that has some good photos up.
+    </p>
+    <p>
+      Why don't you add some now? :)
+    </p>
+  <% else %>
+    <h2>Main Photo:</h2>
+    <div class="primary">
+      <%= link_to image_tag(@property.primary.image_file_name), edit_property_photo_path(@property, @property.primary) %>
+    </div>
+    <h2>Other Photos:</h2>
+    <% @property.other_photos.each do |photo| %>
+    <%= link_to image_tag(photo.image_file_name), edit_property_photo_path(@property, photo) %>
+    <%= link_to "Make Primary", property_photo_path(@property, photo, photo: {primary: true}), method: :put, class: "btn btn-default" %>
+    <%= link_to "Remove Photo", property_photo_path(@property, photo), method: :delete, class: "btn btn-default", data: { confirm: "Are you sure you want to delete this photo?" } %><br>
 
+    <% end %>
   <% end %>
+  <%= link_to "Add Photo", new_property_photo_path(@property), class: "btn btn-default" %>
 <% end %>
-<%= link_to "Add Photo", new_property_photo_path(@property), class: "btn btn-default" %>

@@ -1,38 +1,40 @@
-<div class="functional-header">
-<header class="reservation-menu">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="profile-header brand-box">
-          <h1 class="reservation-header brand-heading">
-          <% if !current_user_is_admin %>
-            My <span>Trips</span>
-          <% else %>
-            <%= @reservation.user.name %>'s <span>Trips</span>
-          <% end %><h1>
+<% cache @reservation do %>
+  <div class="functional-header">
+    <header class="reservation-menu">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="profile-header brand-box">
+            <h1 class="reservation-header brand-heading">
+            <% if !current_user_is_admin %>
+              My <span>Trips</span>
+            <% else %>
+              <%= @reservation.user.name %>'s <span>Trips</span>
+            <% end %><h1>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-</div>
+    </header>
+  </div>
 
-<div class="container">
-  <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
-  <% if current_user.address.nil? %>
-    <div class="row">
-      <div class="col-md-12">
-        <br>
-        <p>
-          Want to see directions on your reservation pages? <%= link_to "Add an address", edit_user_path(current_user) %> to your profile!
-        </p>
+  <div class="container">
+    <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
+    <% if current_user.address.nil? %>
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <p>
+            Want to see directions on your reservation pages? <%= link_to "Add an address", edit_user_path(current_user) %> to your profile!
+          </p>
+        </div>
       </div>
-    </div>
-  <% else %>
-    <div class="row">
-      <div class="col-md-12">
-        <h3>Directions</h3>
-      </div>
+    <% else %>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Directions</h3>
+        </div>
 
-      <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&origin=#{current_user.address.escape_street}+#{current_user.address.escape_city}&destination=#{@reservation.property.address.escape_street}+#{@reservation.property.address.escape_city}" %>> </iframe>
-    </div>
-  <% end %>
-</div>
+        <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&origin=#{current_user.address.escape_street}+#{current_user.address.escape_city}&destination=#{@reservation.property.address.escape_street}+#{@reservation.property.address.escape_city}" %>> </iframe>
+      </div>
+    <% end %>
+  </div>
+<% end %>

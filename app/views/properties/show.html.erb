@@ -1,10 +1,12 @@
-<%= render partial: 'partials/property_header', locals: {property: @property} %>
-<div class="container page-container-responsive">
-  <%= render partial: 'partials/property_detail' %>
-  <h3>Details</h3>
-  <p><%= @property.description %></p>
-  <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&q=#{@property.address.escape_street}+#{@property.address.escape_city}" %>></iframe>
-</div>
-<script>
-  disabledDates = <%= @dates.inspect.html_safe  %>;
-</script>
+<% cache 'property-show-page' do %>
+	<%= render partial: 'partials/property_header', locals: {property: @property} %>
+	<div class="container page-container-responsive">
+	  <%= render partial: 'partials/property_detail' %>
+	  <h3>Details</h3>
+	  <p><%= @property.description %></p>
+	  <iframe id="map" frameborder="0" style="border:0" src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyCzueOTNlgqagtZxGARWKl3M28HRnn57Fs&q=#{@property.address.escape_street}+#{@property.address.escape_city}" %>></iframe>
+	</div>
+	<script>
+	  disabledDates = <%= @dates.inspect.html_safe  %>;
+	</script>
+<% end %>
