@@ -30,7 +30,8 @@ class Seed
       name: "Hostess Hosterson",
       email_address: "host@example.com")
 
-    FactoryGirl.create_list(:host, 2)
+    FactoryGirl.create_list(:user, 5,
+                            host: true)
 
     puts "Users generated"
   end
@@ -45,6 +46,16 @@ class Seed
   end
 
   def generate_categories
+                 FactoryGirl.create(:category, name: "Hut")
+                 FactoryGirl.create(:category, name: "Yurt")
+                 FactoryGirl.create(:category, name: "Cave")
+                 FactoryGirl.create(:category, name: "Igloo")
+                 FactoryGirl.create(:category, name: "Teepee")
+                 FactoryGirl.create(:category, name: "Mansion")
+                 FactoryGirl.create(:category, name: "Bungalow")
+                 FactoryGirl.create(:category, name: "Dog House")
+                 FactoryGirl.create(:category, name: "Nursing Home")
+    @tent      = FactoryGirl.create(:category, name: "Tent")
     @house     = FactoryGirl.create(:category, name: "House")
     @apartment = FactoryGirl.create(:category, name: "Apartment")
     @room      = FactoryGirl.create(:category, name: "Room")
