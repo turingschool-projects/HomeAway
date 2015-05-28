@@ -21,7 +21,7 @@
             <td class="edit"><%= link_to "Edit #{user.name}'s profile", edit_user_path(user) %></td>
             <td>
               <% if user.host? %>
-                <%= link_to "Retire", admin_retire_user_path(user), method: :post %>
+                <%= link_to "Retire", admin_retire_user_path(user), class: "retire-user-btn", method: :post %>
               <% end %></td>
         </tr>
       <% end %>

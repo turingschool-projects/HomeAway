@@ -21,7 +21,7 @@
     <tbody>
       <% @reservations.each do |reservation| %>
       <tr class="reservation reservation_<%= reservation.id %>">
-        <td class="reservation"><%= link_to "View Reservaton", reservation_path(reservation) %></td>
+        <td class="reservation"><%= link_to "View Reservation", reservation_path(reservation), id: "reservation-btn" %></td>
         <td class="host"><%= link_to "#{reservation.host.name} (#{reservation.host.id})", user_path(reservation.host) %></td>
         <td class="user"><%= link_to "#{reservation.user.name} (#{reservation.user.id})", user_path(reservation.user) %></td>
         <td class="total">$<%= reservation.total %></td>
@@ -29,7 +29,7 @@
         <td>
           <% unless reservation.state_buttons.empty? %>
             <div class="btn-group">
-              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <button type="button" id="actions-btn" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 Actions <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
