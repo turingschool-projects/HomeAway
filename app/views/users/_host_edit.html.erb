@@ -1,115 +1,118 @@
-<div class="functional-header">
-<header class="profile-menu">
+<% cache @user do %>
+  <div class="functional-header">
+  <header class="profile-menu">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="profile-header brand-box">
+            <h1 class="profile-header brand-heading">Edit My <span>Profile</span><h1>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        <div class="profile-header brand-box">
-          <h1 class="profile-header brand-heading">Edit My <span>Profile</span><h1>
+      <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+    <div class="col-md-4">
+      <div class="listing">
+        <h4>User Info</h4>
+        <div class="form-group">
+          <%= f.label :email_address %><br>
+          <%= f.text_field :email_address, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :display_name, "Display Name (optional)" %><br>
+          <%= f.text_field :display_name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %><br>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %><br>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
       </div>
     </div>
-  </header>
-</div>
 
-<div class="container">
-  <div class="row">
-    <%= form_for(@user) do |f| %>
-      <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+    <div class="col-md-4">
+      <div class="listing">
+        <h4>Host Info</h4>
+        <div class="form-group">
+          <label>About Me</label><br>
+          <%= f.text_area :description, class: "form-control" %>
         </div>
-      <% end %>
-
-  <div class="col-md-4">
-    <div class="listing">
-      <h4>User Info</h4>
-      <div class="form-group">
-        <%= f.label :email_address %><br>
-        <%= f.text_field :email_address, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :display_name, "Display Name (optional)" %><br>
-        <%= f.text_field :display_name, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password %><br>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="field">
-        <%= f.label :password_confirmation %><br>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
+        <div class="form-conrtol">
+          <label>Custom URL (ie: http://home-away.herokuapp.com/hosts/MyCustomURL)</label><br>
+          <%= f.text_field :host_slug, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <hr>
+          <label>Accepted Payment Types:</label><br>
+          <%= f.check_box :accepts_cc %>
+          <label>Credit Card</label><br>
+          <%= f.check_box :accepts_check %>
+          <label>Check</label><br>
+          <%= f.check_box :accepts_cash %>
+          <label>Cash</label><br>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-4">
-    <div class="listing">
-      <h4>Host Info</h4>
-      <div class="form-group">
-        <label>About Me</label><br>
-        <%= f.text_area :description, class: "form-control" %>
-      </div>
-      <div class="form-conrtol">
-        <label>Custom URL (ie: http://home-away.herokuapp.com/hosts/MyCustomURL)</label><br>
-        <%= f.text_field :host_slug, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <hr>
-        <label>Accepted Payment Types:</label><br>
-        <%= f.check_box :accepts_cc %>
-        <label>Credit Card</label><br>
-        <%= f.check_box :accepts_check %>
-        <label>Check</label><br>
-        <%= f.check_box :accepts_cash %>
-        <label>Cash</label><br>
+    <div class="col-md-4">
+      <div class="listing">
+        <h4>Address Info</h4>
+        <%= f.fields_for :address, @user.address do |address_field| %>
+          <div class="form-group">
+            <%= address_field.label "Line 1" %>
+            <%= address_field.text_field :line_1, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= address_field.label "Line 2" %>
+            <%= address_field.text_field :line_2, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= address_field.label "City" %>
+            <%= address_field.text_field :city, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= address_field.label "State" %>
+            <%= address_field.text_field :state, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= address_field.label "Zip" %>
+            <%= address_field.text_field :zip, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= address_field.label "Country" %><br>
+            <%= address_field.text_field :country, class: "form-control" %>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-4">
-    <div class="listing">
-      <h4>Address Info</h4>
-      <%= f.fields_for :address, @user.address do |address_field| %>
-        <div class="form-group">
-          <%= address_field.label "Line 1" %>
-          <%= address_field.text_field :line_1, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= address_field.label "Line 2" %>
-          <%= address_field.text_field :line_2, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= address_field.label "City" %>
-          <%= address_field.text_field :city, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= address_field.label "State" %>
-          <%= address_field.text_field :state, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= address_field.label "Zip" %>
-          <%= address_field.text_field :zip, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= address_field.label "Country" %><br>
-          <%= address_field.text_field :country, class: "form-control" %>
-        </div>
-      <% end %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= f.submit class: "btn btn-default big-boy" %>
+      </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <%= f.submit class: "btn btn-default big-boy" %>
-    </div>
+  <% end %>
   </div>
 <% end %>
-</div>
+

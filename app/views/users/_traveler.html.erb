@@ -1,37 +1,40 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="profile-primary profile-block">
-        <div class="text-center">
-          <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
-          <h4><%= @user.name %></h4>
-          <hr>
-          <% if @user == current_user %>
-            <%= link_to "Edit My Profile", edit_user_path(current_user), class: "btn btn-default edit_button"%>
+<% cache @user do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="profile-primary profile-block">
+          <div class="text-center">
+            <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
+            <h4><%= @user.name %></h4>
+            <hr>
+            <% if @user == current_user %>
+              <%= link_to "Edit My Profile", edit_user_path(current_user), class: "btn btn-default edit_button"%>
 
-        <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="profile-block">
+          <h4>User Info</h4>
+          <h5>Email Address:</h5><span><%= @user.email_address %></span>
+        </div>
+      </div>
+
+      <%= render partial: 'address' %>
+
+      <div class="col-md-3">
+        <div class="profile-block">
+          <h4>Want to become a host?</h4>
+          <%= link_to "Make a request", new_host_request_path, class: "btn btn-default" %>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>User Info</h4>
-        <h5>Email Address:</h5><span><%= @user.email_address %></span>
-      </div>
-    </div>
-
-    <%= render partial: 'address' %>
-
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>Want to become a host?</h4>
-        <%= link_to "Make a request", new_host_request_path, class: "btn btn-default" %>
-      </div>
-    </div>
+    <% unless @user.owners.empty? %>
+      <%= render partial: 'partials/managed_properties' %>
+    <% end %>
   </div>
+<% end %>
 
-  <% unless @user.owners.empty? %>
-    <%= render partial: 'partials/managed_properties' %>
-  <% end %>
-</div>

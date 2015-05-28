@@ -1,4 +1,6 @@
 class Address < ActiveRecord::Base
+  include InvalidatesCache
+  
   has_one :user
   has_one :property
 

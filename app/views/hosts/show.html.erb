@@ -1,34 +1,38 @@
-<div class="functional-header">
-  <header class="property-menu">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="properties-header brand-box">
-          <h1 class="properties-header brand-heading"><%= @user.display_name %>'s <span>Properties</span><h1>
+<% cache 'hosts-show-page' do %>
+  <% cache @user do %>
+    <div class="functional-header">
+      <header class="property-menu">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="properties-header brand-box">
+              <h1 class="properties-header brand-heading"><%= @user.display_name %>'s <span>Properties</span><h1>
+            </div>
+          </div>
         </div>
+      </header>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h5>About staying with <%= @user.display_name %></h5>
+        <p>
+          <%= @user.description %>
+        </p>
       </div>
     </div>
-  </header>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h5>About staying with <%= @user.display_name %></h5>
-    <p>
-      <%= @user.description %>
-    </p>
-  </div>
-</div>
-
-<div class="container">
-  <% if @properties.any? %>
-    <div class="properties">
-      <%= render partial: "partials/listings" %>
-    </div>
-  <% else %>
-    <% if is_the_host_or_partner? %>
-      <h3><%= link_to "Add Property", new_property_path %></h3>
-    <% end %>
-    <h3>Sorry, this host doesn't have any available propertites right now.</h3>
   <% end %>
-</div>
 
+<% cache @properties do %>
+  <div class="container">
+    <% if @properties.any? %>
+      <div class="properties">
+        <%= render partial: "partials/listings" %>
+      </div>
+    <% else %>
+      <% if is_the_host_or_partner? %>
+        <h3><%= link_to "Add Property", new_property_path %></h3>
+      <% end %>
+      <h3>Sorry, this host doesn't have any available propertites right now.</h3>
+    <% end %>
+  </div>
+<% end %>

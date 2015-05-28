@@ -1,13 +1,15 @@
-<div class="edit-form">
-  <h4>Reservation ID: <%= @reservation.id %></br>
-    Customer Name: <%= @reservation.user.name %><br>
-    Email: <%= @reservation.user.email_address %><br>
-    <% if @reservation.address %>
-      Address: <%= @reservation.address %><br>
-    <% end %>
-  <% if @reservation.editable? %>
-    <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
-  <% else %>
-    <%= render :partial => 'partials/completed_reservation', locals: {reservation: @reservation} %>
-  <% end %>  
-</div>
+<% cache 'admin-reservation-show-page' do %>
+  <div class="edit-form">
+    <h4>Reservation ID: <%= @reservation.id %></br>
+      Customer Name: <%= @reservation.user.name %><br>
+      Email: <%= @reservation.user.email_address %><br>
+      <% if @reservation.address %>
+        Address: <%= @reservation.address %><br>
+      <% end %>
+    <% if @reservation.editable? %>
+      <%= render :partial => 'partials/pending_reservation', locals: {reservation: @reservation} %>
+    <% else %>
+      <%= render :partial => 'partials/completed_reservation', locals: {reservation: @reservation} %>
+    <% end %>  
+  </div>
+<% end %>

@@ -1,27 +1,29 @@
-<div class="container menu-properties-block col-md-9">
-  <div class="admin-new-stuff-buttons">
-    <%= link_to "New Property", new_admin_property_path, class: "btn btn-default" %>
-    <%= link_to "New Category", new_admin_category_path, class: "btn btn-default" %>
-  </div>
-  <% @categories.each do |category| %>
-  <div class="category-block row">
-    <div class= "category-title">
-      <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
+<% cache 'admin-menu' do %>
+  <div class="container menu-properties-block col-md-9">
+    <div class="admin-new-stuff-buttons">
+      <%= link_to "New Property", new_admin_property_path, class: "btn btn-default" %>
+      <%= link_to "New Category", new_admin_category_path, class: "btn btn-default" %>
     </div>
-
-    <% category.properties.each do |property| %>
-    <div class="thumbnail col-sm-6 col-md-4">
-      <%= image_tag property.image.url(:medium) %>
-      <div class="caption">
-        <h3><%= property.title %></h3>
-        <p><%= property.description %></p>
-        <p id="daily_rate">Price: <%= property.daily_rate %></p>
-        <p><a href="/admin/properties/<%= property.id %>/edit" class="btn btn-default modify_button" role="button">Modify</a></p>
-
-      </div>
-    </div>
-    <%end%>
-
+    <% cache @categories do  %>
+      <% @categories.each do |category| %>
+        <% cache category do %>
+          <div class="category-block row">
+            <div class= "category-title">
+              <h2 class="menu-category shadow"><span class="anchor" id="category-id-<%= category.id %>"></span><%= category.name %></h2>
+            </div>
+            <% category.properties.each do |property| %>
+            <div class="thumbnail col-sm-6 col-md-4">
+              <%= image_tag property.image.url(:medium) %>
+              <div class="caption">
+                <h3><%= property.title %></h3>
+                <p><%= property.description %></p>
+                <p id="daily_rate">Price: <%= property.daily_rate %></p>
+                <p><a href="/admin/properties/<%= property.id %>/edit" class="btn btn-default modify_button" role="button">Modify</a></p>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      <% end %>
+    <% end %>
   </div>
-  <%end%>
-</div>
+<% end %>

@@ -1,50 +1,56 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="profile-primary profile-block">
-        <div class="text-center">
-          <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
-          <h4><%= @user.name %></h4>
-          <hr>
-          <%= link_to "Edit My Profile", edit_user_path(@user), class: "btn btn-default edit_button"%>
+<% cache @user do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="profile-primary profile-block">
+          <div class="text-center">
+            <%= image_tag "https://placekitten.com/g/95/95", class: "img-circle avatar" %>
+            <h4><%= @user.name %></h4>
+            <hr>
+            <%= link_to "Edit My Profile", edit_user_path(@user), class: "btn btn-default edit_button"%>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>User Info</h4>
-        <h5>Email Address:</h5><span><%= @user.email_address %></span>
-        <h5>Custom URL:</h5><span><%= link_to host_path(@user.slug, only_path: false), host_path(@user.slug, only_path: false) %></span>
-        <h5>About Me:</h5><span><%= @user.description %></span>
+      <div class="col-md-3">
+        <div class="profile-block">
+          <h4>User Info</h4>
+          <h5>Email Address:</h5><span><%= @user.email_address %></span>
+          <h5>Custom URL:</h5><span><%= link_to host_path(@user.slug, only_path: false), host_path(@user.slug, only_path: false) %></span>
+          <h5>About Me:</h5><span><%= @user.description %></span>
+        </div>
       </div>
-    </div>
 
-    <%= render partial: 'address' %>
-
-    <div class="col-md-3">
-      <div class="profile-block">
-        <h4>Payment Info</h4>
-        <h5>You currently accept:</h5>
-        <% @user.accepted_payments.each do |payment| %>
-          <%= payment %><br>
-        <% end %>
+      <% cache 'address-partial-for-host' do %>
+        <%= render partial: 'address' %>
+      <% end %>
+      
+      <div class="col-md-3">
+        <div class="profile-block">
+          <h4>Payment Info</h4>
+          <h5>You currently accept:</h5>
+          <% @user.accepted_payments.each do |payment| %>
+            <% cache payment do %>
+              <%= payment %><br>
+            <% end %>
+          <% end %>
+        </div>
       </div>
+
+      <% if @user.admin? %>
+        <%= render partial: "admin" %>
+      <% end %>
+
+      <%= render partial: "users/partners" %>
+
+      <%= render partial: "my_properties" %>
+
+      <% unless @user.owners.empty? %>
+      <div class="container">
+        <%= render partial: 'partials/managed_properties' %>
+      </div>
+      <% end %>
+
     </div>
-
-    <% if @user.admin? %>
-      <%= render partial: "admin" %>
-    <% end %>
-
-    <%= render partial: "users/partners" %>
-
-    <%= render partial: "my_properties" %>
-
-    <% unless @user.owners.empty? %>
-    <div class="container">
-      <%= render partial: 'partials/managed_properties' %>
-    </div>
-    <% end %>
-
   </div>
-</div>
+<% end %>
