@@ -42,7 +42,7 @@ $(document).ready(function() {
   };
 
   function addToWishList(){
-    var property_id = $(this).attr("data-id");            
+    var property_id = $(this).attr("data-id");
 
     $.ajax({
       method: "POST",
@@ -62,12 +62,12 @@ $(document).ready(function() {
 
     $.ajax({
       method: "DELETE",
-      url: "/favorites/" + property_id 
+      url: "/favorites/" + property_id
     });
 
     $(this).removeClass("on-wishlist").addClass("wishlist");
     $(".wishlist-text").text("Add to Wishlist")
-    
+
     detachRemoveFromWishListHandler(".on-wishlist");
     attachAddToWishListHandler(".wishlist");
   };
