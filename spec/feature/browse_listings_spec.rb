@@ -10,7 +10,7 @@ describe "user browsing listings", type: :feature do
       visit properties_path
       expect(page).to have_content(Property.first.title.upcase)
       expect(page).not_to have_content(Property.last.title.upcase)
-      page.execute_script('window.scrollTo(0,100000)')
+      page.execute_script('window.scrollTo(0,200000)')
       expect(page).to have_content(Property.last.title.upcase)
     end
 
