@@ -1,44 +1,46 @@
-<% if current_page? rot_path %>
-  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-<% else %>
-  <nav class="navbar navbar-custom navbar-custom-all" role="navigation">
-<% end %>
-<div class="container">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-      <i class="fa fa-bars"></i>
-    </button>
-    <a class="navbar-brand page-scroll" href="<%= root_path %>">
-      <i class="fa fa-globe"></i><span class="light">Home</span>Away
-    </a>
-  </div>
+<% cache 'big-navbar' do %>
+  <% if current_page? rot_path %>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <% else %>
+    <nav class="navbar navbar-custom navbar-custom-all" role="navigation">
+  <% end %>
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand page-scroll" href="<%= root_path %>">
+        <i class="fa fa-globe"></i><span class="light">Home</span>Away
+      </a>
+    </div>
 
-  <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-    <ul class="nav navbar-nav">
-      <li class="hidden">
-      <a href="#page-top"></a>
-      </li>
-      <li>
-      <a href="<%= properties_path %>">Properties</a>
-      </li>
-      <% unless @cart.nil? || @cart.property.nil?  %>
-        <li><%= link_to "Pending Trip", cart_path %></li>
-      <% end %>
-      <% if current_user %>
-        <% unless current_user.reservations.empty? %>
-        <li><%= link_to "My Trips", reservations_path %></li>
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <li class="hidden">
+        <a href="#page-top"></a>
+        </li>
+        <li>
+        <a href="<%= properties_path %>">Properties</a>
+        </li>
+        <% unless @cart.nil? || @cart.property.nil?  %>
+          <li><%= link_to "Pending Trip", cart_path %></li>
         <% end %>
-        <li><%= link_to "My Profile", user_path(current_user), id: "nav-profile-link" %></li>
-        <li><%= link_to "My Wishlist", wishlist_path, id: "nav-profile-link" %></li>
-        <% if current_user.host? %>
-          <li><%= link_to "My Guests", my_guests_path %></li>
+        <% if current_user %>
+          <% unless current_user.reservations.empty? %>
+          <li><%= link_to "My Trips", reservations_path %></li>
+          <% end %>
+          <li><%= link_to "My Profile", user_path(current_user), id: "nav-profile-link" %></li>
+          <li><%= link_to "My Wishlist", wishlist_path, id: "nav-profile-link" %></li>
+          <% if current_user.host? %>
+            <li><%= link_to "My Guests", my_guests_path %></li>
+          <% end %>
+          <li><%= link_to "Logout", logout_path, id: 'logout' %></li>
+        <% else %>
+          <li><%= render partial: 'partials/log_in' %></li>
+          <li><%= render partial: 'partials/sign_up' %></li>
         <% end %>
-        <li><%= link_to "Logout", logout_path, id: 'logout' %></li>
-      <% else %>
-        <li><%= render partial: 'partials/log_in' %></li>
-        <li><%= render partial: 'partials/sign_up' %></li>
-      <% end %>
-    </ul>
+      </ul>
+    </div>
   </div>
-</div>
-</nav>
+  </nav>
+<% end %>

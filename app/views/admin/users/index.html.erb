@@ -1,31 +1,36 @@
-<div class="edit-form">
-  <table class="table table-hover">
+<% cache 'admin-users-page' do %>
+  <div class="edit-form">
+    <table class="table table-hover">
 
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Admin?</th>
-        <th>Host?</th>
-        <th>Edit User Info</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.each do |user| %>
-        <tr class="user user_<%= user.id %>">
-            <td class="name"><%= link_to user.name, user_path(user) %></td>
-            <td class="date"><%= user.email_address %></td>
-            <td class="admin?"><%= user.admin? %></td>
-            <td class="host?"><%= user.host? %></td>
-            <td class="edit"><%= link_to "Edit #{user.name}'s profile", edit_user_path(user) %></td>
-            <td>
-              <% if user.host? %>
-                <%= link_to "Retire", admin_retire_user_path(user), method: :post %>
-              <% end %></td>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Admin?</th>
+          <th>Host?</th>
+          <th>Edit User Info</th>
         </tr>
-      <% end %>
-    </tbody>
+      </thead>
 
-  </table>
-</div>
+      <tbody>
+        <% cache @users do %>
+          <% @users.each do |user| %>
+            <% cache user do %>
+              <tr class="user user_<%= user.id %>">
+                  <td class="name"><%= link_to user.name, user_path(user) %></td>
+                  <td class="date"><%= user.email_address %></td>
+                  <td class="admin?"><%= user.admin? %></td>
+                  <td class="host?"><%= user.host? %></td>
+                  <td class="edit"><%= link_to "Edit #{user.name}'s profile", edit_user_path(user) %></td>
+                  <td>
+                    <% if user.host? %>
+                      <%= link_to "Retire", admin_retire_user_path(user), method: :post %>
+                    <% end %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
