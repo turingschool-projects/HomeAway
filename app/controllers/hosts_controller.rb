@@ -1,4 +1,4 @@
-class HostsController < ApplicationController
+class HostsController < ApplicationController  
   helper_method :is_the_host_or_partner?
 
   def show

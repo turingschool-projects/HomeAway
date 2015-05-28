@@ -1,27 +1,29 @@
-<div class="listing">
-  <div class="pic-container">
-    <%= link_to (image_tag property.primary ? property.primary.image_file_name : "https://placekitten.com/g/235/135", class: "listing-image" ), property_path(property) %>
-  </div>
-  <div class="row">
-    <div class="col-md-12 listing-title">
-      <i class="fa fa-home"></i>
-      <%= link_to property.title, property_path(property) %>
+<% cache property do  %>
+  <div class="listing">
+    <div class="pic-container">
+      <%= link_to (image_tag property.primary ? property.primary.image_file_name : "https://placekitten.com/g/235/135", class: "listing-image" ), property_path(property) %>
     </div>
-    <div class="col-md-4 pull-right linky">
-      <div class="btn-circle btn-xl reserve">
-        <%= link_to (property_path(property)) do %>
-          <i class="fa fa-share"></i>
-        <% end %>
+    <div class="row">
+      <div class="col-md-12 listing-title">
+        <i class="fa fa-home"></i>
+        <%= link_to property.title, property_path(property) %>
+      </div>
+      <div class="col-md-4 pull-right linky">
+        <div class="btn-circle btn-xl reserve">
+          <%= link_to (property_path(property)) do %>
+            <i class="fa fa-share"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 listing-location">
+        <%= property.category.name %> | Sleeps <%= property.occupancy %> | <%= property.location %>
+      </div>
+      <div class="col-md-4 listing-price">
+        <%= number_to_currency(property.daily_rate) %>/night
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-8 listing-location">
-      <%= property.category.name %> | Sleeps <%= property.occupancy %> | <%= property.location %>
-    </div>
-    <div class="col-md-4 listing-price">
-      <%= number_to_currency(property.daily_rate) %>/night
-    </div>
-  </div>
-</div>
+<% end %>
 

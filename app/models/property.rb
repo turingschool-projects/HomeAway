@@ -1,4 +1,6 @@
 class Property < ActiveRecord::Base
+  include InvalidatesCache
+
   attr_accessor :quantity
   validates :title, presence: true
   validates :description, presence: true, length: { maximum: 500 }
