@@ -48,10 +48,7 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    # @properties = Rails.cache.fetch("all_active_properties") do
-      @properties = Property.active.includes(:category, :photos).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
-    # end
-
+    @properties = Property.active.includes(:category, :photos).search(params[:search], params[:moneySlide], params[:category]).paginate(:page => params[:page], :per_page => 6)
     if request.xhr?
       render partial: "partials/listings"
     end
