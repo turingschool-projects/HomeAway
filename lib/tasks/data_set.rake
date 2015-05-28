@@ -24,51 +24,51 @@ namespace :db do
   desc "Insert 800 users, 500,000 proporties, 7 categories"
   task :insert_mass_data do
     start_time = Time.now
-    # system("rake db:drop")
-    # system("rake db:create")
-    # system("rake db:schema:load")
-    # system("rake db:seed")
-    #
-    # @n = 0
-    # User.populate(170000) do |user|
-    #   name = Faker::Name.name
-    #   user.name          = name,
-    #   user.display_name  = Faker::Internet.user_name(name),
-    #   user.email_address = Faker::Internet.email(name + (@n += 1).to_s)
-    # end
-    #
-    # @n = 0
-    # User.populate(30000) do |user|
-    #   name = Faker::Name.name
-    #   user.name          = name,
-    #   user.display_name  = Faker::Internet.user_name(name),
-    #   user.email_address = Faker::Internet.email(name + (@n += 1).to_s)
-    #   user.host          = true
-    # end
-    #
-    # categories.each do |category|
-    #   @category_id = Category.find_by(name: category).id
-    #   @hosts = User.where(host: true)
-    #   @n = 0
-    #   @title = property_titles[categories.index(category)]
-    #   Property.populate(50000) do |property|
-    #     property.user_id          = @hosts.sample.id
-    #     property.title            = "#{@title} #{@n += 1}"
-    #     property.price_cents      = 1000..9900
-    #     property.retired          = false
-    #     property.address_id       = create_address_from_csv(address(@n))
-    #     property.category_id      = @category_id
-    #     property.occupancy        = 1..10
-    #     property.bathroom_private = true
-    #     property.description      = "Staying at #{property.title} is one "\
-    #       "of the best decisions you could ever make. It's awesome here."
-    #     images = image_files.sample(3)
-    #     Photo.populate(3) do |photo|
-    #       photo.property_id     = property.id
-    #       photo.image_file_name = images.pop
-    #     end
-    #   end
-    # end
+    system("rake db:drop")
+    system("rake db:create")
+    system("rake db:schema:load")
+    system("rake db:seed")
+
+    @n = 0
+    User.populate(170000) do |user|
+      name = Faker::Name.name
+      user.name          = name,
+      user.display_name  = Faker::Internet.user_name(name),
+      user.email_address = Faker::Internet.email(name + (@n += 1).to_s)
+    end
+
+    @n = 0
+    User.populate(30000) do |user|
+      name = Faker::Name.name
+      user.name          = name,
+      user.display_name  = Faker::Internet.user_name(name),
+      user.email_address = Faker::Internet.email(name + (@n += 1).to_s)
+      user.host          = true
+    end
+
+    categories.each do |category|
+      @category_id = Category.find_by(name: category).id
+      @hosts = User.where(host: true)
+      @n = 0
+      @title = property_titles[categories.index(category)]
+      Property.populate(50000) do |property|
+        property.user_id          = @hosts.sample.id
+        property.title            = "#{@title} #{@n += 1}"
+        property.price_cents      = 1000..9900
+        property.retired          = false
+        property.address_id       = create_address_from_csv(address(@n))
+        property.category_id      = @category_id
+        property.occupancy        = 1..10
+        property.bathroom_private = true
+        property.description      = "Staying at #{property.title} is one "\
+          "of the best decisions you could ever make. It's awesome here."
+        images = image_files.sample(3)
+        Photo.populate(3) do |photo|
+          photo.property_id     = property.id
+          photo.image_file_name = images.pop
+        end
+      end
+    end
 
     categories.each do |category|
       @category_properties = Property.joins(:category).where(categories: {name: category} )
