@@ -2,7 +2,7 @@ class Admin::PropertiesController < Admin::BaseAdminController
   before_action :set_property, only: [:edit, :update]
 
   def index
-    @properties      = Property.all
+    @properties = Property.all
     @categories = Category.all
   end
 

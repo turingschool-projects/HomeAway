@@ -12,9 +12,7 @@
   </head>
   <body>
     <%= render 'layouts/notices' %>
-    <% cache 'navbar' do %>
-      <%= render partial: 'partials/navbar' %>
-    <% end %>
+    <%= render partial: 'partials/navbar' %>
     <%= yield %>
   </body>
   <% unless @host_request_amount.nil? || @host_request_amount.zero? %>
