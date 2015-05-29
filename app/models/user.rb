@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include InvalidatesCache
-  
+
   has_secure_password
 
   has_and_belongs_to_many(:partners, join_table: :user_connections, class_name: "User",
@@ -63,4 +63,6 @@ class User < ActiveRecord::Base
       owners.reduce(0) { |sum, owner| sum + owner.reservations.pending.count }
     end
   end
+
+  self.per_page = 15
 end

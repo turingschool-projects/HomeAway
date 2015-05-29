@@ -2,7 +2,7 @@ class Admin::ReservationsController < Admin::BaseAdminController
   before_action :set_reservation, except: [:index, :pending, :completed, :reserved, :cancelled]
 
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.all.paginate(:page => params[:page], :per_page => 15)
   end
 
   def update
