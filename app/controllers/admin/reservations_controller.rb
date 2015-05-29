@@ -23,7 +23,7 @@ class Admin::ReservationsController < Admin::BaseAdminController
   end
 
   def pending
-    @reservations = Reservation.pending
+    @reservations = Reservation.pending.paginate(:page => params[:page], :per_page => 6)
     render :index
   end
 
