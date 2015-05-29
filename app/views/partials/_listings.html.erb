@@ -1,12 +1,10 @@
 <div id="property-list">
-	<% cache @properties do  %>
-		<% @properties.each do |property| %>
-		  <%= content_tag :div, class: "category-block", id: "category-#{property.category.name}" do %>
-		    <div class="col-md-6">
-		      <%= render partial: 'partials/listing', locals: { property: property} %>
-		    </div>
-		  <% end %>
-		<% end %>
+	<% @properties.each do |property| %>
+	  <%= content_tag :div, class: "category-block", id: "category-#{property.category.name}" do %>
+	    <div class="col-md-6">
+	      <%= render partial: 'partials/listing', locals: { property: property} %>
+	    </div>
+	  <% end %>
 	<% end %>
 </div>
 
