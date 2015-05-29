@@ -5,7 +5,7 @@ context "authenticated host", type: :feature do
     Rails.root.join('spec', 'fixtures', 'images')
   end
 
-  let!(:traveler) { create(:user) }
+  let!(:traveler) { create(:user, name: "richard") }
   let!(:host) { create(:host) }
   let!(:property) { create(:property, user: host) }
   let!(:retired_property) { create(:property, user: host, retired: true) }
