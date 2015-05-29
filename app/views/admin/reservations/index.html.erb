@@ -1,53 +1,47 @@
-<% cache 'admin-reservations' do %>
-  <div class="btn-group btn-group-justified role-filters" role="group">
-    <a class="btn btn-default" href="<%= admin_reservations_path %>">All</a>
-    <a class="btn btn-default" href="<%= pending_admin_reservations_path %>">Pending</a>
-    <a class="btn btn-default" href="<%= reserved_admin_reservations_path %>">Reserved</a>
-    <a class="btn btn-default" href="<%= completed_admin_reservations_path %>">Completed</a>
-    <a class="btn btn-default" href="<%= cancelled_admin_reservations_path %>">Cancelled</a>
-  </div>
+<div class="btn-group btn-group-justified role-filters" role="group">
+  <a class="btn btn-default" href="<%= admin_reservations_path %>">All</a>
+  <a class="btn btn-default" href="<%= pending_admin_reservations_path %>">Pending</a>
+  <a class="btn btn-default" href="<%= reserved_admin_reservations_path %>">Reserved</a>
+  <a class="btn btn-default" href="<%= completed_admin_reservations_path %>">Completed</a>
+  <a class="btn btn-default" href="<%= cancelled_admin_reservations_path %>">Cancelled</a>
+</div>
 
-  <div class="edit-form">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Reservation</th>
-          <th>Host (id)</th>
-          <th>Traveler (id)</th>
-          <th>Total</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% cache @reservations do %>
-          <% @reservations.each do |reservation| %>
-            <% cache reservation do  %>
-              <tr class="reservation reservation_<%= reservation.id %>">
-                <td class="reservation"><%= link_to "View Reservation", reservation_path(reservation), id: "reservation-btn" %></td>
-                <td class="host"><%= link_to "#{reservation.host.name} (#{reservation.host.id})", user_path(reservation.host) %></td>
-                <td class="user"><%= link_to "#{reservation.user.name} (#{reservation.user.id})", user_path(reservation.user) %></td>
-                <td class="total">$<%= reservation.total %></td>
-                <td class="status"><%= reservation.status %></td>
-                <td>
-                  <% unless reservation.state_buttons.empty? %>
-                    <div class="btn-group">
-                      <button type="button" id="actions-btn" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        Actions <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><% reservation.state_buttons.each do |button| %>
-                          <%= button_to(button, [:admin, reservation], method: :put, name: button, class: "btn") %>
-                        <% end %></li>
-                      </ul>
-                    </div>
-                  <% end %>
-                </td>
-              <% end %>
-            <% end %>
+<div class="edit-form">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Reservation</th>
+        <th>Host (id)</th>
+        <th>Traveler (id)</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+          <tr class="reservation reservation_<%= reservation.id %>">
+            <td class="reservation"><%= link_to "View Reservation", reservation_path(reservation), id: "reservation-btn" %></td>
+            <td class="host"><%= link_to "#{reservation.host.name} (#{reservation.host.id})", user_path(reservation.host) %></td>
+            <td class="user"><%= link_to "#{reservation.user.name} (#{reservation.user.id})", user_path(reservation.user) %></td>
+            <td class="total">$<%= reservation.total %></td>
+            <td class="status"><%= reservation.status %></td>
+            <td>
+              <% unless reservation.state_buttons.empty? %>
+                <div class="btn-group">
+                  <button type="button" id="actions-btn" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    Actions <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><% reservation.state_buttons.each do |button| %>
+                      <%= button_to(button, [:admin, reservation], method: :put, name: button, class: "btn") %>
+                    <% end %></li>
+                  </ul>
+                </div>
+              </td>
           <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+        <% end %>
+    </tbody>
+  </table>
+</div>
 <%= will_paginate @reservations %>
