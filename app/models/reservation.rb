@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
   include AASM
   include InvalidatesCache
-  
+
   belongs_to :property
   belongs_to :user
 
@@ -50,6 +50,8 @@ class Reservation < ActiveRecord::Base
       transitions from: :reserved, to: :completed, guard: :past?
     end
   end
+
+  self.per_page = 15
 
   def state_buttons
     buttons = []
