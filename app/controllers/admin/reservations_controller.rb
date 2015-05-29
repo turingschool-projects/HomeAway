@@ -28,17 +28,17 @@ class Admin::ReservationsController < Admin::BaseAdminController
   end
 
   def reserved
-    @reservations = Reservation.reserved
+    @reservations = Reservation.reserved.paginate(:page => params[:page], :per_page => 6)
     render :index
   end
 
   def cancelled
-    @reservations = Reservation.cancelled
+    @reservations = Reservation.cancelled.paginate(:page => params[:page], :per_page => 6)
     render :index
   end
 
   def completed
-    @reservations = Reservation.completed
+    @reservations = Reservation.completed.paginate(:page => params[:page], :per_page => 6)
     render :index
   end
 
