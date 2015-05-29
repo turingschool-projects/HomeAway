@@ -1,4 +1,3 @@
-<% cache 'admin-users-page' do %>
   <div class="edit-form">
     <table class="table table-hover">
       <tr>
@@ -13,7 +12,6 @@
         <% cache @users do %>
           <% @users.each do |user| %>
             <% cache user do %>
-              <tr class="user user_<%= user.id %>">
                   <td class="name"><%= link_to user.name, user_path(user) %></td>
                   <td class="date"><%= user.email_address %></td>
                   <td class="admin?"><%= user.admin? %></td>
@@ -30,5 +28,4 @@
       </tbody>
     </table>
   </div>
-<% end %>
 <%= will_paginate @users %>
